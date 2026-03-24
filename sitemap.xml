@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- Homepage -->
+  <!-- Primary Page -->
   <url>
     <loc>https://mufeedquickplus-oss.github.io/Sukoon-Academy/</loc>
     <lastmod>2026-03-24</lastmod>
@@ -9,28 +9,29 @@
     <priority>1.0</priority>
   </url>
 
-  <!-- About Page -->
+  <!-- Key Sections (SEO hinting, not separate pages but valuable) -->
   <url>
-    <loc>https://mufeedquickplus-oss.github.io/Sukoon-Academy/about.html</loc>
-    <lastmod>2026-03-24</lastmod>
+    <loc>https://mufeedquickplus-oss.github.io/Sukoon-Academy/#how</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- Courses Page -->
   <url>
-    <loc>https://mufeedquickplus-oss.github.io/Sukoon-Academy/courses.html</loc>
-    <lastmod>2026-03-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <loc>https://mufeedquickplus-oss.github.io/Sukoon-Academy/#levels</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 
-  <!-- Contact Page -->
   <url>
-    <loc>https://mufeedquickplus-oss.github.io/Sukoon-Academy/contact.html</loc>
-    <lastmod>2026-03-24</lastmod>
+    <loc>https://mufeedquickplus-oss.github.io/Sukoon-Academy/#pricing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://mufeedquickplus-oss.github.io/Sukoon-Academy/#register</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
 
 </urlset>

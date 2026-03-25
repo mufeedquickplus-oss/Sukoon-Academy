@@ -443,8 +443,17 @@ document.querySelectorAll('.modal-overlay').forEach(function(o){o.addEventListen
 document.addEventListener('keydown',function(e){if(e.key==='Escape')document.querySelectorAll('.modal-overlay.open').forEach(function(m){m.classList.remove('open');});});
 function setDates(){var d=new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});['today-date-s','today-date-t','today-date-a'].forEach(function(id){var el=document.getElementById(id);if(el)el.textContent=d;});}
 setDates();
-// Restore session on page load / refresh
-restoreSession();
+
+// Init on DOM ready
+document.addEventListener('DOMContentLoaded', function(){
+  // Keyboard shortcuts for login
+  var pwdEl = document.getElementById('l-password');
+  var emailEl = document.getElementById('l-email');
+  if(pwdEl) pwdEl.addEventListener('keydown', function(e){ if(e.key==='Enter') doLogin(); });
+  if(emailEl) emailEl.addEventListener('keydown', function(e){ if(e.key==='Enter') pwdEl.focus(); });
+  // Restore session if logged in
+  restoreSession();
+});
 function toggleAcc(t){var b=t.nextElementSibling;var o=t.classList.contains('open');t.classList.toggle('open',!o);b.classList.toggle('open',!o);}
 function goToSection(id){var el=document.getElementById(id);if(!el)return;var t=el.querySelector('.accordion-trigger'),b=t?t.nextElementSibling:null;if(t&&!t.classList.contains('open')){t.classList.add('open');if(b)b.classList.add('open');}setTimeout(function(){el.scrollIntoView({behavior:'smooth',block:'start'});},100);}
 function togglePwd(){var i=document.getElementById('l-password');i.type=i.type==='password'?'text':'password';}
@@ -467,9 +476,6 @@ async function submitRegistration(){
     setTimeout(function(){window.open('https://wa.me/918943015958?text='+encodeURIComponent(msg),'_blank');btn.disabled=false;btn.textContent='Submit my registration';btn.style.background='';},1200);
   }catch(e){showToast('Something went wrong. Please try again.','error');btn.disabled=false;btn.textContent='Submit my registration';}
 }
-
-document.getElementById('l-password').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
-document.getElementById('l-email').addEventListener('keydown',function(e){if(e.key==='Enter')document.getElementById('l-password').focus();});
 
 async function doLogin(){
   var email=document.getElementById('l-email').value.trim(),pwd=document.getElementById('l-password').value;

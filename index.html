@@ -120,7 +120,7 @@ label{display:block;font-size:13px;font-weight:500;color:var(--charcoal);margin-
 .price-period{font-size:13px;color:var(--muted);margin-top:6px;margin-bottom:24px}.price-card.featured .price-period{color:rgba(255,255,255,.55)}
 .price-features{list-style:none;text-align:left;display:flex;flex-direction:column;gap:10px}
 .price-features li{font-size:14px;color:var(--muted);padding-left:20px;position:relative;font-weight:300}.price-card.featured .price-features li{color:rgba(255,255,255,.75)}
-.price-features li::before{content:'checkmark';content:'✓';position:absolute;left:0;color:var(--gold);font-weight:500}
+.price-features li::before{content:'✓';position:absolute;left:0;color:var(--gold);font-weight:500}
 /* REGISTER */
 .register{background:var(--cream-dark);padding:64px 5%;position:relative;overflow:hidden}
 .register-wrap{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;max-width:1100px;margin:0 auto}
@@ -211,16 +211,31 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
 .info-box{background:var(--teal-pale);border-radius:var(--rs);padding:16px 18px;border-left:3px solid var(--teal);margin-bottom:24px}
 .info-box-title{font-size:12px;font-weight:600;color:var(--teal);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em}
 .info-box p{font-size:13px;color:var(--charcoal);line-height:1.6}
+/* Session restore loader */
+#session-loader{position:fixed;inset:0;background:var(--cream);display:flex;align-items:center;justify-content:center;z-index:9999;flex-direction:column;gap:16px}
+.session-loader-logo{font-family:'Lora',serif;font-size:28px;font-weight:600;color:var(--teal)}.session-loader-logo span{color:var(--gold)}
+.session-loader-dot{width:8px;height:8px;border-radius:50%;background:var(--teal);animation:dotpulse 1.2s ease-in-out infinite}
+@keyframes dotpulse{0%,100%{opacity:.2;transform:scale(.8)}50%{opacity:1;transform:scale(1)}}
 @media(max-width:900px){.sidebar{width:210px}.c4{grid-template-columns:repeat(2,1fr)}.g2{grid-template-columns:1fr}}
 @media(max-width:768px){.hero{grid-template-columns:1fr;padding:100px 5% 60px}.hero-visual{display:none}.stats-bar{grid-template-columns:repeat(2,1fr)}.pricing-grid{grid-template-columns:1fr}.register-wrap{grid-template-columns:1fr}.nav-links{display:none}.fr{grid-template-columns:1fr}.acc-left{flex-direction:column;align-items:flex-start;gap:6px}.hide-mob{display:none!important}}
 @media(max-width:640px){.sidebar{display:none}.dash-content{padding:20px}.c3{grid-template-columns:repeat(2,1fr)}.login-card{padding:36px 28px}}
 </style>
 </head>
 <body>
+
+<!-- Session restore loader — shown on page load, hidden once we know what to show -->
+<div id="session-loader">
+  <div class="session-loader-logo">Sukoon<span>.</span>Academy</div>
+  <div class="session-loader-dot"></div>
+</div>
+
 <div class="toast" id="toast"></div>
+
 <!-- MODALS -->
 <div class="modal-overlay" id="modal-add-student"><div class="modal"><div class="modal-header"><div class="modal-title" style="font-family:'Lora',serif">Add <em style="color:var(--teal);font-style:italic">Student</em></div><button class="modal-close" onclick="closeModal('modal-add-student')">✕</button></div><div class="fg"><label>Full name</label><input id="ms-name" type="text" placeholder="Student's full name"/></div><div class="fr"><div class="fg"><label>Age</label><input id="ms-age" type="number" placeholder="Age" min="5" max="99"/></div><div class="fg"><label>Level</label><select id="ms-level"><option value="">Select level</option><option>Noorani — Level 1</option><option>Mubtadi — Level 2</option><option>Mutawassit — Level 3</option><option>Mutaqaddim — Level 4</option><option>Mujawwad — Level 5</option></select></div></div><div class="fr"><div class="fg"><label>Country</label><select id="ms-country"><option value="">Select</option><option>UAE</option><option>India</option><option>Saudi Arabia</option><option>Qatar</option><option>Kuwait</option><option>Bahrain</option><option>Oman</option><option>Other</option></select></div><div class="fg"><label>Language</label><select id="ms-lang"><option>English</option><option>Malayalam</option><option>Hindi</option><option>Arabic</option></select></div></div><div class="fr"><div class="fg"><label>Payment status</label><select id="ms-pay"><option value="pending">Pending</option><option value="paid">Paid</option></select></div><div class="fg"><label>Amount</label><input id="ms-amount" type="text" placeholder="e.g. AED 50"/></div></div><div class="modal-actions"><button class="btn btn-ghost btn-sm" onclick="closeModal('modal-add-student')">Cancel</button><button class="btn btn-primary btn-sm" onclick="saveStudent()">Save Student</button></div></div></div>
+
 <div class="modal-overlay" id="modal-add-teacher"><div class="modal"><div class="modal-header"><div class="modal-title" style="font-family:'Lora',serif">Add <em style="color:var(--teal);font-style:italic">Teacher</em></div><button class="modal-close" onclick="closeModal('modal-add-teacher')">✕</button></div><div class="fg"><label>Full name</label><input id="mt-name" type="text" placeholder="Teacher's full name"/></div><div class="fg"><label>Email</label><input id="mt-email" type="email" placeholder="teacher@email.com"/></div><div class="fg"><label>WhatsApp number</label><input id="mt-phone" type="tel" placeholder="+971 50 000 0000"/></div><div class="modal-actions"><button class="btn btn-ghost btn-sm" onclick="closeModal('modal-add-teacher')">Cancel</button><button class="btn btn-primary btn-sm" onclick="saveTeacher()">Save Teacher</button></div></div></div>
+
 <div class="modal-overlay" id="modal-add-batch"><div class="modal"><div class="modal-header"><div class="modal-title" style="font-family:'Lora',serif">Add <em style="color:var(--teal);font-style:italic">Batch</em></div><button class="modal-close" onclick="closeModal('modal-add-batch')">✕</button></div><div class="fg"><label>Batch name</label><input id="mb-name" type="text" placeholder="e.g. Noorani Kids - Sat 5pm"/></div><div class="fr"><div class="fg"><label>Level</label><select id="mb-level"><option value="">Select</option><option>Noorani — Level 1</option><option>Mubtadi — Level 2</option><option>Mutawassit — Level 3</option><option>Mutaqaddim — Level 4</option><option>Mujawwad — Level 5</option></select></div><div class="fg"><label>Language</label><select id="mb-lang"><option>English</option><option>Malayalam</option><option>Hindi</option></select></div></div><div class="fr"><div class="fg"><label>Class day</label><select id="mb-day"><option>Monday</option><option>Tuesday</option><option>Wednesday</option><option>Thursday</option><option>Friday</option><option>Saturday</option><option>Sunday</option></select></div><div class="fg"><label>Class time</label><input id="mb-time" type="text" placeholder="e.g. 5:00 PM"/></div></div><div class="modal-actions"><button class="btn btn-ghost btn-sm" onclick="closeModal('modal-add-batch')">Cancel</button><button class="btn btn-primary btn-sm" onclick="saveBatch()">Save Batch</button></div></div></div>
 
 <!-- PAGE 1: WEBSITE -->
@@ -279,230 +294,638 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
 <div class="panel" id="ap-batches"><div class="card"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px"><div class="card-title">All <em>Batches</em></div><button class="btn btn-primary btn-sm" onclick="openModal('modal-add-batch')">+ Add Batch</button></div><div id="a-batches-list"><div class="empty-state"><div class="empty-state-icon">👥</div><div class="empty-state-title">No batches yet</div></div></div></div></div>
 <div class="panel" id="ap-revenue"><div class="stats-row c3"><div class="stat-card teal"><div class="sc-label">Paid Students</div><div class="sc-num" id="r-paid">—</div></div><div class="stat-card"><div class="sc-label">Pending Payment</div><div class="sc-num" id="r-pending">—</div></div><div class="stat-card gold"><div class="sc-label">Est. Monthly Revenue</div><div class="sc-num" id="r-revenue">—</div></div></div><div class="card"><div class="card-title" style="margin-bottom:16px">Payment <em>Status</em></div><div id="a-revenue-table"><div class="empty-state"><div class="empty-state-icon">💰</div><div class="empty-state-title">No data yet</div></div></div></div></div>
 </div></div></div>
+
 <script>
 'use strict';
-var SUPA_URL='https://evxeeggmpbifyxlbxptz.supabase.co';
-var SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV2eGVlZ2dtcGJpZnl4bGJ4cHR6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQzNTAyMTksImV4cCI6MjA4OTkyNjIxOX0.EXneS-8CpnP8LfjUxEJwblZdZzKtEJU1XwTQBmyNmAE';
-var currentUser=null,currentProfile=null,currentSession=null;
 
-async function supa(method,path,body){
-  var opts={method:method,headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+(currentSession?currentSession.access_token:SUPA_KEY),'Content-Type':'application/json','Prefer':method==='POST'?'return=representation':''}};
-  if(body)opts.body=JSON.stringify(body);
-  var res=await fetch(SUPA_URL+path,opts);
-  if(res.status===204)return null;
-  return res.json();
+// ── CONFIG ──────────────────────────────────────────────────────────────────
+var SUPA_URL = 'https://evxeeggmpbifyxlbxptz.supabase.co';
+var SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV2eGVlZ2dtcGJpZnl4bGJ4cHR6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQzNTAyMTksImV4cCI6MjA4OTkyNjIxOX0.EXneS-8CpnP8LfjUxEJwblZdZzKtEJU1XwTQBmyNmAE';
+var SESSION_KEY = 'sukoon_session'; // localStorage key
+
+var currentUser    = null;
+var currentProfile = null;
+var currentSession = null;
+
+// ── SESSION PERSISTENCE ──────────────────────────────────────────────────────
+// Save session to localStorage so it survives page refresh
+function saveSession(session) {
+  try { localStorage.setItem(SESSION_KEY, JSON.stringify(session)); } catch(e) {}
 }
-async function supaAuth(path,body){
-  var res=await fetch(SUPA_URL+'/auth/v1'+path,{method:'POST',headers:{'apikey':SUPA_KEY,'Content-Type':'application/json'},body:JSON.stringify(body)});
-  return res.json();
+function clearSession() {
+  try { localStorage.removeItem(SESSION_KEY); } catch(e) {}
 }
-
-function showToast(msg,type){var t=document.getElementById('toast');t.textContent=msg;t.className='toast '+(type||'')+' show';setTimeout(function(){t.classList.remove('show');},3200);}
-function showPage(id){document.querySelectorAll('.page,.dash-page').forEach(function(p){p.classList.remove('active');});document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
-function showPanel(pageId,panelId,el){var pg=document.getElementById(pageId);pg.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active');});pg.querySelectorAll('.sidebar-nav a').forEach(function(a){a.classList.remove('active');});document.getElementById(panelId).classList.add('active');if(el)el.classList.add('active');}
-function openModal(id){document.getElementById(id).classList.add('open');}
-function closeModal(id){document.getElementById(id).classList.remove('open');}
-document.querySelectorAll('.modal-overlay').forEach(function(o){o.addEventListener('click',function(e){if(e.target===o)o.classList.remove('open');});});
-document.addEventListener('keydown',function(e){if(e.key==='Escape')document.querySelectorAll('.modal-overlay.open').forEach(function(m){m.classList.remove('open');});});
-function setDates(){var d=new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});['today-date-s','today-date-t','today-date-a'].forEach(function(id){var el=document.getElementById(id);if(el)el.textContent=d;});}
-setDates();
-function toggleAcc(t){var b=t.nextElementSibling;var o=t.classList.contains('open');t.classList.toggle('open',!o);b.classList.toggle('open',!o);}
-function goToSection(id){var el=document.getElementById(id);if(!el)return;var t=el.querySelector('.accordion-trigger'),b=t?t.nextElementSibling:null;if(t&&!t.classList.contains('open')){t.classList.add('open');if(b)b.classList.add('open');}setTimeout(function(){el.scrollIntoView({behavior:'smooth',block:'start'});},100);}
-function togglePwd(){var i=document.getElementById('l-password');i.type=i.type==='password'?'text':'password';}
-
-var rates={INR:{sym:'₹',kids:800,adults:1000,note:'Showing price in Indian Rupees'},AED:{sym:'AED ',kids:50,adults:80,note:'Showing price in UAE Dirhams',inrKids:1125,inrAdults:1800},SAR:{sym:'SAR ',kids:50,adults:80,note:'Showing price in Saudi Riyals',inrKids:1125,inrAdults:1800},QAR:{sym:'QAR ',kids:50,adults:80,note:'Showing price in Qatari Riyals',inrKids:1150,inrAdults:1840},KWD:{sym:'KWD ',kids:4,adults:7,note:'Showing price in Kuwaiti Dinars',inrKids:1100,inrAdults:1925},BHD:{sym:'BHD ',kids:5,adults:8,note:'Showing price in Bahraini Dinars',inrKids:1100,inrAdults:1760},OMR:{sym:'OMR ',kids:5,adults:8,note:'Showing price in Omani Riyals',inrKids:1100,inrAdults:1760}};
-window.detectedCurrency='AED';
-function setCurrency(c){window.detectedCurrency=c;var r=rates[c];document.getElementById('sym-kids').textContent=r.sym;document.getElementById('amt-kids').textContent=r.kids;document.getElementById('sym-adults').textContent=r.sym;document.getElementById('amt-adults').textContent=r.adults;document.getElementById('fx-note').textContent=r.note;var ir=document.getElementById('inr-equiv');if(c!=='INR'&&r.inrKids){ir.style.display='block';ir.innerHTML='Approx. ₹'+r.inrKids+' for kids · ₹'+r.inrAdults+' for adults';}else{ir.style.display='none';}document.querySelectorAll('[data-curr]').forEach(function(b){var a=b.dataset.curr===c;b.style.background=a?'var(--teal)':'transparent';b.style.color=a?'#fff':'var(--teal)';b.style.borderColor=a?'var(--teal)':'rgba(27,77,62,.25)';});}
-fetch('https://ipapi.co/json/').then(function(r){return r.json();}).then(function(d){var map={IN:'INR',AE:'AED',SA:'SAR',QA:'QAR',KW:'KWD',BH:'BHD',OM:'OMR'};var code=map[d.country_code]||'AED';window.detectedCurrency=code;var isIndia=d.country_code==='IN';var bw=document.getElementById('currency-buttons');if(!isIndia){var cur=['AED','SAR','QAR','KWD','BHD','OMR'];var fl={AED:'🇦🇪',SAR:'🇸🇦',QAR:'🇶🇦',KWD:'🇰🇼',BHD:'🇧🇭',OMR:'🇴🇲'};cur.forEach(function(c){var btn=document.createElement('button');btn.dataset.curr=c;btn.textContent=fl[c]+' '+c;btn.style.cssText='padding:7px 16px;border-radius:999px;border:1.5px solid rgba(27,77,62,.25);background:transparent;color:var(--teal);font-size:13px;font-weight:500;cursor:pointer;font-family:DM Sans,sans-serif;transition:all .2s;';btn.onclick=function(){setCurrency(c);};bw.appendChild(btn);});bw.style.display='flex';document.getElementById('fx-note').style.display='block';}setCurrency(code);}).catch(function(){setCurrency('AED');});
-
-async function submitRegistration(){
-  var name=document.getElementById('f-name').value.trim(),age=document.getElementById('f-age').value.trim();
-  if(!name||!age){showToast('Please fill in your name and age.','error');return;}
-  var btn=document.getElementById('f-submit');btn.disabled=true;btn.innerHTML='<span class="spinner"></span> Saving...';
-  try{
-    await supa('POST','/rest/v1/registrations',{name:name,age:parseInt(age),level:document.getElementById('f-level').value,preferred_time:document.getElementById('f-time').value,language:document.getElementById('f-lang').value,notes:document.getElementById('f-notes').value.trim(),currency:window.detectedCurrency,status:'new'});
-    var r=rates[window.detectedCurrency]||rates.AED;var isKid=parseInt(age)<=16;
-    var grp=isKid?'Child (Age 5-16) — '+r.sym+r.kids+'/month':'Adult (Age 17+) — '+r.sym+r.adults+'/month';
-    var msg='*New Registration — Sukoon Academy*\n\n*Name:* '+name+'\n*Age:* '+age+'\n*Level:* '+document.getElementById('f-level').value+'\n*Group:* '+grp+'\n*Preferred time:* '+document.getElementById('f-time').value+'\n*Language:* '+document.getElementById('f-lang').value+(document.getElementById('f-notes').value.trim()?'\n*Notes:* '+document.getElementById('f-notes').value.trim():'');
-    btn.innerHTML='JazakAllah khair! Opening WhatsApp... 🌙';btn.style.background='#1D9E75';
-    setTimeout(function(){window.open('https://wa.me/918943015958?text='+encodeURIComponent(msg),'_blank');btn.disabled=false;btn.textContent='Submit my registration';btn.style.background='';},1200);
-  }catch(e){showToast('Something went wrong. Please try again.','error');btn.disabled=false;btn.textContent='Submit my registration';}
-}
-
-document.getElementById('l-password').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
-document.getElementById('l-email').addEventListener('keydown',function(e){if(e.key==='Enter')document.getElementById('l-password').focus();});
-
-async function doLogin(){
-  var email=document.getElementById('l-email').value.trim(),pwd=document.getElementById('l-password').value;
-  var errEl=document.getElementById('login-error');errEl.classList.remove('show');
-  if(!email||!pwd){errEl.textContent='Please enter your email and password.';errEl.classList.add('show');return;}
-  var btn=document.getElementById('login-btn');btn.disabled=true;btn.innerHTML='<span class="spinner"></span>';
-  try{
-    var data=await supaAuth('/token?grant_type=password',{email:email,password:pwd});
-    if(data.error||!data.access_token){errEl.textContent='Incorrect email or password. Please try again.';errEl.classList.add('show');btn.disabled=false;btn.textContent='Sign in';return;}
-    currentSession=data;currentUser=data.user;
-    var profile=await supa('GET','/rest/v1/profiles?id=eq.'+currentUser.id+'&select=*');
-    if(!profile||!profile.length){errEl.textContent='Account setup incomplete. Please contact admin.';errEl.classList.add('show');btn.disabled=false;btn.textContent='Sign in';return;}
-    currentProfile=profile[0];
-    var init=(currentProfile.name||'?').split(' ').map(function(w){return w[0];}).join('').substring(0,2).toUpperCase();
-    if(currentProfile.role==='admin'){document.getElementById('a-name').textContent=currentProfile.name;document.getElementById('a-avatar').textContent=init;showPage('page-admin');loadAdminData();}
-    else if(currentProfile.role==='teacher'){document.getElementById('t-name').textContent=currentProfile.name;document.getElementById('t-topname').textContent=currentProfile.name.split(' ')[0];document.getElementById('t-avatar').textContent=init;showPage('page-teacher');loadTeacherData();}
-    else{document.getElementById('s-name').textContent=currentProfile.name;document.getElementById('s-topname').textContent=currentProfile.name.split(' ')[0];document.getElementById('s-avatar').textContent=init;showPage('page-student');loadStudentData();}
-  }catch(e){errEl.textContent='Could not connect. Please check your internet and try again.';errEl.classList.add('show');btn.disabled=false;btn.textContent='Sign in';}
-}
-
-function doLogout(){currentUser=null;currentProfile=null;currentSession=null;document.getElementById('l-email').value='';document.getElementById('l-password').value='';showPage('page-login');}
-
-async function loadStudentData(){
-  if(!currentProfile)return;
-  try{
-    var st=await supa('GET','/rest/v1/students?id=eq.'+currentProfile.linked_id+'&select=*');
-    if(!st||!st.length)return;
-    var s=st[0];
-    var lmap={'Noorani — Level 1':'نوراني','Mubtadi — Level 2':'مبتدئ','Mutawassit — Level 3':'متوسط','Mutaqaddim — Level 4':'متقدم','Mujawwad — Level 5':'مجوَّد'};
-    document.getElementById('s-stat-level').textContent=(s.level||'').split(' — ')[0]||'—';
-    document.getElementById('s-stat-level-ar').textContent=lmap[s.level]||'—';
-    document.getElementById('s-level-pill').textContent=s.level||'Student';
-    document.getElementById('s-role').textContent=s.level||'Student';
-    document.getElementById('s-stat-lang').textContent=s.language||'—';
-    var levels=['Noorani — Level 1','Mubtadi — Level 2','Mutawassit — Level 3','Mutaqaddim — Level 4','Mujawwad — Level 5'];
-    var cur=levels.indexOf(s.level);var html='';
-    levels.forEach(function(l,i){var done=i<cur,active=i===cur;html+='<div style="margin-bottom:16px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px"><span style="font-size:13px;font-weight:'+(active?600:400)+';color:'+(done||active?'var(--charcoal)':'var(--muted)')+'">'+l+'</span>';if(done)html+='<span class="badge bg">Completed</span>';else if(active)html+='<span class="badge bteal">In Progress</span>';else html+='<span class="badge bgrey">Upcoming</span>';html+='</div><div class="prog-bar"><div class="prog-fill" style="width:'+(done?100:active?50:0)+'%"></div></div></div>';});
-    document.getElementById('s-progress-levels').innerHTML=html;
-    if(s.batch_id){var ba=await supa('GET','/rest/v1/batches?id=eq.'+s.batch_id+'&select=*');if(ba&&ba.length){var b=ba[0];document.getElementById('s-stat-batch').textContent=b.name||'—';document.getElementById('s-batch-info').innerHTML='<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px"><div style="background:var(--teal-pale);border-radius:12px;padding:16px"><div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px">Class day</div><div style="font-size:15px;font-weight:600;color:var(--teal)">'+(b.class_day||'—')+'</div></div><div style="background:var(--gold-light);border-radius:12px;padding:16px"><div style="font-size:11px;color:#8B6914;text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px">Time</div><div style="font-size:15px;font-weight:600;color:#8B6914">'+(b.class_time||'—')+'</div></div></div>';}}
-    var notes=await supa('GET','/rest/v1/progress_notes?student_id=eq.'+s.id+'&order=created_at.desc&limit=5&select=*');
-    if(notes&&notes.length){var nh='<div class="timeline">';notes.forEach(function(n){nh+='<div class="tl-item"><div class="tl-dot">📝</div><div><div class="tl-title">'+new Date(n.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'short'})+'</div><div class="tl-sub">'+n.note+'</div></div></div>';});nh+='</div>';document.getElementById('s-notes-list').innerHTML=nh;}
-  }catch(e){console.error('Student data:',e);}
-}
-
-async function loadTeacherData(){
-  if(!currentProfile)return;
-  try{
-    var tr=await supa('GET','/rest/v1/teachers?id=eq.'+currentProfile.linked_id+'&select=*');
-    if(!tr||!tr.length)return;
-    var teacher=tr[0];
-    var batches=await supa('GET','/rest/v1/batches?teacher_id=eq.'+teacher.id+'&select=*')||[];
-    document.getElementById('t-stat-batches').textContent=batches.length;
-    document.getElementById('t-batches-pill').textContent=batches.length+(batches.length===1?' Batch':' Batches');
-    var students=[];
-    if(batches.length){var bids=batches.map(function(b){return b.id;});var sl=await supa('GET','/rest/v1/students?batch_id=in.('+bids.join(',')+ ')&select=*');if(sl)students=sl;}
-    document.getElementById('t-stat-students').textContent=students.length;
-    var allN=await supa('GET','/rest/v1/progress_notes?teacher_id=eq.'+teacher.id+'&select=id');
-    document.getElementById('t-stat-notes').textContent=allN?allN.length:0;
-    if(students.length){var sh='';students.forEach(function(s){var i=s.name.split(' ').map(function(w){return w[0];}).join('').substring(0,2).toUpperCase();sh+='<div class="user-row"><div class="user-avatar">'+i+'</div><div><div class="user-name">'+s.name+'</div><div class="user-detail">'+s.level+' · '+(s.country||'')+'</div></div><span class="badge bg" style="margin-left:auto">Active</span></div>';});document.getElementById('t-students-list').innerHTML=sh;var opts='<option value="">Select student</option>';students.forEach(function(s){opts+='<option value="'+s.id+'">'+s.name+'</option>';});document.getElementById('t-note-student').innerHTML=opts;}
-    if(batches.length){var bh='';batches.forEach(function(b){bh+='<div style="padding:16px;background:var(--cream);border-radius:14px;border:1px solid var(--border);margin-bottom:10px"><div style="font-weight:600;font-size:14px;margin-bottom:4px">'+b.name+'</div><div style="font-size:12px;color:var(--muted)">'+b.class_day+' · '+b.class_time+' · '+b.level+'</div></div>';});document.getElementById('t-batches-list').innerHTML=bh;var ao='<option value="">Select batch</option>';batches.forEach(function(b){ao+='<option value="'+b.id+'">'+b.name+'</option>';});document.getElementById('t-att-batch').innerHTML=ao;}
-    var notes=await supa('GET','/rest/v1/progress_notes?teacher_id=eq.'+teacher.id+'&order=created_at.desc&limit=10&select=*');
-    if(notes&&notes.length){var nh='<div class="timeline">';notes.forEach(function(n){nh+='<div class="tl-item"><div class="tl-dot">📝</div><div><div class="tl-title">'+new Date(n.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'short'})+'</div><div class="tl-sub">'+n.note+'</div></div></div>';});nh+='</div>';document.getElementById('t-notes-list').innerHTML=nh;}
-  }catch(e){console.error('Teacher data:',e);}
-}
-
-async function loadAttendanceStudents(){
-  var bid=document.getElementById('t-att-batch').value;
-  var listEl=document.getElementById('t-attendance-list');var sw=document.getElementById('t-att-save-wrap');
-  if(!bid){listEl.innerHTML='<div class="empty-state"><div class="empty-state-icon">✅</div><div class="empty-state-title">Select a batch above</div></div>';sw.style.display='none';return;}
-  try{
-    var st=await supa('GET','/rest/v1/students?batch_id=eq.'+bid+'&select=*');
-    if(!st||!st.length){listEl.innerHTML='<div class="empty-state"><div class="empty-state-icon">👤</div><div class="empty-state-title">No students in this batch</div></div>';sw.style.display='none';return;}
-    var html='';
-    st.forEach(function(s){var i=s.name.split(' ').map(function(w){return w[0];}).join('').substring(0,2).toUpperCase();html+='<div style="display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:var(--cream);border-radius:12px;border:1px solid var(--border);margin-bottom:8px" data-sid="'+s.id+'"><div style="display:flex;align-items:center;gap:10px"><div class="user-avatar">'+i+'</div><div class="user-name">'+s.name+'</div></div><div class="att-toggle"><button class="att-btn" onclick="markAtt(this,\'present\')">Present</button><button class="att-btn" onclick="markAtt(this,\'absent\')">Absent</button></div></div>';});
-    listEl.innerHTML=html;sw.style.display='block';
-  }catch(e){console.error('Att load:',e);}
-}
-function markAtt(btn,status){var w=btn.parentElement;w.querySelectorAll('.att-btn').forEach(function(b){b.classList.remove('present','absent');});btn.classList.add(status);}
-
-async function saveAttendance(){
-  var rows=document.querySelectorAll('#t-attendance-list [data-sid]');var today=new Date().toISOString().split('T')[0];var records=[];
-  rows.forEach(function(row){var sid=row.dataset.sid;var pb=row.querySelector('.att-btn.present'),ab=row.querySelector('.att-btn.absent');if(pb||ab)records.push({student_id:sid,date:today,status:pb?'present':'absent',teacher_id:currentProfile.linked_id});});
-  if(!records.length){showToast('Mark at least one student.','error');return;}
-  try{await supa('POST','/rest/v1/attendance',records);showToast('Attendance saved! JazakAllah khair 🌙','success');}
-  catch(e){showToast('Could not save. Please try again.','error');}
-}
-
-async function saveTeacherNote(){
-  var sid=document.getElementById('t-note-student').value,note=document.getElementById('t-note-text').value.trim();
-  if(!sid||!note){showToast('Please select a student and write a note.','error');return;}
-  try{await supa('POST','/rest/v1/progress_notes',{student_id:sid,note:note,teacher_id:currentProfile.linked_id});document.getElementById('t-note-text').value='';showToast('Note saved! 🌙','success');loadTeacherData();}
-  catch(e){showToast('Could not save. Please try again.','error');}
-}
-
-async function loadAdminData(){
-  try{
-    var results=await Promise.all([supa('GET','/rest/v1/students?select=*'),supa('GET','/rest/v1/teachers?select=*'),supa('GET','/rest/v1/batches?select=*'),supa('GET','/rest/v1/registrations?order=created_at.desc&select=*')]);
-    var students=results[0]||[],teachers=results[1]||[],batches=results[2]||[],regs=results[3]||[];
-    var newRegs=regs.filter(function(r){return r.status==='new';});
-    document.getElementById('a-stat-students').textContent=students.length;
-    document.getElementById('a-stat-teachers').textContent=teachers.length;
-    document.getElementById('a-stat-batches').textContent=batches.length;
-    document.getElementById('a-stat-regs').textContent=newRegs.length;
-    if(regs.length){var rh='';regs.slice(0,3).forEach(function(r){rh+='<div class="user-row"><div class="user-avatar">'+r.name[0].toUpperCase()+'</div><div><div class="user-name">'+r.name+'</div><div class="user-detail">Age '+r.age+' · '+r.language+' · '+r.preferred_time+'</div></div><span class="badge bgold" style="margin-left:auto">New</span></div>';});document.getElementById('a-recent-regs').innerHTML=rh;}
-    if(regs.length){var regsHtml='<div class="tscroll"><table><thead><tr><th>Name</th><th>Age</th><th>Level</th><th>Time</th><th>Language</th><th>Currency</th><th>Notes</th><th>Status</th></tr></thead><tbody>';regs.forEach(function(r){regsHtml+='<tr><td style="font-weight:500">'+r.name+'</td><td>'+r.age+'</td><td>'+(r.level||'—')+'</td><td>'+(r.preferred_time||'—')+'</td><td>'+(r.language||'—')+'</td><td>'+(r.currency||'—')+'</td><td style="max-width:160px;font-size:12px;color:var(--muted)">'+(r.notes||'—')+'</td><td><span class="badge '+(r.status==='new'?'bgold':'bg')+'">'+r.status+'</span></td></tr>';});regsHtml+='</tbody></table></div>';document.getElementById('a-regs-list').innerHTML=regsHtml;}
-    if(students.length){var lc={};students.forEach(function(s){lc[s.level]=(lc[s.level]||0)+1;});var lh='';Object.keys(lc).forEach(function(l){var pct=Math.round(lc[l]/students.length*100);lh+='<div style="margin-bottom:14px"><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px"><span>'+l+'</span><span style="font-weight:600;color:var(--teal)">'+lc[l]+'</span></div><div class="prog-bar"><div class="prog-fill" style="width:'+pct+'%"></div></div></div>';});document.getElementById('a-level-breakdown').innerHTML=lh;
-    var sth='<div class="tscroll"><table><thead><tr><th>Name</th><th>Age</th><th>Level</th><th>Country</th><th>Language</th><th>Payment</th><th>Action</th></tr></thead><tbody>';students.forEach(function(s){sth+='<tr><td style="font-weight:500">'+s.name+'</td><td>'+(s.age||'—')+'</td><td>'+(s.level||'—')+'</td><td>'+(s.country||'—')+'</td><td>'+(s.language||'—')+'</td><td>'+(s.payment_status==='paid'?'<span class="badge bg">'+(s.payment_amount||'Paid')+'</span>':'<span class="badge bgold">Pending</span>')+'</td><td><button class="btn btn-danger btn-sm" onclick="deleteStudent(\''+s.id+'\')">Delete</button></td></tr>';});sth+='</tbody></table></div>';document.getElementById('a-students-table').innerHTML=sth;}
-    if(teachers.length){var th='';teachers.forEach(function(t){var i=t.name.split(' ').map(function(w){return w[0];}).join('').substring(0,2).toUpperCase();th+='<div class="user-row"><div class="user-avatar" style="background:var(--gold-light);color:#8B6914">'+i+'</div><div><div class="user-name">'+t.name+'</div><div class="user-detail">'+(t.email||'')+' '+(t.phone?'· '+t.phone:'')+'</div></div><div class="user-actions"><button class="btn btn-danger btn-sm" onclick="deleteTeacher(\''+t.id+'\')">Delete</button></div></div>';});document.getElementById('a-teachers-list').innerHTML=th;}
-    if(batches.length){var bh='';batches.forEach(function(b){bh+='<div style="padding:16px;background:var(--cream);border-radius:14px;border:1px solid var(--border);margin-bottom:10px;display:flex;align-items:center;justify-content:space-between"><div><div style="font-weight:600;font-size:14px;margin-bottom:4px">'+b.name+'</div><div style="font-size:12px;color:var(--muted)">'+b.class_day+' · '+b.class_time+' · '+b.level+'</div></div><button class="btn btn-danger btn-sm" onclick="deleteBatch(\''+b.id+'\')">Delete</button></div>';});document.getElementById('a-batches-list').innerHTML=bh;}
-    var paid=students.filter(function(s){return s.payment_status==='paid';});var pend=students.filter(function(s){return s.payment_status!=='paid';});
-    document.getElementById('r-paid').textContent=paid.length;document.getElementById('r-pending').textContent=pend.length;document.getElementById('r-revenue').textContent=paid.length?'~AED '+(paid.length*65):'—';
-    if(students.length){var rvh='<div class="tscroll"><table><thead><tr><th>Name</th><th>Level</th><th>Payment</th><th>Amount</th></tr></thead><tbody>';students.forEach(function(s){rvh+='<tr><td>'+s.name+'</td><td>'+(s.level||'—')+'</td><td>'+(s.payment_status==='paid'?'<span class="badge bg">Paid</span>':'<span class="badge bgold">Pending</span>')+'</td><td>'+(s.payment_amount||'—')+'</td></tr>';});rvh+='</tbody></table></div>';document.getElementById('a-revenue-table').innerHTML=rvh;}
-  }catch(e){console.error('Admin data:',e);showToast('Could not load data.','error');}
-}
-
-async function saveStudent(){
-  var name=document.getElementById('ms-name').value.trim();if(!name){showToast('Please enter a name.','error');return;}
-  try{await supa('POST','/rest/v1/students',{name:name,age:parseInt(document.getElementById('ms-age').value)||null,level:document.getElementById('ms-level').value,country:document.getElementById('ms-country').value,language:document.getElementById('ms-lang').value,payment_status:document.getElementById('ms-pay').value,payment_amount:document.getElementById('ms-amount').value.trim(),status:'active'});closeModal('modal-add-student');['ms-name','ms-age','ms-amount'].forEach(function(i){document.getElementById(i).value='';});showToast('Student added! 🌙','success');loadAdminData();}
-  catch(e){showToast('Could not save. Please try again.','error');}
-}
-async function saveTeacher(){
-  var name=document.getElementById('mt-name').value.trim();if(!name){showToast('Please enter a name.','error');return;}
-  try{await supa('POST','/rest/v1/teachers',{name:name,email:document.getElementById('mt-email').value.trim(),phone:document.getElementById('mt-phone').value.trim(),status:'active'});closeModal('modal-add-teacher');['mt-name','mt-email','mt-phone'].forEach(function(i){document.getElementById(i).value='';});showToast('Teacher added! 🌙','success');loadAdminData();}
-  catch(e){showToast('Could not save. Please try again.','error');}
-}
-async function saveBatch(){
-  var name=document.getElementById('mb-name').value.trim();if(!name){showToast('Please enter a batch name.','error');return;}
-  try{await supa('POST','/rest/v1/batches',{name:name,level:document.getElementById('mb-level').value,language:document.getElementById('mb-lang').value,class_day:document.getElementById('mb-day').value,class_time:document.getElementById('mb-time').value.trim()});closeModal('modal-add-batch');document.getElementById('mb-name').value='';document.getElementById('mb-time').value='';showToast('Batch created! 🌙','success');loadAdminData();}
-  catch(e){showToast('Could not save. Please try again.','error');}
-}
-async function deleteStudent(id){if(!confirm('Delete this student? This cannot be undone.'))return;try{await supa('DELETE','/rest/v1/students?id=eq.'+id);showToast('Student removed.','success');loadAdminData();}catch(e){showToast('Could not delete.','error');}}
-async function deleteTeacher(id){if(!confirm('Delete this teacher? This cannot be undone.'))return;try{await supa('DELETE','/rest/v1/teachers?id=eq.'+id);showToast('Teacher removed.','success');loadAdminData();}catch(e){showToast('Could not delete.','error');}}
-async function deleteBatch(id){if(!confirm('Delete this batch? This cannot be undone.'))return;try{await supa('DELETE','/rest/v1/batches?id=eq.'+id);showToast('Batch removed.','success');loadAdminData();}catch(e){showToast('Could not delete.','error');}}
-async function doLogin(){
-  const email = document.getElementById('l-email').value.trim();
-  const password = document.getElementById('l-password').value.trim();
-
+function getSavedSession() {
   try {
-    const res = await fetch(SUPA_URL + '/auth/v1/token?grant_type=password', {
-      method: 'POST',
-      headers: {
-        'apikey': SUPA_KEY,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password
-      })
-    });
+    var raw = localStorage.getItem(SESSION_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch(e) { return null; }
+}
 
-    const data = await res.json();
-    console.log("LOGIN RESPONSE:", data);
+// ── SUPABASE HELPERS ─────────────────────────────────────────────────────────
+// Always use the logged-in user's access_token for writes (required by RLS)
+function getAuthToken() {
+  return currentSession ? currentSession.access_token : SUPA_KEY;
+}
 
-    if (data.access_token) {
-      // ✅ SUCCESS
-      currentSession = data;
-      alert("Login successful");
-
-      // go to your admin page
-      showPage('page-admin');
-
-    } else {
-      // ❌ ERROR SHOW PROPER MESSAGE
-      alert(data.error_description || data.error || "Login failed");
+async function supa(method, path, body) {
+  var opts = {
+    method: method,
+    headers: {
+      'apikey': SUPA_KEY,
+      'Authorization': 'Bearer ' + getAuthToken(),
+      'Content-Type': 'application/json',
+      'Prefer': method === 'POST' ? 'return=representation' : ''
     }
+  };
+  if (body) opts.body = JSON.stringify(body);
+  var res = await fetch(SUPA_URL + path, opts);
+  if (res.status === 204) return null;
+  var json = await res.json();
+  // Surface RLS / Supabase errors clearly
+  if (json && json.code && json.message) throw new Error(json.message);
+  return json;
+}
 
-  } catch (err) {
-    console.error(err);
-    alert("Something went wrong");
+// Refresh an expired access token using the refresh_token
+async function refreshSession(session) {
+  try {
+    var res = await fetch(SUPA_URL + '/auth/v1/token?grant_type=refresh_token', {
+      method: 'POST',
+      headers: { 'apikey': SUPA_KEY, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ refresh_token: session.refresh_token })
+    });
+    var data = await res.json();
+    if (data.access_token) return data;
+  } catch(e) {}
+  return null;
+}
+
+// ── BOOT: restore session on page load ──────────────────────────────────────
+window.addEventListener('DOMContentLoaded', async function() {
+  var saved = getSavedSession();
+  if (saved && saved.access_token) {
+    // Check if token is still valid (expires_at is in seconds since epoch)
+    var now = Math.floor(Date.now() / 1000);
+    var expiresAt = saved.expires_at || 0;
+
+    if (expiresAt > now) {
+      // Token still valid — restore session
+      currentSession = saved;
+      currentUser    = saved.user;
+      await restoreUserSession();
+    } else if (saved.refresh_token) {
+      // Token expired — try to refresh
+      var refreshed = await refreshSession(saved);
+      if (refreshed) {
+        currentSession = refreshed;
+        currentUser    = refreshed.user;
+        saveSession(refreshed);
+        await restoreUserSession();
+      } else {
+        // Refresh failed — show login
+        clearSession();
+        hideLoader();
+      }
+    } else {
+      clearSession();
+      hideLoader();
+    }
+  } else {
+    hideLoader();
+  }
+});
+
+async function restoreUserSession() {
+  try {
+    var profile = await supa('GET', '/rest/v1/profiles?id=eq.' + currentUser.id + '&select=*');
+    if (profile && profile.length) {
+      currentProfile = profile[0];
+      applyProfile(currentProfile);
+      return;
+    }
+  } catch(e) {}
+  // Profile fetch failed — clear and show login
+  clearSession();
+  currentSession = null;
+  currentUser    = null;
+  hideLoader();
+}
+
+function hideLoader() {
+  var loader = document.getElementById('session-loader');
+  if (loader) loader.style.display = 'none';
+}
+
+// After login or session restore, route to the correct dashboard
+function applyProfile(profile) {
+  var init = (profile.name || '?').split(' ').map(function(w){ return w[0]; }).join('').substring(0,2).toUpperCase();
+  hideLoader();
+  if (profile.role === 'admin') {
+    document.getElementById('a-name').textContent   = profile.name;
+    document.getElementById('a-avatar').textContent = init;
+    showPage('page-admin');
+    loadAdminData();
+  } else if (profile.role === 'teacher') {
+    document.getElementById('t-name').textContent    = profile.name;
+    document.getElementById('t-topname').textContent = profile.name.split(' ')[0];
+    document.getElementById('t-avatar').textContent  = init;
+    showPage('page-teacher');
+    loadTeacherData();
+  } else {
+    document.getElementById('s-name').textContent    = profile.name;
+    document.getElementById('s-topname').textContent = profile.name.split(' ')[0];
+    document.getElementById('s-avatar').textContent  = init;
+    showPage('page-student');
+    loadStudentData();
   }
 }
-</script>
 
+// ── UI HELPERS ───────────────────────────────────────────────────────────────
+function showToast(msg, type) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className   = 'toast ' + (type || '') + ' show';
+  setTimeout(function(){ t.classList.remove('show'); }, 3200);
+}
+function showPage(id) {
+  document.querySelectorAll('.page,.dash-page').forEach(function(p){ p.classList.remove('active'); });
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+function showPanel(pageId, panelId, el) {
+  var pg = document.getElementById(pageId);
+  pg.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
+  pg.querySelectorAll('.sidebar-nav a').forEach(function(a){ a.classList.remove('active'); });
+  document.getElementById(panelId).classList.add('active');
+  if (el) el.classList.add('active');
+}
+function openModal(id)  { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+document.querySelectorAll('.modal-overlay').forEach(function(o){
+  o.addEventListener('click', function(e){ if (e.target === o) o.classList.remove('open'); });
+});
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.open').forEach(function(m){ m.classList.remove('open'); });
+});
+
+function setDates() {
+  var d = new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  ['today-date-s','today-date-t','today-date-a'].forEach(function(id){
+    var el = document.getElementById(id); if (el) el.textContent = d;
+  });
+}
+setDates();
+
+function toggleAcc(t) {
+  var b = t.nextElementSibling;
+  var o = t.classList.contains('open');
+  t.classList.toggle('open', !o);
+  b.classList.toggle('open', !o);
+}
+function goToSection(id) {
+  var el = document.getElementById(id); if (!el) return;
+  var t = el.querySelector('.accordion-trigger'), b = t ? t.nextElementSibling : null;
+  if (t && !t.classList.contains('open')) { t.classList.add('open'); if (b) b.classList.add('open'); }
+  setTimeout(function(){ el.scrollIntoView({behavior:'smooth',block:'start'}); }, 100);
+}
+function togglePwd() {
+  var i = document.getElementById('l-password');
+  i.type = i.type === 'password' ? 'text' : 'password';
+}
+
+// ── PRICING / CURRENCY ───────────────────────────────────────────────────────
+var rates = {
+  INR:{sym:'₹',kids:800,adults:1000,note:'Showing price in Indian Rupees'},
+  AED:{sym:'AED ',kids:50,adults:80,note:'Showing price in UAE Dirhams',inrKids:1125,inrAdults:1800},
+  SAR:{sym:'SAR ',kids:50,adults:80,note:'Showing price in Saudi Riyals',inrKids:1125,inrAdults:1800},
+  QAR:{sym:'QAR ',kids:50,adults:80,note:'Showing price in Qatari Riyals',inrKids:1150,inrAdults:1840},
+  KWD:{sym:'KWD ',kids:4,adults:7,note:'Showing price in Kuwaiti Dinars',inrKids:1100,inrAdults:1925},
+  BHD:{sym:'BHD ',kids:5,adults:8,note:'Showing price in Bahraini Dinars',inrKids:1100,inrAdults:1760},
+  OMR:{sym:'OMR ',kids:5,adults:8,note:'Showing price in Omani Riyals',inrKids:1100,inrAdults:1760}
+};
+window.detectedCurrency = 'AED';
+function setCurrency(c) {
+  window.detectedCurrency = c;
+  var r = rates[c];
+  document.getElementById('sym-kids').textContent   = r.sym;
+  document.getElementById('amt-kids').textContent   = r.kids;
+  document.getElementById('sym-adults').textContent = r.sym;
+  document.getElementById('amt-adults').textContent = r.adults;
+  document.getElementById('fx-note').textContent    = r.note;
+  var ir = document.getElementById('inr-equiv');
+  if (c !== 'INR' && r.inrKids) {
+    ir.style.display = 'block';
+    ir.innerHTML = 'Approx. ₹' + r.inrKids + ' for kids · ₹' + r.inrAdults + ' for adults';
+  } else { ir.style.display = 'none'; }
+  document.querySelectorAll('[data-curr]').forEach(function(b){
+    var a = b.dataset.curr === c;
+    b.style.background  = a ? 'var(--teal)' : 'transparent';
+    b.style.color       = a ? '#fff' : 'var(--teal)';
+    b.style.borderColor = a ? 'var(--teal)' : 'rgba(27,77,62,.25)';
+  });
+}
+fetch('https://ipapi.co/json/').then(function(r){ return r.json(); }).then(function(d){
+  var map = {IN:'INR',AE:'AED',SA:'SAR',QA:'QAR',KW:'KWD',BH:'BHD',OM:'OMR'};
+  var code = map[d.country_code] || 'AED';
+  var isIndia = d.country_code === 'IN';
+  var bw = document.getElementById('currency-buttons');
+  if (!isIndia) {
+    var cur = ['AED','SAR','QAR','KWD','BHD','OMR'];
+    var fl  = {AED:'🇦🇪',SAR:'🇸🇦',QAR:'🇶🇦',KWD:'🇰🇼',BHD:'🇧🇭',OMR:'🇴🇲'};
+    cur.forEach(function(c){
+      var btn = document.createElement('button');
+      btn.dataset.curr = c;
+      btn.textContent  = fl[c] + ' ' + c;
+      btn.style.cssText = 'padding:7px 16px;border-radius:999px;border:1.5px solid rgba(27,77,62,.25);background:transparent;color:var(--teal);font-size:13px;font-weight:500;cursor:pointer;font-family:DM Sans,sans-serif;transition:all .2s;';
+      btn.onclick = function(){ setCurrency(c); };
+      bw.appendChild(btn);
+    });
+    bw.style.display = 'flex';
+    document.getElementById('fx-note').style.display = 'block';
+  }
+  setCurrency(code);
+}).catch(function(){ setCurrency('AED'); });
+
+// ── REGISTRATION FORM ────────────────────────────────────────────────────────
+async function submitRegistration() {
+  var name = document.getElementById('f-name').value.trim();
+  var age  = document.getElementById('f-age').value.trim();
+  if (!name || !age) { showToast('Please fill in your name and age.', 'error'); return; }
+  var btn = document.getElementById('f-submit');
+  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Saving...';
+  try {
+    await supa('POST', '/rest/v1/registrations', {
+      name: name, age: parseInt(age),
+      level: document.getElementById('f-level').value,
+      preferred_time: document.getElementById('f-time').value,
+      language: document.getElementById('f-lang').value,
+      notes: document.getElementById('f-notes').value.trim(),
+      currency: window.detectedCurrency, status: 'new'
+    });
+    var r = rates[window.detectedCurrency] || rates.AED;
+    var isKid = parseInt(age) <= 16;
+    var grp = isKid ? 'Child (Age 5-16) — ' + r.sym + r.kids + '/month' : 'Adult (Age 17+) — ' + r.sym + r.adults + '/month';
+    var msg = '*New Registration — Sukoon Academy*\n\n*Name:* ' + name + '\n*Age:* ' + age + '\n*Level:* ' + document.getElementById('f-level').value + '\n*Group:* ' + grp + '\n*Preferred time:* ' + document.getElementById('f-time').value + '\n*Language:* ' + document.getElementById('f-lang').value + (document.getElementById('f-notes').value.trim() ? '\n*Notes:* ' + document.getElementById('f-notes').value.trim() : '');
+    btn.innerHTML = 'JazakAllah khair! Opening WhatsApp... 🌙';
+    btn.style.background = '#1D9E75';
+    setTimeout(function(){
+      window.open('https://wa.me/918943015958?text=' + encodeURIComponent(msg), '_blank');
+      btn.disabled = false; btn.textContent = 'Submit my registration'; btn.style.background = '';
+    }, 1200);
+  } catch(e) {
+    showToast('Something went wrong. Please try again.', 'error');
+    btn.disabled = false; btn.textContent = 'Submit my registration';
+  }
+}
+
+// ── LOGIN ────────────────────────────────────────────────────────────────────
+document.getElementById('l-password').addEventListener('keydown', function(e){ if (e.key === 'Enter') doLogin(); });
+document.getElementById('l-email').addEventListener('keydown',    function(e){ if (e.key === 'Enter') document.getElementById('l-password').focus(); });
+
+async function doLogin() {
+  var email = document.getElementById('l-email').value.trim();
+  var pwd   = document.getElementById('l-password').value;
+  var errEl = document.getElementById('login-error');
+  errEl.classList.remove('show');
+
+  if (!email || !pwd) {
+    errEl.textContent = 'Please enter your email and password.';
+    errEl.classList.add('show');
+    return;
+  }
+
+  var btn = document.getElementById('login-btn');
+  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span>';
+
+  try {
+    var res  = await fetch(SUPA_URL + '/auth/v1/token?grant_type=password', {
+      method: 'POST',
+      headers: { 'apikey': SUPA_KEY, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, password: pwd })
+    });
+    var data = await res.json();
+
+    if (!data.access_token) {
+      errEl.textContent = 'Incorrect email or password. Please try again.';
+      errEl.classList.add('show');
+      btn.disabled = false; btn.textContent = 'Sign in';
+      return;
+    }
+
+    // ✅ Store session — this is what persists across refreshes
+    currentSession = data;
+    currentUser    = data.user;
+    saveSession(data);  // <-- persist to localStorage
+
+    var profile = await supa('GET', '/rest/v1/profiles?id=eq.' + currentUser.id + '&select=*');
+    if (!profile || !profile.length) {
+      errEl.textContent = 'Account setup incomplete. Please contact admin.';
+      errEl.classList.add('show');
+      btn.disabled = false; btn.textContent = 'Sign in';
+      return;
+    }
+
+    currentProfile = profile[0];
+    btn.disabled = false; btn.textContent = 'Sign in';
+    applyProfile(currentProfile);
+
+  } catch(e) {
+    errEl.textContent = 'Could not connect. Please check your internet and try again.';
+    errEl.classList.add('show');
+    btn.disabled = false; btn.textContent = 'Sign in';
+  }
+}
+
+// ── LOGOUT ───────────────────────────────────────────────────────────────────
+function doLogout() {
+  currentUser    = null;
+  currentProfile = null;
+  currentSession = null;
+  clearSession(); // remove from localStorage
+  document.getElementById('l-email').value    = '';
+  document.getElementById('l-password').value = '';
+  showPage('page-login');
+}
+
+// ── STUDENT DATA ─────────────────────────────────────────────────────────────
+async function loadStudentData() {
+  if (!currentProfile) return;
+  try {
+    var st = await supa('GET', '/rest/v1/students?id=eq.' + currentProfile.linked_id + '&select=*');
+    if (!st || !st.length) return;
+    var s = st[0];
+    var lmap = {'Noorani — Level 1':'نوراني','Mubtadi — Level 2':'مبتدئ','Mutawassit — Level 3':'متوسط','Mutaqaddim — Level 4':'متقدم','Mujawwad — Level 5':'مجوَّد'};
+    document.getElementById('s-stat-level').textContent    = (s.level || '').split(' — ')[0] || '—';
+    document.getElementById('s-stat-level-ar').textContent = lmap[s.level] || '—';
+    document.getElementById('s-level-pill').textContent    = s.level || 'Student';
+    document.getElementById('s-role').textContent          = s.level || 'Student';
+    document.getElementById('s-stat-lang').textContent     = s.language || '—';
+    var levels = ['Noorani — Level 1','Mubtadi — Level 2','Mutawassit — Level 3','Mutaqaddim — Level 4','Mujawwad — Level 5'];
+    var cur = levels.indexOf(s.level); var html = '';
+    levels.forEach(function(l, i){
+      var done = i < cur, active = i === cur;
+      html += '<div style="margin-bottom:16px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px"><span style="font-size:13px;font-weight:' + (active ? 600 : 400) + ';color:' + (done || active ? 'var(--charcoal)' : 'var(--muted)') + '">' + l + '</span>';
+      if (done)   html += '<span class="badge bg">Completed</span>';
+      else if (active) html += '<span class="badge bteal">In Progress</span>';
+      else        html += '<span class="badge bgrey">Upcoming</span>';
+      html += '</div><div class="prog-bar"><div class="prog-fill" style="width:' + (done ? 100 : active ? 50 : 0) + '%"></div></div></div>';
+    });
+    document.getElementById('s-progress-levels').innerHTML = html;
+    if (s.batch_id) {
+      var ba = await supa('GET', '/rest/v1/batches?id=eq.' + s.batch_id + '&select=*');
+      if (ba && ba.length) {
+        var b = ba[0];
+        document.getElementById('s-stat-batch').textContent = b.name || '—';
+        document.getElementById('s-batch-info').innerHTML = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px"><div style="background:var(--teal-pale);border-radius:12px;padding:16px"><div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px">Class day</div><div style="font-size:15px;font-weight:600;color:var(--teal)">' + (b.class_day || '—') + '</div></div><div style="background:var(--gold-light);border-radius:12px;padding:16px"><div style="font-size:11px;color:#8B6914;text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px">Time</div><div style="font-size:15px;font-weight:600;color:#8B6914">' + (b.class_time || '—') + '</div></div></div>';
+      }
+    }
+    var notes = await supa('GET', '/rest/v1/progress_notes?student_id=eq.' + s.id + '&order=created_at.desc&limit=5&select=*');
+    if (notes && notes.length) {
+      var nh = '<div class="timeline">';
+      notes.forEach(function(n){ nh += '<div class="tl-item"><div class="tl-dot">📝</div><div><div class="tl-title">' + new Date(n.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'short'}) + '</div><div class="tl-sub">' + n.note + '</div></div></div>'; });
+      nh += '</div>';
+      document.getElementById('s-notes-list').innerHTML = nh;
+    }
+  } catch(e) { console.error('Student data:', e); }
+}
+
+// ── TEACHER DATA ─────────────────────────────────────────────────────────────
+async function loadTeacherData() {
+  if (!currentProfile) return;
+  try {
+    var tr = await supa('GET', '/rest/v1/teachers?id=eq.' + currentProfile.linked_id + '&select=*');
+    if (!tr || !tr.length) return;
+    var teacher = tr[0];
+    var batches = await supa('GET', '/rest/v1/batches?teacher_id=eq.' + teacher.id + '&select=*') || [];
+    document.getElementById('t-stat-batches').textContent = batches.length;
+    document.getElementById('t-batches-pill').textContent = batches.length + (batches.length === 1 ? ' Batch' : ' Batches');
+    var students = [];
+    if (batches.length) {
+      var bids = batches.map(function(b){ return b.id; });
+      var sl = await supa('GET', '/rest/v1/students?batch_id=in.(' + bids.join(',') + ')&select=*');
+      if (sl) students = sl;
+    }
+    document.getElementById('t-stat-students').textContent = students.length;
+    var allN = await supa('GET', '/rest/v1/progress_notes?teacher_id=eq.' + teacher.id + '&select=id');
+    document.getElementById('t-stat-notes').textContent = allN ? allN.length : 0;
+    if (students.length) {
+      var sh = '';
+      students.forEach(function(s){ var i = s.name.split(' ').map(function(w){ return w[0]; }).join('').substring(0,2).toUpperCase(); sh += '<div class="user-row"><div class="user-avatar">' + i + '</div><div><div class="user-name">' + s.name + '</div><div class="user-detail">' + s.level + ' · ' + (s.country || '') + '</div></div><span class="badge bg" style="margin-left:auto">Active</span></div>'; });
+      document.getElementById('t-students-list').innerHTML = sh;
+      var opts = '<option value="">Select student</option>';
+      students.forEach(function(s){ opts += '<option value="' + s.id + '">' + s.name + '</option>'; });
+      document.getElementById('t-note-student').innerHTML = opts;
+    }
+    if (batches.length) {
+      var bh = '';
+      batches.forEach(function(b){ bh += '<div style="padding:16px;background:var(--cream);border-radius:14px;border:1px solid var(--border);margin-bottom:10px"><div style="font-weight:600;font-size:14px;margin-bottom:4px">' + b.name + '</div><div style="font-size:12px;color:var(--muted)">' + b.class_day + ' · ' + b.class_time + ' · ' + b.level + '</div></div>'; });
+      document.getElementById('t-batches-list').innerHTML = bh;
+      var ao = '<option value="">Select batch</option>';
+      batches.forEach(function(b){ ao += '<option value="' + b.id + '">' + b.name + '</option>'; });
+      document.getElementById('t-att-batch').innerHTML = ao;
+    }
+    var notes = await supa('GET', '/rest/v1/progress_notes?teacher_id=eq.' + teacher.id + '&order=created_at.desc&limit=10&select=*');
+    if (notes && notes.length) {
+      var nh = '<div class="timeline">';
+      notes.forEach(function(n){ nh += '<div class="tl-item"><div class="tl-dot">📝</div><div><div class="tl-title">' + new Date(n.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'short'}) + '</div><div class="tl-sub">' + n.note + '</div></div></div>'; });
+      nh += '</div>';
+      document.getElementById('t-notes-list').innerHTML = nh;
+    }
+  } catch(e) { console.error('Teacher data:', e); }
+}
+
+// ── ATTENDANCE ───────────────────────────────────────────────────────────────
+async function loadAttendanceStudents() {
+  var bid = document.getElementById('t-att-batch').value;
+  var listEl = document.getElementById('t-attendance-list');
+  var sw = document.getElementById('t-att-save-wrap');
+  if (!bid) {
+    listEl.innerHTML = '<div class="empty-state"><div class="empty-state-icon">✅</div><div class="empty-state-title">Select a batch above</div></div>';
+    sw.style.display = 'none'; return;
+  }
+  try {
+    var st = await supa('GET', '/rest/v1/students?batch_id=eq.' + bid + '&select=*');
+    if (!st || !st.length) {
+      listEl.innerHTML = '<div class="empty-state"><div class="empty-state-icon">👤</div><div class="empty-state-title">No students in this batch</div></div>';
+      sw.style.display = 'none'; return;
+    }
+    var html = '';
+    st.forEach(function(s){ var i = s.name.split(' ').map(function(w){ return w[0]; }).join('').substring(0,2).toUpperCase(); html += '<div style="display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:var(--cream);border-radius:12px;border:1px solid var(--border);margin-bottom:8px" data-sid="' + s.id + '"><div style="display:flex;align-items:center;gap:10px"><div class="user-avatar">' + i + '</div><div class="user-name">' + s.name + '</div></div><div class="att-toggle"><button class="att-btn" onclick="markAtt(this,\'present\')">Present</button><button class="att-btn" onclick="markAtt(this,\'absent\')">Absent</button></div></div>'; });
+    listEl.innerHTML = html; sw.style.display = 'block';
+  } catch(e) { console.error('Att load:', e); }
+}
+function markAtt(btn, status) {
+  var w = btn.parentElement;
+  w.querySelectorAll('.att-btn').forEach(function(b){ b.classList.remove('present','absent'); });
+  btn.classList.add(status);
+}
+async function saveAttendance() {
+  var rows = document.querySelectorAll('#t-attendance-list [data-sid]');
+  var today = new Date().toISOString().split('T')[0];
+  var records = [];
+  rows.forEach(function(row){
+    var sid = row.dataset.sid;
+    var pb = row.querySelector('.att-btn.present'), ab = row.querySelector('.att-btn.absent');
+    if (pb || ab) records.push({ student_id: sid, date: today, status: pb ? 'present' : 'absent', teacher_id: currentProfile.linked_id });
+  });
+  if (!records.length) { showToast('Mark at least one student.', 'error'); return; }
+  try {
+    await supa('POST', '/rest/v1/attendance', records);
+    showToast('Attendance saved! JazakAllah khair 🌙', 'success');
+  } catch(e) { showToast('Could not save. Please try again.', 'error'); }
+}
+async function saveTeacherNote() {
+  var sid  = document.getElementById('t-note-student').value;
+  var note = document.getElementById('t-note-text').value.trim();
+  if (!sid || !note) { showToast('Please select a student and write a note.', 'error'); return; }
+  try {
+    await supa('POST', '/rest/v1/progress_notes', { student_id: sid, note: note, teacher_id: currentProfile.linked_id });
+    document.getElementById('t-note-text').value = '';
+    showToast('Note saved! 🌙', 'success');
+    loadTeacherData();
+  } catch(e) { showToast('Could not save. Please try again.', 'error'); }
+}
+
+// ── ADMIN DATA ───────────────────────────────────────────────────────────────
+async function loadAdminData() {
+  try {
+    var results = await Promise.all([
+      supa('GET', '/rest/v1/students?select=*'),
+      supa('GET', '/rest/v1/teachers?select=*'),
+      supa('GET', '/rest/v1/batches?select=*'),
+      supa('GET', '/rest/v1/registrations?order=created_at.desc&select=*')
+    ]);
+    var students = results[0] || [], teachers = results[1] || [], batches = results[2] || [], regs = results[3] || [];
+    var newRegs = regs.filter(function(r){ return r.status === 'new'; });
+    document.getElementById('a-stat-students').textContent = students.length;
+    document.getElementById('a-stat-teachers').textContent = teachers.length;
+    document.getElementById('a-stat-batches').textContent  = batches.length;
+    document.getElementById('a-stat-regs').textContent     = newRegs.length;
+
+    if (regs.length) {
+      var rh = '';
+      regs.slice(0,3).forEach(function(r){ rh += '<div class="user-row"><div class="user-avatar">' + r.name[0].toUpperCase() + '</div><div><div class="user-name">' + r.name + '</div><div class="user-detail">Age ' + r.age + ' · ' + r.language + ' · ' + r.preferred_time + '</div></div><span class="badge bgold" style="margin-left:auto">New</span></div>'; });
+      document.getElementById('a-recent-regs').innerHTML = rh;
+      var regsHtml = '<div class="tscroll"><table><thead><tr><th>Name</th><th>Age</th><th>Level</th><th>Time</th><th>Language</th><th>Currency</th><th>Notes</th><th>Status</th></tr></thead><tbody>';
+      regs.forEach(function(r){ regsHtml += '<tr><td style="font-weight:500">' + r.name + '</td><td>' + r.age + '</td><td>' + (r.level || '—') + '</td><td>' + (r.preferred_time || '—') + '</td><td>' + (r.language || '—') + '</td><td>' + (r.currency || '—') + '</td><td style="max-width:160px;font-size:12px;color:var(--muted)">' + (r.notes || '—') + '</td><td><span class="badge ' + (r.status === 'new' ? 'bgold' : 'bg') + '">' + r.status + '</span></td></tr>'; });
+      regsHtml += '</tbody></table></div>';
+      document.getElementById('a-regs-list').innerHTML = regsHtml;
+    }
+
+    if (students.length) {
+      var lc = {};
+      students.forEach(function(s){ lc[s.level] = (lc[s.level] || 0) + 1; });
+      var lh = '';
+      Object.keys(lc).forEach(function(l){ var pct = Math.round(lc[l] / students.length * 100); lh += '<div style="margin-bottom:14px"><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px"><span>' + l + '</span><span style="font-weight:600;color:var(--teal)">' + lc[l] + '</span></div><div class="prog-bar"><div class="prog-fill" style="width:' + pct + '%"></div></div></div>'; });
+      document.getElementById('a-level-breakdown').innerHTML = lh;
+      var sth = '<div class="tscroll"><table><thead><tr><th>Name</th><th>Age</th><th>Level</th><th>Country</th><th>Language</th><th>Payment</th><th>Action</th></tr></thead><tbody>';
+      students.forEach(function(s){ sth += '<tr><td style="font-weight:500">' + s.name + '</td><td>' + (s.age || '—') + '</td><td>' + (s.level || '—') + '</td><td>' + (s.country || '—') + '</td><td>' + (s.language || '—') + '</td><td>' + (s.payment_status === 'paid' ? '<span class="badge bg">' + (s.payment_amount || 'Paid') + '</span>' : '<span class="badge bgold">Pending</span>') + '</td><td><button class="btn btn-danger btn-sm" onclick="deleteStudent(\'' + s.id + '\')">Delete</button></td></tr>'; });
+      sth += '</tbody></table></div>';
+      document.getElementById('a-students-table').innerHTML = sth;
+    }
+
+    if (teachers.length) {
+      var th = '';
+      teachers.forEach(function(t){ var i = t.name.split(' ').map(function(w){ return w[0]; }).join('').substring(0,2).toUpperCase(); th += '<div class="user-row"><div class="user-avatar" style="background:var(--gold-light);color:#8B6914">' + i + '</div><div><div class="user-name">' + t.name + '</div><div class="user-detail">' + (t.email || '') + ' ' + (t.phone ? '· ' + t.phone : '') + '</div></div><div class="user-actions"><button class="btn btn-danger btn-sm" onclick="deleteTeacher(\'' + t.id + '\')">Delete</button></div></div>'; });
+      document.getElementById('a-teachers-list').innerHTML = th;
+    }
+
+    if (batches.length) {
+      var bh = '';
+      batches.forEach(function(b){ bh += '<div style="padding:16px;background:var(--cream);border-radius:14px;border:1px solid var(--border);margin-bottom:10px;display:flex;align-items:center;justify-content:space-between"><div><div style="font-weight:600;font-size:14px;margin-bottom:4px">' + b.name + '</div><div style="font-size:12px;color:var(--muted)">' + b.class_day + ' · ' + b.class_time + ' · ' + b.level + '</div></div><button class="btn btn-danger btn-sm" onclick="deleteBatch(\'' + b.id + '\')">Delete</button></div>'; });
+      document.getElementById('a-batches-list').innerHTML = bh;
+    }
+
+    var paid  = students.filter(function(s){ return s.payment_status === 'paid'; });
+    var pend  = students.filter(function(s){ return s.payment_status !== 'paid'; });
+    document.getElementById('r-paid').textContent    = paid.length;
+    document.getElementById('r-pending').textContent = pend.length;
+    document.getElementById('r-revenue').textContent = paid.length ? '~AED ' + (paid.length * 65) : '—';
+
+    if (students.length) {
+      var rvh = '<div class="tscroll"><table><thead><tr><th>Name</th><th>Level</th><th>Payment</th><th>Amount</th></tr></thead><tbody>';
+      students.forEach(function(s){ rvh += '<tr><td>' + s.name + '</td><td>' + (s.level || '—') + '</td><td>' + (s.payment_status === 'paid' ? '<span class="badge bg">Paid</span>' : '<span class="badge bgold">Pending</span>') + '</td><td>' + (s.payment_amount || '—') + '</td></tr>'; });
+      rvh += '</tbody></table></div>';
+      document.getElementById('a-revenue-table').innerHTML = rvh;
+    }
+  } catch(e) { console.error('Admin data:', e); showToast('Could not load data.', 'error'); }
+}
+
+// ── CRUD ─────────────────────────────────────────────────────────────────────
+async function saveStudent() {
+  var name = document.getElementById('ms-name').value.trim();
+  if (!name) { showToast('Please enter a name.', 'error'); return; }
+  try {
+    await supa('POST', '/rest/v1/students', {
+      name: name,
+      age: parseInt(document.getElementById('ms-age').value) || null,
+      level: document.getElementById('ms-level').value,
+      country: document.getElementById('ms-country').value,
+      language: document.getElementById('ms-lang').value,
+      payment_status: document.getElementById('ms-pay').value,
+      payment_amount: document.getElementById('ms-amount').value.trim(),
+      status: 'active'
+    });
+    closeModal('modal-add-student');
+    ['ms-name','ms-age','ms-amount'].forEach(function(i){ document.getElementById(i).value = ''; });
+    showToast('Student added! 🌙', 'success');
+    loadAdminData();
+  } catch(e) { showToast('Could not save: ' + e.message, 'error'); }
+}
+
+async function saveTeacher() {
+  var name = document.getElementById('mt-name').value.trim();
+  if (!name) { showToast('Please enter a name.', 'error'); return; }
+  try {
+    await supa('POST', '/rest/v1/teachers', {
+      name: name,
+      email: document.getElementById('mt-email').value.trim(),
+      phone: document.getElementById('mt-phone').value.trim(),
+      status: 'active'
+    });
+    closeModal('modal-add-teacher');
+    ['mt-name','mt-email','mt-phone'].forEach(function(i){ document.getElementById(i).value = ''; });
+    showToast('Teacher added! 🌙', 'success');
+    loadAdminData();
+  } catch(e) { showToast('Could not save: ' + e.message, 'error'); }
+}
+
+async function saveBatch() {
+  var name = document.getElementById('mb-name').value.trim();
+  if (!name) { showToast('Please enter a batch name.', 'error'); return; }
+  try {
+    await supa('POST', '/rest/v1/batches', {
+      name: name,
+      level: document.getElementById('mb-level').value,
+      language: document.getElementById('mb-lang').value,
+      class_day: document.getElementById('mb-day').value,
+      class_time: document.getElementById('mb-time').value.trim()
+    });
+    closeModal('modal-add-batch');
+    document.getElementById('mb-name').value = '';
+    document.getElementById('mb-time').value = '';
+    showToast('Batch created! 🌙', 'success');
+    loadAdminData();
+  } catch(e) { showToast('Could not save: ' + e.message, 'error'); }
+}
+
+async function deleteStudent(id) {
+  if (!confirm('Delete this student? This cannot be undone.')) return;
+  try { await supa('DELETE', '/rest/v1/students?id=eq.' + id); showToast('Student removed.', 'success'); loadAdminData(); }
+  catch(e) { showToast('Could not delete.', 'error'); }
+}
+async function deleteTeacher(id) {
+  if (!confirm('Delete this teacher? This cannot be undone.')) return;
+  try { await supa('DELETE', '/rest/v1/teachers?id=eq.' + id); showToast('Teacher removed.', 'success'); loadAdminData(); }
+  catch(e) { showToast('Could not delete.', 'error'); }
+}
+async function deleteBatch(id) {
+  if (!confirm('Delete this batch? This cannot be undone.')) return;
+  try { await supa('DELETE', '/rest/v1/batches?id=eq.' + id); showToast('Batch removed.', 'success'); loadAdminData(); }
+  catch(e) { showToast('Could not delete.', 'error'); }
+}
+</script>
 </body>
 </html>

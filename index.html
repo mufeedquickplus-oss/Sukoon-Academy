@@ -221,7 +221,41 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
 <!-- MODALS -->
 <div class="modal-overlay" id="modal-add-student"><div class="modal"><div class="modal-header"><div class="modal-title" style="font-family:'Lora',serif">Add <em style="color:var(--teal);font-style:italic">Student</em></div><button class="modal-close" onclick="closeModal('modal-add-student')">✕</button></div><div class="fg"><label>Full name</label><input id="ms-name" type="text" placeholder="Student's full name"/></div><div class="fr"><div class="fg"><label>Age</label><input id="ms-age" type="number" placeholder="Age" min="5" max="99"/></div><div class="fg"><label>Level</label><select id="ms-level"><option value="">Select level</option><option>Noorani — Level 1</option><option>Mubtadi — Level 2</option><option>Mutawassit — Level 3</option><option>Mutaqaddim — Level 4</option><option>Mujawwad — Level 5</option></select></div></div><div class="fr"><div class="fg"><label>Country</label><select id="ms-country"><option value="">Select</option><option>UAE</option><option>India</option><option>Saudi Arabia</option><option>Qatar</option><option>Kuwait</option><option>Bahrain</option><option>Oman</option><option>Other</option></select></div><div class="fg"><label>Language</label><select id="ms-lang"><option>English</option><option>Malayalam</option><option>Hindi</option><option>Arabic</option></select></div></div><div class="fr"><div class="fg"><label>Payment status</label><select id="ms-pay"><option value="pending">Pending</option><option value="paid">Paid</option></select></div><div class="fg"><label>Amount</label><input id="ms-amount" type="text" placeholder="e.g. AED 50"/></div></div><div class="modal-actions"><button class="btn btn-ghost btn-sm" onclick="closeModal('modal-add-student')">Cancel</button><button class="btn btn-primary btn-sm" onclick="saveStudent()">Save Student</button></div></div></div>
 <div class="modal-overlay" id="modal-add-teacher"><div class="modal"><div class="modal-header"><div class="modal-title" style="font-family:'Lora',serif">Add <em style="color:var(--teal);font-style:italic">Teacher</em></div><button class="modal-close" onclick="closeModal('modal-add-teacher')">✕</button></div><div class="fg"><label>Full name</label><input id="mt-name" type="text" placeholder="Teacher's full name"/></div><div class="fg"><label>Email</label><input id="mt-email" type="email" placeholder="teacher@email.com"/></div><div class="fg"><label>WhatsApp number</label><input id="mt-phone" type="tel" placeholder="+971 50 000 0000"/></div><div class="modal-actions"><button class="btn btn-ghost btn-sm" onclick="closeModal('modal-add-teacher')">Cancel</button><button class="btn btn-primary btn-sm" onclick="saveTeacher()">Save Teacher</button></div></div></div>
-<div class="modal-overlay" id="modal-add-batch"><div class="modal"><div class="modal-header"><div class="modal-title" style="font-family:'Lora',serif">Add <em style="color:var(--teal);font-style:italic">Batch</em></div><button class="modal-close" onclick="closeModal('modal-add-batch')">✕</button></div><div class="fg"><label>Batch name</label><input id="mb-name" type="text" placeholder="e.g. Noorani Kids - Sat 5pm"/></div><div class="fr"><div class="fg"><label>Level</label><select id="mb-level"><option value="">Select</option><option>Noorani — Level 1</option><option>Mubtadi — Level 2</option><option>Mutawassit — Level 3</option><option>Mutaqaddim — Level 4</option><option>Mujawwad — Level 5</option></select></div><div class="fg"><label>Language</label><select id="mb-lang"><option>English</option><option>Malayalam</option><option>Hindi</option></select></div></div><div class="fr"><div class="fg"><label>Class day</label><select id="mb-day"><option>Monday</option><option>Tuesday</option><option>Wednesday</option><option>Thursday</option><option>Friday</option><option>Saturday</option><option>Sunday</option></select></div><div class="fg"><label>Class time</label><input id="mb-time" type="text" placeholder="e.g. 5:00 PM"/></div></div><div class="modal-actions"><button class="btn btn-ghost btn-sm" onclick="closeModal('modal-add-batch')">Cancel</button><button class="btn btn-primary btn-sm" onclick="saveBatch()">Save Batch</button></div></div></div>
+<div class="modal-overlay" id="modal-add-batch"><div class="modal" style="max-width:560px">
+<div class="modal-header"><div class="modal-title" style="font-family:'Lora',serif">Add <em style="color:var(--teal);font-style:italic">Batch</em></div><button class="modal-close" onclick="closeModal('modal-add-batch')">✕</button></div>
+<div class="fg"><label>Batch name</label><input id="mb-name" type="text" placeholder="e.g. Noorani Kids - Sat 5pm"/></div>
+<div class="fr">
+<div class="fg"><label>Level</label><select id="mb-level"><option value="">Select</option><option>Noorani — Level 1</option><option>Mubtadi — Level 2</option><option>Mutawassit — Level 3</option><option>Mutaqaddim — Level 4</option><option>Mujawwad — Level 5</option></select></div>
+<div class="fg"><label>Language</label><select id="mb-lang"><option>English</option><option>Malayalam</option><option>Hindi</option></select></div>
+</div>
+<div class="fr">
+<div class="fg"><label>Class day</label><select id="mb-day"><option>Monday</option><option>Tuesday</option><option>Wednesday</option><option>Thursday</option><option>Friday</option><option>Saturday</option><option>Sunday</option></select></div>
+<div class="fg"><label>Class time</label><input id="mb-time" type="text" placeholder="e.g. 5:00 PM"/></div>
+</div>
+<div class="fg"><label>Assign Teacher</label><select id="mb-teacher"><option value="">Select teacher</option></select><div style="font-size:11px;color:var(--muted);margin-top:5px" id="mb-teacher-count"></div></div>
+<div class="fg"><label>Add Students <span style="color:var(--muted);font-weight:300">(select from approved pool)</span></label><div id="mb-students-list" style="border:1.5px solid var(--border);border-radius:var(--rs);background:var(--cream);padding:12px;max-height:200px;overflow-y:auto"><div style="font-size:13px;color:var(--muted)">Select a teacher first to see available students</div></div><div style="font-size:11px;color:var(--muted);margin-top:5px" id="mb-student-count">0 students selected</div></div>
+<div class="modal-actions"><button class="btn btn-ghost btn-sm" onclick="closeModal('modal-add-batch')">Cancel</button><button class="btn btn-primary btn-sm" onclick="saveBatch()">Save Batch</button></div>
+</div></div>
+
+<!-- Edit Student Modal -->
+<div class="modal-overlay" id="modal-edit-student"><div class="modal">
+<div class="modal-header"><div class="modal-title" style="font-family:'Lora',serif">Edit <em style="color:var(--teal);font-style:italic">Student</em></div><button class="modal-close" onclick="closeModal('modal-edit-student')">✕</button></div>
+<input type="hidden" id="es-id"/>
+<div class="fg"><label>Full name</label><input id="es-name" type="text"/></div>
+<div class="fr">
+<div class="fg"><label>Age</label><input id="es-age" type="number" min="5" max="99"/></div>
+<div class="fg"><label>Level</label><select id="es-level"><option>Noorani — Level 1</option><option>Mubtadi — Level 2</option><option>Mutawassit — Level 3</option><option>Mutaqaddim — Level 4</option><option>Mujawwad — Level 5</option></select></div>
+</div>
+<div class="fr">
+<div class="fg"><label>Country</label><select id="es-country"><option>UAE</option><option>India</option><option>Saudi Arabia</option><option>Qatar</option><option>Kuwait</option><option>Bahrain</option><option>Oman</option><option>Other</option></select></div>
+<div class="fg"><label>Language</label><select id="es-lang"><option>English</option><option>Malayalam</option><option>Hindi</option><option>Arabic</option></select></div>
+</div>
+<div class="fr">
+<div class="fg"><label>Payment status</label><select id="es-pay"><option value="pending">Pending</option><option value="paid">Paid</option></select></div>
+<div class="fg"><label>Amount paid</label><input id="es-amount" type="text" placeholder="e.g. AED 50"/></div>
+</div>
+<div class="modal-actions"><button class="btn btn-ghost btn-sm" onclick="closeModal('modal-edit-student')">Cancel</button><button class="btn btn-primary btn-sm" onclick="updateStudent()">Save Changes</button></div>
+</div></div>
 
 <!-- PAGE 1: WEBSITE -->
 <div class="page active" id="page-site">
@@ -272,12 +306,71 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
 <div class="dash-page" id="page-admin">
 <aside class="sidebar"><div class="sidebar-logo"><div class="sidebar-logo-text">Sukoon<span>.</span></div><div class="sidebar-logo-sub">Admin Portal</div></div><div class="sidebar-section">Management</div><ul class="sidebar-nav"><li><a class="active" onclick="showPanel('page-admin','ap-home',this)"><span class="ni">🏠</span> Overview</a></li><li><a onclick="showPanel('page-admin','ap-registrations',this)"><span class="ni">🔔</span> Registrations</a></li><li><a onclick="showPanel('page-admin','ap-students',this)"><span class="ni">🎓</span> Students</a></li><li><a onclick="showPanel('page-admin','ap-teachers',this)"><span class="ni">📖</span> Teachers</a></li><li><a onclick="showPanel('page-admin','ap-batches',this)"><span class="ni">👥</span> Batches</a></li><li><a onclick="showPanel('page-admin','ap-revenue',this)"><span class="ni">💰</span> Revenue</a></li></ul><div class="sidebar-bottom"><div class="sidebar-user"><div class="sidebar-avatar" id="a-avatar">A</div><div><div class="sidebar-user-name" id="a-name">Admin</div><div class="sidebar-user-role">Full access</div></div></div><button class="sidebar-logout" onclick="doLogout()">← Sign out</button></div></aside>
 <div class="dash-main"><div class="topbar"><div class="topbar-title">Sukoon <em>Admin</em> 🛡️</div><div class="topbar-right"><div class="topbar-date" id="today-date-a"></div><div class="topbar-pill">Full Access</div></div></div><div class="dash-content">
-<div class="panel active" id="ap-home"><div class="stats-row c4"><div class="stat-card teal"><div class="sc-icon">🎓</div><div class="sc-label">Students</div><div class="sc-num" id="a-stat-students">—</div><div class="sc-sub">enrolled</div></div><div class="stat-card"><div class="sc-icon">📖</div><div class="sc-label">Teachers</div><div class="sc-num" id="a-stat-teachers">—</div><div class="sc-sub">active</div></div><div class="stat-card"><div class="sc-icon">👥</div><div class="sc-label">Batches</div><div class="sc-num" id="a-stat-batches">—</div><div class="sc-sub">running</div></div><div class="stat-card gold"><div class="sc-icon">🔔</div><div class="sc-label">New Registrations</div><div class="sc-num" id="a-stat-regs">—</div><div class="sc-sub">pending review</div></div></div><div class="info-box"><div class="info-box-title">Getting Started</div><p>Add teachers first, then create batches and assign students. New website registrations appear in the Registrations tab automatically.</p></div><div class="g2"><div class="card"><div class="card-title" style="margin-bottom:16px">Recent <em>Registrations</em></div><div id="a-recent-regs"><div class="empty-state"><div class="empty-state-icon">🔔</div><div class="empty-state-title">No registrations yet</div></div></div></div><div class="card"><div class="card-title" style="margin-bottom:16px">Students by <em>Level</em></div><div id="a-level-breakdown"><div class="empty-state"><div class="empty-state-icon">📊</div><div class="empty-state-title">No students yet</div></div></div></div></div></div>
-<div class="panel" id="ap-registrations"><div class="card"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px"><div class="card-title">Website <em>Registrations</em></div><button class="btn btn-ghost btn-sm" onclick="loadAdminData()">↻ Refresh</button></div><div id="a-regs-list"><div class="empty-state"><div class="empty-state-icon">🔔</div><div class="empty-state-title">No registrations yet</div><p>When someone fills your registration form, they appear here.</p></div></div></div></div>
-<div class="panel" id="ap-students"><div class="card"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px"><div class="card-title">All <em>Students</em></div><button class="btn btn-primary btn-sm" onclick="openModal('modal-add-student')">+ Add Student</button></div><div id="a-students-table"><div class="empty-state"><div class="empty-state-icon">🎓</div><div class="empty-state-title">No students yet</div><p>Add your first student using the button above.</p></div></div></div></div>
-<div class="panel" id="ap-teachers"><div class="card"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px"><div class="card-title">All <em>Teachers</em></div><button class="btn btn-primary btn-sm" onclick="openModal('modal-add-teacher')">+ Add Teacher</button></div><div id="a-teachers-list"><div class="empty-state"><div class="empty-state-icon">📖</div><div class="empty-state-title">No teachers yet</div><p>Add your first teacher using the button above.</p></div></div></div></div>
-<div class="panel" id="ap-batches"><div class="card"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px"><div class="card-title">All <em>Batches</em></div><button class="btn btn-primary btn-sm" onclick="openModal('modal-add-batch')">+ Add Batch</button></div><div id="a-batches-list"><div class="empty-state"><div class="empty-state-icon">👥</div><div class="empty-state-title">No batches yet</div></div></div></div></div>
-<div class="panel" id="ap-revenue"><div class="stats-row c3"><div class="stat-card teal"><div class="sc-label">Paid Students</div><div class="sc-num" id="r-paid">—</div></div><div class="stat-card"><div class="sc-label">Pending Payment</div><div class="sc-num" id="r-pending">—</div></div><div class="stat-card gold"><div class="sc-label">Est. Monthly Revenue</div><div class="sc-num" id="r-revenue">—</div></div></div><div class="card"><div class="card-title" style="margin-bottom:16px">Payment <em>Status</em></div><div id="a-revenue-table"><div class="empty-state"><div class="empty-state-icon">💰</div><div class="empty-state-title">No data yet</div></div></div></div></div>
+<div class="panel active" id="ap-home">
+<div class="stats-row c4">
+<div class="stat-card teal"><div class="sc-icon">🎓</div><div class="sc-label">Students</div><div class="sc-num" id="a-stat-students">—</div><div class="sc-sub">approved</div></div>
+<div class="stat-card"><div class="sc-icon">📖</div><div class="sc-label">Teachers</div><div class="sc-num" id="a-stat-teachers">—</div><div class="sc-sub">active</div></div>
+<div class="stat-card"><div class="sc-icon">👥</div><div class="sc-label">Batches</div><div class="sc-num" id="a-stat-batches">—</div><div class="sc-sub">running</div></div>
+<div class="stat-card gold"><div class="sc-icon">🔔</div><div class="sc-label">New Registrations</div><div class="sc-num" id="a-stat-regs">—</div><div class="sc-sub">pending review</div></div>
+</div>
+<div class="info-box"><div class="info-box-title">Workflow</div><p>1. Review registrations and approve them as students. 2. Add teachers. 3. Create batches — assign a teacher and select students. Each teacher can have max 10 students.</p></div>
+<div class="g2">
+<div class="card"><div class="card-title" style="margin-bottom:16px">Recent <em>Registrations</em></div><div id="a-recent-regs"><div class="empty-state"><div class="empty-state-icon">🔔</div><div class="empty-state-title">No registrations yet</div></div></div></div>
+<div class="card"><div class="card-title" style="margin-bottom:16px">Students by <em>Level</em></div><div id="a-level-breakdown"><div class="empty-state"><div class="empty-state-icon">📊</div><div class="empty-state-title">No students yet</div></div></div></div>
+</div>
+</div>
+
+<div class="panel" id="ap-registrations">
+<div class="card">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+<div class="card-title">Website <em>Registrations</em></div>
+<button class="btn btn-ghost btn-sm" onclick="loadAdminData()">↻ Refresh</button>
+</div>
+<div class="info-box" style="margin-bottom:16px"><div class="info-box-title">How this works</div><p>Each registration is a person who filled your form. Review their details and click <strong>Approve as Student</strong> to add them to the Students pool. Only then can they be assigned to a batch.</p></div>
+<div id="a-regs-list"><div class="empty-state"><div class="empty-state-icon">🔔</div><div class="empty-state-title">No registrations yet</div><p>When someone fills your registration form, they appear here.</p></div></div>
+</div>
+</div>
+
+<div class="panel" id="ap-students">
+<div class="card">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+<div class="card-title">All <em>Students</em></div>
+</div>
+<p style="font-size:13px;color:var(--muted);margin-bottom:20px;font-weight:300">Only approved students appear here. Approve them from the Registrations tab.</p>
+<div id="a-students-table"><div class="empty-state"><div class="empty-state-icon">🎓</div><div class="empty-state-title">No students yet</div><p>Approve registrations to add students here.</p></div></div>
+</div>
+</div>
+
+<div class="panel" id="ap-teachers">
+<div class="card">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+<div class="card-title">All <em>Teachers</em></div>
+<button class="btn btn-primary btn-sm" onclick="openModal('modal-add-teacher')">+ Add Teacher</button>
+</div>
+<p style="font-size:13px;color:var(--muted);margin-bottom:20px;font-weight:300">Each teacher can have a maximum of 10 students across all their batches.</p>
+<div id="a-teachers-list"><div class="empty-state"><div class="empty-state-icon">📖</div><div class="empty-state-title">No teachers yet</div><p>Add your first teacher using the button above.</p></div></div>
+</div>
+</div>
+
+<div class="panel" id="ap-batches">
+<div class="card">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+<div class="card-title">All <em>Batches</em></div>
+<button class="btn btn-primary btn-sm" onclick="openAddBatchModal()">+ Add Batch</button>
+</div>
+<p style="font-size:13px;color:var(--muted);margin-bottom:20px;font-weight:300">Each batch has one teacher and up to 10 students. Students must be approved first.</p>
+<div id="a-batches-list"><div class="empty-state"><div class="empty-state-icon">👥</div><div class="empty-state-title">No batches yet</div><p>Add a batch and assign a teacher and students to it.</p></div></div>
+</div>
+</div>
+
+<div class="panel" id="ap-revenue">
+<div class="stats-row c3">
+<div class="stat-card teal"><div class="sc-label">Paid Students</div><div class="sc-num" id="r-paid">—</div></div>
+<div class="stat-card"><div class="sc-label">Pending Payment</div><div class="sc-num" id="r-pending">—</div></div>
+<div class="stat-card gold"><div class="sc-label">Est. Monthly Revenue</div><div class="sc-num" id="r-revenue">—</div></div>
+</div>
+<div class="card"><div class="card-title" style="margin-bottom:16px">Payment <em>Status</em></div><div id="a-revenue-table"><div class="empty-state"><div class="empty-state-icon">💰</div><div class="empty-state-title">No data yet</div></div></div></div>
+</div>
 </div></div></div>
 <script>
 'use strict';
@@ -285,12 +378,56 @@ var SUPA_URL='https://fturomssegxeqditglck.supabase.co';
 var SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ0dXJvbXNzZWd4ZXFkaXRnbGNrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxMTY0MDAsImV4cCI6MjA4OTY5MjQwMH0.T9gTjaG7TAxZ2Y0byuX5iebP9c6eT8qhirRQb6kuzBI';
 var currentUser=null,currentProfile=null,currentSession=null;
 
+/* ── SESSION PERSISTENCE ── */
+function saveSession(){
+  try{
+    sessionStorage.setItem('sukoon_session',JSON.stringify({session:currentSession,user:currentUser,profile:currentProfile}));
+  }catch(e){}
+}
+function clearSession(){
+  try{sessionStorage.removeItem('sukoon_session');}catch(e){}
+}
+async function restoreSession(){
+  try{
+    var raw=sessionStorage.getItem('sukoon_session');
+    if(!raw)return false;
+    var saved=JSON.parse(raw);
+    if(!saved||!saved.session||!saved.profile)return false;
+    // Check token not expired
+    var exp=saved.session.expires_at||(saved.session.expires_in?Math.floor(Date.now()/1000)+saved.session.expires_in:0);
+    if(exp&&exp<Math.floor(Date.now()/1000)){clearSession();return false;}
+    currentSession=saved.session;
+    currentUser=saved.user;
+    currentProfile=saved.profile;
+    var init=(currentProfile.name||'?').split(' ').map(function(w){return w[0];}).join('').substring(0,2).toUpperCase();
+    if(currentProfile.role==='admin'){
+      document.getElementById('a-name').textContent=currentProfile.name;
+      document.getElementById('a-avatar').textContent=init;
+      showPage('page-admin');loadAdminData();
+    } else if(currentProfile.role==='teacher'){
+      document.getElementById('t-name').textContent=currentProfile.name;
+      document.getElementById('t-topname').textContent=currentProfile.name.split(' ')[0];
+      document.getElementById('t-avatar').textContent=init;
+      showPage('page-teacher');loadTeacherData();
+    } else {
+      document.getElementById('s-name').textContent=currentProfile.name;
+      document.getElementById('s-topname').textContent=currentProfile.name.split(' ')[0];
+      document.getElementById('s-avatar').textContent=init;
+      showPage('page-student');loadStudentData();
+    }
+    return true;
+  }catch(e){clearSession();return false;}
+}
+
 async function supa(method,path,body){
-  var opts={method:method,headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+(currentSession?currentSession.access_token:SUPA_KEY),'Content-Type':'application/json','Prefer':method==='POST'?'return=representation':''}};
+  var prefer='';
+  if(method==='POST')prefer='return=representation';
+  if(method==='PATCH')prefer='return=representation';
+  var opts={method:method,headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+(currentSession?currentSession.access_token:SUPA_KEY),'Content-Type':'application/json','Prefer':prefer}};
   if(body)opts.body=JSON.stringify(body);
   var res=await fetch(SUPA_URL+path,opts);
-  if(res.status===204)return null;
-  return res.json();
+  if(res.status===204||res.status===200&&method==='DELETE')return null;
+  try{return await res.json();}catch(e){return null;}
 }
 async function supaAuth(path,body){
   var res=await fetch(SUPA_URL+'/auth/v1'+path,{method:'POST',headers:{'apikey':SUPA_KEY,'Content-Type':'application/json'},body:JSON.stringify(body)});
@@ -306,6 +443,8 @@ document.querySelectorAll('.modal-overlay').forEach(function(o){o.addEventListen
 document.addEventListener('keydown',function(e){if(e.key==='Escape')document.querySelectorAll('.modal-overlay.open').forEach(function(m){m.classList.remove('open');});});
 function setDates(){var d=new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});['today-date-s','today-date-t','today-date-a'].forEach(function(id){var el=document.getElementById(id);if(el)el.textContent=d;});}
 setDates();
+// Restore session on page load / refresh
+restoreSession();
 function toggleAcc(t){var b=t.nextElementSibling;var o=t.classList.contains('open');t.classList.toggle('open',!o);b.classList.toggle('open',!o);}
 function goToSection(id){var el=document.getElementById(id);if(!el)return;var t=el.querySelector('.accordion-trigger'),b=t?t.nextElementSibling:null;if(t&&!t.classList.contains('open')){t.classList.add('open');if(b)b.classList.add('open');}setTimeout(function(){el.scrollIntoView({behavior:'smooth',block:'start'});},100);}
 function togglePwd(){var i=document.getElementById('l-password');i.type=i.type==='password'?'text':'password';}
@@ -344,6 +483,7 @@ async function doLogin(){
     var profile=await supa('GET','/rest/v1/profiles?id=eq.'+currentUser.id+'&select=*');
     if(!profile||!profile.length){errEl.textContent='Account setup incomplete. Please contact admin.';errEl.classList.add('show');btn.disabled=false;btn.textContent='Sign in';return;}
     currentProfile=profile[0];
+    saveSession();
     var init=(currentProfile.name||'?').split(' ').map(function(w){return w[0];}).join('').substring(0,2).toUpperCase();
     if(currentProfile.role==='admin'){document.getElementById('a-name').textContent=currentProfile.name;document.getElementById('a-avatar').textContent=init;showPage('page-admin');loadAdminData();}
     else if(currentProfile.role==='teacher'){document.getElementById('t-name').textContent=currentProfile.name;document.getElementById('t-topname').textContent=currentProfile.name.split(' ')[0];document.getElementById('t-avatar').textContent=init;showPage('page-teacher');loadTeacherData();}
@@ -351,7 +491,7 @@ async function doLogin(){
   }catch(e){errEl.textContent='Could not connect. Please check your internet and try again.';errEl.classList.add('show');btn.disabled=false;btn.textContent='Sign in';}
 }
 
-function doLogout(){currentUser=null;currentProfile=null;currentSession=null;document.getElementById('l-email').value='';document.getElementById('l-password').value='';showPage('page-login');}
+function doLogout(){currentUser=null;currentProfile=null;currentSession=null;clearSession();document.getElementById('l-email').value='';document.getElementById('l-password').value='';showPage('page-login');}
 
 async function loadStudentData(){
   if(!currentProfile)return;
@@ -427,43 +567,212 @@ async function saveTeacherNote(){
 
 async function loadAdminData(){
   try{
-    var results=await Promise.all([supa('GET','/rest/v1/students?select=*'),supa('GET','/rest/v1/teachers?select=*'),supa('GET','/rest/v1/batches?select=*'),supa('GET','/rest/v1/registrations?order=created_at.desc&select=*')]);
-    var students=results[0]||[],teachers=results[1]||[],batches=results[2]||[],regs=results[3]||[];
-    var newRegs=regs.filter(function(r){return r.status==='new';});
-    document.getElementById('a-stat-students').textContent=students.length;
-    document.getElementById('a-stat-teachers').textContent=teachers.length;
-    document.getElementById('a-stat-batches').textContent=batches.length;
+    var results=await Promise.all([
+      supa('GET','/rest/v1/students?order=created_at.desc&select=*'),
+      supa('GET','/rest/v1/teachers?order=created_at.desc&select=*'),
+      supa('GET','/rest/v1/batches?order=created_at.desc&select=*'),
+      supa('GET','/rest/v1/registrations?order=created_at.desc&select=*')
+    ]);
+    window.adminStudents=results[0]||[];
+    window.adminTeachers=results[1]||[];
+    window.adminBatches=results[2]||[];
+    window.adminRegs=results[3]||[];
+    var newRegs=window.adminRegs.filter(function(r){return r.status==='new';});
+    document.getElementById('a-stat-students').textContent=window.adminStudents.length;
+    document.getElementById('a-stat-teachers').textContent=window.adminTeachers.length;
+    document.getElementById('a-stat-batches').textContent=window.adminBatches.length;
     document.getElementById('a-stat-regs').textContent=newRegs.length;
-    if(regs.length){var rh='';regs.slice(0,3).forEach(function(r){rh+='<div class="user-row"><div class="user-avatar">'+r.name[0].toUpperCase()+'</div><div><div class="user-name">'+r.name+'</div><div class="user-detail">Age '+r.age+' · '+r.language+' · '+r.preferred_time+'</div></div><span class="badge bgold" style="margin-left:auto">New</span></div>';});document.getElementById('a-recent-regs').innerHTML=rh;}
-    if(regs.length){var regsHtml='<div class="tscroll"><table><thead><tr><th>Name</th><th>Age</th><th>Level</th><th>Time</th><th>Language</th><th>Currency</th><th>Notes</th><th>Status</th></tr></thead><tbody>';regs.forEach(function(r){regsHtml+='<tr><td style="font-weight:500">'+r.name+'</td><td>'+r.age+'</td><td>'+(r.level||'—')+'</td><td>'+(r.preferred_time||'—')+'</td><td>'+(r.language||'—')+'</td><td>'+(r.currency||'—')+'</td><td style="max-width:160px;font-size:12px;color:var(--muted)">'+(r.notes||'—')+'</td><td><span class="badge '+(r.status==='new'?'bgold':'bg')+'">'+r.status+'</span></td></tr>';});regsHtml+='</tbody></table></div>';document.getElementById('a-regs-list').innerHTML=regsHtml;}
-    if(students.length){var lc={};students.forEach(function(s){lc[s.level]=(lc[s.level]||0)+1;});var lh='';Object.keys(lc).forEach(function(l){var pct=Math.round(lc[l]/students.length*100);lh+='<div style="margin-bottom:14px"><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px"><span>'+l+'</span><span style="font-weight:600;color:var(--teal)">'+lc[l]+'</span></div><div class="prog-bar"><div class="prog-fill" style="width:'+pct+'%"></div></div></div>';});document.getElementById('a-level-breakdown').innerHTML=lh;
-    var sth='<div class="tscroll"><table><thead><tr><th>Name</th><th>Age</th><th>Level</th><th>Country</th><th>Language</th><th>Payment</th><th>Action</th></tr></thead><tbody>';students.forEach(function(s){sth+='<tr><td style="font-weight:500">'+s.name+'</td><td>'+(s.age||'—')+'</td><td>'+(s.level||'—')+'</td><td>'+(s.country||'—')+'</td><td>'+(s.language||'—')+'</td><td>'+(s.payment_status==='paid'?'<span class="badge bg">'+(s.payment_amount||'Paid')+'</span>':'<span class="badge bgold">Pending</span>')+'</td><td><button class="btn btn-danger btn-sm" onclick="deleteStudent(\''+s.id+'\')">Delete</button></td></tr>';});sth+='</tbody></table></div>';document.getElementById('a-students-table').innerHTML=sth;}
-    if(teachers.length){var th='';teachers.forEach(function(t){var i=t.name.split(' ').map(function(w){return w[0];}).join('').substring(0,2).toUpperCase();th+='<div class="user-row"><div class="user-avatar" style="background:var(--gold-light);color:#8B6914">'+i+'</div><div><div class="user-name">'+t.name+'</div><div class="user-detail">'+(t.email||'')+' '+(t.phone?'· '+t.phone:'')+'</div></div><div class="user-actions"><button class="btn btn-danger btn-sm" onclick="deleteTeacher(\''+t.id+'\')">Delete</button></div></div>';});document.getElementById('a-teachers-list').innerHTML=th;}
-    if(batches.length){var bh='';batches.forEach(function(b){bh+='<div style="padding:16px;background:var(--cream);border-radius:14px;border:1px solid var(--border);margin-bottom:10px;display:flex;align-items:center;justify-content:space-between"><div><div style="font-weight:600;font-size:14px;margin-bottom:4px">'+b.name+'</div><div style="font-size:12px;color:var(--muted)">'+b.class_day+' · '+b.class_time+' · '+b.level+'</div></div><button class="btn btn-danger btn-sm" onclick="deleteBatch(\''+b.id+'\')">Delete</button></div>';});document.getElementById('a-batches-list').innerHTML=bh;}
-    var paid=students.filter(function(s){return s.payment_status==='paid';});var pend=students.filter(function(s){return s.payment_status!=='paid';});
-    document.getElementById('r-paid').textContent=paid.length;document.getElementById('r-pending').textContent=pend.length;document.getElementById('r-revenue').textContent=paid.length?'~AED '+(paid.length*65):'—';
-    if(students.length){var rvh='<div class="tscroll"><table><thead><tr><th>Name</th><th>Level</th><th>Payment</th><th>Amount</th></tr></thead><tbody>';students.forEach(function(s){rvh+='<tr><td>'+s.name+'</td><td>'+(s.level||'—')+'</td><td>'+(s.payment_status==='paid'?'<span class="badge bg">Paid</span>':'<span class="badge bgold">Pending</span>')+'</td><td>'+(s.payment_amount||'—')+'</td></tr>';});rvh+='</tbody></table></div>';document.getElementById('a-revenue-table').innerHTML=rvh;}
+    renderOverview();renderRegistrations();renderStudentsTable();renderTeachers();renderBatches();renderRevenue();
   }catch(e){console.error('Admin data:',e);showToast('Could not load data.','error');}
 }
-
-async function saveStudent(){
-  var name=document.getElementById('ms-name').value.trim();if(!name){showToast('Please enter a name.','error');return;}
-  try{await supa('POST','/rest/v1/students',{name:name,age:parseInt(document.getElementById('ms-age').value)||null,level:document.getElementById('ms-level').value,country:document.getElementById('ms-country').value,language:document.getElementById('ms-lang').value,payment_status:document.getElementById('ms-pay').value,payment_amount:document.getElementById('ms-amount').value.trim(),status:'active'});closeModal('modal-add-student');['ms-name','ms-age','ms-amount'].forEach(function(i){document.getElementById(i).value='';});showToast('Student added! 🌙','success');loadAdminData();}
-  catch(e){showToast('Could not save. Please try again.','error');}
+function renderOverview(){
+  var regs=window.adminRegs.slice(0,3);
+  if(regs.length){var h='';regs.forEach(function(r){h+='<div class="user-row"><div class="user-avatar">'+r.name[0].toUpperCase()+'</div><div><div class="user-name">'+r.name+'</div><div class="user-detail">Age '+r.age+' · '+(r.language||'')+'</div></div><span class="badge '+(r.status==='new'?'bgold':'bg')+'" style="margin-left:auto">'+r.status+'</span></div>';});document.getElementById('a-recent-regs').innerHTML=h;}
+  var students=window.adminStudents;
+  if(students.length){var lc={};students.forEach(function(s){lc[s.level]=(lc[s.level]||0)+1;});var lh='';Object.keys(lc).forEach(function(l){var pct=Math.round(lc[l]/students.length*100);lh+='<div style="margin-bottom:14px"><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px"><span>'+(l||'Unassigned')+'</span><span style="font-weight:600;color:var(--teal)">'+lc[l]+'</span></div><div class="prog-bar"><div class="prog-fill" style="width:'+pct+'%"></div></div></div>';});document.getElementById('a-level-breakdown').innerHTML=lh;}
+}
+function renderRegistrations(){
+  var regs=window.adminRegs;
+  if(!regs.length){document.getElementById('a-regs-list').innerHTML='<div class="empty-state"><div class="empty-state-icon">🔔</div><div class="empty-state-title">No registrations yet</div><p>When someone fills your registration form, they appear here.</p></div>';return;}
+  var h='<div class="tscroll"><table><thead><tr><th>Name</th><th>Age</th><th>Level</th><th>Time</th><th>Language</th><th>Currency</th><th>Notes</th><th>Status</th><th>Action</th></tr></thead><tbody>';
+  regs.forEach(function(r){
+    var isNew=r.status==='new';
+    var safeName=r.name.replace(/\/g,'').replace(/'/g,'').replace(/"/g,'');
+    h+='<tr><td style="font-weight:500">'+r.name+'</td><td>'+(r.age||'—')+'</td><td style="font-size:12px">'+(r.level||'—')+'</td><td style="font-size:12px">'+(r.preferred_time||'—')+'</td><td>'+(r.language||'—')+'</td><td>'+(r.currency||'—')+'</td><td style="max-width:140px;font-size:12px;color:var(--muted)">'+(r.notes||'—')+'</td>';
+    h+='<td><span class="badge '+(isNew?'bgold':r.status==='approved'?'bg':'bgrey')+'">'+r.status+'</span></td>';
+    h+='<td>';
+    if(isNew){h+='<button class="btn btn-primary btn-sm" style="white-space:nowrap;font-size:12px" onclick="approveReg(''+r.id+'',''+safeName+'','+r.age+',''+r.level+'',''+r.language+'',''+r.currency+'')">Approve</button>';}
+    else if(r.status==='approved'){h+='<span style="font-size:12px;color:#1B7A4A">Added</span>';}
+    h+='</td></tr>';
+  });
+  h+='</tbody></table></div>';
+  document.getElementById('a-regs-list').innerHTML=h;
+}
+async function approveReg(regId,name,age,level,language,currency){
+  if(!confirm('Approve '+name+' as a student?'))return;
+  try{
+    await supa('POST','/rest/v1/students',{name:name,age:age,level:level,language:language,currency:currency,payment_status:'pending',status:'active'});
+    await supa('PATCH','/rest/v1/registrations?id=eq.'+regId,{status:'approved'});
+    showToast(name+' approved as student! 🌙','success');
+    loadAdminData();
+  }catch(e){showToast('Could not approve.','error');console.error(e);}
+}
+function renderStudentsTable(){
+  var students=window.adminStudents;
+  if(!students.length){document.getElementById('a-students-table').innerHTML='<div class="empty-state"><div class="empty-state-icon">🎓</div><div class="empty-state-title">No students yet</div><p>Approve registrations to add students here.</p></div>';return;}
+  var batchMap={};window.adminBatches.forEach(function(b){batchMap[b.id]=b.name;});
+  var h='<div class="tscroll"><table><thead><tr><th>Name</th><th>Age</th><th>Level</th><th>Country</th><th>Language</th><th>Batch</th><th>Payment</th><th>Actions</th></tr></thead><tbody>';
+  students.forEach(function(s){
+    var safeName=s.name.replace(/\/g,'').replace(/'/g,'').replace(/"/g,'');
+    var safeLevel=(s.level||'').replace(/\/g,'').replace(/'/g,'').replace(/"/g,'');
+    var safeCountry=(s.country||'').replace(/\/g,'').replace(/'/g,'').replace(/"/g,'');
+    var safeLang=(s.language||'').replace(/\/g,'').replace(/'/g,'').replace(/"/g,'');
+    var safeAmount=(s.payment_amount||'').replace(/\/g,'').replace(/'/g,'').replace(/"/g,'');
+    h+='<tr><td style="font-weight:500">'+s.name+'</td><td>'+(s.age||'—')+'</td><td style="font-size:12px">'+(s.level||'—')+'</td><td>'+(s.country||'—')+'</td><td>'+(s.language||'—')+'</td>';
+    h+='<td style="font-size:12px">'+(s.batch_id&&batchMap[s.batch_id]?batchMap[s.batch_id]:'<span style="color:var(--muted)">Unassigned</span>')+'</td>';
+    h+='<td>'+(s.payment_status==='paid'?'<span class="badge bg">'+(s.payment_amount||'Paid')+'</span>':'<span class="badge bgold">Pending</span>')+'</td>';
+    h+='<td><div style="display:flex;gap:6px"><button class="btn btn-ghost btn-sm" onclick="openEditStudent(''+s.id+'',''+safeName+'',''+s.age+'',''+safeLevel+'',''+safeCountry+'',''+safeLang+'',''+s.payment_status+'',''+safeAmount+'')">Edit</button><button class="btn btn-danger btn-sm" onclick="deleteStudent(''+s.id+'')">Delete</button></div></td></tr>';
+  });
+  h+='</tbody></table></div>';
+  document.getElementById('a-students-table').innerHTML=h;
+}
+function openEditStudent(id,name,age,level,country,language,payStatus,payAmount){
+  document.getElementById('es-id').value=id;
+  document.getElementById('es-name').value=name;
+  document.getElementById('es-age').value=age||'';
+  document.getElementById('es-level').value=level||'Noorani — Level 1';
+  document.getElementById('es-country').value=country||'UAE';
+  document.getElementById('es-lang').value=language||'English';
+  document.getElementById('es-pay').value=payStatus||'pending';
+  document.getElementById('es-amount').value=payAmount||'';
+  openModal('modal-edit-student');
+}
+async function updateStudent(){
+  var id=document.getElementById('es-id').value;
+  var name=document.getElementById('es-name').value.trim();
+  if(!name){showToast('Please enter a name.','error');return;}
+  try{
+    await supa('PATCH','/rest/v1/students?id=eq.'+id,{name:name,age:parseInt(document.getElementById('es-age').value)||null,level:document.getElementById('es-level').value,country:document.getElementById('es-country').value,language:document.getElementById('es-lang').value,payment_status:document.getElementById('es-pay').value,payment_amount:document.getElementById('es-amount').value.trim()});
+    closeModal('modal-edit-student');showToast('Student updated! 🌙','success');loadAdminData();
+  }catch(e){showToast('Could not update.','error');}
+}
+function renderTeachers(){
+  var teachers=window.adminTeachers;
+  if(!teachers.length){document.getElementById('a-teachers-list').innerHTML='<div class="empty-state"><div class="empty-state-icon">📖</div><div class="empty-state-title">No teachers yet</div><p>Add your first teacher using the button above.</p></div>';return;}
+  var tsc={};
+  window.adminStudents.forEach(function(s){
+    if(!s.batch_id)return;
+    var b=window.adminBatches.find(function(b){return b.id===s.batch_id;});
+    if(b&&b.teacher_id)tsc[b.teacher_id]=(tsc[b.teacher_id]||0)+1;
+  });
+  var h='';
+  teachers.forEach(function(t){
+    var init=t.name.split(' ').map(function(w){return w[0];}).join('').substring(0,2).toUpperCase();
+    var count=tsc[t.id]||0;
+    h+='<div class="user-row"><div class="user-avatar" style="background:var(--gold-light);color:#8B6914">'+init+'</div><div style="flex:1"><div class="user-name">'+t.name+'</div><div class="user-detail">'+(t.email||'')+(t.phone?' · '+t.phone:'')+'</div></div><span class="badge '+(count>=10?'bred':'bg')+'" style="margin-right:8px">'+count+'/10</span><button class="btn btn-danger btn-sm" onclick="deleteTeacher(''+t.id+'')">Delete</button></div>';
+  });
+  document.getElementById('a-teachers-list').innerHTML=h;
+}
+function renderBatches(){
+  var batches=window.adminBatches;
+  if(!batches.length){document.getElementById('a-batches-list').innerHTML='<div class="empty-state"><div class="empty-state-icon">👥</div><div class="empty-state-title">No batches yet</div><p>Add a batch and assign a teacher and students.</p></div>';return;}
+  var teacherMap={};window.adminTeachers.forEach(function(t){teacherMap[t.id]=t.name;});
+  var h='';
+  batches.forEach(function(b){
+    var sc=window.adminStudents.filter(function(s){return s.batch_id===b.id;}).length;
+    h+='<div style="padding:18px;background:var(--cream);border-radius:14px;border:1px solid var(--border);margin-bottom:10px"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px"><div style="font-weight:600;font-size:14px">'+b.name+'</div><button class="btn btn-danger btn-sm" onclick="deleteBatch(''+b.id+'')">Delete</button></div><div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--muted)"><span>📅 '+b.class_day+' · '+b.class_time+'</span><span>📖 '+(b.level||'—')+'</span><span>👩‍🏫 '+(b.teacher_id&&teacherMap[b.teacher_id]?teacherMap[b.teacher_id]:'No teacher')+'</span><span class="badge '+(sc>=10?'bred':'bteal')+'">'+sc+'/10 students</span></div></div>';
+  });
+  document.getElementById('a-batches-list').innerHTML=h;
+}
+function renderRevenue(){
+  var students=window.adminStudents;
+  var paid=students.filter(function(s){return s.payment_status==='paid';});
+  var pend=students.filter(function(s){return s.payment_status!=='paid';});
+  document.getElementById('r-paid').textContent=paid.length;
+  document.getElementById('r-pending').textContent=pend.length;
+  document.getElementById('r-revenue').textContent=paid.length?'~AED '+(paid.length*65):'—';
+  if(!students.length){document.getElementById('a-revenue-table').innerHTML='<div class="empty-state"><div class="empty-state-icon">💰</div><div class="empty-state-title">No data yet</div></div>';return;}
+  var h='<div class="tscroll"><table><thead><tr><th>Name</th><th>Level</th><th>Payment</th><th>Amount</th></tr></thead><tbody>';
+  students.forEach(function(s){h+='<tr><td>'+s.name+'</td><td>'+(s.level||'—')+'</td><td>'+(s.payment_status==='paid'?'<span class="badge bg">Paid</span>':'<span class="badge bgold">Pending</span>')+'</td><td>'+(s.payment_amount||'—')+'</td></tr>';});
+  h+='</tbody></table></div>';
+  document.getElementById('a-revenue-table').innerHTML=h;
+}
+async function openAddBatchModal(){
+  var sel=document.getElementById('mb-teacher');
+  sel.innerHTML='<option value="">Select teacher</option>';
+  window.adminTeachers.forEach(function(t){
+    var count=window.adminStudents.filter(function(s){if(!s.batch_id)return false;var b=window.adminBatches.find(function(b){return b.id===s.batch_id;});return b&&b.teacher_id===t.id;}).length;
+    var opt=document.createElement('option');opt.value=t.id;opt.textContent=t.name+' ('+count+'/10)';if(count>=10)opt.disabled=true;sel.appendChild(opt);
+  });
+  document.getElementById('mb-students-list').innerHTML='<div style="font-size:13px;color:var(--muted)">Select a teacher first to see available students</div>';
+  document.getElementById('mb-student-count').textContent='0 students selected';
+  document.getElementById('mb-teacher-count').textContent='';
+  openModal('modal-add-batch');
+}
+document.addEventListener('change',function(e){if(e.target.id==='mb-teacher')updateBatchStudentList();});
+function updateBatchStudentList(){
+  var tid=document.getElementById('mb-teacher').value;
+  if(!tid){document.getElementById('mb-students-list').innerHTML='<div style="font-size:13px;color:var(--muted)">Select a teacher first</div>';return;}
+  var existing=window.adminStudents.filter(function(s){if(!s.batch_id)return false;var b=window.adminBatches.find(function(b){return b.id===s.batch_id;});return b&&b.teacher_id===tid;}).length;
+  var remaining=10-existing;
+  document.getElementById('mb-teacher-count').textContent=existing+'/10 students assigned. Can add '+remaining+' more.';
+  var unassigned=window.adminStudents.filter(function(s){return !s.batch_id;});
+  if(!unassigned.length){document.getElementById('mb-students-list').innerHTML='<div style="font-size:13px;color:var(--muted)">No unassigned students. Approve registrations first.</div>';return;}
+  var h='';
+  unassigned.forEach(function(s){h+='<label style="display:flex;align-items:center;gap:10px;padding:8px;border-radius:8px;cursor:pointer" onmouseover="this.style.background='var(--teal-pale)'" onmouseout="this.style.background='transparent'"><input type="checkbox" class="bscb" value="'+s.id+'" onchange="updateBatchStudentCount('+remaining+')" style="width:16px;height:16px;accent-color:var(--teal);flex-shrink:0"/><div><div style="font-size:13px;font-weight:500">'+s.name+'</div><div style="font-size:11px;color:var(--muted)">'+(s.level||'')+(s.country?' · '+s.country:'')+'</div></div></label>';});
+  document.getElementById('mb-students-list').innerHTML=h;
+}
+function updateBatchStudentCount(remaining){
+  var checked=document.querySelectorAll('.bscb:checked').length;
+  var el=document.getElementById('mb-student-count');
+  if(checked>remaining){el.style.color='#C0392B';el.textContent='Max '+remaining+' students allowed for this teacher!';var all=document.querySelectorAll('.bscb:checked');all[all.length-1].checked=false;return;}
+  el.style.color='var(--muted)';el.textContent=checked+' student'+(checked===1?'':'s')+' selected';
 }
 async function saveTeacher(){
   var name=document.getElementById('mt-name').value.trim();if(!name){showToast('Please enter a name.','error');return;}
   try{await supa('POST','/rest/v1/teachers',{name:name,email:document.getElementById('mt-email').value.trim(),phone:document.getElementById('mt-phone').value.trim(),status:'active'});closeModal('modal-add-teacher');['mt-name','mt-email','mt-phone'].forEach(function(i){document.getElementById(i).value='';});showToast('Teacher added! 🌙','success');loadAdminData();}
-  catch(e){showToast('Could not save. Please try again.','error');}
+  catch(e){showToast('Could not save.','error');}
 }
 async function saveBatch(){
-  var name=document.getElementById('mb-name').value.trim();if(!name){showToast('Please enter a batch name.','error');return;}
-  try{await supa('POST','/rest/v1/batches',{name:name,level:document.getElementById('mb-level').value,language:document.getElementById('mb-lang').value,class_day:document.getElementById('mb-day').value,class_time:document.getElementById('mb-time').value.trim()});closeModal('modal-add-batch');document.getElementById('mb-name').value='';document.getElementById('mb-time').value='';showToast('Batch created! 🌙','success');loadAdminData();}
-  catch(e){showToast('Could not save. Please try again.','error');}
+  var name=document.getElementById('mb-name').value.trim();var tid=document.getElementById('mb-teacher').value;
+  if(!name){showToast('Please enter a batch name.','error');return;}
+  if(!tid){showToast('Please select a teacher.','error');return;}
+  var sel=Array.from(document.querySelectorAll('.bscb:checked')).map(function(cb){return cb.value;});
+  try{
+    var br=await supa('POST','/rest/v1/batches',{name:name,level:document.getElementById('mb-level').value,language:document.getElementById('mb-lang').value,class_day:document.getElementById('mb-day').value,class_time:document.getElementById('mb-time').value.trim(),teacher_id:tid});
+    var bid=br&&br.length?br[0].id:null;
+    if(bid&&sel.length){for(var i=0;i<sel.length;i++){await supa('PATCH','/rest/v1/students?id=eq.'+sel[i],{batch_id:bid});}}
+    closeModal('modal-add-batch');document.getElementById('mb-name').value='';document.getElementById('mb-time').value='';
+    showToast('Batch created with '+sel.length+' students! 🌙','success');loadAdminData();
+  }catch(e){showToast('Could not save.','error');console.error(e);}
 }
-async function deleteStudent(id){if(!confirm('Delete this student? This cannot be undone.'))return;try{await supa('DELETE','/rest/v1/students?id=eq.'+id);showToast('Student removed.','success');loadAdminData();}catch(e){showToast('Could not delete.','error');}}
-async function deleteTeacher(id){if(!confirm('Delete this teacher? This cannot be undone.'))return;try{await supa('DELETE','/rest/v1/teachers?id=eq.'+id);showToast('Teacher removed.','success');loadAdminData();}catch(e){showToast('Could not delete.','error');}}
-async function deleteBatch(id){if(!confirm('Delete this batch? This cannot be undone.'))return;try{await supa('DELETE','/rest/v1/batches?id=eq.'+id);showToast('Batch removed.','success');loadAdminData();}catch(e){showToast('Could not delete.','error');}}
+async function deleteStudent(id){
+  if(!confirm('Delete this student? This cannot be undone.'))return;
+  try{
+    var res=await fetch(SUPA_URL+'/rest/v1/students?id=eq.'+id,{method:'DELETE',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+(currentSession?currentSession.access_token:SUPA_KEY)}});
+    if(res.ok||res.status===204){showToast('Student removed.','success');loadAdminData();}
+    else{showToast('Could not delete. Please try again.','error');}
+  }catch(e){showToast('Could not delete.','error');console.error(e);}
+}
+async function deleteTeacher(id){
+  if(!confirm('Delete this teacher? This cannot be undone.'))return;
+  try{
+    var res=await fetch(SUPA_URL+'/rest/v1/teachers?id=eq.'+id,{method:'DELETE',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+(currentSession?currentSession.access_token:SUPA_KEY)}});
+    if(res.ok||res.status===204){showToast('Teacher removed.','success');loadAdminData();}
+    else{showToast('Could not delete. Please try again.','error');}
+  }catch(e){showToast('Could not delete.','error');console.error(e);}
+}
+async function deleteBatch(id){
+  if(!confirm('Delete this batch? Students will become unassigned.'))return;
+  try{
+    // Unassign students first
+    await fetch(SUPA_URL+'/rest/v1/students?batch_id=eq.'+id,{method:'PATCH',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+(currentSession?currentSession.access_token:SUPA_KEY),'Content-Type':'application/json'},body:JSON.stringify({batch_id:null})});
+    // Then delete batch
+    var res=await fetch(SUPA_URL+'/rest/v1/batches?id=eq.'+id,{method:'DELETE',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+(currentSession?currentSession.access_token:SUPA_KEY)}});
+    if(res.ok||res.status===204){showToast('Batch removed.','success');loadAdminData();}
+    else{showToast('Could not delete. Please try again.','error');}
+  }catch(e){showToast('Could not delete.','error');console.error(e);}
+}
 </script>
 </body>
 </html>

@@ -465,5 +465,43 @@ async function deleteStudent(id){if(!confirm('Delete this student? This cannot b
 async function deleteTeacher(id){if(!confirm('Delete this teacher? This cannot be undone.'))return;try{await supa('DELETE','/rest/v1/teachers?id=eq.'+id);showToast('Teacher removed.','success');loadAdminData();}catch(e){showToast('Could not delete.','error');}}
 async function deleteBatch(id){if(!confirm('Delete this batch? This cannot be undone.'))return;try{await supa('DELETE','/rest/v1/batches?id=eq.'+id);showToast('Batch removed.','success');loadAdminData();}catch(e){showToast('Could not delete.','error');}}
 </script>
+async function doLogin(){
+  const email = document.getElementById('l-email').value.trim();
+  const password = document.getElementById('l-password').value.trim();
+
+  try {
+    const res = await fetch(SUPA_URL + '/auth/v1/token?grant_type=password', {
+      method: 'POST',
+      headers: {
+        'apikey': SUPA_KEY,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password
+      })
+    });
+
+    const data = await res.json();
+    console.log("LOGIN RESPONSE:", data);
+
+    if (data.access_token) {
+      // ✅ SUCCESS
+      currentSession = data;
+      alert("Login successful");
+
+      // go to your admin page
+      showPage('page-admin');
+
+    } else {
+      // ❌ ERROR SHOW PROPER MESSAGE
+      alert(data.error_description || data.error || "Login failed");
+    }
+
+  } catch (err) {
+    console.error(err);
+    alert("Something went wrong");
+  }
+}
 </body>
 </html>

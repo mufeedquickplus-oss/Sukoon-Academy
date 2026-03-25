@@ -464,7 +464,6 @@ async function saveBatch(){
 async function deleteStudent(id){if(!confirm('Delete this student? This cannot be undone.'))return;try{await supa('DELETE','/rest/v1/students?id=eq.'+id);showToast('Student removed.','success');loadAdminData();}catch(e){showToast('Could not delete.','error');}}
 async function deleteTeacher(id){if(!confirm('Delete this teacher? This cannot be undone.'))return;try{await supa('DELETE','/rest/v1/teachers?id=eq.'+id);showToast('Teacher removed.','success');loadAdminData();}catch(e){showToast('Could not delete.','error');}}
 async function deleteBatch(id){if(!confirm('Delete this batch? This cannot be undone.'))return;try{await supa('DELETE','/rest/v1/batches?id=eq.'+id);showToast('Batch removed.','success');loadAdminData();}catch(e){showToast('Could not delete.','error');}}
-</script>
 async function doLogin(){
   const email = document.getElementById('l-email').value.trim();
   const password = document.getElementById('l-password').value.trim();
@@ -503,5 +502,7 @@ async function doLogin(){
     alert("Something went wrong");
   }
 }
+</script>
+
 </body>
 </html>

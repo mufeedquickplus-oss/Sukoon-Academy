@@ -215,7 +215,7 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
 .info-box-title{font-size:12px;font-weight:600;color:var(--teal);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em}
 .info-box p{font-size:13px;color:var(--charcoal);line-height:1.6}
 @media(max-width:900px){.sidebar{width:210px}.c4{grid-template-columns:repeat(2,1fr)}.g2{grid-template-columns:1fr}}
-@media(max-width:768px){.hero{grid-template-columns:1fr;padding:100px 5% 60px}.hero-visual{display:none}.stats-bar{grid-template-columns:repeat(2,1fr)}.pricing-grid{grid-template-columns:1fr}.register-wrap{grid-template-columns:1fr}.nav-links{display:none}.fr{grid-template-columns:1fr}.acc-left{flex-direction:column;align-items:flex-start;gap:6px}.hide-mob{display:none!important}}
+@media(max-width:768px){.hero{grid-template-columns:1fr;padding:100px 5% 60px}.hero-visual{display:none}.stats-bar{grid-template-columns:repeat(2,1fr)}.pricing-grid{grid-template-columns:1fr}.register-wrap{grid-template-columns:1fr}.nav-links{display:none}.nav-cta{display:none}.fr{grid-template-columns:1fr}.acc-left{flex-direction:column;align-items:flex-start;gap:6px}.hide-mob{display:none!important}.nav-login{padding:8px 16px;font-size:13px}}
 @media(max-width:640px){.dash-content{padding:16px}.c3{grid-template-columns:repeat(2,1fr)}.login-card{padding:32px 20px}input,select,textarea{font-size:16px!important}.dash-page{overflow-x:hidden}.fr{grid-template-columns:1fr}}
 @media(max-width:380px){.login-card{padding:24px 16px}.topbar-title{font-size:14px}.dash-content{padding:12px}.stats-row.c3{grid-template-columns:1fr}.stats-row.c4{grid-template-columns:repeat(2,1fr)}}
 /* FIX 3: Mobile sidebar — corrected CSS variable syntax (was en-dash, now double-hyphen) */
@@ -235,6 +235,7 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
 .profile-tab{flex:1;padding:7px 4px;border-radius:8px;border:none;background:transparent;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--muted);transition:all .2s;text-align:center}
 .profile-tab.active{background:var(--white);color:var(--teal);box-shadow:var(--shadow-sm)}
 .profile-tab-panel{display:none}.profile-tab-panel.active{display:block}
+.bb{display:none}.bb.open{display:block;animation:fadeDown .25s ease}
 .entity-row{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--cream);border-radius:12px;border:1px solid var(--border);margin-bottom:8px;cursor:pointer;transition:all .2s}.entity-row:hover{background:var(--teal-light);border-color:var(--teal);transform:translateX(2px)}
 .ticket-row{padding:14px;background:var(--cream);border-radius:12px;border:1px solid var(--border);margin-bottom:10px}
 </style>
@@ -1434,12 +1435,12 @@ function renderBatchesExpanded(batches,students,allAtt,allNotes){
     var bs=students.filter(function(s){return s.batch_id===b.id;});
     var bP=allAtt.filter(function(a){return bs.some(function(s){return s.id===a.student_id;})&&a.status==='present';}).length;
     var bA=allAtt.filter(function(a){return bs.some(function(s){return s.id===a.student_id;})&&a.status==='absent';}).length;
-    h+='<div style="background:var(--white);border-radius:var(--r);border:1px solid var(--border);box-shadow:var(--shadow-sm);margin-bottom:14px;overflow:hidden">';
+    h+='<div style="background:var(--white);border-radius:var(--r);border:1px solid var(--border);box-shadow:var(--shadow-sm);margin-bottom:14px">';
     var nxt=formatNextClass(b.class_day);var isT=nxt==='Today';
     h+='<div style="padding:18px 22px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;transition:background .2s" onclick="tBEH(this)">';
     h+='<div><div style="font-family:Lora,serif;font-size:15px;font-weight:600">'+b.name+'</div><div style="font-size:12px;color:var(--muted);margin-top:3px">'+(b.level||'')+' · '+(b.language||'')+'</div></div>';
     h+='<div style="display:flex;align-items:center;gap:10px"><span class="badge bteal">'+bs.length+' student'+(bs.length===1?'':'s')+'</span><span style="font-size:11px;color:var(--muted);transition:transform .3s" class="bc">&#9660;</span></div></div>';
-    h+='<div style="max-height:0;overflow:hidden;transition:max-height .4s" class="bb">';
+    h+='<div class="bb">';
     h+='<div style="padding:0 22px 20px;border-top:1px solid var(--border)">';
     h+='<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin:14px 0 16px;padding:12px 14px;background:'+(isT?'var(--teal-pale)':'var(--cream)')+';border-radius:12px;border:1px solid '+(isT?'var(--teal)':'var(--border)')+'"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:18px">📅</span><div><div style="font-size:13px;font-weight:600;color:'+(isT?'var(--teal)':'var(--charcoal)')+'">Next class: '+nxt+'</div><div style="font-size:12px;color:var(--muted)">'+b.class_day+' · '+b.class_time+'</div></div></div>'+(b.meet_link?'<a href="'+b.meet_link+'" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:#fff;font-size:12px;font-weight:600;padding:8px 16px;border-radius:100px;text-decoration:none;flex-shrink:0">🎥 Join Google Meet</a>':'<span style="font-size:12px;color:var(--muted)">No Meet link added</span>')+'</div>';
     if(bs.length){
@@ -1464,10 +1465,12 @@ function renderBatchesExpanded(batches,students,allAtt,allNotes){
 }
 
 function tBEH(hdr){
-  var body=hdr.nextElementSibling;var chev=hdr.querySelector('.bc');var open=hdr.classList.contains('bo');
-  hdr.classList.toggle('bo',!open);hdr.style.background=!open?'var(--teal-pale)':'';
+  var body=hdr.nextElementSibling;
+  var chev=hdr.querySelector('.bc');
+  var open=body.classList.contains('open');
+  body.classList.toggle('open',!open);
+  hdr.style.background=!open?'var(--teal-pale)':'';
   if(chev) chev.style.transform=!open?'rotate(180deg)':'';
-  body.style.maxHeight=!open?'2000px':'0';
 }
 
 function renderAttByBatch(batches,students,allAtt){

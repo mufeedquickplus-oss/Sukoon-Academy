@@ -3,7 +3,7 @@
 <html lang="en" style="color-scheme: only light;">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
 <title>Sukoon Academy — Online Quran Classes for Kids & Adults | UAE & India</title>
 <meta name="google-site-verification" content="oeDAOlvu25__ADyD1FVkRcAI4ldXDEaYV61NWYHeIZQ"/>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231B4D3E'/><text y='.9em' font-size='80' x='50%' text-anchor='middle' fill='%23C9A84C' font-family='serif'>ْ</text></svg>"/>
@@ -24,8 +24,8 @@
 <style>
 :root{--teal:#1B4D3E;--teal-mid:#2A6B56;--teal-light:#E8F3EF;--teal-pale:#F0F7F4;--gold:#C9A84C;--gold-light:#F5EDD4;--cream:#FAF7F2;--cream-dark:#F0EBE1;--charcoal:#2C2C2A;--muted:#6B6860;--white:#FFFFFF;--border:rgba(27,77,62,0.1);--shadow-sm:0 2px 12px rgba(27,77,62,0.06);--shadow:0 4px 20px rgba(27,77,62,0.08);--shadow-lg:0 12px 40px rgba(27,77,62,0.13);--r:20px;--rs:12px}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;color-scheme:light only}
-body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--charcoal);overflow-x:hidden}
+html{scroll-behavior:smooth;color-scheme:light only;-webkit-text-size-adjust:100%}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--charcoal);overflow-x:hidden;-webkit-overflow-scrolling:touch}
 .page{display:none;min-height:100vh}.page.active{display:block}
 .dash-page{display:none;min-height:100vh}.dash-page.active{display:flex}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
@@ -167,7 +167,7 @@ footer{background:var(--charcoal);color:rgba(255,255,255,.55);padding:48px 5%;di
 .sidebar-user{display:flex;align-items:center;gap:10px;margin-bottom:10px}
 .sidebar-avatar{width:36px;height:36px;border-radius:50%;background:rgba(201,168,76,.2);color:var(--gold);font-family:'Lora',serif;font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .sidebar-user-name{font-size:13px;font-weight:500;color:var(--white)}.sidebar-user-role{font-size:11px;color:rgba(255,255,255,.35);margin-top:1px}
-.sidebar-logout{background:none;border:none;color:rgba(255,255,255,.35);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;padding:0;transition:color .2s}.sidebar-logout:hover{color:rgba(255,255,255,.7)}
+.sidebar-logout{display:flex;align-items:center;gap:8px;width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.55);font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;padding:9px 12px;border-radius:10px;transition:all .2s;margin-top:4px}.sidebar-logout:hover{background:rgba(255,255,255,.1);color:rgba(255,255,255,.85);border-color:rgba(255,255,255,.15)}
 .dash-main{flex:1;overflow-y:auto;background:var(--cream);display:flex;flex-direction:column}
 .topbar{background:rgba(250,247,242,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;flex-shrink:0}
 .topbar-title{font-family:'Lora',serif;font-size:18px;font-weight:600;color:var(--charcoal)}.topbar-title em{font-style:italic;color:var(--teal)}
@@ -216,7 +216,8 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
 .info-box p{font-size:13px;color:var(--charcoal);line-height:1.6}
 @media(max-width:900px){.sidebar{width:210px}.c4{grid-template-columns:repeat(2,1fr)}.g2{grid-template-columns:1fr}}
 @media(max-width:768px){.hero{grid-template-columns:1fr;padding:100px 5% 60px}.hero-visual{display:none}.stats-bar{grid-template-columns:repeat(2,1fr)}.pricing-grid{grid-template-columns:1fr}.register-wrap{grid-template-columns:1fr}.nav-links{display:none}.fr{grid-template-columns:1fr}.acc-left{flex-direction:column;align-items:flex-start;gap:6px}.hide-mob{display:none!important}}
-@media(max-width:640px){.dash-content{padding:20px}.c3{grid-template-columns:repeat(2,1fr)}.login-card{padding:36px 28px}}
+@media(max-width:640px){.dash-content{padding:16px}.c3{grid-template-columns:repeat(2,1fr)}.login-card{padding:32px 20px}input,select,textarea{font-size:16px!important}.dash-page{overflow-x:hidden}.fr{grid-template-columns:1fr}}
+@media(max-width:380px){.login-card{padding:24px 16px}.topbar-title{font-size:14px}.dash-content{padding:12px}.stats-row.c3{grid-template-columns:1fr}.stats-row.c4{grid-template-columns:repeat(2,1fr)}}
 /* FIX 3: Mobile sidebar — corrected CSS variable syntax (was en-dash, now double-hyphen) */
 .mob-menu-btn{display:none;background:none;border:none;cursor:pointer;padding:8px;border-radius:10px;color:var(--teal);transition:background .2s;flex-shrink:0}
 .mob-menu-btn:hover{background:var(--teal-light)}
@@ -234,6 +235,8 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
 .profile-tab{flex:1;padding:7px 4px;border-radius:8px;border:none;background:transparent;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--muted);transition:all .2s;text-align:center}
 .profile-tab.active{background:var(--white);color:var(--teal);box-shadow:var(--shadow-sm)}
 .profile-tab-panel{display:none}.profile-tab-panel.active{display:block}
+.entity-row{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--cream);border-radius:12px;border:1px solid var(--border);margin-bottom:8px;cursor:pointer;transition:all .2s}.entity-row:hover{background:var(--teal-light);border-color:var(--teal);transform:translateX(2px)}
+.ticket-row{padding:14px;background:var(--cream);border-radius:12px;border:1px solid var(--border);margin-bottom:10px}
 </style>
 </head>
 <body>
@@ -278,6 +281,47 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
 <div class="fg"><label>Amount paid</label><input id="es-amount" type="text" placeholder="e.g. AED 50"/></div>
 </div>
 <div class="modal-actions"><button class="btn btn-ghost btn-sm" onclick="closeModal('modal-edit-student')">Cancel</button><button class="btn btn-primary btn-sm" onclick="updateStudent()">Save Changes</button></div>
+</div></div>
+
+<!-- Edit Teacher Modal -->
+<div class="modal-overlay" id="modal-edit-teacher"><div class="modal">
+<div class="modal-header"><div class="modal-title" style="font-family:'Lora',serif">Edit <em style="color:var(--teal);font-style:italic">Teacher</em></div><button class="modal-close" onclick="closeModal('modal-edit-teacher')">✕</button></div>
+<input type="hidden" id="et-id"/>
+<div class="fg"><label>Full name</label><input id="et-name" type="text" placeholder="Teacher's full name"/></div>
+<div class="fg"><label>Email</label><input id="et-email" type="email" placeholder="teacher@email.com"/></div>
+<div class="fg"><label>WhatsApp number</label><input id="et-phone" type="tel" placeholder="+971 50 000 0000"/></div>
+<div class="modal-actions"><button class="btn btn-ghost btn-sm" onclick="closeModal('modal-edit-teacher')">Cancel</button><button class="btn btn-primary btn-sm" onclick="updateTeacher()">Save Changes</button></div>
+</div></div>
+
+<!-- Teacher Profile Modal -->
+<div class="modal-overlay" id="modal-teacher-profile"><div class="modal" style="max-width:520px">
+<div class="modal-header">
+  <div><div class="modal-title" id="tpm-title" style="font-family:'Lora',serif">Teacher</div><div id="tpm-sub" style="font-size:12px;color:var(--muted);margin-top:2px"></div></div>
+  <button class="modal-close" onclick="closeModal('modal-teacher-profile')">✕</button>
+</div>
+<div style="display:flex;gap:4px;background:var(--cream);border-radius:10px;padding:4px;margin-bottom:20px">
+  <button class="profile-tab active" onclick="switchTTab('tgeneral',this)">General</button>
+  <button class="profile-tab" onclick="switchTTab('tacademic',this)">Academic</button>
+</div>
+<div id="ptab-tgeneral" class="profile-tab-panel active"></div>
+<div id="ptab-tacademic" class="profile-tab-panel"></div>
+</div></div>
+
+<!-- Batch Detail Modal -->
+<div class="modal-overlay" id="modal-batch-detail"><div class="modal" style="max-width:520px">
+<div class="modal-header">
+  <div><div class="modal-title" id="bdm-title" style="font-family:'Lora',serif">Batch</div><div id="bdm-sub" style="font-size:12px;color:var(--muted);margin-top:2px"></div></div>
+  <button class="modal-close" onclick="closeModal('modal-batch-detail')">✕</button>
+</div>
+<div id="bdm-content"></div>
+</div></div>
+
+<!-- Raise Ticket Modal -->
+<div class="modal-overlay" id="modal-raise-ticket"><div class="modal">
+<div class="modal-header"><div class="modal-title" style="font-family:'Lora',serif">Raise a <em style="color:var(--teal);font-style:italic">Support Ticket</em></div><button class="modal-close" onclick="closeModal('modal-raise-ticket')">✕</button></div>
+<div class="fg"><label>Subject</label><input id="tk-subject" type="text" placeholder="e.g. Class schedule issue, homework question..."/></div>
+<div class="fg"><label>Message</label><textarea class="note-textarea" id="tk-message" rows="4" placeholder="Describe your issue or question in detail..."></textarea></div>
+<div class="modal-actions"><button class="btn btn-ghost btn-sm" onclick="closeModal('modal-raise-ticket')">Cancel</button><button class="btn btn-primary btn-sm" onclick="submitTicket()">Submit Ticket</button></div>
 </div></div>
 
 <!-- Student Profile Modal -->
@@ -479,10 +523,11 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
     <li><a onclick="showPanel('page-student','sp-progress',this)"><span class="ni">📈</span> My Progress</a></li>
     <li><a onclick="showPanel('page-student','sp-classes',this)"><span class="ni">🎙</span> My Classes</a></li>
     <li><a onclick="showPanel('page-student','sp-homework',this)"><span class="ni">📋</span> Homework</a></li>
+    <li><a onclick="showPanel('page-student','sp-tickets',this)"><span class="ni">🎫</span> Support</a></li>
   </ul>
   <div class="sidebar-bottom">
     <div class="sidebar-user"><div class="sidebar-avatar" id="s-avatar">—</div><div><div class="sidebar-user-name" id="s-name">—</div><div class="sidebar-user-role" id="s-role">Student</div></div></div>
-    <button class="sidebar-logout" onclick="doLogout()">← Sign out</button>
+    <button class="sidebar-logout" onclick="doLogout()">↩ Sign Out</button>
   </div>
 </aside>
 <div class="dash-main">
@@ -507,6 +552,16 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
     <div class="panel" id="sp-progress"><div class="card"><div class="card-title" style="margin-bottom:20px">My <em>Learning Journey</em></div><div id="s-progress-levels"><div class="empty-state"><div class="empty-state-icon">📈</div><div class="empty-state-title">Loading...</div></div></div></div></div>
     <div class="panel" id="sp-classes"><div class="card"><div class="card-title" style="margin-bottom:16px">My <em>Batch and Schedule</em></div><div id="s-batch-info"><div class="empty-state"><div class="empty-state-icon">👥</div><div class="empty-state-title">Batch not yet assigned</div><p>Once your assessment is complete and payment confirmed, your batch details will appear here.</p></div></div></div></div>
     <div class="panel" id="sp-homework"><div class="card"><div class="card-title" style="margin-bottom:16px">This Week's <em>Homework</em></div><div id="s-homework-info"><div class="empty-state"><div class="empty-state-icon">📋</div><div class="empty-state-title">No homework assigned yet</div><p>Your teacher will assign homework after your first class.</p></div></div></div></div>
+    <div class="panel" id="sp-tickets">
+      <div class="card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+          <div class="card-title">Support <em>Tickets</em></div>
+          <button class="btn btn-primary btn-sm" onclick="openModal('modal-raise-ticket')">+ Raise Ticket</button>
+        </div>
+        <div class="info-box" style="margin-bottom:16px"><div class="info-box-title">Need help?</div><p>Use this to contact our support team about schedule changes, technical issues, or any questions about your classes.</p></div>
+        <div id="s-tickets-list"><div class="empty-state"><div class="empty-state-icon">🎫</div><div class="empty-state-title">No tickets yet</div><p>Tap the button above to raise a support ticket.</p></div></div>
+      </div>
+    </div>
   </div>
 </div>
 </div><!-- end page-student -->
@@ -525,7 +580,7 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
   </ul>
   <div class="sidebar-bottom">
     <div class="sidebar-user"><div class="sidebar-avatar" id="t-avatar">—</div><div><div class="sidebar-user-name" id="t-name">—</div><div class="sidebar-user-role">Teacher</div></div></div>
-    <button class="sidebar-logout" onclick="doLogout()">← Sign out</button>
+    <button class="sidebar-logout" onclick="doLogout()">↩ Sign Out</button>
   </div>
 </aside>
 <div class="dash-main">
@@ -610,7 +665,7 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
   </ul>
   <div class="sidebar-bottom">
     <div class="sidebar-user"><div class="sidebar-avatar" id="a-avatar">A</div><div><div class="sidebar-user-name" id="a-name">Admin</div><div class="sidebar-user-role">Full access</div></div></div>
-    <button class="sidebar-logout" onclick="doLogout()">← Sign out</button>
+    <button class="sidebar-logout" onclick="doLogout()">↩ Sign Out</button>
   </div>
 </aside>
 <div class="dash-main">
@@ -737,6 +792,7 @@ function showPanel(pageId,panelId,el){
   document.getElementById(panelId).classList.add('active');
   if(el) el.classList.add('active');
   closeMobSidebar();
+  if(panelId==='sp-tickets') loadStudentTickets();
 }
 function openModal(id){document.getElementById(id).classList.add('open');}
 function closeModal(id){document.getElementById(id).classList.remove('open');}
@@ -1151,7 +1207,15 @@ function renderTeachers(){
   adminTeachers.forEach(function(t){
     var init=t.name.split(' ').map(function(w){return w[0];}).join('').substring(0,2).toUpperCase();
     var count=tsc[t.id]||0;
-    h+='<div class="user-row"><div class="user-avatar" style="background:var(--gold-light);color:#8B6914">'+init+'</div><div style="flex:1"><div class="user-name">'+t.name+'</div><div class="user-detail">'+(t.email||'')+(t.phone?' \u00b7 '+t.phone:'')+'</div></div><span class="badge '+(count>=10?'bred':'bg')+'" style="margin-right:8px">'+count+'/10</span><button class="btn btn-danger btn-sm" onclick="deleteTeacher(\''+t.id+'\')">Delete</button></div>';
+    var tn=t.name.replace(/'/g,'\u2019');var te=(t.email||'').replace(/'/g,'\u2019');var tp=(t.phone||'').replace(/'/g,'\u2019');
+    h+='<div class="user-row" style="cursor:pointer" onclick="openTeacherProfile(\''+t.id+'\')" title="View teacher profile">';
+    h+='<div class="user-avatar" style="background:var(--gold-light);color:#8B6914">'+init+'</div>';
+    h+='<div style="flex:1"><div class="user-name" style="color:var(--teal)">'+t.name+'</div><div class="user-detail">'+(t.email||'')+(t.phone?'\u00b7 '+t.phone:'')+'</div></div>';
+    h+='<span class="badge '+(count>=10?'bred':'bg')+'" style="margin-right:8px">'+count+'/10</span>';
+    h+='<div style="display:flex;gap:6px" onclick="event.stopPropagation()">';
+    h+='<button class="btn btn-ghost btn-sm" onclick="openEditTeacher(\''+t.id+'\',\''+tn+'\',\''+te+'\',\''+tp+'\')">Edit</button>';
+    h+='<button class="btn btn-danger btn-sm" onclick="deleteTeacher(\''+t.id+'\')">Delete</button>';
+    h+='</div></div>';
   });
   document.getElementById('a-teachers-list').innerHTML=h;
 }
@@ -1161,7 +1225,14 @@ function renderBatches(){
   var h='';
   adminBatches.forEach(function(b){
     var sc=adminStudents.filter(function(s){return s.batch_id===b.id;}).length;
-    h+='<div style="padding:18px;background:var(--cream);border-radius:14px;border:1px solid var(--border);margin-bottom:10px"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px"><div style="font-weight:600;font-size:14px">'+b.name+'</div><button class="btn btn-danger btn-sm" onclick="deleteBatch(\''+b.id+'\')">Delete</button></div><div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--muted)"><span>\uD83D\uDCC5 '+b.class_day+' \u00b7 '+b.class_time+'</span><span>\uD83D\uDCD6 '+(b.level||'\u2014')+'</span><span>\uD83D\uDC69\u200D\uD83C\uDFEB '+(b.teacher_id&&teacherMap[b.teacher_id]?teacherMap[b.teacher_id]:'No teacher')+'</span><span class="badge '+(sc>=10?'bred':'bteal')+'">'+sc+'/10</span></div></div>';
+    h+='<div style="padding:18px;background:var(--cream);border-radius:14px;border:1px solid var(--border);margin-bottom:10px;cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor=\'var(--teal)\';this.style.background=\'var(--teal-pale)\'" onmouseout="this.style.borderColor=\'var(--border)\';this.style.background=\'var(--cream)\'" onclick="openBatchDetail(\''+b.id+'\')">';
+    h+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">';
+    h+='<div style="font-weight:600;font-size:14px;color:var(--teal)">'+b.name+'</div>';
+    h+='<div style="display:flex;gap:6px" onclick="event.stopPropagation()">';
+    h+='<button class="btn btn-ghost btn-sm" onclick="openBatchDetail(\''+b.id+'\')">View</button>';
+    h+='<button class="btn btn-danger btn-sm" onclick="deleteBatch(\''+b.id+'\')">Delete</button>';
+    h+='</div></div>';
+    h+='<div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--muted)"><span>📅 '+b.class_day+' · '+b.class_time+'</span><span>📖 '+(b.level||'—')+'</span><span>👩‍🏫 '+(b.teacher_id&&teacherMap[b.teacher_id]?teacherMap[b.teacher_id]:'No teacher')+'</span><span class="badge '+(sc>=10?'bred':'bteal')+'">'+sc+'/10 students</span></div></div>';
   });
   document.getElementById('a-batches-list').innerHTML=h;
 }
@@ -1433,8 +1504,9 @@ function openStudentProfile(sid){
   document.querySelectorAll('#modal-student-profile .profile-tab-panel').forEach(function(p){p.classList.remove('active');});
   document.querySelector('#modal-student-profile .profile-tab').classList.add('active');
   document.getElementById('ptab-general').classList.add('active');
-  var gRows=[['Name',s.name||'—'],['Age',s.age||'—'],['Country',s.country||'—'],['Language',s.language||'—'],
-    ['Payment',s.payment_status==='paid'?'<span class="badge bg">'+(s.payment_amount||'Paid')+'</span>':'<span class="badge bgold">Pending</span>']];
+  var isTeacher=currentProfile&&currentProfile.role==='teacher';
+  var gRows=[['Name',s.name||'—'],['Age',s.age||'—'],['Country',s.country||'—'],['Language',s.language||'—']];
+  if(!isTeacher) gRows.push(['Payment',s.payment_status==='paid'?'<span class="badge bg">'+(s.payment_amount||'Paid')+'</span>':'<span class="badge bgold">Pending</span>']);
   var gh='<div style="display:flex;flex-direction:column;gap:8px">';
   gRows.forEach(function(r){gh+='<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--cream);border-radius:10px"><span style="font-size:12px;color:var(--muted);font-weight:500">'+r[0]+'</span><span style="font-size:13px;font-weight:600">'+r[1]+'</span></div>';});
   gh+='</div>';
@@ -1484,6 +1556,151 @@ function switchPTab(name,btn){
   document.querySelectorAll('#modal-student-profile .profile-tab-panel').forEach(function(p){p.classList.remove('active');});
   btn.classList.add('active');
   document.getElementById('ptab-'+name).classList.add('active');
+}
+
+/* ── EDIT TEACHER ── */
+function openEditTeacher(id,name,email,phone){
+  document.getElementById('et-id').value=id;
+  document.getElementById('et-name').value=name||'';
+  document.getElementById('et-email').value=email||'';
+  document.getElementById('et-phone').value=phone||'';
+  openModal('modal-edit-teacher');
+}
+function updateTeacher(){
+  var id=document.getElementById('et-id').value;
+  var name=document.getElementById('et-name').value.trim();
+  if(!name){showToast('Please enter a name.','error');return;}
+  supa('PATCH','/rest/v1/teachers?id=eq.'+id,{
+    name:name,
+    email:document.getElementById('et-email').value.trim(),
+    phone:document.getElementById('et-phone').value.trim()
+  }).then(function(){
+    closeModal('modal-edit-teacher');
+    showToast('Teacher updated! \uD83C\uDF19','success');
+    loadAdminData();
+  }).catch(function(){showToast('Could not update.','error');});
+}
+
+/* ── TEACHER PROFILE MODAL ── */
+function openTeacherProfile(tid){
+  var t=adminTeachers.find(function(x){return x.id===tid;});
+  if(!t){showToast('Teacher not found.','error');return;}
+  document.getElementById('tpm-title').textContent=t.name||'Teacher';
+  document.getElementById('tpm-sub').textContent=(t.email||'')+(t.phone?' \u00b7 '+t.phone:'');
+  document.querySelectorAll('#modal-teacher-profile .profile-tab').forEach(function(b){b.classList.remove('active');});
+  document.querySelectorAll('#modal-teacher-profile .profile-tab-panel').forEach(function(p){p.classList.remove('active');});
+  document.querySelector('#modal-teacher-profile .profile-tab').classList.add('active');
+  document.getElementById('ptab-tgeneral').classList.add('active');
+  var gRows=[['Name',t.name||'\u2014'],['Email',t.email||'\u2014'],['Phone',t.phone||'\u2014'],['Status',t.status||'active']];
+  var gh='<div style="display:flex;flex-direction:column;gap:8px">';
+  gRows.forEach(function(r){gh+='<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--cream);border-radius:10px"><span style="font-size:12px;color:var(--muted);font-weight:500">'+r[0]+'</span><span style="font-size:13px;font-weight:600">'+r[1]+'</span></div>';});
+  gh+='</div>';
+  document.getElementById('ptab-tgeneral').innerHTML=gh;
+  var batches=adminBatches.filter(function(b){return b.teacher_id===tid;});
+  var batchStudents=adminStudents.filter(function(s){return batches.some(function(b){return b.id===s.batch_id;});});
+  var ah='<div style="font-size:13px;color:var(--muted);margin-bottom:14px">'+batches.length+' batch'+(batches.length!==1?'es':'')+' \u00b7 '+batchStudents.length+' student'+(batchStudents.length!==1?'s':'')+'</div>';
+  if(batches.length){
+    batches.forEach(function(b){
+      var bs=adminStudents.filter(function(s){return s.batch_id===b.id;});
+      ah+='<div style="background:var(--cream);border-radius:14px;padding:14px 16px;margin-bottom:10px;border:1px solid var(--border)">';
+      ah+='<div style="font-weight:600;font-size:14px;color:var(--teal);margin-bottom:3px">'+b.name+'</div>';
+      ah+='<div style="font-size:12px;color:var(--muted);margin-bottom:8px">'+(b.class_day||'')+' \u00b7 '+(b.class_time||'')+' \u00b7 '+(b.level||'')+'</div>';
+      if(bs.length){
+        ah+='<div style="display:flex;flex-wrap:wrap;gap:5px">';
+        bs.forEach(function(s){ah+='<span class="badge bteal" style="cursor:pointer" onclick="closeModal(\'modal-teacher-profile\');setTimeout(function(){openStudentProfile(\''+s.id+'\')},200)">'+s.name+'</span>';});
+        ah+='</div>';
+      }else{ah+='<span style="font-size:12px;color:var(--muted)">No students yet</span>';}
+      ah+='</div>';
+    });
+  }else{ah+='<div class="empty-state"><div class="empty-state-icon">\uD83D\uDCD6</div><div class="empty-state-title">No batches assigned yet</div></div>';}
+  document.getElementById('ptab-tacademic').innerHTML=ah;
+  openModal('modal-teacher-profile');
+}
+function switchTTab(name,btn){
+  document.querySelectorAll('#modal-teacher-profile .profile-tab').forEach(function(t){t.classList.remove('active');});
+  document.querySelectorAll('#modal-teacher-profile .profile-tab-panel').forEach(function(p){p.classList.remove('active');});
+  btn.classList.add('active');
+  document.getElementById('ptab-'+name).classList.add('active');
+}
+
+/* ── BATCH DETAIL MODAL ── */
+function openBatchDetail(bid){
+  var b=adminBatches.find(function(x){return x.id===bid;});
+  if(!b){showToast('Batch not found.','error');return;}
+  var t=adminTeachers.find(function(x){return x.id===b.teacher_id;});
+  var students=adminStudents.filter(function(s){return s.batch_id===bid;});
+  var paidCount=students.filter(function(s){return s.payment_status==='paid';}).length;
+  document.getElementById('bdm-title').textContent=b.name||'Batch';
+  document.getElementById('bdm-sub').textContent=(b.class_day||'')+(b.class_time?' \u00b7 '+b.class_time:'')+' \u00b7 '+(b.level||'');
+  var html='';
+  var info=[
+    ['Teacher',t?'<span style="color:var(--teal);font-weight:700">'+t.name+'</span>':'<span style="color:var(--muted)">Not assigned</span>'],
+    ['Level',b.level||'\u2014'],
+    ['Language',b.language||'\u2014'],
+    ['Schedule',b.class_day+' \u00b7 '+b.class_time]
+  ];
+  html+='<div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px">';
+  info.forEach(function(r){html+='<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--cream);border-radius:10px"><span style="font-size:12px;color:var(--muted);font-weight:500">'+r[0]+'</span><span style="font-size:13px;font-weight:600">'+r[1]+'</span></div>';});
+  html+='</div>';
+  html+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px"><div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal)">Students ('+students.length+')</div>';
+  if(currentProfile&&currentProfile.role==='admin') html+='<span style="font-size:12px;color:#1B7A4A;font-weight:600">'+paidCount+' paid</span>';
+  html+='</div>';
+  if(students.length){
+    students.forEach(function(s){
+      html+='<div class="entity-row" onclick="closeModal(\'modal-batch-detail\');setTimeout(function(){openStudentProfile(\''+s.id+'\')},200)">';
+      html+='<div class="user-avatar" style="width:32px;height:32px;font-size:11px;flex-shrink:0">'+ini(s.name)+'</div>';
+      html+='<div style="flex:1"><div style="font-size:13px;font-weight:600">'+s.name+'</div><div style="font-size:11px;color:var(--muted)">'+(s.level||'')+(s.country?' \u00b7 '+s.country:'')+'</div></div>';
+      if(currentProfile&&currentProfile.role==='admin') html+='<span class="badge '+(s.payment_status==='paid'?'bg':'bgold')+'">'+(s.payment_status||'pending')+'</span>';
+      html+='</div>';
+    });
+  }else{html+='<div class="empty-state"><div class="empty-state-icon">\uD83D\uDC64</div><div class="empty-state-title">No students in this batch</div></div>';}
+  document.getElementById('bdm-content').innerHTML=html;
+  openModal('modal-batch-detail');
+}
+
+/* ── STUDENT TICKETS ── */
+function submitTicket(){
+  var subject=document.getElementById('tk-subject').value.trim();
+  var message=document.getElementById('tk-message').value.trim();
+  if(!subject||!message){showToast('Please fill in subject and message.','error');return;}
+  var btn=document.querySelector('#modal-raise-ticket .btn-primary');
+  if(btn){btn.disabled=true;btn.innerHTML='<span class="spinner"></span>';}
+  supa('POST','/rest/v1/tickets',{
+    student_id:currentProfile&&currentProfile.linked_id?currentProfile.linked_id:null,
+    subject:subject,
+    message:message,
+    status:'open'
+  }).then(function(){
+    closeModal('modal-raise-ticket');
+    document.getElementById('tk-subject').value='';
+    document.getElementById('tk-message').value='';
+    showToast('Ticket submitted! We will get back to you soon. \uD83C\uDF19','success');
+    loadStudentTickets();
+  }).catch(function(){
+    showToast('Could not submit. Please try again.','error');
+  }).finally(function(){
+    if(btn){btn.disabled=false;btn.textContent='Submit Ticket';}
+  });
+}
+function loadStudentTickets(){
+  if(!currentProfile||!currentProfile.linked_id) return;
+  supa('GET','/rest/v1/tickets?student_id=eq.'+currentProfile.linked_id+'&order=created_at.desc&select=*').then(function(tickets){
+    var el=document.getElementById('s-tickets-list');if(!el) return;
+    if(!tickets||!tickets.length){
+      el.innerHTML='<div class="empty-state"><div class="empty-state-icon">\uD83C\uDFAB</div><div class="empty-state-title">No tickets yet</div><p>Tap the button above to raise a support ticket.</p></div>';
+      return;
+    }
+    var h='';
+    tickets.forEach(function(tk){
+      var statusClass=tk.status==='open'?'bgold':tk.status==='resolved'?'bg':'bgrey';
+      h+='<div class="ticket-row">';
+      h+='<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px"><div style="font-size:13px;font-weight:600">'+tk.subject+'</div><span class="badge '+statusClass+'">'+tk.status+'</span></div>';
+      h+='<div style="font-size:12px;color:var(--muted);line-height:1.55">'+tk.message+'</div>';
+      h+='<div style="font-size:11px;color:var(--muted);margin-top:6px">'+new Date(tk.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})+'</div>';
+      h+='</div>';
+    });
+    el.innerHTML=h;
+  }).catch(function(){});
 }
 </script>
 

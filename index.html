@@ -259,6 +259,7 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
 <div class="fg"><label>Class day</label><select id="mb-day"><option>Monday</option><option>Tuesday</option><option>Wednesday</option><option>Thursday</option><option>Friday</option><option>Saturday</option><option>Sunday</option></select></div>
 <div class="fg"><label>Class time</label><input id="mb-time" type="text" placeholder="e.g. 5:00 PM"/></div>
 </div>
+<div class="fg"><label>Google Meet link <span style="color:var(--muted);font-weight:300">(recurring — same link every week)</span></label><input id="mb-meet" type="url" placeholder="https://meet.google.com/xxx-xxxx-xxx"/></div>
 <div class="fg"><label>Assign Teacher</label><select id="mb-teacher"><option value="">Select teacher</option></select><div style="font-size:11px;color:var(--muted);margin-top:5px" id="mb-teacher-count"></div></div>
 <div class="fg"><label>Add Students <span style="color:var(--muted);font-weight:300">(select from approved pool)</span></label><div id="mb-students-list" style="border:1.5px solid var(--border);border-radius:var(--rs);background:var(--cream);padding:12px;max-height:200px;overflow-y:auto"><div style="font-size:13px;color:var(--muted)">Select a teacher first to see available students</div></div><div style="font-size:11px;color:var(--muted);margin-top:5px" id="mb-student-count">0 students selected</div></div>
 <div class="modal-actions"><button class="btn btn-ghost btn-sm" onclick="closeModal('modal-add-batch')">Cancel</button><button class="btn btn-primary btn-sm" onclick="saveBatch()">Save Batch</button></div>
@@ -1305,7 +1306,7 @@ function saveBatch(){
   if(!name){showToast('Please enter a batch name.','error');return;}
   if(!tid){showToast('Please select a teacher.','error');return;}
   var sel=Array.from(document.querySelectorAll('.bscb:checked')).map(function(cb){return cb.value;});
-  supa('POST','/rest/v1/batches',{name:name,level:document.getElementById('mb-level').value,language:document.getElementById('mb-lang').value,class_day:document.getElementById('mb-day').value,class_time:document.getElementById('mb-time').value.trim(),teacher_id:tid}).then(function(br){
+  supa('POST','/rest/v1/batches',{name:name,level:document.getElementById('mb-level').value,language:document.getElementById('mb-lang').value,class_day:document.getElementById('mb-day').value,class_time:document.getElementById('mb-time').value.trim(),meet_link:document.getElementById('mb-meet').value.trim()||null,teacher_id:tid}).then(function(br){
     var bid=br&&br.length?br[0].id:null;
     if(bid&&sel.length){
       var patches=sel.map(function(sid){return supa('PATCH','/rest/v1/students?id=eq.'+sid,{batch_id:bid});});
@@ -1313,7 +1314,7 @@ function saveBatch(){
     }
   }).then(function(){
     closeModal('modal-add-batch');
-    document.getElementById('mb-name').value='';document.getElementById('mb-time').value='';
+    document.getElementById('mb-name').value='';document.getElementById('mb-time').value='';document.getElementById('mb-meet').value='';
     showToast('Batch created! \uD83C\uDF19','success');loadAdminData();
   }).catch(function(e){showToast('Could not save.','error');console.error(e);});
 }
@@ -1385,6 +1386,28 @@ var teacherBatchesCache=[],teacherStudentsCache=[],teacherAttCache=[],teacherNot
 
 function ini(n){return (n||'?').split(' ').map(function(w){return w[0]||'';}).join('').substring(0,2).toUpperCase();}
 
+function getNextClassDate(dayName){
+  var days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var target=days.indexOf(dayName);
+  if(target===-1) return null;
+  var today=new Date();
+  var diff=target-today.getDay();
+  if(diff<0) diff+=7;
+  var next=new Date(today);
+  next.setDate(today.getDate()+diff);
+  return next;
+}
+function formatNextClass(dayName){
+  var d=getNextClassDate(dayName);
+  if(!d) return dayName||'—';
+  var today=new Date();today.setHours(0,0,0,0);
+  var tomorrow=new Date(today);tomorrow.setDate(today.getDate()+1);
+  d.setHours(0,0,0,0);
+  if(d.getTime()===today.getTime()) return 'Today';
+  if(d.getTime()===tomorrow.getTime()) return 'Tomorrow';
+  return d.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'});
+}
+
 function renderBatchHomeCards(batches,students){
   var h='';
   batches.forEach(function(b){
@@ -1392,9 +1415,12 @@ function renderBatchHomeCards(batches,students){
     var av='';
     bs.slice(0,4).forEach(function(s){av+='<div style="width:24px;height:24px;border-radius:50%;background:var(--teal-light);color:var(--teal);font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center">'+ini(s.name)+'</div>';});
     if(bs.length>4) av+='<div style="width:24px;height:24px;border-radius:50%;background:var(--gold-light);color:#8B6914;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center">+'+(bs.length-4)+'</div>';
+    var nextLabel=formatNextClass(b.class_day);
+    var isToday=nextLabel==='Today';
     h+='<div style="background:var(--white);border-radius:var(--r);padding:18px 20px;border:1px solid var(--border);box-shadow:var(--shadow-sm);cursor:pointer;transition:all .2s" onmouseover="this.style.transform=\'translateY(-3px)\'" onmouseout="this.style.transform=\'\'" onclick="showPanel(\'page-teacher\',\'tp-batches\',null)">';
     h+='<div style="font-family:Lora,serif;font-size:15px;font-weight:600;margin-bottom:3px">'+b.name+'</div>';
-    h+='<div style="font-size:12px;color:var(--muted);margin-bottom:12px">'+b.class_day+' · '+b.class_time+' · '+(b.level||'')+'</div>';
+    h+='<div style="font-size:12px;color:var(--muted);margin-bottom:10px">'+(b.level||'')+(b.language?' · '+b.language:'')+'</div>';
+    h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;padding:8px 10px;background:'+(isToday?'var(--teal-pale)':'var(--cream)')+';border-radius:10px;border:1px solid '+(isToday?'var(--teal)':'var(--border)')+'"><span style="font-size:14px">📅</span><div><div style="font-size:12px;font-weight:600;color:'+(isToday?'var(--teal)':'var(--charcoal)')+'">'+nextLabel+'</div><div style="font-size:11px;color:var(--muted)">'+b.class_time+'</div></div>'+(isToday&&b.meet_link?'<a href="'+b.meet_link+'" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="margin-left:auto;background:var(--teal);color:#fff;font-size:11px;font-weight:600;padding:5px 10px;border-radius:8px;text-decoration:none">Join</a>':'')+'</div>';
     h+='<div style="display:flex;gap:4px;align-items:center">'+av+'<span style="font-size:11px;color:var(--muted);margin-left:4px">'+bs.length+' student'+(bs.length===1?'':'s')+'</span></div></div>';
   });
   var el=document.getElementById('t-home-batches');
@@ -1409,11 +1435,13 @@ function renderBatchesExpanded(batches,students,allAtt,allNotes){
     var bP=allAtt.filter(function(a){return bs.some(function(s){return s.id===a.student_id;})&&a.status==='present';}).length;
     var bA=allAtt.filter(function(a){return bs.some(function(s){return s.id===a.student_id;})&&a.status==='absent';}).length;
     h+='<div style="background:var(--white);border-radius:var(--r);border:1px solid var(--border);box-shadow:var(--shadow-sm);margin-bottom:14px;overflow:hidden">';
+    var nxt=formatNextClass(b.class_day);var isT=nxt==='Today';
     h+='<div style="padding:18px 22px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;transition:background .2s" onclick="tBEH(this)">';
-    h+='<div><div style="font-family:Lora,serif;font-size:15px;font-weight:600">'+b.name+'</div><div style="font-size:12px;color:var(--muted);margin-top:3px">'+b.class_day+' · '+b.class_time+' · '+(b.level||'')+'</div></div>';
+    h+='<div><div style="font-family:Lora,serif;font-size:15px;font-weight:600">'+b.name+'</div><div style="font-size:12px;color:var(--muted);margin-top:3px">'+(b.level||'')+' · '+(b.language||'')+'</div></div>';
     h+='<div style="display:flex;align-items:center;gap:10px"><span class="badge bteal">'+bs.length+' student'+(bs.length===1?'':'s')+'</span><span style="font-size:11px;color:var(--muted);transition:transform .3s" class="bc">&#9660;</span></div></div>';
     h+='<div style="max-height:0;overflow:hidden;transition:max-height .4s" class="bb">';
     h+='<div style="padding:0 22px 20px;border-top:1px solid var(--border)">';
+    h+='<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin:14px 0 16px;padding:12px 14px;background:'+(isT?'var(--teal-pale)':'var(--cream)')+';border-radius:12px;border:1px solid '+(isT?'var(--teal)':'var(--border)')+'"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:18px">📅</span><div><div style="font-size:13px;font-weight:600;color:'+(isT?'var(--teal)':'var(--charcoal)')+'">Next class: '+nxt+'</div><div style="font-size:12px;color:var(--muted)">'+b.class_day+' · '+b.class_time+'</div></div></div>'+(b.meet_link?'<a href="'+b.meet_link+'" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:#fff;font-size:12px;font-weight:600;padding:8px 16px;border-radius:100px;text-decoration:none;flex-shrink:0">🎥 Join Google Meet</a>':'<span style="font-size:12px;color:var(--muted)">No Meet link added</span>')+'</div>';
     if(bs.length){
       h+='<div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin:14px 0 8px;padding-bottom:5px;border-bottom:1px solid var(--border)">Students — tap for profile</div>';
       bs.forEach(function(s){

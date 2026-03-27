@@ -899,7 +899,7 @@ function routeToDashboard(){
 }
 
 /* ── CURRENCY ── */
-var rates={INR:{sym:'₹',kids:800,adults:1000,note:'Showing price in Indian Rupees'},AED:{sym:'AED ',kids:50,adults:80,note:'Showing price in UAE Dirhams',inrKids:1125,inrAdults:1800},SAR:{sym:'SAR ',kids:50,adults:80,note:'Showing price in Saudi Riyals',inrKids:1125,inrAdults:1800},QAR:{sym:'QAR ',kids:50,adults:80,note:'Showing price in Qatari Riyals',inrKids:1150,inrAdults:1840},KWD:{sym:'KWD ',kids:4,adults:7,note:'Showing price in Kuwaiti Dinars',inrKids:1100,inrAdults:1925},BHD:{sym:'BHD ',kids:5,adults:8,note:'Showing price in Bahraini Dinars',inrKids:1100,inrAdults:1760},OMR:{sym:'OMR ',kids:5,adults:8,note:'Showing price in Omani Riyals',inrKids:1100,inrAdults:1760}};
+var rates={INR:{sym:'₹',kids:500,adults:800,note:'Showing price in Indian Rupees'},AED:{sym:'AED ',kids:50,adults:80,note:'Showing price in UAE Dirhams',inrKids:1140,inrAdults:1820},SAR:{sym:'SAR ',kids:51,adults:82,note:'Showing price in Saudi Riyals',inrKids:1140,inrAdults:1830},QAR:{sym:'QAR ',kids:50,adults:80,note:'Showing price in Qatari Riyals',inrKids:1140,inrAdults:1820},KWD:{sym:'KWD ',kids:4,adults:7,note:'Showing price in Kuwaiti Dinars',inrKids:1100,inrAdults:1920},BHD:{sym:'BHD ',kids:5,adults:8,note:'Showing price in Bahraini Dinars',inrKids:1120,inrAdults:1790},OMR:{sym:'OMR ',kids:5,adults:8,note:'Showing price in Omani Riyals',inrKids:1090,inrAdults:1750}};
 var detectedCurrency='AED';
 function setCurrency(c){
   detectedCurrency=c;var r=rates[c];

@@ -161,7 +161,6 @@ footer{background:var(--charcoal);color:rgba(255,255,255,.55);padding:48px 5%;di
 .sidebar-nav{list-style:none;padding:0 12px}
 .sidebar-nav li a{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;text-decoration:none;font-size:13px;font-weight:400;color:rgba(255,255,255,.6);transition:all .2s;margin-bottom:2px;cursor:pointer}
 .sidebar-nav li a:hover{background:rgba(255,255,255,.07);color:var(--white)}.sidebar-nav li a.active{background:rgba(255,255,255,.12);color:var(--white);font-weight:500}
-/* LOGOUT in nav */
 .sidebar-nav li a.nav-logout-btn{color:rgba(255,255,255,.45);font-size:12px}
 .sidebar-nav li a.nav-logout-btn:hover{background:rgba(255,0,0,.1);color:#ff8080}
 .ni{font-size:15px;width:20px;text-align:center;flex-shrink:0}
@@ -215,20 +214,19 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
 .info-box{background:var(--teal-pale);border-radius:var(--rs);padding:16px 18px;border-left:3px solid var(--teal);margin-bottom:24px}
 .info-box-title{font-size:12px;font-weight:600;color:var(--teal);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em}
 .info-box p{font-size:13px;color:var(--charcoal);line-height:1.6}
-/* meet link badge */
 .meet-link-badge{display:inline-flex;align-items:center;gap:6px;background:#E8F0FE;color:#1a73e8;padding:8px 14px;border-radius:10px;font-size:13px;font-weight:500;text-decoration:none;border:1px solid #c5d4f5;transition:background .2s}.meet-link-badge:hover{background:#d2e3fc}
-/* class schedule item */
 .class-item{display:flex;align-items:flex-start;gap:14px;padding:14px;background:var(--cream);border-radius:12px;border:1px solid var(--border);margin-bottom:8px}
 .class-item.upcoming{border-color:var(--teal);background:var(--teal-pale)}
 .class-item.past{opacity:.65}
 .class-dot{width:10px;height:10px;border-radius:50%;margin-top:4px;flex-shrink:0}
 .class-dot.upcoming{background:var(--teal)}.class-dot.past{background:var(--muted)}
-/* concern form */
 .concern-form{background:var(--white);border-radius:var(--r);padding:28px;border:1px solid var(--border);box-shadow:var(--shadow-sm)}
-/* homework card */
 .hw-card{background:var(--teal-pale);border-radius:14px;padding:20px;border:1px solid rgba(27,77,62,.12);margin-bottom:12px}
 .hw-surah{font-family:'Lora',serif;font-size:18px;font-weight:600;color:var(--teal);margin-bottom:4px}
 .hw-meta{font-size:12px;color:var(--muted);margin-bottom:12px}
+/* Account msg boxes */
+.ac-msg-success{display:none;background:#E6F4EE;color:#1B7A4A;font-size:13px;padding:12px 16px;border-radius:var(--rs);margin-bottom:16px;border:1px solid #B8DFC9;line-height:1.5}
+.ac-msg-error{display:none;background:#FEE8E8;color:#C0392B;font-size:13px;padding:12px 16px;border-radius:var(--rs);margin-bottom:16px;border:1px solid rgba(192,57,43,.15)}
 @media(max-width:900px){.sidebar{width:210px}.c4{grid-template-columns:repeat(2,1fr)}.g2{grid-template-columns:1fr}}
 @media(max-width:768px){.hero{grid-template-columns:1fr;padding:100px 5% 60px}.hero-visual{display:none}.stats-bar{grid-template-columns:repeat(2,1fr)}.pricing-grid{grid-template-columns:1fr}.register-wrap{grid-template-columns:1fr}.nav-links{display:none}.fr{grid-template-columns:1fr}.acc-left{flex-direction:column;align-items:flex-start;gap:6px}.hide-mob{display:none!important}}
 @media(max-width:640px){.dash-content{padding:20px}.c3{grid-template-columns:repeat(2,1fr)}.login-card{padding:36px 28px}}
@@ -247,7 +245,6 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
 .profile-tab{flex:1;padding:7px 4px;border-radius:8px;border:none;background:transparent;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--muted);transition:all .2s;text-align:center}
 .profile-tab.active{background:var(--white);color:var(--teal);box-shadow:var(--shadow-sm)}
 .profile-tab-panel{display:none}.profile-tab-panel.active{display:block}
-/* drill-down breadcrumb */
 .breadcrumb{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:16px;flex-wrap:wrap}
 .breadcrumb-link{color:var(--teal);cursor:pointer;font-weight:500;background:none;border:none;font-family:'DM Sans',sans-serif;font-size:13px;padding:0;text-decoration:underline;text-underline-offset:2px}
 .breadcrumb-sep{color:var(--muted);opacity:.4}
@@ -258,8 +255,6 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
 
 <!-- ═══════════════════════════════════════════ MODALS ═══════════════════════════════════════════ -->
 
-<!-- Add Student -->
-
 <div class="modal-overlay" id="modal-add-student"><div class="modal">
 <div class="modal-header"><div class="modal-title">Add <em style="color:var(--teal);font-style:italic">Student</em></div><button class="modal-close" onclick="closeModal('modal-add-student')">✕</button></div>
 <div class="fg"><label>Full name</label><input id="ms-name" type="text" placeholder="Student's full name"/></div>
@@ -269,8 +264,6 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
 <div class="modal-actions"><button class="btn btn-ghost btn-sm" onclick="closeModal('modal-add-student')">Cancel</button><button class="btn btn-primary btn-sm" onclick="saveStudent()">Save Student</button></div>
 </div></div>
 
-<!-- Add Teacher -->
-
 <div class="modal-overlay" id="modal-add-teacher"><div class="modal">
 <div class="modal-header"><div class="modal-title">Add <em style="color:var(--teal);font-style:italic">Teacher</em></div><button class="modal-close" onclick="closeModal('modal-add-teacher')">✕</button></div>
 <div class="fg"><label>Full name</label><input id="mt-name" type="text" placeholder="Teacher's full name"/></div>
@@ -278,8 +271,6 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
 <div class="fg"><label>WhatsApp number</label><input id="mt-phone" type="tel" placeholder="+971 50 000 0000"/></div>
 <div class="modal-actions"><button class="btn btn-ghost btn-sm" onclick="closeModal('modal-add-teacher')">Cancel</button><button class="btn btn-primary btn-sm" onclick="saveTeacher()">Save Teacher</button></div>
 </div></div>
-
-<!-- Edit Teacher -->
 
 <div class="modal-overlay" id="modal-edit-teacher"><div class="modal">
 <div class="modal-header"><div class="modal-title">Edit <em style="color:var(--teal);font-style:italic">Teacher</em></div><button class="modal-close" onclick="closeModal('modal-edit-teacher')">✕</button></div>
@@ -289,8 +280,6 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
 <div class="fg"><label>WhatsApp number</label><input id="et-phone" type="tel"/></div>
 <div class="modal-actions"><button class="btn btn-ghost btn-sm" onclick="closeModal('modal-edit-teacher')">Cancel</button><button class="btn btn-primary btn-sm" onclick="updateTeacher()">Save Changes</button></div>
 </div></div>
-
-<!-- Add Batch -->
 
 <div class="modal-overlay" id="modal-add-batch"><div class="modal" style="max-width:560px">
 <div class="modal-header"><div class="modal-title">Add <em style="color:var(--teal);font-style:italic">Batch</em></div><button class="modal-close" onclick="closeModal('modal-add-batch')">✕</button></div>
@@ -303,13 +292,11 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
 <div class="fg"><label>Class day</label><select id="mb-day"><option>Monday</option><option>Tuesday</option><option>Wednesday</option><option>Thursday</option><option>Friday</option><option>Saturday</option><option>Sunday</option></select></div>
 <div class="fg"><label>Class time</label><input id="mb-time" type="text" placeholder="e.g. 5:00 PM"/></div>
 </div>
-<div class="fg"><label>Google Meet Link <span style="color:var(--muted);font-weight:300">(optional — set now or later)</span></label><input id="mb-meet" type="url" placeholder="https://meet.google.com/xxx-xxxx-xxx"/></div>
+<div class="fg"><label>Google Meet Link <span style="color:var(--muted);font-weight:300">(optional)</span></label><input id="mb-meet" type="url" placeholder="https://meet.google.com/xxx-xxxx-xxx"/></div>
 <div class="fg"><label>Assign Teacher</label><select id="mb-teacher"><option value="">Select teacher</option></select><div style="font-size:11px;color:var(--muted);margin-top:5px" id="mb-teacher-count"></div></div>
-<div class="fg"><label>Add Students <span style="color:var(--muted);font-weight:300">(select from approved pool)</span></label><div id="mb-students-list" style="border:1.5px solid var(--border);border-radius:var(--rs);background:var(--cream);padding:12px;max-height:200px;overflow-y:auto"><div style="font-size:13px;color:var(--muted)">Select a teacher first to see available students</div></div><div style="font-size:11px;color:var(--muted);margin-top:5px" id="mb-student-count">0 students selected</div></div>
+<div class="fg"><label>Add Students</label><div id="mb-students-list" style="border:1.5px solid var(--border);border-radius:var(--rs);background:var(--cream);padding:12px;max-height:200px;overflow-y:auto"><div style="font-size:13px;color:var(--muted)">Select a teacher first</div></div><div style="font-size:11px;color:var(--muted);margin-top:5px" id="mb-student-count">0 students selected</div></div>
 <div class="modal-actions"><button class="btn btn-ghost btn-sm" onclick="closeModal('modal-add-batch')">Cancel</button><button class="btn btn-primary btn-sm" onclick="saveBatch()">Save Batch</button></div>
 </div></div>
-
-<!-- Edit Batch -->
 
 <div class="modal-overlay" id="modal-edit-batch"><div class="modal" style="max-width:520px">
 <div class="modal-header"><div class="modal-title">Edit <em style="color:var(--teal);font-style:italic">Batch</em></div><button class="modal-close" onclick="closeModal('modal-edit-batch')">✕</button></div>
@@ -324,8 +311,6 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
 <div class="modal-actions"><button class="btn btn-ghost btn-sm" onclick="closeModal('modal-edit-batch')">Cancel</button><button class="btn btn-primary btn-sm" onclick="updateBatch()">Save Changes</button></div>
 </div></div>
 
-<!-- Edit Student -->
-
 <div class="modal-overlay" id="modal-edit-student"><div class="modal">
 <div class="modal-header"><div class="modal-title">Edit <em style="color:var(--teal);font-style:italic">Student</em></div><button class="modal-close" onclick="closeModal('modal-edit-student')">✕</button></div>
 <input type="hidden" id="es-id"/>
@@ -336,22 +321,18 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
 <div class="modal-actions"><button class="btn btn-ghost btn-sm" onclick="closeModal('modal-edit-student')">Cancel</button><button class="btn btn-primary btn-sm" onclick="updateStudent()">Save Changes</button></div>
 </div></div>
 
-<!-- Assign Homework (Teacher) -->
-
 <div class="modal-overlay" id="modal-assign-hw"><div class="modal">
 <div class="modal-header"><div class="modal-title">Assign <em style="color:var(--teal);font-style:italic">Homework</em></div><button class="modal-close" onclick="closeModal('modal-assign-hw')">✕</button></div>
 <input type="hidden" id="hw-batch-id"/>
-<div class="fg"><label>Surah name</label><input id="hw-surah" type="text" placeholder="e.g. Al-Fatiha, Al-Baqarah"/></div>
+<div class="fg"><label>Surah name</label><input id="hw-surah" type="text" placeholder="e.g. Al-Fatiha"/></div>
 <div class="fr">
 <div class="fg"><label>From Ayah</label><input id="hw-from" type="number" placeholder="1" min="1"/></div>
 <div class="fg"><label>To Ayah</label><input id="hw-to" type="number" placeholder="7" min="1"/></div>
 </div>
 <div class="fg"><label>Instructions <span style="color:var(--muted);font-weight:300">(optional)</span></label><textarea class="note-textarea" id="hw-notes" placeholder="e.g. Focus on ghunnah in ayah 3..."></textarea></div>
-<div class="info-box" style="margin-top:4px"><div class="info-box-title">Submission</div><p>Students will submit their recitation via WhatsApp. They'll be shown this assignment in their dashboard.</p></div>
+<div class="info-box" style="margin-top:4px"><div class="info-box-title">Submission</div><p>Students will submit their recitation via WhatsApp.</p></div>
 <div class="modal-actions"><button class="btn btn-ghost btn-sm" onclick="closeModal('modal-assign-hw')">Cancel</button><button class="btn btn-primary btn-sm" onclick="saveHomework()">Assign Homework</button></div>
 </div></div>
-
-<!-- Student Profile Modal -->
 
 <div class="modal-overlay" id="modal-student-profile"><div class="modal" style="max-width:520px">
 <div class="modal-header">
@@ -369,8 +350,6 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
 <div id="ptab-attendance" class="profile-tab-panel"></div>
 <div id="ptab-notes" class="profile-tab-panel"></div>
 </div></div>
-
-<!-- Edit Attendance Modal -->
 
 <div class="modal-overlay" id="modal-edit-att"><div class="modal">
 <div class="modal-header"><div class="modal-title">Edit <em style="color:var(--teal);font-style:italic">Attendance</em></div><button class="modal-close" onclick="closeModal('modal-edit-att')">✕</button></div>
@@ -439,7 +418,7 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
     <div class="steps">
       <div class="step-card"><div class="step-num">1</div><h3>Register and get assessed</h3><p>Fill in a quick form. We do a free 10-minute voice note assessment to find your exact level.</p></div>
       <div class="step-card"><div class="step-num">2</div><h3>Join your batch</h3><p>You are placed in a small group of 4 — same age, same level. A WhatsApp group is created with your teacher.</p></div>
-      <div class="step-card"><div class="step-num">3</div><h3>Live class on Google Meet</h3><p>One class per week. Your teacher corrects your recitation in real time — every student is heard.</p></div>
+      <div class="step-card"><div class="step-num">3</div><h3>Live class on Google Meet</h3><p>One class per week. Your teacher corrects your recitation in real time.</p></div>
       <div class="step-card"><div class="step-num">4</div><h3>Daily WhatsApp follow-up</h3><p>Send a voice note between classes. Your teacher replies with corrections the same day.</p></div>
     </div>
   </div>
@@ -454,7 +433,7 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
     <div class="levels-grid">
       <div class="level-card"><div class="level-num-badge">Level 1</div><h3>Noorani</h3><div class="level-arabic">نوراني — Foundation</div><p>Complete beginners. Every Arabic letter, its sound, and basic vowels.</p><div class="level-tags"><span class="level-tag">Age 5+</span><span class="level-tag">All ages</span><span class="level-tag">1 class/week</span><span class="level-tag">30 mins</span></div></div>
       <div class="level-card"><div class="level-num-badge">Level 2</div><h3>Mubtadi</h3><div class="level-arabic">مبتدئ — Elementary</div><p>Knows letters but reads slowly. We join letters into words and recite short surahs correctly.</p><div class="level-tags"><span class="level-tag">Age 7+</span><span class="level-tag">All ages</span><span class="level-tag">1 class/week</span><span class="level-tag">30 mins</span></div></div>
-      <div class="level-card featured"><div class="level-num-badge">Level 3 — most popular</div><h3>Mutawassit</h3><div class="level-arabic">متوسط — Intermediate</div><p>Can read but makes tajweed errors. We apply the rules in real recitation — no boring theory.</p><div class="level-tags"><span class="level-tag">Age 10+</span><span class="level-tag">All ages</span><span class="level-tag">1 class/week</span><span class="level-tag">35 mins</span></div></div>
+      <div class="level-card featured"><div class="level-num-badge">Level 3 — most popular</div><h3>Mutawassit</h3><div class="level-arabic">متوسط — Intermediate</div><p>Can read but makes tajweed errors. We apply the rules in real recitation.</p><div class="level-tags"><span class="level-tag">Age 10+</span><span class="level-tag">All ages</span><span class="level-tag">1 class/week</span><span class="level-tag">35 mins</span></div></div>
       <div class="level-card"><div class="level-num-badge">Level 4</div><h3>Mutaqaddim</h3><div class="level-arabic">متقدم — Advanced</div><p>Reads well but needs polishing. Full applied tajweed in real ayahs.</p><div class="level-tags"><span class="level-tag">Age 13+</span><span class="level-tag">1-2 classes/week</span><span class="level-tag">35 mins</span></div></div>
       <div class="level-card"><div class="level-num-badge">Level 5</div><h3>Mujawwad</h3><div class="level-arabic">مجوَّد — Mastery</div><p>Recite with beauty, rhythm, and full tajweed. Lead your family in prayer with confidence.</p><div class="level-tags"><span class="level-tag">Age 15+</span><span class="level-tag">2 classes/week</span><span class="level-tag">40 mins</span></div></div>
     </div>
@@ -497,7 +476,7 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
   <div class="register-info">
     <div style="display:inline-block;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:12px">Register now</div>
     <h2>Your journey <em>starts here</em></h2>
-    <p class="ri-desc">Fill in the form and we will be in touch within 24 hours to schedule your free assessment. No payment needed yet.</p>
+    <p class="ri-desc">Fill in the form and we will be in touch within 24 hours to schedule your free assessment.</p>
     <div class="promise-list">
       <div class="promise"><div class="promise-icon">🕌</div><div><h4>Free assessment first</h4><p>We find your exact level before placing you in a group.</p></div></div>
       <div class="promise"><div class="promise-icon">💬</div><div><h4>Response within 24 hours</h4><p>A real person from our team will reach out — not a bot.</p></div></div>
@@ -541,8 +520,6 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
   </div>
 </div>
 
-<!-- Mobile sidebar backdrop -->
-
 <div class="sidebar-backdrop" id="sidebar-backdrop" onclick="closeMobSidebar()"></div>
 
 <!-- ═══════════════════════════════════════════ PAGE 3: STUDENT ═══════════════════════════════════════════ -->
@@ -570,69 +547,45 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
     <div class="topbar-right"><div class="topbar-date" id="today-date-s"></div><div class="topbar-pill" id="s-level-pill">Student</div></div>
   </div>
   <div class="dash-content">
-
-```
-<!-- HOME -->
-<div class="panel active" id="sp-home">
-  <div class="stats-row c3">
-    <div class="stat-card teal"><div class="sc-icon">ْ</div><div class="sc-label">Current Level</div><div class="sc-num" style="font-size:20px" id="s-stat-level">—</div><div class="sc-sub" id="s-stat-level-ar">—</div></div>
-    <div class="stat-card"><div class="sc-icon">📅</div><div class="sc-label">Batch</div><div class="sc-num" style="font-size:20px" id="s-stat-batch">—</div><div class="sc-sub">Your class group</div></div>
-    <div class="stat-card"><div class="sc-icon">🌍</div><div class="sc-label">Language</div><div class="sc-num" style="font-size:20px" id="s-stat-lang">—</div><div class="sc-sub">Class language</div></div>
-  </div>
-  <div class="g2">
-    <div class="card"><div class="card-title" style="margin-bottom:16px">My <em>Teacher</em></div><div id="s-teacher-info"><div class="empty-state"><div class="empty-state-icon">👩‍🏫</div><div class="empty-state-title">Not yet assigned</div><p>Your teacher will be assigned after your assessment.</p></div></div></div>
-    <div class="card"><div class="card-title" style="margin-bottom:16px">Next <em>Class</em></div><div id="s-next-class"><div class="empty-state"><div class="empty-state-icon">📅</div><div class="empty-state-title">No class scheduled yet</div><p>Your first class will appear here once your batch is confirmed.</p></div></div></div>
-  </div>
-  <div class="card"><div class="card-title" style="margin-bottom:16px">Recent <em>Notes</em> from Teacher</div><div id="s-notes-list"><div class="empty-state"><div class="empty-state-icon">📝</div><div class="empty-state-title">No notes yet</div><p>Your teacher's feedback will appear here after your first class.</p></div></div></div>
-</div>
-
-<!-- PROGRESS -->
-<div class="panel" id="sp-progress">
-  <div class="card"><div class="card-title" style="margin-bottom:20px">My <em>Learning Journey</em></div><div id="s-progress-levels"><div class="empty-state"><div class="empty-state-icon">📈</div><div class="empty-state-title">Loading...</div></div></div></div>
-</div>
-
-<!-- CLASSES -->
-<div class="panel" id="sp-classes">
-  <div class="card" style="margin-bottom:20px">
-    <div class="card-title" style="margin-bottom:6px">My <em>Batch and Schedule</em></div>
-    <p style="font-size:13px;color:var(--muted);margin-bottom:16px;font-weight:300">One class per week — 3-month course. Tap upcoming classes to join.</p>
-    <div id="s-batch-info"><div class="empty-state"><div class="empty-state-icon">👥</div><div class="empty-state-title">Batch not yet assigned</div><p>Once your assessment is complete and payment confirmed, your batch details will appear here.</p></div></div>
-  </div>
-  <div class="card">
-    <div class="card-title" style="margin-bottom:16px">Class <em>History &amp; Schedule</em></div>
-    <div id="s-class-schedule"><div class="empty-state"><div class="empty-state-icon">📆</div><div class="empty-state-title">No schedule yet</div><p>Your 3-month class schedule will appear here once your batch is confirmed.</p></div></div>
-  </div>
-</div>
-
-<!-- HOMEWORK -->
-<div class="panel" id="sp-homework">
-  <div class="card"><div class="card-title" style="margin-bottom:6px">This Week's <em>Homework</em></div>
-    <p style="font-size:13px;color:var(--muted);margin-bottom:16px;font-weight:300">Recite the assigned ayahs and send a voice note to your teacher on WhatsApp.</p>
-    <div id="s-homework-info"><div class="empty-state"><div class="empty-state-icon">📋</div><div class="empty-state-title">No homework assigned yet</div><p>Your teacher will assign homework after your first class.</p></div></div>
-  </div>
-</div>
-
-<!-- NEED HELP (hidden from teachers, direct to admin) -->
-<div class="panel" id="sp-help">
-  <div class="card" style="max-width:560px">
-    <div class="card-title" style="margin-bottom:6px">Need <em>Help?</em> 🤝</div>
-    <p style="font-size:13px;color:var(--muted);margin-bottom:24px;font-weight:300">Got a question, concern, or something you'd like to share with us? Send a message directly to the Sukoon team. Your teacher won't see this.</p>
-    <div class="fg"><label>Your message</label><textarea class="note-textarea" id="help-msg" rows="5" placeholder="e.g. I'd like to request a different class time, or I have a question about my fees..."></textarea></div>
-    <div class="fg"><label>Type of concern</label>
-      <select id="help-type">
-        <option>Class scheduling</option>
-        <option>Payment or fees</option>
-        <option>Teacher feedback</option>
-        <option>Technical issue</option>
-        <option>Other</option>
-      </select>
+    <div class="panel active" id="sp-home">
+      <div class="stats-row c3">
+        <div class="stat-card teal"><div class="sc-icon">ْ</div><div class="sc-label">Current Level</div><div class="sc-num" style="font-size:20px" id="s-stat-level">—</div><div class="sc-sub" id="s-stat-level-ar">—</div></div>
+        <div class="stat-card"><div class="sc-icon">📅</div><div class="sc-label">Batch</div><div class="sc-num" style="font-size:20px" id="s-stat-batch">—</div><div class="sc-sub">Your class group</div></div>
+        <div class="stat-card"><div class="sc-icon">🌍</div><div class="sc-label">Language</div><div class="sc-num" style="font-size:20px" id="s-stat-lang">—</div><div class="sc-sub">Class language</div></div>
+      </div>
+      <div class="g2">
+        <div class="card"><div class="card-title" style="margin-bottom:16px">My <em>Teacher</em></div><div id="s-teacher-info"><div class="empty-state"><div class="empty-state-icon">👩‍🏫</div><div class="empty-state-title">Not yet assigned</div></div></div></div>
+        <div class="card"><div class="card-title" style="margin-bottom:16px">Next <em>Class</em></div><div id="s-next-class"><div class="empty-state"><div class="empty-state-icon">📅</div><div class="empty-state-title">No class scheduled yet</div></div></div></div>
+      </div>
+      <div class="card"><div class="card-title" style="margin-bottom:16px">Recent <em>Notes</em> from Teacher</div><div id="s-notes-list"><div class="empty-state"><div class="empty-state-icon">📝</div><div class="empty-state-title">No notes yet</div></div></div></div>
     </div>
-    <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="submitHelp()">Send to Admin via WhatsApp 💬</button>
-    <p style="font-size:11px;color:var(--muted);margin-top:10px;text-align:center">This opens WhatsApp. Your message goes directly to the Sukoon admin team.</p>
-  </div>
-</div>
-```
-
+    <div class="panel" id="sp-progress">
+      <div class="card"><div class="card-title" style="margin-bottom:20px">My <em>Learning Journey</em></div><div id="s-progress-levels"><div class="empty-state"><div class="empty-state-icon">📈</div><div class="empty-state-title">Loading...</div></div></div></div>
+    </div>
+    <div class="panel" id="sp-classes">
+      <div class="card" style="margin-bottom:20px">
+        <div class="card-title" style="margin-bottom:6px">My <em>Batch and Schedule</em></div>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:16px;font-weight:300">One class per week — 3-month course.</p>
+        <div id="s-batch-info"><div class="empty-state"><div class="empty-state-icon">👥</div><div class="empty-state-title">Batch not yet assigned</div></div></div>
+      </div>
+      <div class="card"><div class="card-title" style="margin-bottom:16px">Class <em>History &amp; Schedule</em></div><div id="s-class-schedule"><div class="empty-state"><div class="empty-state-icon">📆</div><div class="empty-state-title">No schedule yet</div></div></div></div>
+    </div>
+    <div class="panel" id="sp-homework">
+      <div class="card"><div class="card-title" style="margin-bottom:6px">This Week's <em>Homework</em></div>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:16px;font-weight:300">Recite the assigned ayahs and send a voice note to your teacher on WhatsApp.</p>
+        <div id="s-homework-info"><div class="empty-state"><div class="empty-state-icon">📋</div><div class="empty-state-title">No homework assigned yet</div></div></div>
+      </div>
+    </div>
+    <div class="panel" id="sp-help">
+      <div class="card" style="max-width:560px">
+        <div class="card-title" style="margin-bottom:6px">Need <em>Help?</em> 🤝</div>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:24px;font-weight:300">Got a question or concern? Send a message directly to the Sukoon team. Your teacher won't see this.</p>
+        <div class="fg"><label>Your message</label><textarea class="note-textarea" id="help-msg" rows="5" placeholder="e.g. I'd like to request a different class time..."></textarea></div>
+        <div class="fg"><label>Type of concern</label><select id="help-type"><option>Class scheduling</option><option>Payment or fees</option><option>Teacher feedback</option><option>Technical issue</option><option>Other</option></select></div>
+        <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="submitHelp()">Send to Admin via WhatsApp 💬</button>
+        <p style="font-size:11px;color:var(--muted);margin-top:10px;text-align:center">This opens WhatsApp. Your message goes directly to the Sukoon admin team.</p>
+      </div>
+    </div>
   </div>
 </div>
 </div>
@@ -661,61 +614,47 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
     <div class="topbar-right"><div class="topbar-date" id="today-date-t"></div><div class="topbar-pill" id="t-batches-pill">Teacher</div></div>
   </div>
   <div class="dash-content">
-
-```
-<!-- HOME -->
-<div class="panel active" id="tp-home">
-  <div class="stats-row c3">
-    <div class="stat-card teal"><div class="sc-icon">👥</div><div class="sc-label">My Students</div><div class="sc-num" id="t-stat-students">—</div><div class="sc-sub">across all batches</div></div>
-    <div class="stat-card"><div class="sc-icon">📚</div><div class="sc-label">My Batches</div><div class="sc-num" id="t-stat-batches">—</div><div class="sc-sub">active this month</div></div>
-    <div class="stat-card"><div class="sc-icon">📝</div><div class="sc-label">Notes Added</div><div class="sc-num" id="t-stat-notes">—</div><div class="sc-sub">total progress notes</div></div>
-  </div>
-  <div style="font-family:'Lora',serif;font-size:17px;font-weight:600;color:var(--charcoal);margin-bottom:14px">Batch <em style="font-style:italic;color:var(--teal)">Overview</em></div>
-  <div id="t-home-batches" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-bottom:24px"><div class="empty-state"><div class="empty-state-icon">📚</div><div class="empty-state-title">No batches assigned yet</div></div></div>
-</div>
-
-<!-- BATCHES -->
-<div class="panel" id="tp-batches">
-  <div style="font-family:'Lora',serif;font-size:17px;font-weight:600;color:var(--charcoal);margin-bottom:6px">My <em style="font-style:italic;color:var(--teal)">Batches</em></div>
-  <p style="font-size:13px;color:var(--muted);margin-bottom:18px;font-weight:300">Tap a batch to expand. Assign homework per batch. Tap a student for their profile.</p>
-  <div id="t-batches-list"><div class="empty-state"><div class="empty-state-icon">📚</div><div class="empty-state-title">No batches assigned yet</div></div></div>
-</div>
-
-<!-- ATTENDANCE -->
-<div class="panel" id="tp-attendance">
-  <div class="card" style="margin-bottom:20px">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px">
-      <div class="card-title">Mark <em>Attendance</em></div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
-        <input type="date" id="t-att-date" style="width:auto;font-size:13px;padding:8px 12px" />
-        <select id="t-att-batch" onchange="loadAttendanceStudents()" style="width:auto;min-width:200px;font-size:13px;padding:8px 36px 8px 12px"><option value="">Select batch</option></select>
+    <div class="panel active" id="tp-home">
+      <div class="stats-row c3">
+        <div class="stat-card teal"><div class="sc-icon">👥</div><div class="sc-label">My Students</div><div class="sc-num" id="t-stat-students">—</div><div class="sc-sub">across all batches</div></div>
+        <div class="stat-card"><div class="sc-icon">📚</div><div class="sc-label">My Batches</div><div class="sc-num" id="t-stat-batches">—</div><div class="sc-sub">active this month</div></div>
+        <div class="stat-card"><div class="sc-icon">📝</div><div class="sc-label">Notes Added</div><div class="sc-num" id="t-stat-notes">—</div><div class="sc-sub">total progress notes</div></div>
+      </div>
+      <div style="font-family:'Lora',serif;font-size:17px;font-weight:600;color:var(--charcoal);margin-bottom:14px">Batch <em style="font-style:italic;color:var(--teal)">Overview</em></div>
+      <div id="t-home-batches" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-bottom:24px"><div class="empty-state"><div class="empty-state-icon">📚</div><div class="empty-state-title">No batches assigned yet</div></div></div>
+    </div>
+    <div class="panel" id="tp-batches">
+      <div style="font-family:'Lora',serif;font-size:17px;font-weight:600;color:var(--charcoal);margin-bottom:6px">My <em style="font-style:italic;color:var(--teal)">Batches</em></div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:18px;font-weight:300">Tap a batch to expand. Assign homework per batch. Tap a student for their profile.</p>
+      <div id="t-batches-list"><div class="empty-state"><div class="empty-state-icon">📚</div><div class="empty-state-title">No batches assigned yet</div></div></div>
+    </div>
+    <div class="panel" id="tp-attendance">
+      <div class="card" style="margin-bottom:20px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px">
+          <div class="card-title">Mark <em>Attendance</em></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+            <input type="date" id="t-att-date" style="width:auto;font-size:13px;padding:8px 12px"/>
+            <select id="t-att-batch" onchange="loadAttendanceStudents()" style="width:auto;min-width:200px;font-size:13px;padding:8px 36px 8px 12px"><option value="">Select batch</option></select>
+          </div>
+        </div>
+        <div id="t-attendance-list"><div class="empty-state"><div class="empty-state-icon">✅</div><div class="empty-state-title">Select a batch above</div></div></div>
+        <div id="t-att-save-wrap" style="display:none;margin-top:16px"><button class="btn btn-primary" style="width:100%;justify-content:center" onclick="saveAttendance()">Save Attendance</button></div>
+      </div>
+      <div class="card"><div class="card-title" style="margin-bottom:16px">Attendance <em>History</em> <span style="font-size:12px;color:var(--muted);font-weight:300">(click a record to edit)</span></div>
+        <div id="t-att-summary"><div class="empty-state"><div class="empty-state-icon">📊</div><div class="empty-state-title">No attendance records yet</div></div></div>
       </div>
     </div>
-    <div id="t-attendance-list"><div class="empty-state"><div class="empty-state-icon">✅</div><div class="empty-state-title">Select a batch above</div></div></div>
-    <div id="t-att-save-wrap" style="display:none;margin-top:16px"><button class="btn btn-primary" style="width:100%;justify-content:center" onclick="saveAttendance()">Save Attendance</button></div>
-  </div>
-  <div class="card"><div class="card-title" style="margin-bottom:16px">Attendance <em>History</em> <span style="font-size:12px;color:var(--muted);font-weight:300">(click a record to edit)</span></div>
-    <div id="t-att-summary"><div class="empty-state"><div class="empty-state-icon">📊</div><div class="empty-state-title">No attendance records yet</div></div></div>
-  </div>
-</div>
-
-<!-- NOTES -->
-<div class="panel" id="tp-notes">
-  <div class="g2">
-    <div class="card">
-      <div class="card-title" style="margin-bottom:16px">Add <em>Progress Note</em></div>
-      <div class="fg"><label>Select student</label><select id="t-note-student"><option value="">Select student</option></select></div>
-      <div class="fg"><label>Note</label><textarea class="note-textarea" id="t-note-text" placeholder="e.g. MashaAllah, ghunnah has improved..."></textarea></div>
-      <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="saveTeacherNote()">Save Note</button>
+    <div class="panel" id="tp-notes">
+      <div class="g2">
+        <div class="card">
+          <div class="card-title" style="margin-bottom:16px">Add <em>Progress Note</em></div>
+          <div class="fg"><label>Select student</label><select id="t-note-student"><option value="">Select student</option></select></div>
+          <div class="fg"><label>Note</label><textarea class="note-textarea" id="t-note-text" placeholder="e.g. MashaAllah, ghunnah has improved..."></textarea></div>
+          <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="saveTeacherNote()">Save Note</button>
+        </div>
+        <div class="card"><div class="card-title" style="margin-bottom:16px">Notes <em>by Batch</em></div><div id="t-notes-list"><div class="empty-state"><div class="empty-state-icon">📝</div><div class="empty-state-title">No notes yet</div></div></div></div>
+      </div>
     </div>
-    <div class="card">
-      <div class="card-title" style="margin-bottom:16px">Notes <em>by Batch</em></div>
-      <div id="t-notes-list"><div class="empty-state"><div class="empty-state-icon">📝</div><div class="empty-state-title">No notes yet</div></div></div>
-    </div>
-  </div>
-</div>
-```
-
   </div>
 </div>
 </div>
@@ -733,6 +672,8 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
     <li><a onclick="showPanel('page-admin','ap-teachers',this)"><span class="ni">📖</span> Teachers</a></li>
     <li><a onclick="showPanel('page-admin','ap-batches',this)"><span class="ni">👥</span> Batches</a></li>
     <li><a onclick="showPanel('page-admin','ap-revenue',this)"><span class="ni">💰</span> Revenue</a></li>
+    <!-- ★ NEW -->
+    <li><a onclick="showPanel('page-admin','ap-accounts',this);loadExistingLogins()"><span class="ni">👤</span> User Accounts</a></li>
     <li><a class="nav-logout-btn" onclick="doLogout()"><span class="ni">←</span> Sign Out</a></li>
   </ul>
   <div class="sidebar-bottom">
@@ -747,84 +688,154 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
   </div>
   <div class="dash-content">
 
-```
-<!-- OVERVIEW -->
-<div class="panel active" id="ap-home">
-  <div class="stats-row c4">
-    <div class="stat-card teal"><div class="sc-icon">🎓</div><div class="sc-label">Students</div><div class="sc-num" id="a-stat-students">—</div><div class="sc-sub">approved</div></div>
-    <div class="stat-card"><div class="sc-icon">📖</div><div class="sc-label">Teachers</div><div class="sc-num" id="a-stat-teachers">—</div><div class="sc-sub">active</div></div>
-    <div class="stat-card"><div class="sc-icon">👥</div><div class="sc-label">Batches</div><div class="sc-num" id="a-stat-batches">—</div><div class="sc-sub">running</div></div>
-    <div class="stat-card gold"><div class="sc-icon">🔔</div><div class="sc-label">New Registrations</div><div class="sc-num" id="a-stat-regs">—</div><div class="sc-sub">pending review</div></div>
-  </div>
-  <div class="info-box"><div class="info-box-title">Workflow</div><p>1. Review registrations and approve them as students. 2. Add teachers. 3. Create batches — assign a teacher and select students. Each teacher can have max 10 students.</p></div>
-  <div class="g2">
-    <div class="card"><div class="card-title" style="margin-bottom:16px">Recent <em>Registrations</em></div><div id="a-recent-regs"><div class="empty-state"><div class="empty-state-icon">🔔</div><div class="empty-state-title">No registrations yet</div></div></div></div>
-    <div class="card"><div class="card-title" style="margin-bottom:16px">Students by <em>Level</em></div><div id="a-level-breakdown"><div class="empty-state"><div class="empty-state-icon">📊</div><div class="empty-state-title">No students yet</div></div></div></div>
-  </div>
-</div>
-
-<!-- REGISTRATIONS -->
-<div class="panel" id="ap-registrations">
-  <div class="card">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
-      <div class="card-title">Website <em>Registrations</em></div>
-      <button class="btn btn-ghost btn-sm" onclick="loadAdminData()">↻ Refresh</button>
+    <!-- OVERVIEW -->
+    <div class="panel active" id="ap-home">
+      <div class="stats-row c4">
+        <div class="stat-card teal"><div class="sc-icon">🎓</div><div class="sc-label">Students</div><div class="sc-num" id="a-stat-students">—</div><div class="sc-sub">approved</div></div>
+        <div class="stat-card"><div class="sc-icon">📖</div><div class="sc-label">Teachers</div><div class="sc-num" id="a-stat-teachers">—</div><div class="sc-sub">active</div></div>
+        <div class="stat-card"><div class="sc-icon">👥</div><div class="sc-label">Batches</div><div class="sc-num" id="a-stat-batches">—</div><div class="sc-sub">running</div></div>
+        <div class="stat-card gold"><div class="sc-icon">🔔</div><div class="sc-label">New Registrations</div><div class="sc-num" id="a-stat-regs">—</div><div class="sc-sub">pending review</div></div>
+      </div>
+      <div class="info-box"><div class="info-box-title">Workflow</div><p>1. Review registrations and approve them as students. 2. Add teachers. 3. Create batches — assign a teacher and select students. 4. Use <strong>User Accounts</strong> to create login credentials for students and teachers.</p></div>
+      <div class="g2">
+        <div class="card"><div class="card-title" style="margin-bottom:16px">Recent <em>Registrations</em></div><div id="a-recent-regs"><div class="empty-state"><div class="empty-state-icon">🔔</div><div class="empty-state-title">No registrations yet</div></div></div></div>
+        <div class="card"><div class="card-title" style="margin-bottom:16px">Students by <em>Level</em></div><div id="a-level-breakdown"><div class="empty-state"><div class="empty-state-icon">📊</div><div class="empty-state-title">No students yet</div></div></div></div>
+      </div>
     </div>
-    <div class="info-box" style="margin-bottom:16px"><div class="info-box-title">How this works</div><p>Review each registration and click <strong>Approve</strong> to add them to the Students pool. Delete registrations that are duplicate or invalid — only possible before approval.</p></div>
-    <div id="a-regs-list"><div class="empty-state"><div class="empty-state-icon">🔔</div><div class="empty-state-title">No registrations yet</div><p>When someone fills your registration form, they appear here.</p></div></div>
-  </div>
-</div>
 
-<!-- STUDENTS -->
-<div class="panel" id="ap-students">
-  <div class="card">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-      <div class="card-title">All <em>Students</em></div>
+    <!-- REGISTRATIONS -->
+    <div class="panel" id="ap-registrations">
+      <div class="card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+          <div class="card-title">Website <em>Registrations</em></div>
+          <button class="btn btn-ghost btn-sm" onclick="loadAdminData()">↻ Refresh</button>
+        </div>
+        <div class="info-box" style="margin-bottom:16px"><div class="info-box-title">How this works</div><p>Review each registration and click <strong>Approve</strong> to add them to the Students pool. Delete registrations that are duplicate or invalid.</p></div>
+        <div id="a-regs-list"><div class="empty-state"><div class="empty-state-icon">🔔</div><div class="empty-state-title">No registrations yet</div></div></div>
+      </div>
     </div>
-    <p style="font-size:13px;color:var(--muted);margin-bottom:20px;font-weight:300">Only approved students appear here.</p>
-    <div id="a-students-table"><div class="empty-state"><div class="empty-state-icon">🎓</div><div class="empty-state-title">No students yet</div><p>Approve registrations to add students here.</p></div></div>
-  </div>
-</div>
 
-<!-- TEACHERS — drill-down: list → teacher detail → batches → students -->
-<div class="panel" id="ap-teachers">
-  <div class="card">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-      <div id="ap-teachers-header" class="card-title">All <em>Teachers</em></div>
-      <button class="btn btn-primary btn-sm" id="ap-add-teacher-btn" onclick="openModal('modal-add-teacher')">+ Add Teacher</button>
+    <!-- STUDENTS -->
+    <div class="panel" id="ap-students">
+      <div class="card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+          <div class="card-title">All <em>Students</em></div>
+        </div>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:20px;font-weight:300">Only approved students appear here.</p>
+        <div id="a-students-table"><div class="empty-state"><div class="empty-state-icon">🎓</div><div class="empty-state-title">No students yet</div></div></div>
+      </div>
     </div>
-    <p style="font-size:13px;color:var(--muted);margin-bottom:4px;font-weight:300">Each teacher can have a maximum of 10 students across all their batches.</p>
-    <div id="ap-teachers-breadcrumb" class="breadcrumb" style="margin-top:10px"></div>
-    <!-- Sub-views -->
-    <div id="ap-teachers-view-list"><div class="empty-state"><div class="empty-state-icon">📖</div><div class="empty-state-title">No teachers yet</div><p>Add your first teacher using the button above.</p></div></div>
-    <div id="ap-teachers-view-detail" style="display:none"></div>
-  </div>
-</div>
 
-<!-- BATCHES — drill-down: list → batch detail with students -->
-<div class="panel" id="ap-batches">
-  <div class="card">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-      <div id="ap-batches-header" class="card-title">All <em>Batches</em></div>
-      <button class="btn btn-primary btn-sm" id="ap-add-batch-btn" onclick="openAddBatchModal()">+ Add Batch</button>
+    <!-- TEACHERS -->
+    <div class="panel" id="ap-teachers">
+      <div class="card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+          <div id="ap-teachers-header" class="card-title">All <em>Teachers</em></div>
+          <button class="btn btn-primary btn-sm" id="ap-add-teacher-btn" onclick="openModal('modal-add-teacher')">+ Add Teacher</button>
+        </div>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:4px;font-weight:300">Each teacher can have a maximum of 10 students across all their batches.</p>
+        <div id="ap-teachers-breadcrumb" class="breadcrumb" style="margin-top:10px"></div>
+        <div id="ap-teachers-view-list"><div class="empty-state"><div class="empty-state-icon">📖</div><div class="empty-state-title">No teachers yet</div></div></div>
+        <div id="ap-teachers-view-detail" style="display:none"></div>
+      </div>
     </div>
-    <p style="font-size:13px;color:var(--muted);margin-bottom:4px;font-weight:300">Each batch has one teacher and up to 10 students.</p>
-    <div id="ap-batches-breadcrumb" class="breadcrumb" style="margin-top:10px"></div>
-    <div id="ap-batches-view-list"><div class="empty-state"><div class="empty-state-icon">👥</div><div class="empty-state-title">No batches yet</div><p>Add a batch and assign a teacher and students to it.</p></div></div>
-    <div id="ap-batches-view-detail" style="display:none"></div>
-  </div>
-</div>
 
-<!-- REVENUE -->
-<div class="panel" id="ap-revenue">
-  <div class="stats-row c3">
-    <div class="stat-card teal"><div class="sc-label">Paid Students</div><div class="sc-num" id="r-paid">—</div></div>
-    <div class="stat-card"><div class="sc-label">Pending Payment</div><div class="sc-num" id="r-pending">—</div></div>
-    <div class="stat-card gold"><div class="sc-label">Est. Monthly Revenue</div><div class="sc-num" id="r-revenue">—</div></div>
-  </div>
-  <div class="card"><div class="card-title" style="margin-bottom:16px">Payment <em>Status</em> <span style="font-size:12px;color:var(--muted);font-weight:300">(amounts converted to INR)</span></div><div id="a-revenue-table"><div class="empty-state"><div class="empty-state-icon">💰</div><div class="empty-state-title">No data yet</div></div></div></div>
-</div>
-```
+    <!-- BATCHES -->
+    <div class="panel" id="ap-batches">
+      <div class="card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+          <div id="ap-batches-header" class="card-title">All <em>Batches</em></div>
+          <button class="btn btn-primary btn-sm" id="ap-add-batch-btn" onclick="openAddBatchModal()">+ Add Batch</button>
+        </div>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:4px;font-weight:300">Each batch has one teacher and up to 10 students.</p>
+        <div id="ap-batches-breadcrumb" class="breadcrumb" style="margin-top:10px"></div>
+        <div id="ap-batches-view-list"><div class="empty-state"><div class="empty-state-icon">👥</div><div class="empty-state-title">No batches yet</div></div></div>
+        <div id="ap-batches-view-detail" style="display:none"></div>
+      </div>
+    </div>
+
+    <!-- REVENUE -->
+    <div class="panel" id="ap-revenue">
+      <div class="stats-row c3">
+        <div class="stat-card teal"><div class="sc-label">Paid Students</div><div class="sc-num" id="r-paid">—</div></div>
+        <div class="stat-card"><div class="sc-label">Pending Payment</div><div class="sc-num" id="r-pending">—</div></div>
+        <div class="stat-card gold"><div class="sc-label">Est. Monthly Revenue</div><div class="sc-num" id="r-revenue">—</div></div>
+      </div>
+      <div class="card"><div class="card-title" style="margin-bottom:16px">Payment <em>Status</em></div><div id="a-revenue-table"><div class="empty-state"><div class="empty-state-icon">💰</div><div class="empty-state-title">No data yet</div></div></div></div>
+    </div>
+
+    <!-- ★ USER ACCOUNTS (NEW) -->
+    <div class="panel" id="ap-accounts">
+
+      <div class="card" style="max-width:580px;margin-bottom:24px">
+        <div class="card-title" style="margin-bottom:6px">Create <em>Login Credentials</em></div>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:20px;font-weight:300;line-height:1.6">
+          Create a portal login for a student or teacher. Pick the person, set their email and password — done. No Supabase dashboard needed.
+        </p>
+
+        <div class="info-box" style="margin-bottom:20px">
+          <div class="info-box-title">Before you create</div>
+          <p>The student or teacher must already exist in the system first. Their name is pulled from their record automatically.</p>
+        </div>
+
+        <!-- Step 1: Role -->
+        <div class="fg">
+          <label>Account type</label>
+          <select id="ac-role" onchange="loadAccountCandidates()">
+            <option value="">— Select type —</option>
+            <option value="student">Student</option>
+            <option value="teacher">Teacher</option>
+          </select>
+        </div>
+
+        <!-- Step 2: Person -->
+        <div class="fg" id="ac-person-wrap" style="display:none">
+          <label id="ac-person-label">Select person</label>
+          <select id="ac-person" onchange="onAccountPersonChange()">
+            <option value="">— Select —</option>
+          </select>
+          <div style="font-size:11px;color:var(--muted);margin-top:5px" id="ac-person-hint"></div>
+        </div>
+
+        <!-- Step 3: Email -->
+        <div class="fg" id="ac-email-wrap" style="display:none">
+          <label>Email address</label>
+          <input type="email" id="ac-email" placeholder="e.g. student@email.com" autocomplete="off"/>
+        </div>
+
+        <!-- Step 4: Password -->
+        <div class="fg" id="ac-pwd-wrap" style="display:none">
+          <label>Password <span style="font-weight:300;color:var(--muted)">(min 8 characters)</span></label>
+          <div class="pwd-wrap">
+            <input type="password" id="ac-password" placeholder="Choose a strong password" autocomplete="new-password"/>
+            <button class="pwd-toggle" type="button" onclick="var i=document.getElementById('ac-password');i.type=i.type==='password'?'text':'password'">👁</button>
+          </div>
+        </div>
+
+        <!-- Messages -->
+        <div id="ac-error" class="ac-msg-error"></div>
+        <div id="ac-success" class="ac-msg-success"></div>
+
+        <!-- Submit -->
+        <button class="btn btn-primary" id="ac-submit" style="display:none;width:100%;justify-content:center;border-radius:var(--rs)" onclick="createUserAccount()">
+          Create Login
+        </button>
+      </div>
+
+      <!-- Existing logins table -->
+      <div class="card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+          <div class="card-title">Existing <em>Logins</em></div>
+          <button class="btn btn-ghost btn-sm" onclick="loadExistingLogins()">↻ Refresh</button>
+        </div>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:16px;font-weight:300">All portal accounts that have been created. To reset a password or delete an account, use the Supabase Auth dashboard.</p>
+        <div id="ac-existing-list">
+          <div class="empty-state"><div class="empty-state-icon">👤</div><div class="empty-state-title">Loading...</div></div>
+        </div>
+      </div>
+
+    </div>
+    <!-- END USER ACCOUNTS -->
 
   </div>
 </div>
@@ -835,6 +846,10 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
 <script>
 var SUPA_URL='https://fturomssegxeqditglck.supabase.co';
 var SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ0dXJvbXNzZWd4ZXFkaXRnbGNrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxMTY0MDAsImV4cCI6MjA4OTY5MjQwMH0.T9gTjaG7TAxZ2Y0byuX5iebP9c6eT8qhirRQb6kuzBI';
+
+// Edge Function URL — same Supabase project
+var EDGE_CREATE_USER = SUPA_URL + '/functions/v1/create-user';
+
 var currentUser=null,currentProfile=null,currentSession=null;
 var adminStudents=[],adminTeachers=[],adminBatches=[],adminRegs=[];
 var adminAttendance=[];
@@ -911,7 +926,6 @@ function togglePwd(){var i=document.getElementById('l-password');i.type=i.type==
 function setDates(){
   var d=new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
   ['today-date-s','today-date-t','today-date-a'].forEach(function(id){var el=document.getElementById(id);if(el)el.textContent=d;});
-  // Set default attendance date to today
   var td=document.getElementById('t-att-date');
   if(td)td.value=new Date().toISOString().split('T')[0];
 }
@@ -980,7 +994,6 @@ var rates={INR:{sym:'₹',kids:800,adults:1000,note:'Showing price in Indian Rup
 var detectedCurrency='AED';
 function toINR(amount,currency){
   if(currency==='INR')return amount;
-  // approximate conversion via AED equivalent
   var aedMap={AED:1,SAR:1,QAR:1,KWD:0.082,BHD:0.1,OMR:0.1};
   var aedVal=amount/(aedMap[currency]||1);
   return Math.round(aedVal*GCC_TO_INR);
@@ -993,10 +1006,8 @@ function setCurrency(c){
   document.getElementById('amt-adults').textContent=r.adults;
   document.getElementById('fx-note').textContent=r.note;
   var ir=document.getElementById('inr-equiv');
-  if(c!=='INR'){
-    ir.style.display='block';
-    ir.innerHTML='≈ ₹'+toINR(r.kids,c)+' for kids · ₹'+toINR(r.adults,c)+' for adults';
-  }else{ir.style.display='none';}
+  if(c!=='INR'){ir.style.display='block';ir.innerHTML='≈ ₹'+toINR(r.kids,c)+' for kids · ₹'+toINR(r.adults,c)+' for adults';}
+  else{ir.style.display='none';}
   document.querySelectorAll('[data-curr]').forEach(function(b){
     var active=b.dataset.curr===c;
     b.style.background=active?'var(--teal)':'transparent';
@@ -1071,8 +1082,6 @@ function loadStudentData(){
     document.getElementById('s-level-pill').textContent=s.level||'Student';
     document.getElementById('s-role').textContent=s.level||'Student';
     document.getElementById('s-stat-lang').textContent=s.language||'—';
-
-    // Progress levels — no half fill, just highlight current
     var levels=['Noorani — Level 1','Mubtadi — Level 2','Mutawassit — Level 3','Mutaqaddim — Level 4','Mujawwad — Level 5'];
     var cur=levels.indexOf(s.level);var html='';
     levels.forEach(function(l,i){
@@ -1084,25 +1093,16 @@ function loadStudentData(){
       html+='</div><div class="prog-bar"><div class="prog-fill" style="width:'+(done?100:0)+'%"></div></div></div>';
     });
     document.getElementById('s-progress-levels').innerHTML=html;
-
     if(s.batch_id){
       supa('GET','/rest/v1/batches?id=eq.'+s.batch_id+'&select=*').then(function(ba){
         if(!ba||!ba.length)return;
         var b=ba[0];
         document.getElementById('s-stat-batch').textContent=b.name||'—';
-
-        // batch info + meet link
-        var meetHtml=b.meet_link?'<a href="'+b.meet_link+'" target="_blank" class="meet-link-badge" style="margin-top:12px;display:inline-flex">📹 Join Google Meet</a>':'<p style="font-size:12px;color:var(--muted);margin-top:10px">Meet link will appear here once set by admin.</p>';
+        var meetHtml=b.meet_link?'<a href="'+b.meet_link+'" target="_blank" class="meet-link-badge" style="margin-top:12px;display:inline-flex">📹 Join Google Meet</a>':'<p style="font-size:12px;color:var(--muted);margin-top:10px">Meet link will appear here once set.</p>';
         document.getElementById('s-batch-info').innerHTML='<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px"><div style="background:var(--teal-pale);border-radius:12px;padding:16px"><div style="font-size:11px;color:var(--muted);text-transform:uppercase;margin-bottom:5px">Class day</div><div style="font-size:15px;font-weight:600;color:var(--teal)">'+(b.class_day||'—')+'</div></div><div style="background:var(--gold-light);border-radius:12px;padding:16px"><div style="font-size:11px;color:#8B6914;text-transform:uppercase;margin-bottom:5px">Time</div><div style="font-size:15px;font-weight:600;color:#8B6914">'+(b.class_time||'—')+'</div></div></div>'+meetHtml;
-
-        // next class
         renderStudentNextClass(b);
-
-        // class schedule — 12 weeks from enrollment
         renderStudentSchedule(b,s);
       });
-
-      // teacher info
       supa('GET','/rest/v1/batches?id=eq.'+s.batch_id+'&select=teacher_id').then(function(ba){
         if(!ba||!ba.length||!ba[0].teacher_id)return;
         supa('GET','/rest/v1/teachers?id=eq.'+ba[0].teacher_id+'&select=*').then(function(tr){
@@ -1113,8 +1113,6 @@ function loadStudentData(){
         });
       });
     }
-
-    // notes
     supa('GET','/rest/v1/progress_notes?student_id=eq.'+s.id+'&order=created_at.desc&limit=5&select=*').then(function(notes){
       if(notes&&notes.length){
         var nh='<div class="timeline">';
@@ -1123,58 +1121,45 @@ function loadStudentData(){
         document.getElementById('s-notes-list').innerHTML=nh;
       }
     });
-
-    // homework
     supa('GET','/rest/v1/homework?batch_id=eq.'+s.batch_id+'&order=created_at.desc&limit=5&select=*').then(function(hws){
       renderStudentHomework(hws||[],s);
     }).catch(function(){});
   });
 }
-
 function renderStudentNextClass(batch){
   if(!batch||!batch.class_day)return;
   var days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
   var today=new Date();
   var targetDay=days.indexOf(batch.class_day);
   var diff=(targetDay-today.getDay()+7)%7;
-  if(diff===0)diff=7; // next occurrence
+  if(diff===0)diff=7;
   var next=new Date(today);next.setDate(today.getDate()+diff);
   var label=next.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'});
   document.getElementById('s-next-class').innerHTML='<div style="background:var(--teal-pale);border-radius:12px;padding:18px"><div style="font-size:12px;color:var(--teal);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">Next Class</div><div style="font-family:Lora,serif;font-size:18px;font-weight:600;color:var(--charcoal)">'+label+'</div><div style="font-size:13px;color:var(--muted);margin-top:4px">'+batch.class_time+'</div>'+(batch.meet_link?'<a href="'+batch.meet_link+'" target="_blank" class="meet-link-badge" style="margin-top:12px;display:inline-flex">📹 Join Google Meet</a>':'')+'</div>';
 }
-
 function renderStudentSchedule(batch,student){
-  if(!batch||!batch.class_day){return;}
+  if(!batch||!batch.class_day)return;
   var days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
   var targetDay=days.indexOf(batch.class_day);
   var startDate=student.created_at?new Date(student.created_at):new Date();
-  // find first class on or after enrollment
   var firstClass=new Date(startDate);
   var diff=(targetDay-firstClass.getDay()+7)%7;
   firstClass.setDate(firstClass.getDate()+diff);
   var today=new Date();today.setHours(0,0,0,0);
   var classes=[];
-  for(var i=0;i<13;i++){
-    var d=new Date(firstClass);
-    d.setDate(firstClass.getDate()+i*7);
-    classes.push(d);
-  }
+  for(var i=0;i<13;i++){var d=new Date(firstClass);d.setDate(firstClass.getDate()+i*7);classes.push(d);}
   var html='';
   classes.forEach(function(d,i){
     var isPast=d<today,isNext=(i===classes.findIndex(function(x){return x>=today;}));
     var label=d.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
-    html+='<div class="class-item '+(isPast?'past':isNext?'upcoming':'')+'">';
-    html+='<div class="class-dot '+(isPast?'past':'upcoming')+'"></div>';
-    html+='<div style="flex:1"><div style="font-size:13px;font-weight:'+(isNext?600:400)+';color:'+(isNext?'var(--teal)':isPast?'var(--muted)':'var(--charcoal)')+'">Class '+(i+1)+' — '+label+'</div>';
-    html+='<div style="font-size:12px;color:var(--muted);margin-top:2px">'+batch.class_time+(isNext?' · Up next':'')+(isPast?' · Completed':'')+'</div></div>';
+    html+='<div class="class-item '+(isPast?'past':isNext?'upcoming':'')+'"><div class="class-dot '+(isPast?'past':'upcoming')+'"></div><div style="flex:1"><div style="font-size:13px;font-weight:'+(isNext?600:400)+';color:'+(isNext?'var(--teal)':isPast?'var(--muted)':'var(--charcoal)')+'">Class '+(i+1)+' — '+label+'</div><div style="font-size:12px;color:var(--muted);margin-top:2px">'+batch.class_time+(isNext?' · Up next':'')+(isPast?' · Completed':'')+'</div></div>';
     if(isNext&&batch.meet_link)html+='<a href="'+batch.meet_link+'" target="_blank" class="meet-link-badge" style="font-size:11px;padding:6px 10px">📹 Join</a>';
     html+='</div>';
   });
   document.getElementById('s-class-schedule').innerHTML=html||'<div class="empty-state"><div class="empty-state-icon">📆</div><div class="empty-state-title">No schedule yet</div></div>';
 }
-
 function renderStudentHomework(hws,student){
-  if(!hws.length){return;}
+  if(!hws.length)return;
   var el=document.getElementById('s-homework-info');
   var html='';
   hws.forEach(function(hw){
@@ -1183,8 +1168,6 @@ function renderStudentHomework(hws,student){
   });
   el.innerHTML=html;
 }
-
-/* Need Help → WhatsApp to admin */
 function submitHelp(){
   var msg=document.getElementById('help-msg').value.trim();
   var type=document.getElementById('help-type').value;
@@ -1214,8 +1197,7 @@ function loadTeacherData(){
       if(!batches.length){
         document.getElementById('t-stat-students').textContent=0;
         renderBatchHomeCards([],[]);renderBatchesExpanded([],[],[],[]);
-        renderAttByBatch([],[],[]);renderNotesByBatch([],[],[]);
-        return;
+        renderAttByBatch([],[],[]);renderNotesByBatch([],[],[]);return;
       }
       var bids=batches.map(function(b){return b.id;});
       supa('GET','/rest/v1/students?batch_id=in.('+bids.join(',')+ ')&select=*').then(function(students){
@@ -1235,7 +1217,6 @@ function loadTeacherData(){
     });
   });
 }
-
 function loadAttendanceStudents(){
   var bid=document.getElementById('t-att-batch').value;
   var listEl=document.getElementById('t-attendance-list');
@@ -1267,8 +1248,7 @@ function saveAttendance(){
   });
   if(!records.length){showToast('Mark at least one student.','error');return;}
   supa('POST','/rest/v1/attendance',records).then(function(){
-    showToast('Attendance saved! JazakAllah khair 🌙','success');
-    loadTeacherData();
+    showToast('Attendance saved! JazakAllah khair 🌙','success');loadTeacherData();
   }).catch(function(){showToast('Could not save.','error');});
 }
 function saveTeacherNote(){
@@ -1280,8 +1260,6 @@ function saveTeacherNote(){
     showToast('Note saved! 🌙','success');loadTeacherData();
   }).catch(function(){showToast('Could not save.','error');});
 }
-
-/* Homework */
 function openAssignHw(batchId){
   document.getElementById('hw-batch-id').value=batchId;
   document.getElementById('hw-surah').value='';
@@ -1297,12 +1275,9 @@ function saveHomework(){
   var to=document.getElementById('hw-to').value;
   if(!surah||!from||!to){showToast('Please fill in surah name and ayah range.','error');return;}
   supa('POST','/rest/v1/homework',{batch_id:bid,surah:surah,from_ayah:parseInt(from),to_ayah:parseInt(to),notes:document.getElementById('hw-notes').value.trim(),teacher_id:currentProfile.linked_id}).then(function(){
-    closeModal('modal-assign-hw');
-    showToast('Homework assigned! 🌙','success');
-  }).catch(function(){showToast('Could not save. Make sure the homework table exists.','error');});
+    closeModal('modal-assign-hw');showToast('Homework assigned! 🌙','success');
+  }).catch(function(){showToast('Could not save.','error');});
 }
-
-/* Edit attendance record */
 function openEditAttModal(attId,date,status){
   document.getElementById('ea-id').value=attId;
   document.getElementById('ea-date').value=date;
@@ -1312,9 +1287,7 @@ function openEditAttModal(attId,date,status){
 function saveEditAtt(){
   var id=document.getElementById('ea-id').value;
   supa('PATCH','/rest/v1/attendance?id=eq.'+id,{date:document.getElementById('ea-date').value,status:document.getElementById('ea-status').value}).then(function(){
-    closeModal('modal-edit-att');
-    showToast('Attendance updated! 🌙','success');
-    loadTeacherData();
+    closeModal('modal-edit-att');showToast('Attendance updated! 🌙','success');loadTeacherData();
   }).catch(function(){showToast('Could not update.','error');});
 }
 
@@ -1343,7 +1316,6 @@ function loadAdminData(){
     renderTeachersList();renderBatchesList();renderRevenue();
   }).catch(function(e){console.error('Admin data:',e);showToast('Could not load data.','error');});
 }
-
 function renderOverview(){
   var regs=adminRegs.slice(0,3);
   if(regs.length){
@@ -1359,10 +1331,9 @@ function renderOverview(){
     document.getElementById('a-level-breakdown').innerHTML=lh;
   }
 }
-
 function renderRegistrations(){
   var el=document.getElementById('a-regs-list');
-  if(!adminRegs.length){el.innerHTML='<div class="empty-state"><div class="empty-state-icon">🔔</div><div class="empty-state-title">No registrations yet</div><p>When someone fills your registration form, they appear here.</p></div>';return;}
+  if(!adminRegs.length){el.innerHTML='<div class="empty-state"><div class="empty-state-icon">🔔</div><div class="empty-state-title">No registrations yet</div></div>';return;}
   var h='<div class="tscroll"><table><thead><tr><th>Name</th><th>Age</th><th>Level</th><th>Time</th><th>Language</th><th>Currency</th><th>Notes</th><th>Status</th><th>Actions</th></tr></thead><tbody>';
   adminRegs.forEach(function(r){
     var isNew=r.status==='new';
@@ -1372,21 +1343,18 @@ function renderRegistrations(){
     h+='<td><div style="display:flex;gap:6px">';
     if(isNew)h+='<button class="btn btn-primary btn-sm" style="white-space:nowrap;font-size:12px" onclick="approveReg(\''+r.id+'\',\''+sn+'\','+r.age+',\''+r.level+'\',\''+r.language+'\',\''+r.currency+'\')">Approve</button>';
     else if(r.status==='approved')h+='<span style="font-size:12px;color:#1B7A4A">Added</span>';
-    // Only show delete if NOT yet approved
     if(r.status!=='approved')h+='<button class="btn btn-danger btn-sm" onclick="deleteRegistration(\''+r.id+'\')">Delete</button>';
     h+='</div></td></tr>';
   });
   h+='</tbody></table></div>';
   el.innerHTML=h;
 }
-
 function deleteRegistration(id){
-  if(!confirm('Delete this registration? This cannot be undone.'))return;
+  if(!confirm('Delete this registration?'))return;
   fetch(SUPA_URL+'/rest/v1/registrations?id=eq.'+id,{method:'DELETE',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+(currentSession?currentSession.access_token:SUPA_KEY)}}).then(function(){
     showToast('Registration deleted.','success');loadAdminData();
   }).catch(function(){showToast('Could not delete.','error');});
 }
-
 function approveReg(regId,name,age,level,language,currency){
   if(!confirm('Approve '+name+' as a student?'))return;
   supa('POST','/rest/v1/students',{name:name,age:age,level:level,language:language,currency:currency,payment_status:'pending',status:'active',enrollment_date:new Date().toISOString().split('T')[0]}).then(function(){
@@ -1395,10 +1363,9 @@ function approveReg(regId,name,age,level,language,currency){
     showToast(name+' approved as student! 🌙','success');loadAdminData();
   }).catch(function(e){showToast('Could not approve.','error');console.error(e);});
 }
-
 function renderStudentsTable(){
   var el=document.getElementById('a-students-table');
-  if(!adminStudents.length){el.innerHTML='<div class="empty-state"><div class="empty-state-icon">🎓</div><div class="empty-state-title">No students yet</div><p>Approve registrations to add students here.</p></div>';return;}
+  if(!adminStudents.length){el.innerHTML='<div class="empty-state"><div class="empty-state-icon">🎓</div><div class="empty-state-title">No students yet</div></div>';return;}
   var batchMap={};adminBatches.forEach(function(b){batchMap[b.id]=b.name;});
   var h='<div class="tscroll"><table><thead><tr><th>Name</th><th>Age</th><th>Level</th><th>Country</th><th>Language</th><th>Batch</th><th>Enrolled</th><th>Status</th><th>Actions</th></tr></thead><tbody>';
   adminStudents.forEach(function(s){
@@ -1408,14 +1375,9 @@ function renderStudentsTable(){
     var slang=(s.language||'').replace(/['"]/g,'');
     var sa=(s.payment_amount||'').replace(/['"]/g,'');
     var enrolDate=s.enrollment_date?new Date(s.enrollment_date).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}):'—';
-    // Course completed check: 3 months from enrollment
     var isCompleted=s.course_status==='completed';
     var canComplete=false;
-    if(s.enrollment_date&&!isCompleted){
-      var enrol=new Date(s.enrollment_date);
-      var threeMonths=new Date(enrol);threeMonths.setMonth(threeMonths.getMonth()+3);
-      canComplete=new Date()>=threeMonths;
-    }
+    if(s.enrollment_date&&!isCompleted){var enrol=new Date(s.enrollment_date);var threeMonths=new Date(enrol);threeMonths.setMonth(threeMonths.getMonth()+3);canComplete=new Date()>=threeMonths;}
     h+='<tr style="cursor:pointer" onclick="openStudentProfile(\''+s.id+'\')" title="View profile">';
     h+='<td style="font-weight:500;color:var(--teal)">'+s.name+'</td><td>'+(s.age||'—')+'</td><td style="font-size:12px">'+(s.level||'—')+'</td><td>'+(s.country||'—')+'</td><td>'+(s.language||'—')+'</td>';
     h+='<td style="font-size:12px">'+(s.batch_id&&batchMap[s.batch_id]?batchMap[s.batch_id]:'<span style="color:var(--muted)">Unassigned</span>')+'</td>';
@@ -1429,7 +1391,6 @@ function renderStudentsTable(){
   h+='</tbody></table></div>';
   el.innerHTML=h;
 }
-
 function openEditStudent(id,name,age,level,country,language,payStatus,payAmount){
   document.getElementById('es-id').value=id;
   document.getElementById('es-name').value=name;
@@ -1449,10 +1410,9 @@ function updateStudent(){
     closeModal('modal-edit-student');showToast('Student updated! 🌙','success');loadAdminData();
   }).catch(function(){showToast('Could not update.','error');});
 }
-function markCourseComplete(studentId,batchId){
+function markCourseComplete(studentId){
   if(!confirm('Mark this student as course completed?'))return;
-  var updates={course_status:'completed'};
-  supa('PATCH','/rest/v1/students?id=eq.'+studentId,updates).then(function(){
+  supa('PATCH','/rest/v1/students?id=eq.'+studentId,{course_status:'completed'}).then(function(){
     showToast('Course marked as completed! 🌙','success');loadAdminData();
   }).catch(function(){showToast('Could not update.','error');});
 }
@@ -1465,7 +1425,7 @@ function renderTeachersList(){
   document.getElementById('ap-teachers-breadcrumb').innerHTML='';
   document.getElementById('ap-teachers-header').innerHTML='All <em>Teachers</em>';
   document.getElementById('ap-add-teacher-btn').style.display='';
-  if(!adminTeachers.length){listEl.innerHTML='<div class="empty-state"><div class="empty-state-icon">📖</div><div class="empty-state-title">No teachers yet</div><p>Add your first teacher using the button above.</p></div>';return;}
+  if(!adminTeachers.length){listEl.innerHTML='<div class="empty-state"><div class="empty-state-icon">📖</div><div class="empty-state-title">No teachers yet</div></div>';return;}
   var tsc={};
   adminStudents.forEach(function(s){
     if(!s.batch_id)return;
@@ -1478,7 +1438,7 @@ function renderTeachersList(){
     var count=tsc[t.id]||0;
     var bcount=adminBatches.filter(function(b){return b.teacher_id===t.id;}).length;
     h+='<div style="background:var(--cream);border-radius:14px;padding:18px 20px;border:1px solid var(--border);margin-bottom:10px;display:flex;align-items:center;gap:14px">';
-    h+='<div class="user-avatar" style="background:var(--gold-light);color:#8B6914;width:42px;height:42px;font-size:15px;cursor:pointer" onclick="openTeacherDetail(\''+t.id+'\')" >'+init+'</div>';
+    h+='<div class="user-avatar" style="background:var(--gold-light);color:#8B6914;width:42px;height:42px;font-size:15px;cursor:pointer" onclick="openTeacherDetail(\''+t.id+'\')">'+init+'</div>';
     h+='<div style="flex:1;cursor:pointer" onclick="openTeacherDetail(\''+t.id+'\')"><div style="font-weight:600;font-size:14px">'+t.name+'</div>';
     h+='<div style="font-size:12px;color:var(--muted)">'+(t.email||'')+(t.phone?' · '+t.phone:'')+'</div>';
     h+='<div style="display:flex;gap:8px;margin-top:6px"><span class="badge '+(count>=10?'bred':'bg')+'">'+count+'/10 students</span><span class="badge bteal">'+bcount+' batch'+(bcount===1?'':'es')+'</span></div></div>';
@@ -1506,13 +1466,9 @@ function openTeacherDetail(tid){
     h+='<div style="font-family:Lora,serif;font-size:15px;font-weight:600;margin-bottom:12px">Batches <em style="color:var(--teal)">by this Teacher</em></div>';
     batches.forEach(function(b){
       var bs=adminStudents.filter(function(s){return s.batch_id===b.id;});
-      h+='<div style="background:var(--white);border-radius:14px;padding:16px 18px;border:1px solid var(--border);margin-bottom:10px;cursor:pointer;transition:box-shadow .2s" onmouseover="this.style.boxShadow=\'var(--shadow)\'" onmouseout="this.style.boxShadow=\'\'" onclick="openBatchDetail(\''+b.id+'\')">';
+      h+='<div style="background:var(--white);border-radius:14px;padding:16px 18px;border:1px solid var(--border);margin-bottom:10px;cursor:pointer" onclick="openBatchDetail(\''+b.id+'\')">';
       h+='<div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-weight:600;font-size:14px">'+b.name+'</div><div style="font-size:12px;color:var(--muted);margin-top:2px">'+b.class_day+' · '+b.class_time+' · '+(b.level||'—')+'</div></div><span class="badge bteal">'+bs.length+' students →</span></div>';
-      if(bs.length){
-        h+='<div style="margin-top:12px;display:flex;gap:6px;flex-wrap:wrap">';
-        bs.forEach(function(s){h+='<span style="background:var(--teal-light);color:var(--teal);padding:4px 10px;border-radius:100px;font-size:11px;font-weight:500">'+s.name+'</span>';});
-        h+='</div>';
-      }
+      if(bs.length){h+='<div style="margin-top:12px;display:flex;gap:6px;flex-wrap:wrap">';bs.forEach(function(s){h+='<span style="background:var(--teal-light);color:var(--teal);padding:4px 10px;border-radius:100px;font-size:11px;font-weight:500">'+s.name+'</span>';});h+='</div>';}
       h+='</div>';
     });
   }else h+='<div class="empty-state"><div class="empty-state-icon">📚</div><div class="empty-state-title">No batches assigned to this teacher yet</div></div>';
@@ -1543,12 +1499,12 @@ function renderBatchesList(){
   document.getElementById('ap-batches-breadcrumb').innerHTML='';
   document.getElementById('ap-batches-header').innerHTML='All <em>Batches</em>';
   document.getElementById('ap-add-batch-btn').style.display='';
-  if(!adminBatches.length){listEl.innerHTML='<div class="empty-state"><div class="empty-state-icon">👥</div><div class="empty-state-title">No batches yet</div><p>Add a batch and assign a teacher and students.</p></div>';return;}
+  if(!adminBatches.length){listEl.innerHTML='<div class="empty-state"><div class="empty-state-icon">👥</div><div class="empty-state-title">No batches yet</div></div>';return;}
   var teacherMap={};adminTeachers.forEach(function(t){teacherMap[t.id]=t.name;});
   var h='';
   adminBatches.forEach(function(b){
     var sc=adminStudents.filter(function(s){return s.batch_id===b.id;}).length;
-    h+='<div style="padding:18px;background:var(--cream);border-radius:14px;border:1px solid var(--border);margin-bottom:10px;cursor:pointer;transition:box-shadow .2s" onmouseover="this.style.boxShadow=\'var(--shadow)\'" onmouseout="this.style.boxShadow=\'\'" onclick="openBatchDetail(\''+b.id+'\')">';
+    h+='<div style="padding:18px;background:var(--cream);border-radius:14px;border:1px solid var(--border);margin-bottom:10px;cursor:pointer" onclick="openBatchDetail(\''+b.id+'\')">';
     h+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">';
     h+='<div style="font-weight:600;font-size:14px">'+b.name+'</div>';
     h+='<div style="display:flex;gap:6px" onclick="event.stopPropagation()">';
@@ -1556,9 +1512,7 @@ function renderBatchesList(){
     h+='<button class="btn btn-danger btn-sm" onclick="deleteBatch(\''+b.id+'\')">Delete</button>';
     h+='</div></div>';
     h+='<div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--muted)">';
-    h+='<span>📅 '+b.class_day+' · '+b.class_time+'</span>';
-    h+='<span>📖 '+(b.level||'—')+'</span>';
-    h+='<span>👩‍🏫 '+(b.teacher_id&&teacherMap[b.teacher_id]?teacherMap[b.teacher_id]:'No teacher')+'</span>';
+    h+='<span>📅 '+b.class_day+' · '+b.class_time+'</span><span>📖 '+(b.level||'—')+'</span><span>👩‍🏫 '+(b.teacher_id&&teacherMap[b.teacher_id]?teacherMap[b.teacher_id]:'No teacher')+'</span>';
     if(b.meet_link)h+='<span>📹 Meet set</span>';
     h+='<span class="badge '+(sc>=10?'bred':'bteal')+'">'+sc+'/10 students →</span></div></div>';
   });
@@ -1576,19 +1530,16 @@ function openBatchDetail(bid){
   var totalAtt=adminAttendance.filter(function(a){return students.some(function(s){return s.id===a.student_id;});});
   var presCount=totalAtt.filter(function(a){return a.status==='present';}).length;
   var attRate=totalAtt.length?Math.round(presCount/totalAtt.length*100):null;
-  // Course completion check
   var now=new Date();
   var h='<div style="background:var(--teal-pale);border-radius:14px;padding:20px;margin-bottom:20px">';
   h+='<div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px">';
   h+='<div><div style="font-family:Lora,serif;font-size:18px;font-weight:600">'+b.name+'</div>';
   h+='<div style="font-size:13px;color:var(--muted);margin-top:4px">'+b.class_day+' · '+b.class_time+' · '+(b.level||'—')+'</div>';
-  h+='<div style="font-size:13px;color:var(--muted);margin-top:3px">Teacher: <strong>'+( teacher?teacher.name:'Not assigned')+'</strong></div>';
+  h+='<div style="font-size:13px;color:var(--muted);margin-top:3px">Teacher: <strong>'+(teacher?teacher.name:'Not assigned')+'</strong></div>';
   if(b.meet_link)h+='<a href="'+b.meet_link+'" target="_blank" class="meet-link-badge" style="margin-top:10px;display:inline-flex">📹 Google Meet</a>';
-  h+='</div>';
-  h+='<button class="btn btn-ghost btn-sm" onclick="openEditBatch(\''+bid+'\')">Edit Batch</button></div>';
+  h+='</div><button class="btn btn-ghost btn-sm" onclick="openEditBatch(\''+bid+'\')">Edit Batch</button></div>';
   if(attRate!==null)h+='<div style="margin-top:14px;font-size:13px;color:var(--teal);font-weight:600">Overall attendance: '+attRate+'%</div>';
   h+='</div>';
-  // Students summary
   h+='<div style="font-family:Lora,serif;font-size:15px;font-weight:600;margin-bottom:12px">Students <em style="color:var(--teal)">in this Batch</em> <span style="font-size:13px;font-weight:400;color:var(--muted)">('+students.length+'/10)</span></div>';
   if(students.length){
     h+='<div class="tscroll"><table><thead><tr><th>Name</th><th>Level</th><th>Enrolled</th><th>Status</th><th>Actions</th></tr></thead><tbody>';
@@ -1604,7 +1555,7 @@ function openBatchDetail(bid){
       h+='<td style="font-size:12px">'+(s.level||'—')+'</td><td style="font-size:12px">'+enrolDate+'</td>';
       h+='<td>'+(isCompleted?'<span class="badge bg">Completed</span>':canComplete?'<span class="badge bgold">3mo passed</span>':'<span class="badge bteal">Active</span>')+''+(sp!==null?' <span class="badge '+(sp>=75?'bg':sp>=50?'bgold':'bred')+'" style="font-size:10px">'+sp+'%</span>':'')+'</td>';
       h+='<td><div style="display:flex;gap:6px">';
-      if(canComplete&&!isCompleted)h+='<button class="btn btn-success btn-sm" onclick="markCourseComplete(\''+s.id+'\',\''+bid+'\')">Mark Complete</button>';
+      if(canComplete&&!isCompleted)h+='<button class="btn btn-success btn-sm" onclick="markCourseComplete(\''+s.id+'\')">Mark Complete</button>';
       h+='<button class="btn btn-ghost btn-sm" onclick="openStudentProfile(\''+s.id+'\')">Profile</button>';
       h+='</div></td></tr>';
     });
@@ -1637,29 +1588,12 @@ function renderRevenue(){
   var pend=adminStudents.filter(function(s){return s.payment_status!=='paid';});
   document.getElementById('r-paid').textContent=paid.length;
   document.getElementById('r-pending').textContent=pend.length;
-  // Revenue in INR
   var totalINR=0;
-  paid.forEach(function(s){
-    var cur=s.currency||'INR';
-    var r=rates[cur]||rates.AED;
-    var age=parseInt(s.age)||0;
-    var baseAmt=age>16?r.adults:r.kids;
-    totalINR+=toINR(baseAmt,cur);
-  });
+  paid.forEach(function(s){var cur=s.currency||'INR';var r=rates[cur]||rates.AED;var age=parseInt(s.age)||0;var baseAmt=age>16?r.adults:r.kids;totalINR+=toINR(baseAmt,cur);});
   document.getElementById('r-revenue').textContent=paid.length?'₹'+totalINR.toLocaleString('en-IN'):'—';
   if(!adminStudents.length){document.getElementById('a-revenue-table').innerHTML='<div class="empty-state"><div class="empty-state-icon">💰</div><div class="empty-state-title">No data yet</div></div>';return;}
   var h='<div class="tscroll"><table><thead><tr><th>Name</th><th>Level</th><th>Country/Currency</th><th>Payment</th><th>Original</th><th>INR Equivalent</th></tr></thead><tbody>';
-  adminStudents.forEach(function(s){
-    var cur=s.currency||'INR';
-    var r=rates[cur]||rates.AED;
-    var age=parseInt(s.age)||0;
-    var baseAmt=age>16?r.adults:r.kids;
-    var inrAmt=toINR(baseAmt,cur);
-    h+='<tr><td>'+s.name+'</td><td style="font-size:12px">'+(s.level||'—')+'</td><td>'+(s.country||'—')+(cur?' ('+cur+')':'')+'</td>';
-    h+='<td>'+(s.payment_status==='paid'?'<span class="badge bg">Paid</span>':'<span class="badge bgold">Pending</span>')+'</td>';
-    h+='<td style="font-size:12px">'+(s.payment_amount||(r.sym+baseAmt))+'</td>';
-    h+='<td style="font-weight:600;color:var(--teal)">₹'+inrAmt.toLocaleString('en-IN')+'</td></tr>';
-  });
+  adminStudents.forEach(function(s){var cur=s.currency||'INR';var r=rates[cur]||rates.AED;var age=parseInt(s.age)||0;var baseAmt=age>16?r.adults:r.kids;var inrAmt=toINR(baseAmt,cur);h+='<tr><td>'+s.name+'</td><td style="font-size:12px">'+(s.level||'—')+'</td><td>'+(s.country||'—')+(cur?' ('+cur+')':'')+'</td><td>'+(s.payment_status==='paid'?'<span class="badge bg">Paid</span>':'<span class="badge bgold">Pending</span>')+'</td><td style="font-size:12px">'+(s.payment_amount||(r.sym+baseAmt))+'</td><td style="font-weight:600;color:var(--teal)">₹'+inrAmt.toLocaleString('en-IN')+'</td></tr>';});
   h+='</tbody></table></div>';
   document.getElementById('a-revenue-table').innerHTML=h;
 }
@@ -1669,23 +1603,19 @@ function saveStudent(){
   var name=document.getElementById('ms-name').value.trim();
   if(!name){showToast('Please enter a name.','error');return;}
   supa('POST','/rest/v1/students',{name:name,age:parseInt(document.getElementById('ms-age').value)||null,level:document.getElementById('ms-level').value,country:document.getElementById('ms-country').value,language:document.getElementById('ms-lang').value,payment_status:document.getElementById('ms-pay').value,payment_amount:document.getElementById('ms-amount').value.trim(),status:'active',enrollment_date:new Date().toISOString().split('T')[0]}).then(function(){
-    closeModal('modal-add-student');
-    ['ms-name','ms-age','ms-amount'].forEach(function(i){document.getElementById(i).value='';});
+    closeModal('modal-add-student');['ms-name','ms-age','ms-amount'].forEach(function(i){document.getElementById(i).value='';});
     showToast('Student added! 🌙','success');loadAdminData();
   }).catch(function(){showToast('Could not save.','error');});
 }
 function deleteStudent(id,regId){
-  if(!confirm('Delete this student? This cannot be undone.'))return;
+  if(!confirm('Delete this student?'))return;
   fetch(SUPA_URL+'/rest/v1/students?id=eq.'+id,{method:'DELETE',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+(currentSession?currentSession.access_token:SUPA_KEY)}}).then(function(){
-    // Also update related registration if exists
-    if(regId){
-      supa('PATCH','/rest/v1/registrations?id=eq.'+regId,{status:'deleted'});
-    }
+    if(regId)supa('PATCH','/rest/v1/registrations?id=eq.'+regId,{status:'deleted'});
     showToast('Student removed.','success');loadAdminData();
   }).catch(function(){showToast('Could not delete.','error');});
 }
 function deleteTeacher(id){
-  if(!confirm('Delete this teacher? This cannot be undone.'))return;
+  if(!confirm('Delete this teacher?'))return;
   fetch(SUPA_URL+'/rest/v1/teachers?id=eq.'+id,{method:'DELETE',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+(currentSession?currentSession.access_token:SUPA_KEY)}}).then(function(){
     showToast('Teacher removed.','success');loadAdminData();
   }).catch(function(){showToast('Could not delete.','error');});
@@ -1694,9 +1624,7 @@ function deleteBatch(id){
   if(!confirm('Delete this batch? Students will become unassigned.'))return;
   fetch(SUPA_URL+'/rest/v1/students?batch_id=eq.'+id,{method:'PATCH',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+(currentSession?currentSession.access_token:SUPA_KEY),'Content-Type':'application/json'},body:JSON.stringify({batch_id:null})}).then(function(){
     return fetch(SUPA_URL+'/rest/v1/batches?id=eq.'+id,{method:'DELETE',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+(currentSession?currentSession.access_token:SUPA_KEY)}});
-  }).then(function(){
-    showToast('Batch removed.','success');renderBatchesList();loadAdminData();
-  }).catch(function(){showToast('Could not delete.','error');});
+  }).then(function(){showToast('Batch removed.','success');renderBatchesList();loadAdminData();}).catch(function(){showToast('Could not delete.','error');});
 }
 
 /* ══ BATCH MODAL ══ */
@@ -1705,12 +1633,9 @@ function openAddBatchModal(){
   sel.innerHTML='<option value="">Select teacher</option>';
   adminTeachers.forEach(function(t){
     var count=adminStudents.filter(function(s){if(!s.batch_id)return false;var b=adminBatches.find(function(b){return b.id===s.batch_id;});return b&&b.teacher_id===t.id;}).length;
-    var opt=document.createElement('option');
-    opt.value=t.id;opt.textContent=t.name+' ('+count+'/10)';
-    if(count>=10)opt.disabled=true;
-    sel.appendChild(opt);
+    var opt=document.createElement('option');opt.value=t.id;opt.textContent=t.name+' ('+count+'/10)';if(count>=10)opt.disabled=true;sel.appendChild(opt);
   });
-  document.getElementById('mb-students-list').innerHTML='<div style="font-size:13px;color:var(--muted)">Select a teacher first to see available students</div>';
+  document.getElementById('mb-students-list').innerHTML='<div style="font-size:13px;color:var(--muted)">Select a teacher first</div>';
   document.getElementById('mb-student-count').textContent='0 students selected';
   document.getElementById('mb-teacher-count').textContent='';
   document.getElementById('mb-name').value='';
@@ -1727,27 +1652,20 @@ function updateBatchStudentList(){
   var unassigned=adminStudents.filter(function(s){return !s.batch_id;});
   if(!unassigned.length){document.getElementById('mb-students-list').innerHTML='<div style="font-size:13px;color:var(--muted)">No unassigned students available.</div>';return;}
   var h='';
-  unassigned.forEach(function(s){
-    h+='<label style="display:flex;align-items:center;gap:10px;padding:8px;border-radius:8px;cursor:pointer"><input type="checkbox" class="bscb" value="'+s.id+'" onchange="updateBatchStudentCount('+remaining+')" style="width:16px;height:16px;accent-color:var(--teal);flex-shrink:0"/><div><div style="font-size:13px;font-weight:500">'+s.name+'</div><div style="font-size:11px;color:var(--muted)">'+(s.level||'')+(s.country?' · '+s.country:'')+'</div></div></label>';
-  });
+  unassigned.forEach(function(s){h+='<label style="display:flex;align-items:center;gap:10px;padding:8px;border-radius:8px;cursor:pointer"><input type="checkbox" class="bscb" value="'+s.id+'" onchange="updateBatchStudentCount('+remaining+')" style="width:16px;height:16px;accent-color:var(--teal);flex-shrink:0"/><div><div style="font-size:13px;font-weight:500">'+s.name+'</div><div style="font-size:11px;color:var(--muted)">'+(s.level||'')+(s.country?' · '+s.country:'')+'</div></div></label>';});
   document.getElementById('mb-students-list').innerHTML=h;
 }
 function updateBatchStudentCount(remaining){
   var checked=document.querySelectorAll('.bscb:checked').length;
   var el=document.getElementById('mb-student-count');
-  if(checked>remaining){
-    el.style.color='#C0392B';el.textContent='Max '+remaining+' for this teacher!';
-    var allChecked=Array.from(document.querySelectorAll('.bscb:checked'));
-    allChecked[allChecked.length-1].checked=false;return;
-  }
+  if(checked>remaining){el.style.color='#C0392B';el.textContent='Max '+remaining+' for this teacher!';var allChecked=Array.from(document.querySelectorAll('.bscb:checked'));allChecked[allChecked.length-1].checked=false;return;}
   el.style.color='#6B6860';el.textContent=checked+' student'+(checked===1?'':'s')+' selected';
 }
 function saveTeacher(){
   var name=document.getElementById('mt-name').value.trim();
   if(!name){showToast('Please enter a name.','error');return;}
   supa('POST','/rest/v1/teachers',{name:name,email:document.getElementById('mt-email').value.trim(),phone:document.getElementById('mt-phone').value.trim(),status:'active'}).then(function(){
-    closeModal('modal-add-teacher');
-    ['mt-name','mt-email','mt-phone'].forEach(function(i){document.getElementById(i).value='';});
+    closeModal('modal-add-teacher');['mt-name','mt-email','mt-phone'].forEach(function(i){document.getElementById(i).value='';});
     showToast('Teacher added! 🌙','success');loadAdminData();
   }).catch(function(){showToast('Could not save.','error');});
 }
@@ -1759,19 +1677,12 @@ function saveBatch(){
   var sel=Array.from(document.querySelectorAll('.bscb:checked')).map(function(cb){return cb.value;});
   supa('POST','/rest/v1/batches',{name:name,level:document.getElementById('mb-level').value,language:document.getElementById('mb-lang').value,class_day:document.getElementById('mb-day').value,class_time:document.getElementById('mb-time').value.trim(),meet_link:document.getElementById('mb-meet').value.trim()||null,teacher_id:tid}).then(function(br){
     var bid=br&&br.length?br[0].id:null;
-    if(bid&&sel.length){
-      var patches=sel.map(function(sid){return supa('PATCH','/rest/v1/students?id=eq.'+sid,{batch_id:bid});});
-      return Promise.all(patches);
-    }
-  }).then(function(){
-    closeModal('modal-add-batch');
-    showToast('Batch created! 🌙','success');loadAdminData();
-  }).catch(function(e){showToast('Could not save.','error');console.error(e);});
+    if(bid&&sel.length){var patches=sel.map(function(sid){return supa('PATCH','/rest/v1/students?id=eq.'+sid,{batch_id:bid});});return Promise.all(patches);}
+  }).then(function(){closeModal('modal-add-batch');showToast('Batch created! 🌙','success');loadAdminData();}).catch(function(e){showToast('Could not save.','error');console.error(e);});
 }
 
 /* ══ TEACHER RENDER HELPERS ══ */
 function ini(n){return (n||'?').split(' ').map(function(w){return w[0]||'';}).join('').substring(0,2).toUpperCase();}
-
 function renderBatchHomeCards(batches,students){
   var h='';
   batches.forEach(function(b){
@@ -1779,7 +1690,7 @@ function renderBatchHomeCards(batches,students){
     var av='';
     bs.slice(0,4).forEach(function(s){av+='<div style="width:24px;height:24px;border-radius:50%;background:var(--teal-light);color:var(--teal);font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center">'+ini(s.name)+'</div>';});
     if(bs.length>4)av+='<div style="width:24px;height:24px;border-radius:50%;background:var(--gold-light);color:#8B6914;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center">+'+(bs.length-4)+'</div>';
-    h+='<div style="background:var(--white);border-radius:var(--r);padding:18px 20px;border:1px solid var(--border);box-shadow:var(--shadow-sm);cursor:pointer;transition:all .2s" onmouseover="this.style.transform=\'translateY(-3px)\'" onmouseout="this.style.transform=\'\'" onclick="showPanel(\'page-teacher\',\'tp-batches\',null)">';
+    h+='<div style="background:var(--white);border-radius:var(--r);padding:18px 20px;border:1px solid var(--border);box-shadow:var(--shadow-sm);cursor:pointer" onclick="showPanel(\'page-teacher\',\'tp-batches\',null)">';
     h+='<div style="font-family:Lora,serif;font-size:15px;font-weight:600;margin-bottom:3px">'+b.name+'</div>';
     h+='<div style="font-size:12px;color:var(--muted);margin-bottom:12px">'+b.class_day+' · '+b.class_time+' · '+(b.level||'')+'</div>';
     if(b.meet_link)h+='<a href="'+b.meet_link+'" target="_blank" class="meet-link-badge" style="font-size:11px;padding:5px 10px;margin-bottom:10px;display:inline-flex" onclick="event.stopPropagation()">📹 Google Meet</a>';
@@ -1789,7 +1700,6 @@ function renderBatchHomeCards(batches,students){
   if(el)el.style.display=batches.length?'grid':'block';
   if(el)el.innerHTML=h||'<div class="empty-state"><div class="empty-state-icon">📚</div><div class="empty-state-title">No batches yet</div></div>';
 }
-
 function renderBatchesExpanded(batches,students,allAtt,allNotes){
   var h='';
   batches.forEach(function(b){
@@ -1797,17 +1707,13 @@ function renderBatchesExpanded(batches,students,allAtt,allNotes){
     var bP=allAtt.filter(function(a){return bs.some(function(s){return s.id===a.student_id;})&&a.status==='present';}).length;
     var bA=allAtt.filter(function(a){return bs.some(function(s){return s.id===a.student_id;})&&a.status==='absent';}).length;
     h+='<div style="background:var(--white);border-radius:var(--r);border:1px solid var(--border);box-shadow:var(--shadow-sm);margin-bottom:14px;overflow:hidden">';
-    h+='<div style="padding:18px 22px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;transition:background .2s" onclick="tBEH(this)">';
-    h+='<div><div style="font-family:Lora,serif;font-size:15px;font-weight:600">'+b.name+'</div>';
-    h+='<div style="font-size:12px;color:var(--muted);margin-top:3px">'+b.class_day+' · '+b.class_time+' · '+(b.level||'')+'</div></div>';
-    h+='<div style="display:flex;align-items:center;gap:10px"><span class="badge bteal">'+bs.length+' students</span>';
-    h+='<span style="font-size:11px;color:var(--muted);transition:transform .3s" class="bc">▼</span></div></div>';
+    h+='<div style="padding:18px 22px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none" onclick="tBEH(this)">';
+    h+='<div><div style="font-family:Lora,serif;font-size:15px;font-weight:600">'+b.name+'</div><div style="font-size:12px;color:var(--muted);margin-top:3px">'+b.class_day+' · '+b.class_time+' · '+(b.level||'')+'</div></div>';
+    h+='<div style="display:flex;align-items:center;gap:10px"><span class="badge bteal">'+bs.length+' students</span><span style="font-size:11px;color:var(--muted);transition:transform .3s" class="bc">▼</span></div></div>';
     h+='<div style="max-height:0;overflow:hidden;transition:max-height .4s" class="bb">';
     h+='<div style="padding:0 22px 20px;border-top:1px solid var(--border)">';
-    // Meet link + homework assign
-    var meetSection=b.meet_link?'<a href="'+b.meet_link+'" target="_blank" class="meet-link-badge" style="margin-right:8px">📹 Google Meet</a>':'<span style="font-size:12px;color:var(--muted)">No Meet link set (admin sets this)</span>';
-    h+='<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:14px 0 10px">';
-    h+=meetSection;
+    var meetSection=b.meet_link?'<a href="'+b.meet_link+'" target="_blank" class="meet-link-badge" style="margin-right:8px">📹 Google Meet</a>':'<span style="font-size:12px;color:var(--muted)">No Meet link set</span>';
+    h+='<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:14px 0 10px">'+meetSection;
     h+='<button class="btn btn-primary btn-sm" onclick="openAssignHw(\''+b.id+'\')">📋 Assign Homework</button></div>';
     if(bs.length){
       h+='<div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid var(--border)">Students — tap for profile</div>';
@@ -1815,7 +1721,7 @@ function renderBatchesExpanded(batches,students,allAtt,allNotes){
         var sA=allAtt.filter(function(a){return a.student_id===s.id;});
         var sp=sA.length?Math.round(sA.filter(function(a){return a.status==='present';}).length/sA.length*100):null;
         var sN=allNotes.filter(function(n){return n.student_id===s.id;}).length;
-        h+='<div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--cream);border-radius:12px;border:1px solid var(--border);cursor:pointer;margin-bottom:8px;transition:all .2s" onmouseover="this.style.background=\'var(--teal-light)\';this.style.borderColor=\'var(--teal)\'" onmouseout="this.style.background=\'var(--cream)\';this.style.borderColor=\'var(--border)\'" onclick="openStudentProfile(\''+s.id+'\')">';
+        h+='<div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--cream);border-radius:12px;border:1px solid var(--border);cursor:pointer;margin-bottom:8px" onclick="openStudentProfile(\''+s.id+'\')">';
         h+='<div class="user-avatar" style="width:30px;height:30px;font-size:11px;flex-shrink:0">'+ini(s.name)+'</div>';
         h+='<div style="flex:1"><div style="font-size:13px;font-weight:600">'+s.name+'</div><div style="font-size:11px;color:var(--muted)">'+(s.level||'')+'</div></div>';
         if(sp!==null)h+='<span class="badge '+(sp>=75?'bg':sp>=50?'bgold':'bred')+'" style="font-size:10px">'+sp+'%</span>';
@@ -1851,12 +1757,10 @@ function renderAttByBatch(batches,students,allAtt){
       h+='<div style="flex:1"><div style="display:flex;gap:2px;margin-bottom:3px"><div style="height:8px;background:#1B7A4A;border-radius:4px;width:'+pc+'%;min-width:'+(p?4:0)+'px"></div><div style="height:8px;background:#C0392B;border-radius:4px;width:'+(100-pc)+'%;min-width:'+(t-p?4:0)+'px"></div></div>';
       h+='<div style="font-size:11px;color:var(--muted)">'+p+' present · '+(t-p)+' absent</div></div>';
       h+='<span class="badge '+(pc>=75?'bg':pc>=50?'bgold':'bred')+'">'+pc+'%</span>';
-      // show recent records with edit option
       var recent=sa.slice().sort(function(a,b){return new Date(b.date)-new Date(a.date);}).slice(0,3);
       var recHtml='<div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:6px">';
       recent.forEach(function(a){recHtml+='<span class="badge '+(a.status==='present'?'bg':'bred')+'" style="font-size:10px;cursor:pointer" onclick="openEditAttModal(\''+a.id+'\',\''+a.date+'\',\''+a.status+'\')">'+new Date(a.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})+' ✎</span>';});
-      recHtml+='</div>';
-      h=h.replace('</div></div>','</div>'+recHtml+'</div>');
+      recHtml+='</div>';h=h.replace('</div></div>','</div>'+recHtml+'</div>');
     });
   });
   el.innerHTML=h||'<div class="empty-state"><div class="empty-state-icon">📊</div><div class="empty-state-title">No records yet</div></div>';
@@ -1871,10 +1775,7 @@ function renderNotesByBatch(batches,students,allNotes){
     if(!bn.length)return;
     h+='<div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin:14px 0 8px;padding-bottom:5px;border-bottom:1px solid var(--border)">'+b.name+'</div>';
     h+='<div class="timeline">';
-    bn.slice(0,5).forEach(function(n){
-      var st=students.find(function(s){return s.id===n.student_id;});
-      h+='<div class="tl-item" style="cursor:pointer" onclick="openStudentProfile(\''+n.student_id+'\')"><div class="tl-dot">📝</div><div><div class="tl-title">'+(st?st.name:'?')+' · '+new Date(n.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'short'})+'</div><div class="tl-sub">'+n.note+'</div></div></div>';
-    });
+    bn.slice(0,5).forEach(function(n){var st=students.find(function(s){return s.id===n.student_id;});h+='<div class="tl-item" style="cursor:pointer" onclick="openStudentProfile(\''+n.student_id+'\')"><div class="tl-dot">📝</div><div><div class="tl-title">'+(st?st.name:'?')+' · '+new Date(n.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'short'})+'</div><div class="tl-sub">'+n.note+'</div></div></div>';});
     h+='</div>';
   });
   el.innerHTML=h||'<div class="empty-state"><div class="empty-state-icon">📝</div><div class="empty-state-title">No notes yet</div></div>';
@@ -1891,7 +1792,6 @@ function openStudentProfile(sid){
   document.querySelectorAll('#modal-student-profile .profile-tab-panel').forEach(function(p){p.classList.remove('active');});
   document.querySelector('#modal-student-profile .profile-tab').classList.add('active');
   document.getElementById('ptab-general').classList.add('active');
-  // General — payment hidden from teachers
   var isTeacher=currentProfile&&currentProfile.role==='teacher';
   var gRows=[['Name',s.name||'—'],['Age',s.age||'—'],['Country',s.country||'—'],['Language',s.language||'—']];
   if(!isTeacher)gRows.push(['Payment',s.payment_status==='paid'?'<span class="badge bg">'+(s.payment_amount||'Paid')+'</span>':'<span class="badge bgold">Pending</span>']);
@@ -1899,16 +1799,9 @@ function openStudentProfile(sid){
   gRows.forEach(function(r){gh+='<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--cream);border-radius:10px"><span style="font-size:12px;color:var(--muted);font-weight:500">'+r[0]+'</span><span style="font-size:13px;font-weight:600">'+r[1]+'</span></div>';});
   gh+='</div>';
   document.getElementById('ptab-general').innerHTML=gh;
-  // Academic
   var allB=teacherBatchesCache.concat(adminBatches),allT=adminTeachers;
   var bname='—',bday='—',btime='—',tname='—',meetLink=null;
-  if(s.batch_id){
-    var b=allB.find(function(x){return x.id===s.batch_id;});
-    if(b){bname=b.name||'—';bday=b.class_day||'—';btime=b.class_time||'—';meetLink=b.meet_link||null;
-      if(b.teacher_id){var t=allT.find(function(x){return x.id===b.teacher_id;});if(t)tname=t.name;
-        else if(currentProfile&&currentProfile.role==='teacher')tname=document.getElementById('t-name').textContent||'—';}
-    }
-  }
+  if(s.batch_id){var b=allB.find(function(x){return x.id===s.batch_id;});if(b){bname=b.name||'—';bday=b.class_day||'—';btime=b.class_time||'—';meetLink=b.meet_link||null;if(b.teacher_id){var t=allT.find(function(x){return x.id===b.teacher_id;});if(t)tname=t.name;else if(currentProfile&&currentProfile.role==='teacher')tname=document.getElementById('t-name').textContent||'—';}}}
   var levels=['Noorani — Level 1','Mubtadi — Level 2','Mutawassit — Level 3','Mutaqaddim — Level 4','Mujawwad — Level 5'];
   var cL=levels.indexOf(s.level);
   var aRows=[['Level',s.level||'—'],['Batch',bname],['Day',bday],['Time',btime],['Teacher','<span style="color:var(--teal);font-weight:600">'+tname+'</span>']];
@@ -1919,7 +1812,6 @@ function openStudentProfile(sid){
   levels.forEach(function(l,i){var done=i<cL,active=i===cL;ah+='<div style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;margin-bottom:3px"><span style="font-size:12px;color:'+(done||active?'var(--charcoal)':'var(--muted)')+'">'+l+'</span>';if(done)ah+='<span class="badge bg" style="font-size:10px">Done</span>';else if(active)ah+='<span class="badge bteal" style="font-size:10px">Current</span>';else ah+='<span class="badge bgrey" style="font-size:10px">Next</span>';ah+='</div><div class="prog-bar"><div class="prog-fill" style="width:'+(done?100:0)+'%"></div></div></div>';});
   ah+='</div>';
   document.getElementById('ptab-academic').innerHTML=ah;
-  // Attendance
   var sAtt=(teacherAttCache.concat(adminAttendance)).filter(function(a){return a.student_id===sid;});
   if(sAtt.length){
     var p=sAtt.filter(function(a){return a.status==='present';}).length,tot=sAtt.length,pc=Math.round(p/tot*100);
@@ -1931,7 +1823,6 @@ function openStudentProfile(sid){
     sorted.forEach(function(a){ath+='<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 12px;background:var(--cream);border-radius:8px;margin-bottom:5px"><span style="font-size:12px;color:var(--muted)">'+new Date(a.date).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})+'</span><span class="badge '+(a.status==='present'?'bg':'bred')+'" style="font-size:10px">'+a.status+'</span>'+(currentProfile&&currentProfile.role==='teacher'?'<button class="btn btn-ghost btn-sm" style="padding:3px 8px;font-size:10px" onclick="openEditAttModal(\''+a.id+'\',\''+a.date+'\',\''+a.status+'\')">Edit</button>':'')+'</div>';});
     document.getElementById('ptab-attendance').innerHTML=ath;
   }else document.getElementById('ptab-attendance').innerHTML='<div class="empty-state"><div class="empty-state-icon">📊</div><div class="empty-state-title">No attendance records yet</div></div>';
-  // Notes
   var sNotes=teacherNotesCache.filter(function(n){return n.student_id===sid;});
   function setNotesTab(notes){
     if(notes.length){var nh='<div class="timeline">';notes.forEach(function(n){nh+='<div class="tl-item"><div class="tl-dot">📝</div><div><div class="tl-title">'+new Date(n.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})+'</div><div class="tl-sub">'+n.note+'</div></div></div>';});nh+='</div>';document.getElementById('ptab-notes').innerHTML=nh;}
@@ -1946,6 +1837,133 @@ function switchPTab(name,btn){
   document.querySelectorAll('#modal-student-profile .profile-tab-panel').forEach(function(p){p.classList.remove('active');});
   btn.classList.add('active');
   document.getElementById('ptab-'+name).classList.add('active');
+}
+
+/* ══════════════════════════════════
+   USER ACCOUNTS — ADMIN PANEL
+══════════════════════════════════ */
+function loadAccountCandidates(){
+  var role=document.getElementById('ac-role').value;
+  var personWrap=document.getElementById('ac-person-wrap');
+  var emailWrap=document.getElementById('ac-email-wrap');
+  var pwdWrap=document.getElementById('ac-pwd-wrap');
+  var submitBtn=document.getElementById('ac-submit');
+  var hint=document.getElementById('ac-person-hint');
+  var label=document.getElementById('ac-person-label');
+  var sel=document.getElementById('ac-person');
+  emailWrap.style.display='none';pwdWrap.style.display='none';submitBtn.style.display='none';
+  document.getElementById('ac-email').value='';document.getElementById('ac-password').value='';
+  hideAccountMsg();
+  if(!role){personWrap.style.display='none';return;}
+  label.textContent=role==='student'?'Select student':'Select teacher';
+  sel.innerHTML='<option value="">— Select —</option>';
+  hint.textContent='';
+  var list=role==='student'?adminStudents:adminTeachers;
+  // Check who already has a login
+  supa('GET','/rest/v1/profiles?role=eq.'+role+'&select=linked_id').then(function(profiles){
+    var taken=new Set((profiles||[]).map(function(p){return p.linked_id;}));
+    list.forEach(function(item){
+      var opt=document.createElement('option');
+      opt.value=item.id;
+      var already=taken.has(item.id);
+      opt.textContent=item.name+(already?' ✓ has login':'');
+      if(already)opt.style.color='#1B7A4A';
+      sel.appendChild(opt);
+    });
+    if(!list.length)hint.textContent='No '+role+'s in system yet. Add some first.';
+    personWrap.style.display='block';
+    onAccountPersonChange();
+  });
+}
+function onAccountPersonChange(){
+  var role=document.getElementById('ac-role').value;
+  var personId=document.getElementById('ac-person').value;
+  var emailWrap=document.getElementById('ac-email-wrap');
+  var pwdWrap=document.getElementById('ac-pwd-wrap');
+  var submitBtn=document.getElementById('ac-submit');
+  var hint=document.getElementById('ac-person-hint');
+  hideAccountMsg();
+  if(!personId){emailWrap.style.display='none';pwdWrap.style.display='none';submitBtn.style.display='none';hint.textContent='';return;}
+  var list=role==='student'?adminStudents:adminTeachers;
+  var person=list.find(function(x){return x.id===personId;});if(!person)return;
+  if(role==='teacher'&&person.email)document.getElementById('ac-email').value=person.email;
+  else document.getElementById('ac-email').value='';
+  hint.textContent='Creating login for: '+person.name;
+  emailWrap.style.display='block';pwdWrap.style.display='block';submitBtn.style.display='flex';
+}
+async function createUserAccount(){
+  var role=document.getElementById('ac-role').value;
+  var personId=document.getElementById('ac-person').value;
+  var email=document.getElementById('ac-email').value.trim();
+  var password=document.getElementById('ac-password').value;
+  hideAccountMsg();
+  if(!role||!personId){showAccountError('Please select an account type and a person.');return;}
+  if(!email){showAccountError('Please enter an email address.');return;}
+  if(password.length<8){showAccountError('Password must be at least 8 characters.');return;}
+  var list=role==='student'?adminStudents:adminTeachers;
+  var person=list.find(function(x){return x.id===personId;});
+  if(!person){showAccountError('Could not find selected person.');return;}
+  var btn=document.getElementById('ac-submit');
+  btn.disabled=true;btn.innerHTML='<span class="spinner"></span> Creating…';
+  try{
+    var res=await fetch(EDGE_CREATE_USER,{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'Authorization':'Bearer '+(currentSession?currentSession.access_token:SUPA_KEY),
+        'apikey':SUPA_KEY
+      },
+      body:JSON.stringify({email:email,password:password,name:person.name,role:role,linked_id:person.id})
+    });
+    var data=await res.json();
+    if(!res.ok||data.error){
+      showAccountError(data.error||'Something went wrong. Please try again.');
+    }else{
+      showAccountSuccess('✓ Login created for '+person.name+'! They can now sign in with '+email+'.');
+      // Reset form
+      document.getElementById('ac-role').value='';
+      document.getElementById('ac-person-wrap').style.display='none';
+      document.getElementById('ac-email-wrap').style.display='none';
+      document.getElementById('ac-pwd-wrap').style.display='none';
+      submitBtn.style.display='none';
+      document.getElementById('ac-email').value='';document.getElementById('ac-password').value='';
+      loadExistingLogins();
+    }
+  }catch(err){
+    showAccountError('Network error. Please check your connection and try again.');
+  }
+  btn.disabled=false;btn.innerHTML='Create Login';
+}
+function loadExistingLogins(){
+  var el=document.getElementById('ac-existing-list');if(!el)return;
+  el.innerHTML='<div class="empty-state"><div class="empty-state-icon">⏳</div><div class="empty-state-title">Loading...</div></div>';
+  supa('GET','/rest/v1/profiles?select=*&order=created_at.desc').then(function(profiles){
+    if(!profiles||!profiles.length){el.innerHTML='<div class="empty-state"><div class="empty-state-icon">👤</div><div class="empty-state-title">No logins yet</div><p>Create your first login above.</p></div>';return;}
+    var h='<div class="tscroll"><table><thead><tr><th>Name</th><th>Role</th><th>Linked record</th><th>Created</th></tr></thead><tbody>';
+    profiles.forEach(function(p){
+      var linked='—';
+      if(p.linked_id&&p.role==='student'){var s=adminStudents.find(function(x){return x.id===p.linked_id;});linked=s?'<span class="badge bteal">'+s.name+'</span>':p.linked_id;}
+      else if(p.linked_id&&p.role==='teacher'){var t=adminTeachers.find(function(x){return x.id===p.linked_id;});linked=t?'<span class="badge bgold">'+t.name+'</span>':p.linked_id;}
+      else if(p.role==='admin')linked='<span class="badge bpurple">Admin account</span>';
+      var created=p.created_at?new Date(p.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}):'—';
+      var roleBadge=p.role==='admin'?'<span class="badge bpurple">admin</span>':p.role==='teacher'?'<span class="badge bgold">teacher</span>':'<span class="badge bteal">student</span>';
+      h+='<tr><td style="font-weight:500">'+p.name+'</td><td>'+roleBadge+'</td><td>'+linked+'</td><td style="font-size:12px;color:var(--muted)">'+created+'</td></tr>';
+    });
+    h+='</tbody></table></div>';
+    el.innerHTML=h;
+  }).catch(function(){el.innerHTML='<div class="empty-state"><div class="empty-state-icon">⚠️</div><div class="empty-state-title">Could not load logins</div></div>';});
+}
+function showAccountError(msg){
+  var e=document.getElementById('ac-error');var s=document.getElementById('ac-success');
+  e.textContent=msg;e.style.display='block';s.style.display='none';
+}
+function showAccountSuccess(msg){
+  var s=document.getElementById('ac-success');var e=document.getElementById('ac-error');
+  s.textContent=msg;s.style.display='block';e.style.display='none';
+}
+function hideAccountMsg(){
+  document.getElementById('ac-error').style.display='none';
+  document.getElementById('ac-success').style.display='none';
 }
 
 /* ══ EVENT LISTENERS ══ */

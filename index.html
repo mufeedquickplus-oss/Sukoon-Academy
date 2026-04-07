@@ -990,7 +990,7 @@ function routeToDashboard(){
 
 /* ══ CURRENCY ══ */
 var GCC_TO_INR=24.5;
-var rates={INR:{sym:'₹',kids:800,adults:1000,note:'Showing price in Indian Rupees'},AED:{sym:'AED ',kids:50,adults:80,note:'Showing price in UAE Dirhams'},SAR:{sym:'SAR ',kids:50,adults:80,note:'Showing price in Saudi Riyals'},QAR:{sym:'QAR ',kids:50,adults:80,note:'Showing price in Qatari Riyals'},KWD:{sym:'KWD ',kids:4,adults:7,note:'Showing price in Kuwaiti Dinars'},BHD:{sym:'BHD ',kids:5,adults:8,note:'Showing price in Bahraini Dinars'},OMR:{sym:'OMR ',kids:5,adults:8,note:'Showing price in Omani Riyals'}};
+var rates={INR:{sym:'₹',kids:500,adults:800,note:'Showing price in Indian Rupees'},AED:{sym:'AED ',kids:50,adults:80,note:'Showing price in UAE Dirhams'},SAR:{sym:'SAR ',kids:50,adults:80,note:'Showing price in Saudi Riyals'},QAR:{sym:'QAR ',kids:50,adults:80,note:'Showing price in Qatari Riyals'},KWD:{sym:'KWD ',kids:4,adults:7,note:'Showing price in Kuwaiti Dinars'},BHD:{sym:'BHD ',kids:5,adults:8,note:'Showing price in Bahraini Dinars'},OMR:{sym:'OMR ',kids:5,adults:8,note:'Showing price in Omani Riyals'}};
 var detectedCurrency='AED';
 function toINR(amount,currency){
   if(currency==='INR')return amount;

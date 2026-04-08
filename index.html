@@ -737,17 +737,36 @@ async function supaAuth(path,body){
 }
 
 /* ── MOBILE SIDEBAR ── */
+<!-- Replace the existing mobile sidebar functions with this -->
+
+/* ── IMPROVED MOBILE SIDEBAR ── */
 function openMobSidebar(pageId){
-  var pg=document.getElementById(pageId);
-  var sb=pg.querySelector('.sidebar');
-  var bd=document.getElementById('sidebar-backdrop');
+  var pg = document.getElementById(pageId);
+  if(!pg) return;
+  var sb = pg.querySelector('.sidebar');
+  var bd = document.getElementById('sidebar-backdrop');
+  
   if(sb) sb.classList.add('mob-open');
   if(bd) bd.classList.add('open');
 }
+
 function closeMobSidebar(){
-  document.querySelectorAll('.sidebar.mob-open').forEach(function(s){s.classList.remove('mob-open');});
-  var bd=document.getElementById('sidebar-backdrop');
-  if(bd) bd.classList.remove('open');
+  // Force close everything
+  document.querySelectorAll('.sidebar.mob-open').forEach(function(s){
+    s.classList.remove('mob-open');
+  });
+  
+  var bd = document.getElementById('sidebar-backdrop');
+  if(bd) {
+    bd.classList.remove('open');
+  }
+  
+  // Extra safety - remove any lingering styles after a tiny delay
+  setTimeout(() => {
+    document.querySelectorAll('.sidebar').forEach(s => {
+      s.style.transition = 'transform .3s cubic-bezier(.4,0,.2,1)';
+    });
+  }, 300);
 }
 
 /* ── UI HELPERS ── */

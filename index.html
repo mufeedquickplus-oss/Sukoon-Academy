@@ -500,7 +500,8 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
 
 <!-- Mobile sidebar backdrop -->
 
-<div class="sidebar-backdrop" id="sidebar-backdrop" onclick="closeMobSidebar()"></div>
+<!-- Mobile sidebar backdrop - TEMPORARILY DISABLED -->
+<!-- <div class="sidebar-backdrop" id="sidebar-backdrop" onclick="closeMobSidebar()"></div> -->
 
 <!-- PAGE 3: STUDENT -->
 
@@ -750,16 +751,26 @@ function openMobSidebar(pageId){
   if(bd) bd.classList.add('open');
 }
 
-function closeMobSidebar(){
-  // Force close everything
+/* ── FIXED closeMobSidebar ── */
+function closeMobSidebar(force = false){
+  // Close the sliding sidebar
   document.querySelectorAll('.sidebar.mob-open').forEach(function(s){
     s.classList.remove('mob-open');
   });
   
+  // Close the dark fade (backdrop)
   var bd = document.getElementById('sidebar-backdrop');
   if(bd) {
     bd.classList.remove('open');
   }
+  
+  // Extra strong cleanup (this helps prevent the stuck fade)
+  if(force){
+    setTimeout(function(){
+      if(bd) bd.classList.remove('open');
+    }, 150);
+  }
+}
   
   // Extra safety - remove any lingering styles after a tiny delay
   setTimeout(() => {

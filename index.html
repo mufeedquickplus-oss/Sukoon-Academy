@@ -160,14 +160,14 @@ footer{background:var(--charcoal);color:rgba(255,255,255,.55);padding:48px 5%;di
 .sidebar-logo-sub{font-size:11px;color:rgba(255,255,255,.35);margin-top:3px;font-style:italic}
 .sidebar-section{padding:18px 20px 6px;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.28)}
 .sidebar-nav{list-style:none;padding:0 12px}
-.sidebar-nav li a{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;text-decoration:none;font-size:13px;font-weight:500;color:rgba(255,255,255,.85);transition:all .2s;margin-bottom:2px;cursor:pointer}
+.sidebar-nav li a{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;text-decoration:none;font-size:13px;font-weight:500;color:rgba(255,255,255,.85);transition:all .2s;margin-bottom:2px;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 .sidebar-nav li a:hover{background:rgba(255,255,255,.1);color:var(--white)}.sidebar-nav li a.active{background:rgba(255,255,255,.15);color:var(--white);font-weight:600}
 .ni{font-size:15px;width:20px;text-align:center;flex-shrink:0}
 .sidebar-bottom{margin-top:auto;padding:18px 16px;border-top:1px solid rgba(255,255,255,.07)}
 .sidebar-user{display:flex;align-items:center;gap:10px;margin-bottom:10px}
 .sidebar-avatar{width:36px;height:36px;border-radius:50%;background:rgba(201,168,76,.2);color:var(--gold);font-family:'Lora',serif;font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .sidebar-user-name{font-size:13px;font-weight:500;color:var(--white)}.sidebar-user-role{font-size:11px;color:rgba(255,255,255,.35);margin-top:1px}
-.sidebar-logout{display:flex;align-items:center;gap:8px;width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.55);font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;padding:9px 12px;border-radius:10px;transition:all .2s;margin-top:4px}.sidebar-logout:hover{background:rgba(255,255,255,.1);color:rgba(255,255,255,.85);border-color:rgba(255,255,255,.15)}
+.sidebar-logout{display:flex;align-items:center;gap:8px;width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.55);font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;padding:9px 12px;border-radius:10px;transition:all .2s;margin-top:4px;touch-action:manipulation;-webkit-tap-highlight-color:transparent}.sidebar-logout:hover{background:rgba(255,255,255,.1);color:rgba(255,255,255,.85);border-color:rgba(255,255,255,.15)}
 .dash-main{flex:1;overflow-y:auto;background:var(--cream);display:flex;flex-direction:column}
 .topbar{background:rgba(250,247,242,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;flex-shrink:0}
 .topbar-title{font-family:'Lora',serif;font-size:18px;font-weight:600;color:var(--charcoal)}.topbar-title em{font-style:italic;color:var(--teal)}
@@ -222,11 +222,11 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
 .mob-menu-btn{display:none;background:none;border:none;cursor:pointer;padding:8px;border-radius:10px;color:var(--teal);transition:background .2s;flex-shrink:0}
 .mob-menu-btn:hover{background:var(--teal-light)}
 .mob-menu-btn svg{display:block}
-.sidebar-backdrop{display:none;position:fixed;inset:0;background:rgba(44,44,42,.5);z-index:200;animation:fadeIn .2s ease}
+.sidebar-backdrop{display:none;position:fixed;inset:0;background:rgba(44,44,42,.5);z-index:250;-webkit-tap-highlight-color:transparent;animation:fadeIn .2s ease}
 .sidebar-backdrop.open{display:block}
 @media(max-width:640px){
-.sidebar{position:fixed;top:0;left:0;height:100vh;z-index:300;transform:translateX(-100%);transition:transform .3s cubic-bezier(.4,0,.2,1);width:260px}
-.sidebar.mob-open{transform:translateX(0)}
+.sidebar{position:fixed;top:0;left:0;height:100vh;z-index:300;transform:translateX(-100%);-webkit-transform:translateX(-100%);-webkit-overflow-scrolling:touch;overflow-y:auto;touch-action:pan-y;transition:transform .3s cubic-bezier(.4,0,.2,1);width:260px}
+.sidebar.mob-open{transform:translateX(0);-webkit-transform:translateX(0)}
 .mob-menu-btn{display:flex;align-items:center;justify-content:center}
 .topbar{padding:0 16px}
 .dash-content{padding:16px}

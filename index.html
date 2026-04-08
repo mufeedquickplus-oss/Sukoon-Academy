@@ -475,6 +475,7 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
   <div class="register-form-wrap">
     <div class="fg"><label>Full name</label><input type="text" id="f-name" placeholder="Your full name"/></div>
     <div class="fg"><label>Age</label><input type="number" id="f-age" placeholder="Your age" min="5" max="99"/></div>
+    <div class="fg"><label>WhatsApp number</label><input type="tel" id="f-whatsapp" placeholder="e.g. +971 50 123 4567"/></div>
     <div class="fg"><label>Current Quran reading level</label><select id="f-level"><option value="Not sure — assess me!" selected>I am not sure — assess me!</option><option>I cannot read Arabic yet</option><option>I know letters but read slowly</option><option>I can read but make mistakes</option><option>I read well but want to improve tajweed</option><option>I read with tajweed but want to perfect it</option></select></div>
     <div class="fg"><label>Preferred class time</label><select id="f-time"><option value="Flexible">Flexible — any time slot</option><option>Morning — 8am to 12pm</option><option>Afternoon — 12pm to 4pm</option><option>Evening — 4pm to 8pm</option><option>Night — 8pm to 10pm</option></select></div>
     <div class="fg"><label>Preferred class language</label><select id="f-lang"><option value="English">English</option><option value="Malayalam">Malayalam</option><option value="Hindi">Hindi</option></select></div>
@@ -943,11 +944,12 @@ fetch('https://ipapi.co/json/').then(function(r){return r.json();}).then(functio
 function submitRegistration(){
   var name=document.getElementById('f-name').value.trim();
   var age=document.getElementById('f-age').value.trim();
-  if(!name||!age){showToast('Please fill in your name and age.','error');return;}
+  var whatsapp=document.getElementById('f-whatsapp').value.trim();
+  if(!name||!age||!whatsapp){showToast('Please fill in your name, age, and WhatsApp number.','error');return;}
   var btn=document.getElementById('f-submit');
   btn.disabled=true;btn.innerHTML='<span class="spinner"></span> Saving\u2026';
   supa('POST','/rest/v1/registrations',{
-    name:name,age:parseInt(age),
+    name:name,age:parseInt(age),whatsapp:whatsapp,
     level:document.getElementById('f-level').value,
     preferred_time:document.getElementById('f-time').value,
     language:document.getElementById('f-lang').value,
@@ -957,7 +959,7 @@ function submitRegistration(){
     var r=rates[detectedCurrency]||rates.AED;
     var isKid=parseInt(age)<=16;
     var grp=isKid?'Child \u2014 '+r.sym+r.kids+'/month':'Adult \u2014 '+r.sym+r.adults+'/month';
-    var msg='*New Registration \u2014 Sukoon Academy*\n\n*Name:* '+name+'\n*Age:* '+age+'\n*Level:* '+document.getElementById('f-level').value+'\n*Group:* '+grp+'\n*Time:* '+document.getElementById('f-time').value+'\n*Language:* '+document.getElementById('f-lang').value+(document.getElementById('f-notes').value.trim()?'\n*Notes:* '+document.getElementById('f-notes').value.trim():'');
+    var msg='*New Registration \u2014 Sukoon Academy*\n\n*Name:* '+name+'\n*Age:* '+age+'\n*WhatsApp:* '+whatsapp+'\n*Level:* '+document.getElementById('f-level').value+'\n*Group:* '+grp+'\n*Time:* '+document.getElementById('f-time').value+'\n*Language:* '+document.getElementById('f-lang').value+(document.getElementById('f-notes').value.trim()?'\n*Notes:* '+document.getElementById('f-notes').value.trim():'');
     btn.innerHTML='JazakAllah khair! Opening WhatsApp \uD83C\uDF19';
     btn.style.background='#1D9E75';
     setTimeout(function(){
@@ -1137,11 +1139,11 @@ function renderOverview(){
 }
 function renderRegistrations(){
   if(!adminRegs.length){document.getElementById('a-regs-list').innerHTML='<div class="empty-state"><div class="empty-state-icon">🔔</div><div class="empty-state-title">No registrations yet</div><p>When someone fills your registration form, they appear here.</p></div>';return;}
-  var h='<div class="tscroll"><table><thead><tr><th>Name</th><th>Age</th><th>Level</th><th>Time</th><th>Language</th><th>Currency</th><th>Notes</th><th>Status</th><th>Action</th></tr></thead><tbody>';
+  var h='<div class="tscroll"><table><thead><tr><th>Name</th><th>Age</th><th>WhatsApp</th><th>Level</th><th>Time</th><th>Language</th><th>Currency</th><th>Notes</th><th>Status</th><th>Action</th></tr></thead><tbody>';
   adminRegs.forEach(function(r){
     var isNew=r.status==='new';
     var sn=r.name.replace(/'/g,'').replace(/"/g,'');
-    h+='<tr><td style="font-weight:500">'+r.name+'</td><td>'+(r.age||'\u2014')+'</td><td style="font-size:12px">'+(r.level||'\u2014')+'</td><td style="font-size:12px">'+(r.preferred_time||'\u2014')+'</td><td>'+(r.language||'\u2014')+'</td><td>'+(r.currency||'\u2014')+'</td><td style="max-width:140px;font-size:12px;color:var(--muted)">'+(r.notes||'\u2014')+'</td>';
+    h+='<tr><td style="font-weight:500">'+r.name+'</td><td>'+(r.age||'\u2014')+'</td><td style="font-size:12px">'+(r.whatsapp||'\u2014')+'</td><td style="font-size:12px">'+(r.level||'\u2014')+'</td><td style="font-size:12px">'+(r.preferred_time||'\u2014')+'</td><td>'+(r.language||'\u2014')+'</td><td>'+(r.currency||'\u2014')+'</td><td style="max-width:140px;font-size:12px;color:var(--muted)">'+(r.notes||'\u2014')+'</td>';
     h+='<td><span class="badge '+(isNew?'bgold':r.status==='approved'?'bg':'bgrey')+'">'+r.status+'</span></td>';
     h+='<td>';
     if(isNew) h+='<button class="btn btn-primary btn-sm" style="white-space:nowrap;font-size:12px" onclick="approveReg(\''+r.id+'\',\''+sn+'\','+r.age+',\''+r.level+'\',\''+r.language+'\',\''+r.currency+'\')">Approve</button>';

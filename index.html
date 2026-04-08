@@ -1518,7 +1518,7 @@ function renderSurahTracker(students){
     h+='<div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--cream);border-radius:12px;border:1px solid var(--border);margin-bottom:8px">';
     h+='<div style="display:flex;align-items:center;gap:10px;flex:1;cursor:pointer" onclick="openStudentProfile(\''+s.id+'\')"><div class="user-avatar" style="width:30px;height:30px;font-size:11px;flex-shrink:0">'+ini(s.name)+'</div>';
     h+='<div><div style="font-size:13px;font-weight:600">'+s.name+'</div><div style="font-size:11px;color:var(--muted)">'+(s.current_surah?'&#128214; '+s.current_surah:'No surah assigned yet')+'</div></div></div>';
-    h+='<button class="btn btn-primary btn-sm" onclick="openSurahModal(\''+s.id+'\',\''+s.name.replace(/'/g,'\u2019')+'\',\''+(s.current_surah||'')+'\',\''+(s.surah_notes||'\')')+'">'+(s.current_surah?'Update':'Assign')+'</button></div>';
+h+='<button class="btn btn-primary btn-sm" onclick="openSurahModal(\''+s.id+'\',\''+s.name.replace(/'/g,'\u2019')+'\',\''+(s.current_surah||'')+'\',\''+(s.surah_notes||'')+'\')">'+  (s.current_surah?'Update':'Assign')+'</button></div>';
   });
   var el=document.getElementById('t-surah-list');
   if(el) el.innerHTML=h||'<div class="empty-state"><div class="empty-state-icon">&#128214;</div><div class="empty-state-title">No students yet</div></div>';

@@ -4,32 +4,39 @@
   <!-- Primary Page -->
   <url>
     <loc>https://mufeedquickplus-oss.github.io/Sukoon-Academy/</loc>
-    <lastmod>2026-03-24</lastmod>
+    <lastmod>2026-04-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <!-- Key Sections (SEO hinting, not separate pages but valuable) -->
+  <!-- How it works -->
   <url>
     <loc>https://mufeedquickplus-oss.github.io/Sukoon-Academy/#how</loc>
+    <lastmod>2026-04-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
+  <!-- Our levels -->
   <url>
     <loc>https://mufeedquickplus-oss.github.io/Sukoon-Academy/#levels</loc>
+    <lastmod>2026-04-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
+  <!-- Pricing -->
   <url>
     <loc>https://mufeedquickplus-oss.github.io/Sukoon-Academy/#pricing</loc>
+    <lastmod>2026-04-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
+  <!-- Registration -->
   <url>
     <loc>https://mufeedquickplus-oss.github.io/Sukoon-Academy/#register</loc>
+    <lastmod>2026-04-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>

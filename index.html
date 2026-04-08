@@ -245,7 +245,7 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
 
 <!-- MODALS -->
 
-<div class="modal-overlay" id="modal-add-student"><div class="modal"><div class="modal-header"><div class="modal-title" style="font-family:'Lora',serif">Add <em style="color:var(--teal);font-style:italic">Student</em></div><button class="modal-close" onclick="closeModal('modal-add-student')">✕</button></div><div class="fg"><label>Full name</label><input id="ms-name" type="text" placeholder="Student's full name"/></div><div class="fr"><div class="fg"><label>Age</label><input id="ms-age" type="number" placeholder="Age" min="5" max="99"/></div><div class="fg"><label>Level</label><select id="ms-level"><option value="">Select level</option><option>Noorani — Level 1</option><option>Mubtadi — Level 2</option><option>Mutawassit — Level 3</option><option>Mutaqaddim — Level 4</option><option>Mujawwad — Level 5</option></select></div></div><div class="fr"><div class="fg"><label>Country</label><select id="ms-country"><option value="">Select</option><option>UAE</option><option>India</option><option>Saudi Arabia</option><option>Qatar</option><option>Kuwait</option><option>Bahrain</option><option>Oman</option><option>Other</option></select></div><div class="fg"><label>Language</label><select id="ms-lang"><option>English</option><option>Malayalam</option><option>Hindi</option><option>Arabic</option></select></div></div><div class="fr"><div class="fg"><label>Payment status</label><select id="ms-pay"><option value="pending">Pending</option><option value="paid">Paid</option></select></div><div class="fg"><label>Amount</label><input id="ms-amount" type="text" placeholder="e.g. AED 50"/></div></div><div class="modal-actions"><button class="btn btn-ghost btn-sm" onclick="closeModal('modal-add-student')">Cancel</button><button class="btn btn-primary btn-sm" onclick="saveStudent()">Save Student</button></div></div></div>
+<div class="modal-overlay" id="modal-add-student"><div class="modal"><div class="modal-header"><div class="modal-title" style="font-family:'Lora',serif">Add <em style="color:var(--teal);font-style:italic">Student</em></div><button class="modal-close" onclick="closeModal('modal-add-student')">✕</button></div><div class="fg"><label>Full name</label><input id="ms-name" type="text" placeholder="Student's full name"/></div><div class="fr"><div class="fg"><label>Age</label><input id="ms-age" type="number" placeholder="Age" min="5" max="99"/></div><div class="fg"><label>Level</label><select id="ms-level"><option value="">Select level</option><option>Haroof - Level 1</option><option>Qira'a - Level 2</option><option>Tajweed - Level 3</option><option>Hifz - Level 4</option></select></div></div><div class="fr"><div class="fg"><label>Country</label><select id="ms-country"><option value="">Select</option><option>UAE</option><option>India</option><option>Saudi Arabia</option><option>Qatar</option><option>Kuwait</option><option>Bahrain</option><option>Oman</option><option>Other</option></select></div><div class="fg"><label>Language</label><select id="ms-lang"><option>English</option><option>Malayalam</option><option>Hindi</option><option>Arabic</option></select></div></div><div class="fr"><div class="fg"><label>Payment status</label><select id="ms-pay"><option value="pending">Pending</option><option value="paid">Paid</option></select></div><div class="fg"><label>Amount</label><input id="ms-amount" type="text" placeholder="e.g. AED 50"/></div></div><div class="modal-actions"><button class="btn btn-ghost btn-sm" onclick="closeModal('modal-add-student')">Cancel</button><button class="btn btn-primary btn-sm" onclick="saveStudent()">Save Student</button></div></div></div>
 
 <div class="modal-overlay" id="modal-add-teacher"><div class="modal"><div class="modal-header"><div class="modal-title" style="font-family:'Lora',serif">Add <em style="color:var(--teal);font-style:italic">Teacher</em></div><button class="modal-close" onclick="closeModal('modal-add-teacher')">✕</button></div><div class="fg"><label>Full name</label><input id="mt-name" type="text" placeholder="Teacher's full name"/></div><div class="fg"><label>Email</label><input id="mt-email" type="email" placeholder="teacher@email.com"/></div><div class="fg"><label>WhatsApp number</label><input id="mt-phone" type="tel" placeholder="+971 50 000 0000"/></div><div class="modal-actions"><button class="btn btn-ghost btn-sm" onclick="closeModal('modal-add-teacher')">Cancel</button><button class="btn btn-primary btn-sm" onclick="saveTeacher()">Save Teacher</button></div></div></div>
 
@@ -253,7 +253,7 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
 <div class="modal-header"><div class="modal-title" style="font-family:'Lora',serif">Add <em style="color:var(--teal);font-style:italic">Batch</em></div><button class="modal-close" onclick="closeModal('modal-add-batch')">✕</button></div>
 <div class="fg"><label>Batch name</label><input id="mb-name" type="text" placeholder="e.g. Noorani Kids - Sat 5pm"/></div>
 <div class="fr">
-<div class="fg"><label>Level</label><select id="mb-level"><option value="">Select</option><option>Noorani — Level 1</option><option>Mubtadi — Level 2</option><option>Mutawassit — Level 3</option><option>Mutaqaddim — Level 4</option><option>Mujawwad — Level 5</option></select></div>
+<div class="fg"><label>Level</label><select id="mb-level"><option value="">Select</option><option>Haroof - Level 1</option><option>Qira'a - Level 2</option><option>Tajweed - Level 3</option><option>Hifz - Level 4</option></select></div>
 <div class="fg"><label>Language</label><select id="mb-lang"><option>English</option><option>Malayalam</option><option>Hindi</option></select></div>
 </div>
 <div class="fr">
@@ -272,7 +272,7 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
 <div class="fg"><label>Full name</label><input id="es-name" type="text"/></div>
 <div class="fr">
 <div class="fg"><label>Age</label><input id="es-age" type="number" min="5" max="99"/></div>
-<div class="fg"><label>Level</label><select id="es-level"><option>Noorani — Level 1</option><option>Mubtadi — Level 2</option><option>Mutawassit — Level 3</option><option>Mutaqaddim — Level 4</option><option>Mujawwad — Level 5</option></select></div>
+<div class="fg"><label>Level</label><select id="es-level"><option>Haroof - Level 1</option><option>Qira'a - Level 2</option><option>Tajweed - Level 3</option><option>Hifz - Level 4</option></select></div>
 </div>
 <div class="fr">
 <div class="fg"><label>Country</label><select id="es-country"><option>UAE</option><option>India</option><option>Saudi Arabia</option><option>Qatar</option><option>Kuwait</option><option>Bahrain</option><option>Oman</option><option>Other</option></select></div>
@@ -420,11 +420,10 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
   </button>
   <div class="accordion-body">
     <div class="levels-grid">
-      <div class="level-card"><div class="level-num-badge">Level 1</div><h3>Noorani</h3><div class="level-arabic">نوراني — Foundation</div><p>Complete beginners. Every Arabic letter, its sound, and basic vowels.</p><div class="level-tags"><span class="level-tag">Age 5+</span><span class="level-tag">All ages</span><span class="level-tag">1 class/week</span><span class="level-tag">30 mins</span></div></div>
-      <div class="level-card"><div class="level-num-badge">Level 2</div><h3>Mubtadi</h3><div class="level-arabic">مبتدئ — Elementary</div><p>Knows letters but reads slowly. We join letters into words and recite short surahs correctly.</p><div class="level-tags"><span class="level-tag">Age 7+</span><span class="level-tag">All ages</span><span class="level-tag">1 class/week</span><span class="level-tag">30 mins</span></div></div>
-      <div class="level-card featured"><div class="level-num-badge">Level 3 — most popular</div><h3>Mutawassit</h3><div class="level-arabic">متوسط — Intermediate</div><p>Can read but makes tajweed errors. We apply the rules in real recitation — no boring theory.</p><div class="level-tags"><span class="level-tag">Age 10+</span><span class="level-tag">All ages</span><span class="level-tag">1 class/week</span><span class="level-tag">35 mins</span></div></div>
-      <div class="level-card"><div class="level-num-badge">Level 4</div><h3>Mutaqaddim</h3><div class="level-arabic">متقدم — Advanced</div><p>Reads well but needs polishing. Full applied tajweed in real ayahs.</p><div class="level-tags"><span class="level-tag">Age 13+</span><span class="level-tag">1-2 classes/week</span><span class="level-tag">35 mins</span></div></div>
-      <div class="level-card"><div class="level-num-badge">Level 5</div><h3>Mujawwad</h3><div class="level-arabic">مجوَّد — Mastery</div><p>Recite with beauty, rhythm, and full tajweed. Lead your family in prayer with confidence.</p><div class="level-tags"><span class="level-tag">Age 15+</span><span class="level-tag">2 classes/week</span><span class="level-tag">40 mins</span></div></div>
+      <div class="level-card"><div class="level-num-badge">Level 1</div><h3>Haroof</h3><div class="level-arabic">حروف - Letters</div><p>Complete beginners. Students learn every Arabic letter, its correct pronunciation, and basic vowel sounds (harakat). The foundation of Quran recitation built from scratch.</p><div class="level-tags"><span class="level-tag">1 class/week</span><span class="level-tag">40 mins</span></div></div>
+      <div class="level-card"><div class="level-num-badge">Level 2</div><h3>Qira'a</h3><div class="level-arabic">قراءة - Reading</div><p>Students who know their letters but struggle to read fluently. We focus on connecting letters into words and reading Quranic verses smoothly and correctly, building reading confidence one ayah at a time.</p><div class="level-tags"><span class="level-tag">1 class/week</span><span class="level-tag">40 mins</span></div></div>
+      <div class="level-card featured"><div class="level-num-badge">Level 3 — most popular</div><h3>Tajweed</h3><div class="level-arabic">تجويد - Beautification</div><p>Students can read but apply tajweed rules inconsistently. We focus on applied tajweed in real Quranic recitation — rules of noon sakinah, medd, qalqalah and more — no dry theory, only live practice.</p><div class="level-tags"><span class="level-tag">1 class/week</span><span class="level-tag">40 mins</span></div></div>
+      <div class="level-card"><div class="level-num-badge">Level 4</div><h3>Hifz</h3><div class="level-arabic">حفظ - Memorisation</div><p>Students with strong recitation who are ready to memorise. Guided hifz with daily revision, teacher accountability, and structured memorisation of surahs — from short surahs up to full juz.</p><div class="level-tags"><span class="level-tag">1 class/week</span><span class="level-tag">40 mins</span></div></div>
     </div>
   </div>
 </div>
@@ -977,13 +976,13 @@ function loadStudentData(){
   supa('GET','/rest/v1/students?id=eq.'+currentProfile.linked_id+'&select=*').then(function(st){
     if(!st||!st.length) return;
     var s=st[0];
-    var lmap={'Noorani — Level 1':'نوراني','Mubtadi — Level 2':'مبتدئ','Mutawassit — Level 3':'متوسط','Mutaqaddim — Level 4':'متقدم','Mujawwad — Level 5':'مجوَّد'};
+    var lmap={'Haroof - Level 1':'حروف','Qira\'a - Level 2':'قراءة','Tajweed - Level 3':'تجويد','Hifz - Level 4':'حفظ'};
     document.getElementById('s-stat-level').textContent=(s.level||'').split(' \u2014 ')[0]||'\u2014';
     document.getElementById('s-stat-level-ar').textContent=lmap[s.level]||'\u2014';
     document.getElementById('s-level-pill').textContent=s.level||'Student';
     document.getElementById('s-role').textContent=s.level||'Student';
     document.getElementById('s-stat-lang').textContent=s.language||'\u2014';
-    var levels=['Noorani — Level 1','Mubtadi — Level 2','Mutawassit — Level 3','Mutaqaddim — Level 4','Mujawwad — Level 5'];
+    var levels=['Haroof - Level 1','Qira\'a - Level 2','Tajweed - Level 3','Hifz - Level 4'];
     var cur=levels.indexOf(s.level);var html='';
     levels.forEach(function(l,i){
       var done=i<cur,active=i===cur;
@@ -1182,7 +1181,7 @@ function openEditStudent(id,name,age,level,country,language,payStatus,payAmount)
   document.getElementById('es-id').value=id;
   document.getElementById('es-name').value=name;
   document.getElementById('es-age').value=age||'';
-  document.getElementById('es-level').value=level||'Noorani — Level 1';
+  document.getElementById('es-level').value=level||'Haroof - Level 1';
   document.getElementById('es-country').value=country||'UAE';
   document.getElementById('es-lang').value=language||'English';
   document.getElementById('es-pay').value=payStatus||'pending';
@@ -1551,7 +1550,7 @@ function openStudentProfile(sid){
         else if(currentProfile&&currentProfile.role==='teacher') tname=document.getElementById('t-name').textContent||'—';}
     }
   }
-  var levels=['Noorani — Level 1','Mubtadi — Level 2','Mutawassit — Level 3','Mutaqaddim — Level 4','Mujawwad — Level 5'];
+  var levels=['Haroof - Level 1','Qira\'a - Level 2','Tajweed - Level 3','Hifz - Level 4'];
   var cL=levels.indexOf(s.level);
   var aRows=[['Level',s.level||'—'],['Batch',bname],['Day',bday],['Time',btime],['Teacher','<span style="color:var(--teal);font-weight:600">'+tname+'</span>']];
   var ah='<div style="display:flex;flex-direction:column;gap:8px">';

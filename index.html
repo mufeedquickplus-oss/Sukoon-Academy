@@ -782,15 +782,32 @@ function showPage(id){
 }
 
 /* FIX 1: showPanel — accepts event and calls preventDefault to stop href="#" scroll jump on mobile */
-function showPanel(pageId,panelId,el,evt){
+/* ── FIXED SHOW PANEL FUNCTION ── */
+function showPanel(pageId, panelId, el, evt){
   if(evt) evt.preventDefault();
-  var pg=document.getElementById(pageId);
-  pg.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active');});
-  pg.querySelectorAll('.sidebar-nav a').forEach(function(a){a.classList.remove('active');});
+  
+  var pg = document.getElementById(pageId);
+  if(!pg) return;
+  
+  // Switch active panel
+  pg.querySelectorAll('.panel').forEach(function(p){
+    p.classList.remove('active');
+  });
   document.getElementById(panelId).classList.add('active');
+  
+  // Update active menu link
+  pg.querySelectorAll('.sidebar-nav a').forEach(function(a){
+    a.classList.remove('active');
+  });
   if(el) el.classList.add('active');
-  closeMobSidebar();
-  if(panelId==='sp-tickets') loadStudentTickets();
+  
+  // Force close mobile sidebar + backdrop (this fixes the fade issue)
+  closeMobSidebar(true);
+
+  // Special case for Tickets tab
+  if(panelId === 'sp-tickets') {
+    loadStudentTickets();
+  }
 }
 
 function openModal(id){document.getElementById(id).classList.add('open');}

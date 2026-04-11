@@ -220,8 +220,8 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
 .mob-menu-btn{display:none;background:none;border:none;cursor:pointer;padding:8px;border-radius:10px;color:var(--teal);transition:background .2s;flex-shrink:0}
 .mob-menu-btn:hover{background:var(--teal-light)}
 .mob-menu-btn svg{display:block}
-.sidebar-backdrop{display:none;position:fixed;inset:0;background:rgba(44,44,42,.5);z-index:250;-webkit-tap-highlight-color:transparent;animation:fadeIn .2s ease}
-.sidebar-backdrop.open{display:block}
+.sidebar-backdrop{display:none;position:fixed;inset:0;background:rgba(44,44,42,.5);z-index:250;-webkit-tap-highlight-color:transparent;animation:fadeIn .2s ease;pointer-events:none}
+.sidebar-backdrop.open{display:block;pointer-events:all}
 @media(max-width:640px){
 .sidebar{position:fixed;top:0;left:0;height:100vh;z-index:300;transform:translateX(-100%);-webkit-transform:translateX(-100%);-webkit-overflow-scrolling:touch;overflow-y:auto;touch-action:pan-y;transition:transform .3s cubic-bezier(.4,0,.2,1);width:260px}
 .sidebar.mob-open{transform:translateX(0);-webkit-transform:translateX(0)}

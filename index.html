@@ -771,6 +771,7 @@ function showPanel(pageId,panelId,el,evt){
   document.getElementById(panelId).classList.add('active');
   if(el) el.classList.add('active');
   closeMobSidebar();
+  try{ sessionStorage.setItem('sukoon_active_panel', pageId+'|'+panelId); }catch(e){}
   if(panelId==='sp-tickets') loadStudentTickets();
 }
 
@@ -844,16 +845,19 @@ function routeToDashboard(){
     document.getElementById('a-name').textContent=currentProfile.name;
     document.getElementById('a-avatar').textContent=init;
     showPage('page-admin');loadAdminData();
+    var _sp=sessionStorage.getItem('sukoon_active_panel');if(_sp){var _spp=_sp.split('|');if(_spp[0]==='page-admin') showPanel('page-admin',_spp[1],null,null);}
   } else if(currentProfile.role==='teacher'){
     document.getElementById('t-name').textContent=currentProfile.name;
     document.getElementById('t-topname').textContent=currentProfile.name.split(' ')[0];
     document.getElementById('t-avatar').textContent=init;
     showPage('page-teacher');loadTeacherData();
+    var _sp=sessionStorage.getItem('sukoon_active_panel');if(_sp){var _spp=_sp.split('|');if(_spp[0]==='page-teacher') showPanel('page-teacher',_spp[1],null,null);}
   } else {
     document.getElementById('s-name').textContent=currentProfile.name;
     document.getElementById('s-topname').textContent=currentProfile.name.split(' ')[0];
     document.getElementById('s-avatar').textContent=init;
     showPage('page-student');loadStudentData();
+    var _sp=sessionStorage.getItem('sukoon_active_panel');if(_sp){var _spp=_sp.split('|');if(_spp[0]==='page-student') showPanel('page-student',_spp[1],null,null);}
   }
 }
 

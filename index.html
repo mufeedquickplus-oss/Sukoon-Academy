@@ -1108,7 +1108,8 @@ function approveReg(regId,name,age,level,language,currency,whatsapp){
   supa('POST','/rest/v1/students',{name:name,age:age,level:level,language:language,currency:currency,whatsapp:whatsapp||null,payment_status:'pending',status:'active'}).then(function(){
     return supa('PATCH','/rest/v1/registrations?id=eq.'+regId,{status:'approved'});
   }).then(function(){
-    showToast(name+' approved as student! 🌙','success');loadAdminData();
+    showToast(name+' approved as student! 🌙','success');
+    setTimeout(function(){ loadAdminData(); }, 600);
   }).catch(function(e){showToast('Could not approve.','error');console.error(e);});
 }
 

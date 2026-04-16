@@ -314,6 +314,23 @@ body.dash-active .sidebar-backdrop.open{left:260px}
 <div id="bdm-content"></div>
 </div></div>
 
+<!-- CREATE LOGIN MODAL -->
+<div class="modal-overlay" id="modal-create-login"><div class="modal">
+<div class="modal-header"><div class="modal-title" style="font-family:'Lora',serif">Create <em style="color:var(--teal);font-style:italic">Login Account</em></div><button class="modal-close" onclick="closeModal('modal-create-login')">✕</button></div>
+<div class="info-box" style="margin-bottom:20px">
+  <div class="info-box-title">🔐 Setting up dashboard access</div>
+  <p id="cl-info-text">This will create a login for the student so they can access their dashboard.</p>
+</div>
+<input type="hidden" id="cl-linked-id"/>
+<input type="hidden" id="cl-role"/>
+<input type="hidden" id="cl-name"/>
+<input type="hidden" id="cl-reg-id"/>
+<div class="fg"><label>Email address</label><input id="cl-email" type="email" placeholder="student@email.com"/></div>
+<div class="fg"><label>Temporary password <span style="color:var(--muted);font-weight:300">(share this with them)</span></label><div class="pwd-wrap"><input id="cl-password" type="password" placeholder="Min. 8 characters"/><button class="pwd-toggle" onclick="toggleClPwd()">👁</button></div></div>
+<div id="cl-error" style="background:#FEE8E8;color:#C0392B;font-size:13px;padding:12px 16px;border-radius:var(--rs);margin-bottom:16px;display:none;border:1px solid rgba(192,57,43,.15)"></div>
+<div class="modal-actions"><button class="btn btn-ghost btn-sm" onclick="closeModal('modal-create-login')">Cancel</button><button class="btn btn-primary btn-sm" id="cl-submit-btn" onclick="submitCreateLogin()">Create Login 🔐</button></div>
+</div></div>
+
 <div class="modal-overlay" id="modal-raise-ticket"><div class="modal">
 <div class="modal-header"><div class="modal-title" style="font-family:'Lora',serif">Raise a <em style="color:var(--teal);font-style:italic">Support Ticket</em></div><button class="modal-close" onclick="closeModal('modal-raise-ticket')">✕</button></div>
 <div class="fg"><label>Subject</label><input id="tk-subject" type="text" placeholder="e.g. Class schedule issue, homework question..."/></div>
@@ -883,20 +900,29 @@ function setCurrency(c){
     b.style.background=active?'var(--teal)':'transparent';b.style.color=active?'#fff':'var(--teal)';b.style.borderColor=active?'var(--teal)':'rgba(27,77,62,.25)';
   });
 }
+/* Always build GCC currency buttons immediately */
+(function(){
+  var cur=['AED','SAR','QAR','KWD','BHD','OMR'];
+  var fl={AED:'🇦🇪',SAR:'🇸🇦',QAR:'🇶🇦',KWD:'🇰🇼',BHD:'🇧🇭',OMR:'🇴🇲'};
+  var bw=document.getElementById('currency-buttons');
+  cur.forEach(function(c){
+    var btn=document.createElement('button');
+    btn.dataset.curr=c;btn.textContent=fl[c]+' '+c;
+    btn.style.cssText='padding:7px 16px;border-radius:999px;border:1.5px solid rgba(27,77,62,.25);background:transparent;color:var(--teal);font-size:13px;font-weight:500;cursor:pointer;font-family:DM Sans,sans-serif;transition:all .2s;';
+    btn.onclick=function(){setCurrency(c);};bw.appendChild(btn);
+  });
+  bw.style.display='flex';
+  document.getElementById('fx-note').style.display='block';
+  setCurrency('AED');
+})();
+/* Then try to detect country and update active button */
 fetch('https://ipapi.co/json/').then(function(r){return r.json();}).then(function(d){
   var map={IN:'INR',AE:'AED',SA:'SAR',QA:'QAR',KW:'KWD',BH:'BHD',OM:'OMR'};
-  var code=map[d.country_code]||'AED';detectedCurrency=code;
-  var isIndia=d.country_code==='IN';
-  var bw=document.getElementById('currency-buttons');
-  if(!isIndia){
-    var cur=['AED','SAR','QAR','KWD','BHD','OMR'];var fl={AED:'🇦🇪',SAR:'🇸🇦',QAR:'🇶🇦',KWD:'🇰🇼',BHD:'🇧🇭',OMR:'🇴🇲'};
-    cur.forEach(function(c){
-      var btn=document.createElement('button');
-      btn.dataset.curr=c;btn.textContent=fl[c]+' '+c;
-      btn.style.cssText='padding:7px 16px;border-radius:999px;border:1.5px solid rgba(27,77,62,.25);background:transparent;color:var(--teal);font-size:13px;font-weight:500;cursor:pointer;font-family:DM Sans,sans-serif;transition:all .2s;';
-      btn.onclick=function(){setCurrency(c);};bw.appendChild(btn);
-    });
-    bw.style.display='flex';document.getElementById('fx-note').style.display='block';
+  var code=map[d.country_code]||'AED';
+  detectedCurrency=code;
+  if(d.country_code==='IN'){
+    /* Hide GCC buttons for India, show INR */
+    document.getElementById('currency-buttons').style.display='none';
   }
   setCurrency(code);
 }).catch(function(){setCurrency('AED');});
@@ -1112,15 +1138,74 @@ function deleteReg(id){
   }).catch(function(){showToast('Could not delete.','error');});
 }
 
-/* FIX 3: approveReg — now accepts and saves whatsapp */
+/* approveReg — creates student row then opens login creation modal */
 function approveReg(regId,name,age,level,language,currency,whatsapp){
   if(!confirm('Approve '+name+' as a student?')) return;
-  supa('POST','/rest/v1/students',{name:name,age:age,level:level,language:language,currency:currency,whatsapp:whatsapp||null,payment_status:'pending',status:'active'}).then(function(){
-    return supa('PATCH','/rest/v1/registrations?id=eq.'+regId,{status:'approved'});
-  }).then(function(){
-    showToast(name+' approved as student! 🌙','success');
-    setTimeout(function(){ loadAdminData(); }, 600);
+  supa('POST','/rest/v1/students',{
+    name:name,age:age,level:level,language:language,currency:currency,
+    whatsapp:whatsapp||null,payment_status:'pending',status:'active',
+    course_status:'enrolled',enrollment_date:new Date().toISOString().split('T')[0],
+    registration_id:regId
+  }).then(function(res){
+    var studentId=res&&res.length?res[0].id:null;
+    return supa('PATCH','/rest/v1/registrations?id=eq.'+regId,{status:'approved'}).then(function(){return studentId;});
+  }).then(function(studentId){
+    showToast(name+' approved! Now create their login. 🌙','success');
+    setTimeout(function(){loadAdminData();},600);
+    if(studentId){
+      document.getElementById('cl-linked-id').value=studentId;
+      document.getElementById('cl-role').value='student';
+      document.getElementById('cl-name').value=name;
+      document.getElementById('cl-reg-id').value=regId;
+      document.getElementById('cl-info-text').textContent='Creating dashboard login for '+name+'. Share the password with them via WhatsApp.';
+      document.getElementById('cl-email').value='';
+      document.getElementById('cl-password').value='';
+      document.getElementById('cl-error').style.display='none';
+      setTimeout(function(){openModal('modal-create-login');},800);
+    }
   }).catch(function(e){showToast('Could not approve.','error');console.error(e);});
+}
+
+/* submitCreateLogin — calls Edge Function to create Auth user + profile */
+function submitCreateLogin(){
+  var email=document.getElementById('cl-email').value.trim();
+  var password=document.getElementById('cl-password').value;
+  var name=document.getElementById('cl-name').value;
+  var role=document.getElementById('cl-role').value;
+  var linkedId=document.getElementById('cl-linked-id').value;
+  var errEl=document.getElementById('cl-error');
+  var btn=document.getElementById('cl-submit-btn');
+  errEl.style.display='none';
+  if(!email||!password){errEl.textContent='Please enter email and password.';errEl.style.display='block';return;}
+  if(password.length<8){errEl.textContent='Password must be at least 8 characters.';errEl.style.display='block';return;}
+  btn.disabled=true;btn.innerHTML='<span class="spinner"></span> Creating\u2026';
+  fetch('https://fturomssegxeqditglck.supabase.co/functions/v1/create-user',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Authorization':'Bearer '+SUPA_KEY,'apikey':SUPA_KEY},
+    body:JSON.stringify({email:email,password:password,name:name,role:role,linked_id:linkedId})
+  }).then(function(r){return r.json();}).then(function(data){
+    if(data.error){errEl.textContent=data.error;errEl.style.display='block';btn.disabled=false;btn.textContent='Create Login \uD83D\uDD10';return;}
+    closeModal('modal-create-login');
+    showToast('Login created for '+name+'! \uD83C\uDF19','success');
+    loadAdminData();
+  }).catch(function(){
+    errEl.textContent='Could not connect. Please try again.';errEl.style.display='block';
+    btn.disabled=false;btn.textContent='Create Login \uD83D\uDD10';
+  });
+}
+
+function toggleClPwd(){var i=document.getElementById('cl-password');i.type=i.type==='password'?'text':'password';}
+
+function openCreateLoginForTeacher(teacherId,name){
+  document.getElementById('cl-linked-id').value=teacherId;
+  document.getElementById('cl-role').value='teacher';
+  document.getElementById('cl-name').value=name;
+  document.getElementById('cl-reg-id').value='';
+  document.getElementById('cl-info-text').textContent='Creating dashboard login for teacher '+name+'.';
+  document.getElementById('cl-email').value='';
+  document.getElementById('cl-password').value='';
+  document.getElementById('cl-error').style.display='none';
+  openModal('modal-create-login');
 }
 
 function renderStudentsTable(){
@@ -1249,10 +1334,15 @@ function updateBatchStudentCount(remaining){
 
 function saveTeacher(){
   var name=document.getElementById('mt-name').value.trim();
+  var email=document.getElementById('mt-email').value.trim();
   if(!name){showToast('Please enter a name.','error');return;}
-  supa('POST','/rest/v1/teachers',{name:name,email:document.getElementById('mt-email').value.trim(),phone:document.getElementById('mt-phone').value.trim(),status:'active'}).then(function(){
-    closeModal('modal-add-teacher');['mt-name','mt-email','mt-phone'].forEach(function(i){document.getElementById(i).value='';});
-    showToast('Teacher added! 🌙','success');loadAdminData();
+  supa('POST','/rest/v1/teachers',{name:name,email:email,phone:document.getElementById('mt-phone').value.trim(),status:'active'}).then(function(res){
+    var teacherId=res&&res.length?res[0].id:null;
+    closeModal('modal-add-teacher');
+    ['mt-name','mt-email','mt-phone'].forEach(function(i){document.getElementById(i).value='';});
+    showToast('Teacher added! Now create their login. 🌙','success');
+    loadAdminData();
+    if(teacherId){setTimeout(function(){openCreateLoginForTeacher(teacherId,name);},800);}
   }).catch(function(){showToast('Could not save.','error');});
 }
 

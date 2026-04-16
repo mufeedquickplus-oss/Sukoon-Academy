@@ -1531,17 +1531,23 @@ function renderLoginsPanel(){
 }
 function toggleClPwd(){var i=document.getElementById('cl-password');i.type=i.type==='password'?'text':'password';}
 function openResetPassword(linkedId,name,email){
-  document.getElementById('cl-linked-id').value=linkedId;
-  document.getElementById('cl-name').value=name;
-  document.getElementById('cl-mode').value='reset';
-  document.getElementById('cl-email').value=email||'';
-  document.getElementById('cl-password').value='';
-  document.getElementById('cl-error').style.display='none';
-  document.getElementById('cl-info-title').textContent='Reset login password';
-  document.getElementById('cl-info-text').textContent='Enter a new password for '+name+'. Share it via WhatsApp.';
-  document.getElementById('cl-email-wrap').style.display='none';
-  document.getElementById('cl-submit-btn').textContent='Update Password';
-  openModal('modal-create-login');
+  // linkedId here is the student/teacher row ID
+  // We need to find their auth user ID from profiles table
+  supa('GET','/rest/v1/profiles?linked_id=eq.'+linkedId+'&select=id').then(function(res){
+    var authUserId=res&&res.length?res[0].id:null;
+    if(!authUserId){showToast('No login account found for '+name+'. Create one first.','error');return;}
+    document.getElementById('cl-linked-id').value=authUserId;
+    document.getElementById('cl-name').value=name;
+    document.getElementById('cl-mode').value='reset';
+    document.getElementById('cl-email').value='';
+    document.getElementById('cl-password').value='';
+    document.getElementById('cl-error').style.display='none';
+    document.getElementById('cl-info-title').textContent='Reset login password';
+    document.getElementById('cl-info-text').textContent='Enter a new password for '+name+'. Share it via WhatsApp. Their email stays the same.';
+    document.getElementById('cl-email-wrap').style.display='none';
+    document.getElementById('cl-submit-btn').textContent='Update Password';
+    openModal('modal-create-login');
+  }).catch(function(){showToast('Could not find account. Please try again.','error');});
 }
 function openCreateLoginForStudent(studentId,name){
   document.getElementById('cl-linked-id').value=studentId;
@@ -1588,8 +1594,10 @@ function submitCreateLogin(){
   if(password.length<8){errEl.textContent='Password must be at least 8 characters.';errEl.style.display='block';return;}
   btn.disabled=true;
   btn.innerHTML='<span class="spinner"></span> '+(mode==='reset'?'Updating...':'Creating...');
+  // For reset: cl-linked-id holds the auth user UUID (from profiles.id)
+  // For create: cl-linked-id holds the student/teacher row UUID
   var payload=mode==='reset'
-    ?{action:'reset-password',email:email,password:password}
+    ?{action:'reset-password',user_id:linkedId,password:password}
     :{action:'create-user',email:email,password:password,name:name,role:role,linked_id:linkedId};
   fetch('https://fturomssegxeqditglck.supabase.co/functions/v1/create-user',{
     method:'POST',

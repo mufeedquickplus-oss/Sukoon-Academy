@@ -31,7 +31,7 @@ html{scroll-behavior:smooth;color-scheme:light only;-webkit-text-size-adjust:100
 body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--charcoal);overflow-x:hidden;-webkit-overflow-scrolling:touch;height:100%}
 .page{display:none;min-height:100vh}.page.active{display:block}
 #page-login.active{position:fixed;width:100%;overflow:hidden}
-.dash-page{display:none;min-height:100vh}.dash-page.active{display:flex}
+.dash-page{display:none;min-height:100vh;min-height:100dvh}.dash-page.active{display:flex}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
@@ -170,7 +170,7 @@ footer{background:var(--charcoal);color:rgba(255,255,255,.55);padding:48px 5%;di
 .sidebar-avatar{width:36px;height:36px;border-radius:50%;background:rgba(201,168,76,.2);color:var(--gold);font-family:'Lora',serif;font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .sidebar-user-name{font-size:13px;font-weight:500;color:var(--white)}.sidebar-user-role{font-size:11px;color:rgba(255,255,255,.35);margin-top:1px}
 .sidebar-logout{display:flex;align-items:center;gap:8px;width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.55);font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;padding:9px 12px;border-radius:10px;transition:all .2s;margin-top:4px;touch-action:manipulation;-webkit-tap-highlight-color:transparent}.sidebar-logout:hover{background:rgba(255,255,255,.1);color:rgba(255,255,255,.85);border-color:rgba(255,255,255,.15)}
-.dash-main{flex:1;overflow-y:auto;background:var(--cream);display:flex;flex-direction:column}
+.dash-main{flex:1;overflow-y:auto;overflow-x:hidden;background:var(--cream);display:flex;flex-direction:column;min-width:0}
 .topbar{background:rgba(250,247,242,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;flex-shrink:0}
 .topbar-title{font-family:'Lora',serif;font-size:18px;font-weight:600;color:var(--charcoal)}.topbar-title em{font-style:italic;color:var(--teal)}
 .topbar-right{display:flex;align-items:center;gap:12px}.topbar-date{font-size:12px;color:var(--muted)}
@@ -217,20 +217,64 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
 .info-box-title{font-size:12px;font-weight:600;color:var(--teal);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em}
 .info-box p{font-size:13px;color:var(--charcoal);line-height:1.6}
 @media(max-width:900px){.sidebar{width:210px}.c4{grid-template-columns:repeat(2,1fr)}.g2{grid-template-columns:1fr}}
-@media(max-width:768px){.hero{grid-template-columns:1fr;padding:100px 5% 60px}.hero-visual{display:none}.stats-bar{grid-template-columns:repeat(2,1fr)}.pricing-grid{grid-template-columns:1fr}.register-wrap{grid-template-columns:1fr}.nav-links{display:none}.nav-cta{display:none}.fr{grid-template-columns:1fr}.acc-left{flex-direction:column;align-items:flex-start;gap:6px}.hide-mob{display:none!important}.nav-login{padding:8px 16px;font-size:13px}}
-@media(max-width:640px){.dash-content{padding:16px}.c3{grid-template-columns:repeat(2,1fr)}.login-card{padding:32px 20px}input,select,textarea{font-size:16px!important}.dash-page{overflow-x:hidden}.fr{grid-template-columns:1fr}}
-@media(max-width:380px){.login-card{padding:24px 16px}.topbar-title{font-size:14px}.dash-content{padding:12px}.stats-row.c3{grid-template-columns:1fr}.stats-row.c4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){
+  .hero{grid-template-columns:1fr;padding:100px 5% 60px}
+  .hero-visual{display:none}
+  .stats-bar{grid-template-columns:repeat(2,1fr)}
+  .pricing-grid{grid-template-columns:1fr}
+  .register-wrap{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .nav-cta{display:none}
+  .fr{grid-template-columns:1fr}
+  .acc-left{flex-direction:column;align-items:flex-start;gap:6px}
+  .hide-mob{display:none!important}
+  .nav-login{padding:8px 16px;font-size:13px}
+  .modal{padding:24px 20px}
+  .stats-row.c4{grid-template-columns:repeat(2,1fr)}
+  .tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  table{min-width:600px}
+  .topbar-date{display:none}
+  .card{padding:20px}
+}
+@media(max-width:640px){
+  .dash-content{padding:12px}
+  .c3{grid-template-columns:repeat(2,1fr)}
+  .login-card{padding:28px 20px}
+  input,select,textarea{font-size:16px!important}
+  .dash-page{overflow-x:hidden}
+  .fr{grid-template-columns:1fr}
+  .modal{padding:20px 16px;border-radius:16px}
+  .modal-title{font-size:17px}
+  .btn{padding:11px 20px}
+  .stat-card{padding:18px}
+  .sc-num{font-size:28px}
+  .profile-tab{font-size:11px;padding:6px 2px}
+  .user-row{flex-wrap:wrap;gap:8px}
+  .register-form-wrap{padding:24px 16px}
+}
+@media(max-width:380px){
+  .login-card{padding:24px 14px}
+  .topbar-title{font-size:13px}
+  .dash-content{padding:10px}
+  .stats-row.c3{grid-template-columns:1fr}
+  .stats-row.c4{grid-template-columns:repeat(2,1fr)}
+  .c3{grid-template-columns:1fr}
+  .sidebar-nav li a{font-size:12px;padding:9px 10px}
+}
 /* Mobile sidebar */
 .mob-menu-btn{display:none;background:none;border:none;cursor:pointer;padding:8px;border-radius:10px;color:var(--teal);transition:background .2s;flex-shrink:0}
 .mob-menu-btn:hover{background:var(--teal-light)}
 .mob-menu-btn svg{display:block}
-.sidebar-backdrop{display:none;position:fixed;inset:0;background:rgba(44,44,42,.5);z-index:250;-webkit-tap-highlight-color:transparent;pointer-events:none}
-.sidebar-backdrop.open{display:block;pointer-events:all}
-body.dash-active .sidebar-backdrop.open{left:260px}
+.mob-logout-btn{display:none;align-items:center;gap:5px;background:none;border:1.5px solid rgba(27,77,62,.2);color:var(--muted);font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;padding:7px 12px;border-radius:100px;transition:all .2s;flex-shrink:0}
+.mob-logout-btn:hover{color:var(--teal);border-color:var(--teal)}
+.sidebar-backdrop{display:none;position:fixed;inset:0;background:rgba(44,44,42,.5);z-index:250;-webkit-tap-highlight-color:transparent;pointer-events:none;touch-action:none}
+.sidebar-backdrop.open{display:block;pointer-events:all;touch-action:none}
+/* backdrop always covers full screen */
 @media(max-width:640px){
-.sidebar{position:fixed;top:0;left:0;height:100vh;z-index:300;transform:translateX(-100%);-webkit-transform:translateX(-100%);-webkit-overflow-scrolling:touch;overflow-y:auto;touch-action:pan-y;transition:transform .3s cubic-bezier(.4,0,.2,1);width:260px}
+.sidebar{position:fixed;top:0;left:0;height:100vh;height:100dvh;z-index:300;transform:translateX(-100%);-webkit-transform:translateX(-100%);-webkit-overflow-scrolling:touch;overflow-y:auto;touch-action:pan-y;transition:transform .3s cubic-bezier(.4,0,.2,1);width:260px}
 .sidebar.mob-open{transform:translateX(0);-webkit-transform:translateX(0)}
 .mob-menu-btn{display:flex;align-items:center;justify-content:center}
+.mob-logout-btn{display:flex}
 .topbar{padding:0 16px}
 .dash-content{padding:16px}
 }
@@ -529,7 +573,6 @@ body.dash-active .sidebar-backdrop.open{left:260px}
 <div class="dash-page" id="page-student">
 <aside class="sidebar">
   <div class="sidebar-logo"><div class="sidebar-logo-text">Sukoon<span>.</span></div><div class="sidebar-logo-sub">Student Portal</div></div>
-  <div style="padding:10px 12px 4px"><button class="sidebar-logout" onclick="doLogout()">↩ Sign Out</button></div>
   <div class="sidebar-section">My Learning</div>
   <ul class="sidebar-nav">
     <li><a href="#" class="active" onclick="showPanel('page-student','sp-home',this,event)"><span class="ni">🏠</span> Home</a></li>
@@ -540,13 +583,14 @@ body.dash-active .sidebar-backdrop.open{left:260px}
   </ul>
   <div class="sidebar-bottom">
     <div class="sidebar-user"><div class="sidebar-avatar" id="s-avatar">—</div><div><div class="sidebar-user-name" id="s-name">—</div><div class="sidebar-user-role" id="s-role">Student</div></div></div>
+    <button class="sidebar-logout" onclick="doLogout()">← Sign out</button>
   </div>
 </aside>
 <div class="dash-main">
   <div class="topbar">
     <button class="mob-menu-btn" onclick="openMobSidebar('page-student')" aria-label="Open menu"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="2" y="5" width="18" height="2" rx="1" fill="currentColor"/><rect x="2" y="10" width="18" height="2" rx="1" fill="currentColor"/><rect x="2" y="15" width="18" height="2" rx="1" fill="currentColor"/></svg></button>
     <div class="topbar-title">Ahlan, <em id="s-topname">—</em> 🌙</div>
-    <div class="topbar-right"><div class="topbar-date" id="today-date-s"></div><div class="topbar-pill" id="s-level-pill">Student</div></div>
+    <div class="topbar-right"><div class="topbar-date" id="today-date-s"></div><div class="topbar-pill" id="s-level-pill">Student</div><button class="mob-logout-btn" onclick="doLogout()">↩ Out</button></div>
   </div>
   <div class="dash-content">
     <div class="panel active" id="sp-home">
@@ -583,7 +627,6 @@ body.dash-active .sidebar-backdrop.open{left:260px}
 <div class="dash-page" id="page-teacher">
 <aside class="sidebar">
   <div class="sidebar-logo"><div class="sidebar-logo-text">Sukoon<span>.</span></div><div class="sidebar-logo-sub">Teacher Portal</div></div>
-  <div style="padding:10px 12px 4px"><button class="sidebar-logout" onclick="doLogout()">↩ Sign Out</button></div>
   <div class="sidebar-section">Teaching</div>
   <ul class="sidebar-nav">
     <li><a href="#" class="active" onclick="showPanel('page-teacher','tp-home',this,event)"><span class="ni">🏠</span> Home</a></li>
@@ -593,13 +636,14 @@ body.dash-active .sidebar-backdrop.open{left:260px}
   </ul>
   <div class="sidebar-bottom">
     <div class="sidebar-user"><div class="sidebar-avatar" id="t-avatar">—</div><div><div class="sidebar-user-name" id="t-name">—</div><div class="sidebar-user-role">Teacher</div></div></div>
+    <button class="sidebar-logout" onclick="doLogout()">← Sign out</button>
   </div>
 </aside>
 <div class="dash-main">
   <div class="topbar">
     <button class="mob-menu-btn" onclick="openMobSidebar('page-teacher')" aria-label="Open menu"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="2" y="5" width="18" height="2" rx="1" fill="currentColor"/><rect x="2" y="10" width="18" height="2" rx="1" fill="currentColor"/><rect x="2" y="15" width="18" height="2" rx="1" fill="currentColor"/></svg></button>
     <div class="topbar-title">Ahlan, <em id="t-topname">—</em> 🌙</div>
-    <div class="topbar-right"><div class="topbar-date" id="today-date-t"></div><div class="topbar-pill" id="t-batches-pill">Teacher</div></div>
+    <div class="topbar-right"><div class="topbar-date" id="today-date-t"></div><div class="topbar-pill" id="t-batches-pill">Teacher</div><button class="mob-logout-btn" onclick="doLogout()">↩ Out</button></div>
   </div>
   <div class="dash-content">
     <div class="panel active" id="tp-home">
@@ -652,7 +696,6 @@ body.dash-active .sidebar-backdrop.open{left:260px}
 <div class="dash-page" id="page-admin">
 <aside class="sidebar">
   <div class="sidebar-logo"><div class="sidebar-logo-text">Sukoon<span>.</span></div><div class="sidebar-logo-sub">Admin Portal</div></div>
-  <div style="padding:10px 12px 4px"><button class="sidebar-logout" onclick="doLogout()">↩ Sign Out</button></div>
   <div class="sidebar-section">Management</div>
   <ul class="sidebar-nav">
     <li><a href="#" class="active" onclick="showPanel('page-admin','ap-home',this,event)"><span class="ni">🏠</span> Overview</a></li>
@@ -672,7 +715,7 @@ body.dash-active .sidebar-backdrop.open{left:260px}
   <div class="topbar">
     <button class="mob-menu-btn" onclick="openMobSidebar('page-admin')" aria-label="Open menu"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="2" y="5" width="18" height="2" rx="1" fill="currentColor"/><rect x="2" y="10" width="18" height="2" rx="1" fill="currentColor"/><rect x="2" y="15" width="18" height="2" rx="1" fill="currentColor"/></svg></button>
     <div class="topbar-title">Sukoon <em>Admin</em> 🛡️</div>
-    <div class="topbar-right"><div class="topbar-date" id="today-date-a"></div><div class="topbar-pill">Full Access</div></div>
+    <div class="topbar-right"><div class="topbar-date" id="today-date-a"></div><div class="topbar-pill">Full Access</div><button class="mob-logout-btn" onclick="doLogout()">↩ Out</button></div>
   </div>
   <div class="dash-content">
     <div class="panel active" id="ap-home">
@@ -734,6 +777,20 @@ body.dash-active .sidebar-backdrop.open{left:260px}
         <div class="stat-card gold"><div class="sc-label">Est. Monthly Revenue</div><div class="sc-num" id="r-revenue">—</div></div>
       </div>
       <div class="card"><div class="card-title" style="margin-bottom:16px">Payment <em>Status</em></div><div id="a-revenue-table"><div class="empty-state"><div class="empty-state-icon">💰</div><div class="empty-state-title">No data yet</div></div></div></div>
+    </div>
+    <div class="panel" id="ap-logins">
+      <div class="card">
+        <div class="card-title" style="margin-bottom:6px">Create <em>Logins</em> 🔐</div>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:20px;font-weight:300">Create dashboard login credentials for students and teachers. Once created they can sign in immediately.</p>
+        <div class="info-box" style="margin-bottom:24px">
+          <div class="info-box-title">How it works</div>
+          <p>Enter an email and temporary password for each person. Share credentials via WhatsApp. They can log in right away.</p>
+        </div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);margin-bottom:12px">Students</div>
+        <div id="logins-students-list"><div class="empty-state"><div class="empty-state-icon">🎓</div><div class="empty-state-title">No students yet</div></div></div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);margin-top:28px;margin-bottom:12px">Teachers</div>
+        <div id="logins-teachers-list"><div class="empty-state"><div class="empty-state-icon">📖</div><div class="empty-state-title">No teachers yet</div></div></div>
+      </div>
     </div>
   </div>
 </div>
@@ -862,7 +919,10 @@ function doLogin(){
         errEl.textContent='Account setup incomplete. Please contact admin.';errEl.classList.add('show');
         btn.disabled=false;btn.textContent='Sign in';return;
       }
-      currentProfile=profile[0];saveSession();routeToDashboard();
+      currentProfile=profile[0];saveSession();btn.disabled=false;btn.textContent='Sign in';routeToDashboard();
+    }).catch(function(){
+      errEl.textContent='Could not load profile. Please try again.';errEl.classList.add('show');
+      btn.disabled=false;btn.textContent='Sign in';
     });
   }).catch(function(){
     errEl.textContent='Could not connect. Check your internet.';errEl.classList.add('show');
@@ -976,11 +1036,17 @@ function loadStudentData(){
   supa('GET','/rest/v1/students?id=eq.'+currentProfile.linked_id+'&select=*').then(function(st){
     if(!st||!st.length) return;
     var s=st[0];
-    var lmap={'Haroof - Level 1':'حروف',"Qira'a - Level 2":'قراءة','Tajweed - Level 3':'تجويد','Hifz - Level 4':'حفظ'};
-    document.getElementById('s-stat-level').textContent=(s.level||'').split(' — ')[0]||'—';
+    var lmap={
+      'Haroof - Level 1':'حروف',
+      "Qira'a - Level 2":'قراءة',
+      'Tajweed - Level 3':'تجويد',
+      'Hifz - Level 4':'حفظ',
+      };
+    var levelShort=(s.level||'').replace(' - Level 1','').replace(' - Level 2','').replace(' - Level 3','').replace(' - Level 4','').replace(' - Level 5','')||'—';
+    document.getElementById('s-stat-level').textContent=levelShort;
     document.getElementById('s-stat-level-ar').textContent=lmap[s.level]||'—';
-    document.getElementById('s-level-pill').textContent=s.level||'Student';
-    document.getElementById('s-role').textContent=s.level||'Student';
+    document.getElementById('s-level-pill').textContent=levelShort||'Student';
+    document.getElementById('s-role').textContent=levelShort||'Student';
     document.getElementById('s-stat-lang').textContent=s.language||'—';
     var levels=["Haroof - Level 1","Qira'a - Level 2","Tajweed - Level 3","Hifz - Level 4"];
     var cur=levels.indexOf(s.level);var html='';
@@ -1160,9 +1226,14 @@ function deleteReg(id){
 /* approveReg — creates student row then opens login creation modal */
 function approveReg(regId,name,age,level,language,currency,whatsapp){
   if(!confirm('Approve '+name+' as a student?')) return;
+  // Always default to Level 1 on approval — teacher will assess and update
+  var defaultLevel='Haroof - Level 1';
+  // Derive country from currency
+  var currencyCountryMap={AED:'UAE',SAR:'Saudi Arabia',QAR:'Qatar',KWD:'Kuwait',BHD:'Bahrain',OMR:'Oman',INR:'India'};
+  var country=currencyCountryMap[currency]||'UAE';
   supa('POST','/rest/v1/students',{
-    name:name,age:age,level:level,language:language,currency:currency,
-    whatsapp:whatsapp||null,payment_status:'pending',status:'active',
+    name:name,age:age,level:defaultLevel,language:language,currency:currency,
+    country:country,whatsapp:whatsapp||null,payment_status:'pending',status:'active',
     course_status:'enrolled',enrollment_date:new Date().toISOString().split('T')[0],
     registration_id:regId
   }).then(function(res){
@@ -1417,10 +1488,15 @@ function deleteBatch(id){
 
 /* ── CREATE LOGINS PANEL ── */
 function renderLoginsPanel(){
-  // Students
   var sl=document.getElementById('logins-students-list');
   var tl=document.getElementById('logins-teachers-list');
   if(!sl||!tl) return;
+  // If data not yet loaded, show loading and trigger load
+  if(!adminStudents.length && !adminTeachers.length){
+    sl.innerHTML='<div class="empty-state"><div class="empty-state-icon">⏳</div><div class="empty-state-title">Loading...</div></div>';
+    tl.innerHTML='';
+    loadAdminData();return;
+  }
   if(!adminStudents.length){
     sl.innerHTML='<div class="empty-state"><div class="empty-state-icon">🎓</div><div class="empty-state-title">No students yet</div></div>';
   } else {

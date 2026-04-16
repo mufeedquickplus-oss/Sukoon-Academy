@@ -20,7 +20,10 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"EducationalOrganization","name":"Sukoon Academy","url":"https://mufeedquickplus-oss.github.io/Sukoon-Academy/","areaServed":["UAE","India","Saudi Arabia","Qatar","Kuwait","Bahrain","Oman"],"teaches":"Quran recitation with applied tajweed","availableLanguage":["English","Malayalam","Hindi"],"offers":[{"@type":"Offer","name":"Children Quran Classes","price":"50","priceCurrency":"AED"},{"@type":"Offer","name":"Adult Quran Classes","price":"80","priceCurrency":"AED"}]}
 </script>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/></noscript>
 <style>
 :root{--teal:#1B4D3E;--teal-mid:#2A6B56;--teal-light:#E8F3EF;--teal-pale:#F0F7F4;--gold:#C9A84C;--gold-light:#F5EDD4;--cream:#FAF7F2;--cream-dark:#F0EBE1;--charcoal:#2C2C2A;--muted:#6B6860;--white:#FFFFFF;--border:rgba(27,77,62,0.1);--shadow-sm:0 2px 12px rgba(27,77,62,0.06);--shadow:0 4px 20px rgba(27,77,62,0.08);--shadow-lg:0 12px 40px rgba(27,77,62,0.13);--r:20px;--rs:12px}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -658,9 +661,11 @@ body.dash-active .sidebar-backdrop.open{left:260px}
     <li><a href="#" onclick="showPanel('page-admin','ap-teachers',this,event)"><span class="ni">📖</span> Teachers</a></li>
     <li><a href="#" onclick="showPanel('page-admin','ap-batches',this,event)"><span class="ni">👥</span> Batches</a></li>
     <li><a href="#" onclick="showPanel('page-admin','ap-revenue',this,event)"><span class="ni">💰</span> Revenue</a></li>
+    <li><a href="#" onclick="showPanel('page-admin','ap-logins',this,event);renderLoginsPanel()"><span class="ni">🔐</span> Create Logins</a></li>
   </ul>
   <div class="sidebar-bottom">
     <div class="sidebar-user"><div class="sidebar-avatar" id="a-avatar">A</div><div><div class="sidebar-user-name" id="a-name">Admin</div><div class="sidebar-user-role">Full access</div></div></div>
+    <button class="sidebar-logout" onclick="doLogout()">← Sign out</button>
   </div>
 </aside>
 <div class="dash-main">
@@ -747,6 +752,13 @@ async function supa(method,path,body){
   var opts={method:method,headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+(currentSession?currentSession.access_token:SUPA_KEY),'Content-Type':'application/json','Prefer':prefer}};
   if(body) opts.body=JSON.stringify(body);
   var res=await fetch(SUPA_URL+path,opts);
+  if(res.status===401){
+    // Session expired — clear and redirect to login
+    clearSession();currentUser=null;currentProfile=null;currentSession=null;
+    showPage('page-login');
+    showToast('Session expired. Please sign in again.','error');
+    return null;
+  }
   if(res.status===204) return null;
   try{return await res.json();}catch(e){return null;}
 }
@@ -1071,7 +1083,14 @@ function saveTeacherNote(){
   var sid=document.getElementById('t-note-student').value;var note=document.getElementById('t-note-text').value.trim();
   if(!sid||!note){showToast('Please select a student and write a note.','error');return;}
   supa('POST','/rest/v1/progress_notes',{student_id:sid,note:note,teacher_id:currentProfile.linked_id}).then(function(){
-    document.getElementById('t-note-text').value='';showToast('Note saved! 🌙','success');loadTeacherData();
+    document.getElementById('t-note-text').value='';
+    showToast('Note saved! 🌙','success');
+    // Only refresh notes, not all teacher data
+    supa('GET','/rest/v1/progress_notes?teacher_id=eq.'+currentProfile.linked_id+'&order=created_at.desc&select=*').then(function(notes){
+      teacherNotesCache=notes||[];
+      renderNotesByBatch(teacherBatchesCache,teacherStudentsCache,teacherNotesCache);
+      document.getElementById('t-stat-notes').textContent=teacherNotesCache.length;
+    });
   }).catch(function(){showToast('Could not save.','error');});
 }
 
@@ -1195,6 +1214,18 @@ function submitCreateLogin(){
 }
 
 function toggleClPwd(){var i=document.getElementById('cl-password');i.type=i.type==='password'?'text':'password';}
+
+function openCreateLoginForStudent(studentId,name){
+  document.getElementById('cl-linked-id').value=studentId;
+  document.getElementById('cl-role').value='student';
+  document.getElementById('cl-name').value=name;
+  document.getElementById('cl-reg-id').value='';
+  document.getElementById('cl-info-text').textContent='Creating dashboard login for '+name+'. Share the password with them via WhatsApp.';
+  document.getElementById('cl-email').value='';
+  document.getElementById('cl-password').value='';
+  document.getElementById('cl-error').style.display='none';
+  openModal('modal-create-login');
+}
 
 function openCreateLoginForTeacher(teacherId,name){
   document.getElementById('cl-linked-id').value=teacherId;
@@ -1382,6 +1413,43 @@ function deleteBatch(id){
   fetch(SUPA_URL+'/rest/v1/students?batch_id=eq.'+id,{method:'PATCH',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+(currentSession?currentSession.access_token:SUPA_KEY),'Content-Type':'application/json'},body:JSON.stringify({batch_id:null})}).then(function(){
     return fetch(SUPA_URL+'/rest/v1/batches?id=eq.'+id,{method:'DELETE',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+(currentSession?currentSession.access_token:SUPA_KEY)}});
   }).then(function(){showToast('Batch removed.','success');loadAdminData();}).catch(function(){showToast('Could not delete.','error');});
+}
+
+/* ── CREATE LOGINS PANEL ── */
+function renderLoginsPanel(){
+  // Students
+  var sl=document.getElementById('logins-students-list');
+  var tl=document.getElementById('logins-teachers-list');
+  if(!sl||!tl) return;
+  if(!adminStudents.length){
+    sl.innerHTML='<div class="empty-state"><div class="empty-state-icon">🎓</div><div class="empty-state-title">No students yet</div></div>';
+  } else {
+    var sh='';
+    adminStudents.forEach(function(s){
+      var sn=s.name.replace(/'/g,'\u2019');
+      sh+='<div class="user-row">';
+      sh+='<div class="user-avatar">'+ini(s.name)+'</div>';
+      sh+='<div style="flex:1"><div class="user-name">'+s.name+'</div><div class="user-detail">'+(s.level||'')+(s.language?' · '+s.language:'')+'</div></div>';
+      sh+='<button class="btn btn-primary btn-sm" style="font-size:12px;white-space:nowrap" onclick="openCreateLoginForStudent(\''+s.id+'\',\''+sn+'\')">🔐 Create Login</button>';
+      sh+='</div>';
+    });
+    sl.innerHTML=sh;
+  }
+  // Teachers
+  if(!adminTeachers.length){
+    tl.innerHTML='<div class="empty-state"><div class="empty-state-icon">📖</div><div class="empty-state-title">No teachers yet</div></div>';
+  } else {
+    var th='';
+    adminTeachers.forEach(function(t){
+      var tn=t.name.replace(/'/g,'\u2019');
+      th+='<div class="user-row">';
+      th+='<div class="user-avatar" style="background:var(--gold-light);color:#8B6914">'+ini(t.name)+'</div>';
+      th+='<div style="flex:1"><div class="user-name">'+t.name+'</div><div class="user-detail">'+(t.email||'')+'</div></div>';
+      th+='<button class="btn btn-primary btn-sm" style="font-size:12px;white-space:nowrap" onclick="openCreateLoginForTeacher(\''+t.id+'\',\''+tn+'\')">🔐 Create Login</button>';
+      th+='</div>';
+    });
+    tl.innerHTML=th;
+  }
 }
 
 /* ── EVENT LISTENERS & INIT ── */

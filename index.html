@@ -224,8 +224,6 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
 .mob-menu-btn{display:none;background:none;border:none;cursor:pointer;padding:8px;border-radius:10px;color:var(--teal);transition:background .2s;flex-shrink:0}
 .mob-menu-btn:hover{background:var(--teal-light)}
 .mob-menu-btn svg{display:block}
-.mob-logout-btn{display:none;align-items:center;gap:5px;background:none;border:1.5px solid rgba(27,77,62,.2);color:var(--muted);font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;padding:7px 12px;border-radius:100px;transition:all .2s;flex-shrink:0}
-.mob-logout-btn:hover{color:var(--teal);border-color:var(--teal)}
 .sidebar-backdrop{display:none;position:fixed;top:0;right:0;bottom:0;left:260px;background:rgba(44,44,42,.5);z-index:250;-webkit-tap-highlight-color:transparent;pointer-events:none}
 .sidebar-backdrop.open{display:block;pointer-events:all}
 body.dash-active .sidebar-backdrop.open{left:260px}
@@ -235,9 +233,16 @@ body.dash-active .sidebar-backdrop.open{left:260px}
 .sidebar .sidebar-nav a{position:relative;z-index:401;pointer-events:all;-webkit-tap-highlight-color:rgba(255,255,255,.1)}
 .sidebar .sidebar-bottom button{position:relative;z-index:401;pointer-events:all}
 .mob-menu-btn{display:flex;align-items:center;justify-content:center}
-.mob-logout-btn{display:flex}
 .topbar{padding:0 16px}
-.dash-content{padding:16px}
+.dash-content{padding:12px}
+.stats-row.c3{grid-template-columns:1fr}
+.stats-row.c4{grid-template-columns:1fr 1fr}
+.g2{grid-template-columns:1fr}
+.c3{grid-template-columns:1fr 1fr}
+.topbar-pill{display:none}
+.topbar-date{display:none}
+.card{padding:16px;border-radius:14px}
+.modal{padding:20px 16px;border-radius:20px;max-height:95vh}
 }
 .profile-tab{flex:1;padding:7px 4px;border-radius:8px;border:none;background:transparent;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--muted);transition:all .2s;text-align:center}
 .profile-tab.active{background:var(--white);color:var(--teal);box-shadow:var(--shadow-sm)}
@@ -551,6 +556,7 @@ body.dash-active .sidebar-backdrop.open{left:260px}
     <li><a href="#" onclick="showPanel('page-student','sp-classes',this,event)"><span class="ni">🎙</span> My Classes</a></li>
     <li><a href="#" onclick="showPanel('page-student','sp-homework',this,event)"><span class="ni">📋</span> Homework</a></li>
     <li><a href="#" onclick="showPanel('page-student','sp-tickets',this,event)"><span class="ni">🎫</span> Support</a></li>
+    <li><a href="#" onclick="doLogout()" style="color:rgba(255,255,255,.5);margin-top:8px;border-top:1px solid rgba(255,255,255,.07);padding-top:14px"><span class="ni">↩</span> Sign out</a></li>
   </ul>
   <div class="sidebar-bottom">
     <div class="sidebar-user"><div class="sidebar-avatar" id="s-avatar">-</div><div><div class="sidebar-user-name" id="s-name">-</div><div class="sidebar-user-role" id="s-role">Student</div></div></div>
@@ -560,7 +566,7 @@ body.dash-active .sidebar-backdrop.open{left:260px}
   <div class="topbar">
     <button class="mob-menu-btn" onclick="openMobSidebar('page-student')" aria-label="Open menu"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="2" y="5" width="18" height="2" rx="1" fill="currentColor"/><rect x="2" y="10" width="18" height="2" rx="1" fill="currentColor"/><rect x="2" y="15" width="18" height="2" rx="1" fill="currentColor"/></svg></button>
     <div class="topbar-title">Ahlan, <em id="s-topname">-</em> 🌙</div>
-    <div class="topbar-right"><div class="topbar-date" id="today-date-s"></div><div class="topbar-pill" id="s-level-pill">Student</div><button class="mob-logout-btn" onclick="doLogout()">↩ Out</button></div>
+    <div class="topbar-right"><div class="topbar-date" id="today-date-s"></div><div class="topbar-pill" id="s-level-pill">Student</div></div>
   </div>
   <div class="dash-content">
     <div class="panel active" id="sp-home">
@@ -603,6 +609,7 @@ body.dash-active .sidebar-backdrop.open{left:260px}
     <li><a href="#" onclick="showPanel('page-teacher','tp-batches',this,event)"><span class="ni">👥</span> My Batches</a></li>
     <li><a href="#" onclick="showPanel('page-teacher','tp-attendance',this,event)"><span class="ni">✅</span> Attendance</a></li>
     <li><a href="#" onclick="showPanel('page-teacher','tp-notes',this,event)"><span class="ni">📝</span> Progress Notes</a></li>
+    <li><a href="#" onclick="doLogout()" style="color:rgba(255,255,255,.5);margin-top:8px;border-top:1px solid rgba(255,255,255,.07);padding-top:14px"><span class="ni">↩</span> Sign out</a></li>
   </ul>
   <div class="sidebar-bottom">
     <div class="sidebar-user"><div class="sidebar-avatar" id="t-avatar">-</div><div><div class="sidebar-user-name" id="t-name">-</div><div class="sidebar-user-role">Teacher</div></div></div>
@@ -612,7 +619,7 @@ body.dash-active .sidebar-backdrop.open{left:260px}
   <div class="topbar">
     <button class="mob-menu-btn" onclick="openMobSidebar('page-teacher')" aria-label="Open menu"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="2" y="5" width="18" height="2" rx="1" fill="currentColor"/><rect x="2" y="10" width="18" height="2" rx="1" fill="currentColor"/><rect x="2" y="15" width="18" height="2" rx="1" fill="currentColor"/></svg></button>
     <div class="topbar-title">Ahlan, <em id="t-topname">-</em> 🌙</div>
-    <div class="topbar-right"><div class="topbar-date" id="today-date-t"></div><div class="topbar-pill" id="t-batches-pill">Teacher</div><button class="mob-logout-btn" onclick="doLogout()">↩ Out</button></div>
+    <div class="topbar-right"><div class="topbar-date" id="today-date-t"></div><div class="topbar-pill" id="t-batches-pill">Teacher</div></div>
   </div>
   <div class="dash-content">
     <div class="panel active" id="tp-home">
@@ -674,17 +681,17 @@ body.dash-active .sidebar-backdrop.open{left:260px}
     <li><a href="#" onclick="showPanel('page-admin','ap-batches',this,event)"><span class="ni">👥</span> Batches</a></li>
     <li><a href="#" onclick="showPanel('page-admin','ap-revenue',this,event)"><span class="ni">💰</span> Revenue</a></li>
     <li><a href="#" onclick="showPanel('page-admin','ap-logins',this,event);renderLoginsPanel()"><span class="ni">🔐</span> Create Logins</a></li>
+    <li><a href="#" onclick="doLogout()" style="color:rgba(255,255,255,.5);margin-top:8px;border-top:1px solid rgba(255,255,255,.07);padding-top:14px"><span class="ni">↩</span> Sign out</a></li>
   </ul>
   <div class="sidebar-bottom">
     <div class="sidebar-user"><div class="sidebar-avatar" id="a-avatar">A</div><div><div class="sidebar-user-name" id="a-name">Admin</div><div class="sidebar-user-role">Full access</div></div></div>
-    <button class="sidebar-logout" onclick="doLogout()">← Sign out</button>
   </div>
 </aside>
 <div class="dash-main">
   <div class="topbar">
     <button class="mob-menu-btn" onclick="openMobSidebar('page-admin')" aria-label="Open menu"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="2" y="5" width="18" height="2" rx="1" fill="currentColor"/><rect x="2" y="10" width="18" height="2" rx="1" fill="currentColor"/><rect x="2" y="15" width="18" height="2" rx="1" fill="currentColor"/></svg></button>
     <div class="topbar-title">Sukoon <em>Admin</em> 🛡️</div>
-    <div class="topbar-right"><div class="topbar-date" id="today-date-a"></div><div class="topbar-pill">Full Access</div><button class="mob-logout-btn" onclick="doLogout()">↩ Out</button></div>
+    <div class="topbar-right"><div class="topbar-date" id="today-date-a"></div><div class="topbar-pill">Full Access</div></div>
   </div>
   <div class="dash-content">
     <div class="panel active" id="ap-home">

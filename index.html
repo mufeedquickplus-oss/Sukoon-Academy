@@ -23,7 +23,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'"/>
-<noscript><link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/></noscript>
+<noscript><link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/></noscript></noscript>
 <style>
 :root{--teal:#1B4D3E;--teal-mid:#2A6B56;--teal-light:#E8F3EF;--teal-pale:#F0F7F4;--gold:#C9A84C;--gold-light:#F5EDD4;--cream:#FAF7F2;--cream-dark:#F0EBE1;--charcoal:#2C2C2A;--muted:#6B6860;--white:#FFFFFF;--border:rgba(27,77,62,0.1);--shadow-sm:0 2px 12px rgba(27,77,62,0.06);--shadow:0 4px 20px rgba(27,77,62,0.08);--shadow-lg:0 12px 40px rgba(27,77,62,0.13);--r:20px;--rs:12px}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -217,8 +220,6 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
 .info-box-title{font-size:12px;font-weight:600;color:var(--teal);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em}
 .info-box p{font-size:13px;color:var(--charcoal);line-height:1.6}
 @media(max-width:900px){.sidebar{width:210px}.c4{grid-template-columns:repeat(2,1fr)}.g2{grid-template-columns:1fr}}
-@media(max-width:768px){.stats-row.c4{grid-template-columns:repeat(2,1fr)}.tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}table{min-width:600px}.topbar-date{display:none}.card{padding:20px}.modal{padding:24px 20px}}
-@media(max-width:640px){.login-card{padding:28px 20px}.modal{padding:20px 16px;border-radius:16px}.btn{padding:11px 20px}.stat-card{padding:18px}.profile-tab{font-size:11px;padding:6px 2px}.register-form-wrap{padding:24px 16px}}
 @media(max-width:768px){.hero{grid-template-columns:1fr;padding:100px 5% 60px}.hero-visual{display:none}.stats-bar{grid-template-columns:repeat(2,1fr)}.pricing-grid{grid-template-columns:1fr}.register-wrap{grid-template-columns:1fr}.nav-links{display:none}.nav-cta{display:none}.fr{grid-template-columns:1fr}.acc-left{flex-direction:column;align-items:flex-start;gap:6px}.hide-mob{display:none!important}.nav-login{padding:8px 16px;font-size:13px}}
 @media(max-width:640px){.dash-content{padding:16px}.c3{grid-template-columns:repeat(2,1fr)}.login-card{padding:32px 20px}input,select,textarea{font-size:16px!important}.dash-page{overflow-x:hidden}.fr{grid-template-columns:1fr}}
 @media(max-width:380px){.login-card{padding:24px 16px}.topbar-title{font-size:14px}.dash-content{padding:12px}.stats-row.c3{grid-template-columns:1fr}.stats-row.c4{grid-template-columns:repeat(2,1fr)}}
@@ -228,9 +229,9 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
 .mob-menu-btn svg{display:block}
 .mob-logout-btn{display:none;align-items:center;gap:5px;background:none;border:1.5px solid rgba(27,77,62,.2);color:var(--muted);font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;padding:7px 12px;border-radius:100px;transition:all .2s;flex-shrink:0}
 .mob-logout-btn:hover{color:var(--teal);border-color:var(--teal)}
-.sidebar-backdrop{display:none;position:fixed;top:0;right:0;bottom:0;left:260px;background:rgba(44,44,42,.5);z-index:250;-webkit-tap-highlight-color:transparent;pointer-events:none;touch-action:none}
-.sidebar-backdrop.open{display:block;pointer-events:all;touch-action:none}
-/* backdrop covers full screen */
+.sidebar-backdrop{display:none;position:fixed;top:0;right:0;bottom:0;left:260px;background:rgba(44,44,42,.5);z-index:250;-webkit-tap-highlight-color:transparent;pointer-events:none}
+.sidebar-backdrop.open{display:block;pointer-events:all}
+body.dash-active .sidebar-backdrop.open{left:260px}
 @media(max-width:640px){
 .sidebar{position:fixed;top:0;left:0;height:100vh;height:100dvh;z-index:400;transform:translateX(-100%);-webkit-transform:translateX(-100%);-webkit-overflow-scrolling:touch;overflow-y:auto;touch-action:pan-y;transition:transform .3s cubic-bezier(.4,0,.2,1);width:260px}
 .sidebar.mob-open{transform:translateX(0);-webkit-transform:translateX(0)}
@@ -326,20 +327,29 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
 
 <!-- CREATE LOGIN MODAL -->
 <div class="modal-overlay" id="modal-create-login"><div class="modal">
-<div class="modal-header"><div class="modal-title" style="font-family:'Lora',serif">Create <em style="color:var(--teal);font-style:italic">Login Account</em></div><button class="modal-close" onclick="closeModal('modal-create-login')">&#x2715;</button></div>
+<div class="modal-header"><div class="modal-title" style="font-family:'Lora',serif">Create <em style="color:var(--teal);font-style:italic">Login Account</em></div><button class="modal-close" onclick="closeModal('modal-create-login')">✕</button></div>
 <div class="info-box" style="margin-bottom:20px">
-  <div class="info-box-title" id="cl-info-title">&#128272; Setting up dashboard access</div>
+  <div class="info-box-title">🔐 Setting up dashboard access</div>
   <p id="cl-info-text">This will create a login for the student so they can access their dashboard.</p>
 </div>
 <input type="hidden" id="cl-linked-id"/>
 <input type="hidden" id="cl-role"/>
 <input type="hidden" id="cl-name"/>
 <input type="hidden" id="cl-reg-id"/>
-<input type="hidden" id="cl-mode" value="create"/>
-<div class="fg" id="cl-email-wrap"><label>Email address</label><input id="cl-email" type="email" placeholder="student@email.com"/></div>
-<div class="fg"><label id="cl-pwd-label">New password <span style="color:var(--muted);font-weight:300">(share this with them)</span></label><div class="pwd-wrap"><input id="cl-password" type="password" placeholder="Min. 8 characters"/><button class="pwd-toggle" onclick="toggleClPwd()">&#128065;</button></div></div>
+<div class="fg"><label>Email address</label><input id="cl-email" type="email" placeholder="student@email.com"/></div>
+<div class="fg"><label>Temporary password <span style="color:var(--muted);font-weight:300">(share this with them)</span></label><div class="pwd-wrap"><input id="cl-password" type="password" placeholder="Min. 8 characters"/><button class="pwd-toggle" onclick="toggleClPwd()">👁</button></div></div>
 <div id="cl-error" style="background:#FEE8E8;color:#C0392B;font-size:13px;padding:12px 16px;border-radius:var(--rs);margin-bottom:16px;display:none;border:1px solid rgba(192,57,43,.15)"></div>
-<div class="modal-actions"><button class="btn btn-ghost btn-sm" onclick="closeModal('modal-create-login')">Cancel</button><button class="btn btn-primary btn-sm" id="cl-submit-btn" onclick="submitCreateLogin()">Create Login &#128272;</button></div>
+<div class="modal-actions"><button class="btn btn-ghost btn-sm" onclick="closeModal('modal-create-login')">Cancel</button><button class="btn btn-primary btn-sm" id="cl-submit-btn" onclick="submitCreateLogin()">Create Login 🔐</button></div>
+</div></div>
+
+<div class="modal-overlay" id="modal-create-login"><div class="modal">
+<div class="modal-header"><div class="modal-title" style="font-family:'Lora',serif">Create <em style="color:var(--teal);font-style:italic">Login</em></div><button class="modal-close" onclick="closeModal('modal-create-login')">&#x2715;</button></div>
+<div class="info-box" style="margin-bottom:20px"><div class="info-box-title" id="cl-info-title">&#128272; Setting up dashboard access</div><p id="cl-info-text">This will create a login for the student.</p></div>
+<input type="hidden" id="cl-linked-id"/><input type="hidden" id="cl-role"/><input type="hidden" id="cl-name"/><input type="hidden" id="cl-reg-id"/><input type="hidden" id="cl-mode" value="create"/>
+<div class="fg" id="cl-email-wrap"><label>Email address</label><input id="cl-email" type="email" placeholder="student@email.com"/></div>
+<div class="fg"><label id="cl-pwd-label">Password <span style="color:var(--muted);font-weight:300">(share with them)</span></label><div class="pwd-wrap"><input id="cl-password" type="password" placeholder="Min. 8 characters"/><button class="pwd-toggle" onclick="toggleClPwd()" type="button">&#128065;</button></div></div>
+<div id="cl-error" style="background:#FEE8E8;color:#C0392B;font-size:13px;padding:12px 16px;border-radius:var(--rs);margin-bottom:16px;display:none;border:1px solid rgba(192,57,43,.15)"></div>
+<div class="modal-actions"><button class="btn btn-ghost btn-sm" onclick="closeModal('modal-create-login')">Cancel</button><button class="btn btn-primary btn-sm" id="cl-submit-btn" onclick="submitCreateLogin()">Create Login</button></div>
 </div></div>
 
 <div class="modal-overlay" id="modal-raise-ticket"><div class="modal">
@@ -547,7 +557,6 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
   </ul>
   <div class="sidebar-bottom">
     <div class="sidebar-user"><div class="sidebar-avatar" id="s-avatar">-</div><div><div class="sidebar-user-name" id="s-name">-</div><div class="sidebar-user-role" id="s-role">Student</div></div></div>
-    <button class="sidebar-logout" onclick="doLogout()">← Sign out</button>
   </div>
 </aside>
 <div class="dash-main">
@@ -600,7 +609,6 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
   </ul>
   <div class="sidebar-bottom">
     <div class="sidebar-user"><div class="sidebar-avatar" id="t-avatar">-</div><div><div class="sidebar-user-name" id="t-name">-</div><div class="sidebar-user-role">Teacher</div></div></div>
-    <button class="sidebar-logout" onclick="doLogout()">← Sign out</button>
   </div>
 </aside>
 <div class="dash-main">
@@ -734,6 +742,17 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
         <div id="a-batches-list"><div class="empty-state"><div class="empty-state-icon">👥</div><div class="empty-state-title">No batches yet</div><p>Add a batch and assign a teacher and students to it.</p></div></div>
       </div>
     </div>
+    <div class="panel" id="ap-logins">
+      <div class="card">
+        <div class="card-title" style="margin-bottom:6px">Create &amp; Reset <em>Logins</em></div>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:20px;font-weight:300">Create or reset dashboard login credentials for students and teachers.</p>
+        <div class="info-box" style="margin-bottom:24px"><div class="info-box-title">How it works</div><p>Create Login - first time setup. Reset Password - if they forget it.</p></div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);margin-bottom:12px">Students</div>
+        <div id="logins-students-list"><div class="empty-state"><div class="empty-state-icon">&#127891;</div><div class="empty-state-title">No students yet</div></div></div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);margin-top:28px;margin-bottom:12px">Teachers</div>
+        <div id="logins-teachers-list"><div class="empty-state"><div class="empty-state-icon">&#128218;</div><div class="empty-state-title">No teachers yet</div></div></div>
+      </div>
+    </div>
     <div class="panel" id="ap-revenue">
       <div class="stats-row c3">
         <div class="stat-card teal"><div class="sc-label">Paid Students</div><div class="sc-num" id="r-paid">-</div></div>
@@ -741,17 +760,6 @@ tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--tea
         <div class="stat-card gold"><div class="sc-label">Est. Monthly Revenue</div><div class="sc-num" id="r-revenue">-</div></div>
       </div>
       <div class="card"><div class="card-title" style="margin-bottom:16px">Payment <em>Status</em></div><div id="a-revenue-table"><div class="empty-state"><div class="empty-state-icon">💰</div><div class="empty-state-title">No data yet</div></div></div></div>
-    </div>
-    <div class="panel" id="ap-logins">
-      <div class="card">
-        <div class="card-title" style="margin-bottom:6px">Create &amp; Reset <em>Logins</em></div>
-        <p style="font-size:13px;color:var(--muted);margin-bottom:20px;font-weight:300">Create or reset dashboard login credentials for students and teachers. Share credentials via WhatsApp.</p>
-        <div class="info-box" style="margin-bottom:24px"><div class="info-box-title">How it works</div><p>&#128272; Create Login - for first time setup. &#128273; Reset Password - if they forget their password.</p></div>
-        <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);margin-bottom:12px">Students</div>
-        <div id="logins-students-list"><div class="empty-state"><div class="empty-state-icon">&#127891;</div><div class="empty-state-title">No students yet</div></div></div>
-        <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);margin-top:28px;margin-bottom:12px">Teachers</div>
-        <div id="logins-teachers-list"><div class="empty-state"><div class="empty-state-icon">&#128218;</div><div class="empty-state-title">No teachers yet</div></div></div>
-      </div>
     </div>
   </div>
 </div>
@@ -1208,8 +1216,346 @@ function approveReg(regId,name,age,level,language,currency,whatsapp){
     }
   }).catch(function(e){showToast('Could not approve.','error');console.error(e);});
 }
+function deleteReg(id){
+  if(!confirm('Delete this registration? This cannot be undone.')) return;
+  fetch(SUPA_URL+'/rest/v1/registrations?id=eq.'+id,{method:'DELETE',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+(currentSession?currentSession.access_token:SUPA_KEY)}}).then(function(){
+    showToast('Registration deleted.','success');loadAdminData();
+  }).catch(function(){showToast('Could not delete.','error');});
+}
+
+/* approveReg — creates student row then opens login creation modal */
+function approveReg(regId,name,age,level,language,currency,whatsapp){
+  if(!confirm('Approve '+name+' as a student?')) return;
+  supa('POST','/rest/v1/students',{
+    name:name,age:age,level:level,language:language,currency:currency,
+    whatsapp:whatsapp||null,payment_status:'pending',status:'active',
+    course_status:'enrolled',enrollment_date:new Date().toISOString().split('T')[0],
+    registration_id:regId
+  }).then(function(res){
+    var studentId=res&&res.length?res[0].id:null;
+    return supa('PATCH','/rest/v1/registrations?id=eq.'+regId,{status:'approved'}).then(function(){return studentId;});
+  }).then(function(studentId){
+    showToast(name+' approved! Now create their login. 🌙','success');
+    setTimeout(function(){loadAdminData();},600);
+    if(studentId){
+      document.getElementById('cl-linked-id').value=studentId;
+      document.getElementById('cl-role').value='student';
+      document.getElementById('cl-name').value=name;
+      document.getElementById('cl-reg-id').value=regId;
+      document.getElementById('cl-info-text').textContent='Creating dashboard login for '+name+'. Share the password with them via WhatsApp.';
+      document.getElementById('cl-email').value='';
+      document.getElementById('cl-password').value='';
+      document.getElementById('cl-error').style.display='none';
+      setTimeout(function(){openModal('modal-create-login');},800);
+    }
+  }).catch(function(e){showToast('Could not approve.','error');console.error(e);});
+}
+
+/* submitCreateLogin — calls Edge Function to create Auth user + profile */
+function submitCreateLogin(){
+  var email=document.getElementById('cl-email').value.trim();
+  var password=document.getElementById('cl-password').value;
+  var name=document.getElementById('cl-name').value;
+  var role=document.getElementById('cl-role').value;
+  var linkedId=document.getElementById('cl-linked-id').value;
+  var errEl=document.getElementById('cl-error');
+  var btn=document.getElementById('cl-submit-btn');
+  errEl.style.display='none';
+  if(!email||!password){errEl.textContent='Please enter email and password.';errEl.style.display='block';return;}
+  if(password.length<8){errEl.textContent='Password must be at least 8 characters.';errEl.style.display='block';return;}
+  btn.disabled=true;btn.innerHTML='<span class="spinner"></span> Creating\u2026';
+  fetch('https://fturomssegxeqditglck.supabase.co/functions/v1/create-user',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Authorization':'Bearer '+SUPA_KEY,'apikey':SUPA_KEY},
+    body:JSON.stringify({email:email,password:password,name:name,role:role,linked_id:linkedId})
+  }).then(function(r){return r.json();}).then(function(data){
+    if(data.error){errEl.textContent=data.error;errEl.style.display='block';btn.disabled=false;btn.textContent='Create Login \uD83D\uDD10';return;}
+    closeModal('modal-create-login');
+    showToast('Login created for '+name+'! \uD83C\uDF19','success');
+    loadAdminData();
+  }).catch(function(){
+    errEl.textContent='Could not connect. Please try again.';errEl.style.display='block';
+    btn.disabled=false;btn.textContent='Create Login \uD83D\uDD10';
+  });
+}
+
+function toggleClPwd(){var i=document.getElementById('cl-password');i.type=i.type==='password'?'text':'password';}
+
+function openCreateLoginForStudent(studentId,name){
+  document.getElementById('cl-linked-id').value=studentId;
+  document.getElementById('cl-role').value='student';
+  document.getElementById('cl-name').value=name;
+  document.getElementById('cl-reg-id').value='';
+  document.getElementById('cl-info-text').textContent='Creating dashboard login for '+name+'. Share the password with them via WhatsApp.';
+  document.getElementById('cl-email').value='';
+  document.getElementById('cl-password').value='';
+  document.getElementById('cl-error').style.display='none';
+  openModal('modal-create-login');
+}
+
+function openCreateLoginForTeacher(teacherId,name){
+  document.getElementById('cl-linked-id').value=teacherId;
+  document.getElementById('cl-role').value='teacher';
+  document.getElementById('cl-name').value=name;
+  document.getElementById('cl-reg-id').value='';
+  document.getElementById('cl-info-text').textContent='Creating dashboard login for teacher '+name+'.';
+  document.getElementById('cl-email').value='';
+  document.getElementById('cl-password').value='';
+  document.getElementById('cl-error').style.display='none';
+  openModal('modal-create-login');
+}
+
+function renderStudentsTable(){
+  if(!adminStudents.length){document.getElementById('a-students-table').innerHTML='<div class="empty-state"><div class="empty-state-icon">🎓</div><div class="empty-state-title">No students yet</div><p>Approve registrations to add students here.</p></div>';return;}
+  var batchMap={};adminBatches.forEach(function(b){batchMap[b.id]=b.name;});
+  var h='<div class="tscroll"><table><thead><tr><th>Name</th><th>Age</th><th>Level</th><th>Country</th><th>Language</th><th>WhatsApp</th><th>Batch</th><th>Payment</th><th>Actions</th></tr></thead><tbody>';
+  adminStudents.forEach(function(s){
+    var sn=s.name.replace(/'/g,'').replace(/"/g,'');
+    var sl=(s.level||'').replace(/'/g,'');var sc=(s.country||'').replace(/'/g,'');
+    var slang=(s.language||'').replace(/'/g,'');var sa=(s.payment_amount||'').replace(/'/g,'');
+    h+='<tr style="cursor:pointer" onclick="openStudentProfile(\''+s.id+'\')" title="View profile">';
+    h+='<td style="font-weight:500;color:var(--teal)">'+s.name+'</td><td>'+(s.age||'—')+'</td>';
+    h+='<td style="font-size:12px">'+(s.level||'—')+'</td><td>'+(s.country||'—')+'</td><td>'+(s.language||'—')+'</td>';
+    h+='<td style="font-size:12px">'+(s.whatsapp?'<a href="https://wa.me/'+s.whatsapp.replace(/[^0-9]/g,'')+'" target="_blank" onclick="event.stopPropagation()" style="color:var(--teal);font-weight:600">'+s.whatsapp+'</a>':'—')+'</td>';
+    h+='<td style="font-size:12px">'+(s.batch_id&&batchMap[s.batch_id]?batchMap[s.batch_id]:'<span style="color:var(--muted)">Unassigned</span>')+'</td>';
+    h+='<td>'+(s.payment_status==='paid'?'<span class="badge bg">'+(s.payment_amount||'Paid')+'</span>':'<span class="badge bgold">Pending</span>')+'</td>';
+    h+='<td><div style="display:flex;gap:6px"><button class="btn btn-ghost btn-sm" onclick="event.stopPropagation();openEditStudent(\''+s.id+'\',\''+sn+'\',\''+s.age+'\',\''+sl+'\',\''+sc+'\',\''+slang+'\',\''+s.payment_status+'\',\''+sa+'\')">Edit</button><button class="btn btn-danger btn-sm" onclick="event.stopPropagation();deleteStudent(\''+s.id+'\')">Delete</button></div></td></tr>';
+  });
+  h+='</tbody></table></div>';
+  document.getElementById('a-students-table').innerHTML=h;
+}
+
+function openEditStudent(id,name,age,level,country,language,payStatus,payAmount){
+  document.getElementById('es-id').value=id;document.getElementById('es-name').value=name;
+  document.getElementById('es-age').value=age||'';document.getElementById('es-level').value=level||'Haroof - Level 1';
+  document.getElementById('es-country').value=country||'UAE';document.getElementById('es-lang').value=language||'English';
+  document.getElementById('es-pay').value=payStatus||'pending';document.getElementById('es-amount').value=payAmount||'';
+  openModal('modal-edit-student');
+}
+function updateStudent(){
+  var id=document.getElementById('es-id').value;var name=document.getElementById('es-name').value.trim();
+  if(!name){showToast('Please enter a name.','error');return;}
+  supa('PATCH','/rest/v1/students?id=eq.'+id,{name:name,age:parseInt(document.getElementById('es-age').value)||null,level:document.getElementById('es-level').value,country:document.getElementById('es-country').value,language:document.getElementById('es-lang').value,payment_status:document.getElementById('es-pay').value,payment_amount:document.getElementById('es-amount').value.trim()}).then(function(){
+    closeModal('modal-edit-student');showToast('Student updated! 🌙','success');loadAdminData();
+  }).catch(function(){showToast('Could not update.','error');});
+}
+
+function renderTeachers(){
+  if(!adminTeachers.length){document.getElementById('a-teachers-list').innerHTML='<div class="empty-state"><div class="empty-state-icon">📖</div><div class="empty-state-title">No teachers yet</div><p>Add your first teacher using the button above.</p></div>';return;}
+  var tsc={};
+  adminStudents.forEach(function(s){
+    if(!s.batch_id) return;
+    var b=adminBatches.find(function(b){return b.id===s.batch_id;});
+    if(b&&b.teacher_id) tsc[b.teacher_id]=(tsc[b.teacher_id]||0)+1;
+  });
+  var h='';
+  adminTeachers.forEach(function(t){
+    var init=t.name.split(' ').map(function(w){return w[0];}).join('').substring(0,2).toUpperCase();
+    var count=tsc[t.id]||0;
+    var tn=t.name.replace(/'/g,'\u2019');var te=(t.email||'').replace(/'/g,'\u2019');var tp=(t.phone||'').replace(/'/g,'\u2019');
+    h+='<div class="user-row" style="cursor:pointer" onclick="openTeacherProfile(\''+t.id+'\')" title="View teacher profile">';
+    h+='<div class="user-avatar" style="background:var(--gold-light);color:#8B6914">'+init+'</div>';
+    h+='<div style="flex:1"><div class="user-name" style="color:var(--teal)">'+t.name+'</div><div class="user-detail">'+(t.email||'')+(t.phone?' · '+t.phone:'')+'</div></div>';
+    h+='<span class="badge '+(count>=10?'bred':'bg')+'" style="margin-right:8px">'+count+'/10</span>';
+    h+='<div style="display:flex;gap:6px" onclick="event.stopPropagation()">';
+    h+='<button class="btn btn-ghost btn-sm" onclick="openEditTeacher(\''+t.id+'\',\''+tn+'\',\''+te+'\',\''+tp+'\')">Edit</button>';
+    h+='<button class="btn btn-danger btn-sm" onclick="deleteTeacher(\''+t.id+'\')">Delete</button>';
+    h+='</div></div>';
+  });
+  document.getElementById('a-teachers-list').innerHTML=h;
+}
+
+function renderBatches(){
+  if(!adminBatches.length){document.getElementById('a-batches-list').innerHTML='<div class="empty-state"><div class="empty-state-icon">👥</div><div class="empty-state-title">No batches yet</div><p>Add a batch and assign a teacher and students.</p></div>';return;}
+  var teacherMap={};adminTeachers.forEach(function(t){teacherMap[t.id]=t.name;});
+  var h='';
+  adminBatches.forEach(function(b){
+    var sc=adminStudents.filter(function(s){return s.batch_id===b.id;}).length;
+    h+='<div style="padding:18px;background:var(--cream);border-radius:14px;border:1px solid var(--border);margin-bottom:10px;cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor=\'var(--teal)\';this.style.background=\'var(--teal-pale)\'" onmouseout="this.style.borderColor=\'var(--border)\';this.style.background=\'var(--cream)\'" onclick="openBatchDetail(\''+b.id+'\')">';
+    h+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">';
+    h+='<div style="font-weight:600;font-size:14px;color:var(--teal)">'+b.name+'</div>';
+    h+='<div style="display:flex;gap:6px" onclick="event.stopPropagation()">';
+    h+='<button class="btn btn-ghost btn-sm" onclick="openBatchDetail(\''+b.id+'\')">View</button>';
+    h+='<button class="btn btn-danger btn-sm" onclick="deleteBatch(\''+b.id+'\')">Delete</button>';
+    h+='</div></div>';
+    h+='<div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--muted)"><span>📅 '+b.class_day+' · '+b.class_time+'</span><span>📖 '+(b.level||'—')+'</span><span>👩‍🏫 '+(b.teacher_id&&teacherMap[b.teacher_id]?teacherMap[b.teacher_id]:'No teacher')+'</span><span class="badge '+(sc>=10?'bred':'bteal')+'">'+sc+'/10 students</span></div></div>';
+  });
+  document.getElementById('a-batches-list').innerHTML=h;
+}
+
+function renderRevenue(){
+  var paid=adminStudents.filter(function(s){return s.payment_status==='paid';});
+  var pend=adminStudents.filter(function(s){return s.payment_status!=='paid';});
+  document.getElementById('r-paid').textContent=paid.length;document.getElementById('r-pending').textContent=pend.length;
+  document.getElementById('r-revenue').textContent=paid.length?'~AED '+(paid.length*65):'—';
+  if(!adminStudents.length){document.getElementById('a-revenue-table').innerHTML='<div class="empty-state"><div class="empty-state-icon">💰</div><div class="empty-state-title">No data yet</div></div>';return;}
+  var h='<div class="tscroll"><table><thead><tr><th>Name</th><th>Level</th><th>Payment</th><th>Amount</th></tr></thead><tbody>';
+  adminStudents.forEach(function(s){h+='<tr><td>'+s.name+'</td><td>'+(s.level||'—')+'</td><td>'+(s.payment_status==='paid'?'<span class="badge bg">Paid</span>':'<span class="badge bgold">Pending</span>')+'</td><td>'+(s.payment_amount||'—')+'</td></tr>';});
+  h+='</tbody></table></div>';document.getElementById('a-revenue-table').innerHTML=h;
+}
+
+function openAddBatchModal(){
+  var sel=document.getElementById('mb-teacher');
+  sel.innerHTML='<option value="">Select teacher</option>';
+  adminTeachers.forEach(function(t){
+    var count=adminStudents.filter(function(s){if(!s.batch_id)return false;var b=adminBatches.find(function(b){return b.id===s.batch_id;});return b&&b.teacher_id===t.id;}).length;
+    var opt=document.createElement('option');opt.value=t.id;opt.textContent=t.name+' ('+count+'/10)';
+    if(count>=10) opt.disabled=true;sel.appendChild(opt);
+  });
+  document.getElementById('mb-students-list').innerHTML='<div style="font-size:13px;color:var(--muted)">Select a teacher first to see available students</div>';
+  document.getElementById('mb-student-count').textContent='0 students selected';
+  document.getElementById('mb-teacher-count').textContent='';
+  openModal('modal-add-batch');
+}
+
+function updateBatchStudentList(){
+  var tid=document.getElementById('mb-teacher').value;
+  if(!tid){document.getElementById('mb-students-list').innerHTML='<div style="font-size:13px;color:var(--muted)">Select a teacher first</div>';return;}
+  var existing=adminStudents.filter(function(s){if(!s.batch_id)return false;var b=adminBatches.find(function(b){return b.id===s.batch_id;});return b&&b.teacher_id===tid;}).length;
+  var remaining=10-existing;
+  document.getElementById('mb-teacher-count').textContent=existing+'/10 students. Can add '+remaining+' more.';
+  var unassigned=adminStudents.filter(function(s){return !s.batch_id;});
+  if(!unassigned.length){document.getElementById('mb-students-list').innerHTML='<div style="font-size:13px;color:var(--muted)">No unassigned students available.</div>';return;}
+  var h='';
+  unassigned.forEach(function(s){
+    h+='<label style="display:flex;align-items:center;gap:10px;padding:8px;border-radius:8px;cursor:pointer"><input type="checkbox" class="bscb" value="'+s.id+'" onchange="updateBatchStudentCount('+remaining+')" style="width:16px;height:16px;accent-color:var(--teal);flex-shrink:0"/><div><div style="font-size:13px;font-weight:500">'+s.name+'</div><div style="font-size:11px;color:var(--muted)">'+(s.level||'')+(s.country?' · '+s.country:'')+'</div></div></label>';
+  });
+  document.getElementById('mb-students-list').innerHTML=h;
+}
+
+function updateBatchStudentCount(remaining){
+  var checked=document.querySelectorAll('.bscb:checked').length;var el=document.getElementById('mb-student-count');
+  if(checked>remaining){el.style.color='#C0392B';el.textContent='Max '+remaining+' for this teacher!';var allChecked=Array.from(document.querySelectorAll('.bscb:checked'));allChecked[allChecked.length-1].checked=false;return;}
+  el.style.color='#6B6860';el.textContent=checked+' student'+(checked===1?'':'s')+' selected';
+}
+
+function saveTeacher(){
+  var name=document.getElementById('mt-name').value.trim();
+  var email=document.getElementById('mt-email').value.trim();
+  if(!name){showToast('Please enter a name.','error');return;}
+  supa('POST','/rest/v1/teachers',{name:name,email:email,phone:document.getElementById('mt-phone').value.trim(),status:'active'}).then(function(res){
+    var teacherId=res&&res.length?res[0].id:null;
+    closeModal('modal-add-teacher');
+    ['mt-name','mt-email','mt-phone'].forEach(function(i){document.getElementById(i).value='';});
+    showToast('Teacher added! Now create their login.','success');
+    loadAdminData();
+    if(teacherId){setTimeout(function(){openCreateLoginForTeacher(teacherId,name);},800);}
+  }).catch(function(){showToast('Could not save.','error');});
+}
+function saveBatch(){
+  var name=document.getElementById('mb-name').value.trim();var tid=document.getElementById('mb-teacher').value;
+  if(!name){showToast('Please enter a batch name.','error');return;}
+  if(!tid){showToast('Please select a teacher.','error');return;}
+  var sel=Array.from(document.querySelectorAll('.bscb:checked')).map(function(cb){return cb.value;});
+  supa('POST','/rest/v1/batches',{name:name,level:document.getElementById('mb-level').value,language:document.getElementById('mb-lang').value,class_day:document.getElementById('mb-day').value,class_time:document.getElementById('mb-time').value.trim(),meet_link:document.getElementById('mb-meet').value.trim()||null,teacher_id:tid}).then(function(br){
+    var bid=br&&br.length?br[0].id:null;
+    if(bid&&sel.length){var patches=sel.map(function(sid){return supa('PATCH','/rest/v1/students?id=eq.'+sid,{batch_id:bid});});return Promise.all(patches);}
+  }).then(function(){
+    closeModal('modal-add-batch');document.getElementById('mb-name').value='';document.getElementById('mb-time').value='';document.getElementById('mb-meet').value='';
+    showToast('Batch created! 🌙','success');loadAdminData();
+  }).catch(function(e){showToast('Could not save.','error');console.error(e);});
+}
+
+function saveStudent(){
+  var name=document.getElementById('ms-name').value.trim();
+  if(!name){showToast('Please enter a name.','error');return;}
+  supa('POST','/rest/v1/students',{name:name,age:parseInt(document.getElementById('ms-age').value)||null,level:document.getElementById('ms-level').value,country:document.getElementById('ms-country').value,language:document.getElementById('ms-lang').value,payment_status:document.getElementById('ms-pay').value,payment_amount:document.getElementById('ms-amount').value.trim(),status:'active'}).then(function(){
+    closeModal('modal-add-student');['ms-name','ms-age','ms-amount'].forEach(function(i){document.getElementById(i).value='';});
+    showToast('Student added! 🌙','success');loadAdminData();
+  }).catch(function(){showToast('Could not save.','error');});
+}
+
+function deleteStudent(id){
+  if(!confirm('Delete this student? This cannot be undone.')) return;
+  fetch(SUPA_URL+'/rest/v1/students?id=eq.'+id,{method:'DELETE',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+(currentSession?currentSession.access_token:SUPA_KEY)}}).then(function(){showToast('Student removed.','success');loadAdminData();}).catch(function(){showToast('Could not delete.','error');});
+}
+function deleteTeacher(id){
+  if(!confirm('Delete this teacher? This cannot be undone.')) return;
+  fetch(SUPA_URL+'/rest/v1/teachers?id=eq.'+id,{method:'DELETE',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+(currentSession?currentSession.access_token:SUPA_KEY)}}).then(function(){showToast('Teacher removed.','success');loadAdminData();}).catch(function(){showToast('Could not delete.','error');});
+}
+function deleteBatch(id){
+  if(!confirm('Delete this batch? Students will become unassigned.')) return;
+  fetch(SUPA_URL+'/rest/v1/students?batch_id=eq.'+id,{method:'PATCH',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+(currentSession?currentSession.access_token:SUPA_KEY),'Content-Type':'application/json'},body:JSON.stringify({batch_id:null})}).then(function(){
+    return fetch(SUPA_URL+'/rest/v1/batches?id=eq.'+id,{method:'DELETE',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+(currentSession?currentSession.access_token:SUPA_KEY)}});
+  }).then(function(){showToast('Batch removed.','success');loadAdminData();}).catch(function(){showToast('Could not delete.','error');});
+}
+
+/* ── CREATE LOGINS PANEL ── */
+function renderLoginsPanel(){
+  // Students
+  var sl=document.getElementById('logins-students-list');
+  var tl=document.getElementById('logins-teachers-list');
+  if(!sl||!tl) return;
+  if(!adminStudents.length){
+    sl.innerHTML='<div class="empty-state"><div class="empty-state-icon">🎓</div><div class="empty-state-title">No students yet</div></div>';
+  } else {
+    var sh='';
+    adminStudents.forEach(function(s){
+      var sn=s.name.replace(/'/g,'\u2019');
+      sh+='<div class="user-row">';
+      sh+='<div class="user-avatar">'+ini(s.name)+'</div>';
+      sh+='<div style="flex:1"><div class="user-name">'+s.name+'</div><div class="user-detail">'+(s.level||'')+(s.language?' · '+s.language:'')+'</div></div>';
+      sh+='<button class="btn btn-primary btn-sm" style="font-size:12px;white-space:nowrap" onclick="openCreateLoginForStudent(\''+s.id+'\',\''+sn+'\')">🔐 Create Login</button>';
+      sh+='</div>';
+    });
+    sl.innerHTML=sh;
+  }
+  // Teachers
+  if(!adminTeachers.length){
+    tl.innerHTML='<div class="empty-state"><div class="empty-state-icon">📖</div><div class="empty-state-title">No teachers yet</div></div>';
+  } else {
+    var th='';
+    adminTeachers.forEach(function(t){
+      var tn=t.name.replace(/'/g,'\u2019');
+      th+='<div class="user-row">';
+      th+='<div class="user-avatar" style="background:var(--gold-light);color:#8B6914">'+ini(t.name)+'</div>';
+      th+='<div style="flex:1"><div class="user-name">'+t.name+'</div><div class="user-detail">'+(t.email||'')+'</div></div>';
+      th+='<button class="btn btn-primary btn-sm" style="font-size:12px;white-space:nowrap" onclick="openCreateLoginForTeacher(\''+t.id+'\',\''+tn+'\')">🔐 Create Login</button>';
+      th+='</div>';
+    });
+    tl.innerHTML=th;
+  }
+}
+
+/* ── CREATE LOGINS PANEL ── */
+function renderLoginsPanel(){
+  var sl=document.getElementById('logins-students-list');
+  var tl=document.getElementById('logins-teachers-list');
+  if(!sl||!tl) return;
+  if(!adminStudents.length&&!adminTeachers.length){sl.innerHTML='<div class="empty-state"><div class="empty-state-icon">&#9203;</div><div class="empty-state-title">Loading...</div></div>';tl.innerHTML='';loadAdminData();return;}
+  if(!adminStudents.length){sl.innerHTML='<div class="empty-state"><div class="empty-state-icon">&#127891;</div><div class="empty-state-title">No students yet</div></div>';}
+  else{
+    var sh='';
+    adminStudents.forEach(function(s){
+      var sn=s.name.replace(/'/g,'’');
+      sh+='<div class="user-row" style="flex-wrap:wrap;gap:8px"><div class="user-avatar">'+ini(s.name)+'</div>';
+      sh+='<div style="flex:1;min-width:100px"><div class="user-name">'+s.name+'</div><div class="user-detail">'+(s.level||'')+(s.language?' - '+s.language:'')+'</div></div>';
+      sh+='<div style="display:flex;gap:5px;flex-shrink:0">';
+      sh+='<button class="btn btn-primary btn-sm" style="font-size:11px" onclick="openCreateLoginForStudent(''+s.id+'',''+sn+'')">&#128272; Create</button>';
+      sh+='<button class="btn btn-ghost btn-sm" style="font-size:11px" onclick="openResetPassword(''+s.id+'',''+sn+'','')">&#128273; Reset</button>';
+      sh+='</div></div>';
+    });
+    sl.innerHTML=sh;
+  }
+  if(!adminTeachers.length){tl.innerHTML='<div class="empty-state"><div class="empty-state-icon">&#128218;</div><div class="empty-state-title">No teachers yet</div></div>';}
+  else{
+    var th='';
+    adminTeachers.forEach(function(t){
+      var tn=t.name.replace(/'/g,'’');
+      var te=(t.email||'').replace(/'/g,'’');
+      th+='<div class="user-row" style="flex-wrap:wrap;gap:8px"><div class="user-avatar" style="background:var(--gold-light);color:#8B6914">'+ini(t.name)+'</div>';
+      th+='<div style="flex:1;min-width:100px"><div class="user-name">'+t.name+'</div><div class="user-detail">'+(t.email||'')+'</div></div>';
+      th+='<div style="display:flex;gap:5px;flex-shrink:0">';
+      th+='<button class="btn btn-primary btn-sm" style="font-size:11px" onclick="openCreateLoginForTeacher(''+t.id+'',''+tn+'')">&#128272; Create</button>';
+      th+='<button class="btn btn-ghost btn-sm" style="font-size:11px" onclick="openResetPassword(''+t.id+'',''+tn+'',''+te+'')">&#128273; Reset</button>';
+      th+='</div></div>';
+    });
+    tl.innerHTML=th;
+  }
+}
 
 /* ── LOGIN MANAGEMENT ── */
+function toggleClPwd(){var i=document.getElementById('cl-password');i.type=i.type==='password'?'text':'password';}
 function openResetPassword(linkedId,name,email){
   document.getElementById('cl-linked-id').value=linkedId;
   document.getElementById('cl-name').value=name;
@@ -1217,12 +1563,12 @@ function openResetPassword(linkedId,name,email){
   document.getElementById('cl-email').value=email||'';
   document.getElementById('cl-password').value='';
   document.getElementById('cl-error').style.display='none';
+  document.getElementById('cl-info-title').textContent='Reset login password';
   document.getElementById('cl-info-text').textContent='Enter a new password for '+name+'. Share it via WhatsApp.';
   document.getElementById('cl-email-wrap').style.display='none';
   document.getElementById('cl-submit-btn').textContent='Update Password';
   openModal('modal-create-login');
 }
-function toggleClPwd(){var i=document.getElementById('cl-password');i.type=i.type==='password'?'text':'password';}
 function openCreateLoginForStudent(studentId,name){
   document.getElementById('cl-linked-id').value=studentId;
   document.getElementById('cl-role').value='student';
@@ -1232,6 +1578,7 @@ function openCreateLoginForStudent(studentId,name){
   document.getElementById('cl-email').value='';
   document.getElementById('cl-password').value='';
   document.getElementById('cl-error').style.display='none';
+  document.getElementById('cl-info-title').textContent='Setting up dashboard access';
   document.getElementById('cl-email-wrap').style.display='block';
   document.getElementById('cl-submit-btn').textContent='Create Login';
   document.getElementById('cl-info-text').textContent='Creating login for '+name+'. Share the password via WhatsApp.';
@@ -1246,6 +1593,7 @@ function openCreateLoginForTeacher(teacherId,name){
   document.getElementById('cl-email').value='';
   document.getElementById('cl-password').value='';
   document.getElementById('cl-error').style.display='none';
+  document.getElementById('cl-info-title').textContent='Setting up dashboard access';
   document.getElementById('cl-email-wrap').style.display='block';
   document.getElementById('cl-submit-btn').textContent='Create Login';
   document.getElementById('cl-info-text').textContent='Creating login for teacher '+name+'.';
@@ -1261,7 +1609,7 @@ function submitCreateLogin(){
   var errEl=document.getElementById('cl-error');
   var btn=document.getElementById('cl-submit-btn');
   errEl.style.display='none';
-  if(mode==='create'&&!email){errEl.textContent='Please enter an email address.';errEl.style.display='block';return;}
+  if(mode==='create'&&!email){errEl.textContent='Please enter an email.';errEl.style.display='block';return;}
   if(!password){errEl.textContent='Please enter a password.';errEl.style.display='block';return;}
   if(password.length<8){errEl.textContent='Password must be at least 8 characters.';errEl.style.display='block';return;}
   btn.disabled=true;
@@ -1274,13 +1622,9 @@ function submitCreateLogin(){
     headers:{'Content-Type':'application/json','Authorization':'Bearer '+SUPA_KEY,'apikey':SUPA_KEY},
     body:JSON.stringify(payload)
   }).then(function(r){return r.json();}).then(function(data){
-    if(data.error){
-      errEl.textContent=data.error;errEl.style.display='block';
-      btn.disabled=false;btn.textContent=mode==='reset'?'Update Password':'Create Login';
-      return;
-    }
+    if(data.error){errEl.textContent=data.error;errEl.style.display='block';btn.disabled=false;btn.textContent=mode==='reset'?'Update Password':'Create Login';return;}
     closeModal('modal-create-login');
-    showToast(mode==='reset'?'Password updated for '+name+'! 🌙':'Login created for '+name+'! 🌙','success');
+    showToast(mode==='reset'?'Password updated for '+name+'!':'Login created for '+name+'!','success');
     loadAdminData();
   }).catch(function(){
     errEl.textContent='Could not connect. Please try again.';errEl.style.display='block';
@@ -1312,6 +1656,320 @@ setDates();
     currentSession=saved.session;currentUser=saved.user;currentProfile=saved.profile;routeToDashboard();
   }catch(e){sessionStorage.removeItem('sukoon_session');}
 })();
+
+/* ── TEACHER/STUDENT HELPERS ── */
+var teacherBatchesCache=[],teacherStudentsCache=[],teacherAttCache=[],teacherNotesCache=[];
+function ini(n){return(n||'?').split(' ').map(function(w){return w[0]||'';}).join('').substring(0,2).toUpperCase();}
+
+function getNextClassDate(dayName){
+  var days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var target=days.indexOf(dayName);if(target===-1) return null;
+  var today=new Date();var diff=target-today.getDay();if(diff<0) diff+=7;
+  var next=new Date(today);next.setDate(today.getDate()+diff);return next;
+}
+function formatNextClass(dayName){
+  var d=getNextClassDate(dayName);if(!d) return dayName||'—';
+  var today=new Date();today.setHours(0,0,0,0);var tomorrow=new Date(today);tomorrow.setDate(today.getDate()+1);d.setHours(0,0,0,0);
+  if(d.getTime()===today.getTime()) return 'Today';if(d.getTime()===tomorrow.getTime()) return 'Tomorrow';
+  return d.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'});
+}
+
+function renderBatchHomeCards(batches,students){
+  var h='';
+  batches.forEach(function(b){
+    var bs=students.filter(function(s){return s.batch_id===b.id;});
+    var av='';bs.slice(0,4).forEach(function(s){av+='<div style="width:24px;height:24px;border-radius:50%;background:var(--teal-light);color:var(--teal);font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center">'+ini(s.name)+'</div>';});
+    if(bs.length>4) av+='<div style="width:24px;height:24px;border-radius:50%;background:var(--gold-light);color:#8B6914;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center">+'+(bs.length-4)+'</div>';
+    var nextLabel=formatNextClass(b.class_day);var isToday=nextLabel==='Today';
+    h+='<div style="background:var(--white);border-radius:var(--r);padding:18px 20px;border:1px solid var(--border);box-shadow:var(--shadow-sm);cursor:pointer;transition:all .2s" onmouseover="this.style.transform=\'translateY(-3px)\'" onmouseout="this.style.transform=\'\'" onclick="showPanel(\'page-teacher\',\'tp-batches\',null,event)">';
+    h+='<div style="font-family:Lora,serif;font-size:15px;font-weight:600;margin-bottom:3px">'+b.name+'</div>';
+    h+='<div style="font-size:12px;color:var(--muted);margin-bottom:10px">'+(b.level||'')+(b.language?' · '+b.language:'')+'</div>';
+    h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;padding:8px 10px;background:'+(isToday?'var(--teal-pale)':'var(--cream)')+';border-radius:10px;border:1px solid '+(isToday?'var(--teal)':'var(--border)')+'"><span style="font-size:14px">📅</span><div><div style="font-size:12px;font-weight:600;color:'+(isToday?'var(--teal)':'var(--charcoal)')+'">'+nextLabel+'</div><div style="font-size:11px;color:var(--muted)">'+b.class_time+'</div></div>'+(isToday&&b.meet_link?'<a href="'+b.meet_link+'" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="margin-left:auto;background:var(--teal);color:#fff;font-size:11px;font-weight:600;padding:5px 10px;border-radius:8px;text-decoration:none">Join</a>':'')+'</div>';
+    h+='<div style="display:flex;gap:4px;align-items:center">'+av+'<span style="font-size:11px;color:var(--muted);margin-left:4px">'+bs.length+' student'+(bs.length===1?'':'s')+'</span></div></div>';
+  });
+  var el=document.getElementById('t-home-batches');
+  if(el) el.style.display=batches.length?'grid':'block';
+  if(el) el.innerHTML=h||'<div class="empty-state"><div class="empty-state-icon">&#128218;</div><div class="empty-state-title">No batches yet</div></div>';
+}
+
+function renderBatchesExpanded(batches,students,allAtt,allNotes){
+  var h='';
+  batches.forEach(function(b){
+    var bs=students.filter(function(s){return s.batch_id===b.id;});
+    var bP=allAtt.filter(function(a){return bs.some(function(s){return s.id===a.student_id;})&&a.status==='present';}).length;
+    var bA=allAtt.filter(function(a){return bs.some(function(s){return s.id===a.student_id;})&&a.status==='absent';}).length;
+    h+='<div style="background:var(--white);border-radius:var(--r);border:1px solid var(--border);box-shadow:var(--shadow-sm);margin-bottom:14px">';
+    var nxt=formatNextClass(b.class_day);var isT=nxt==='Today';
+    h+='<div style="padding:18px 22px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;transition:background .2s" onclick="tBEH(this)">';
+    h+='<div><div style="font-family:Lora,serif;font-size:15px;font-weight:600">'+b.name+'</div><div style="font-size:12px;color:var(--muted);margin-top:3px">'+(b.level||'')+' · '+(b.language||'')+'</div></div>';
+    h+='<div style="display:flex;align-items:center;gap:10px"><span class="badge bteal">'+bs.length+' student'+(bs.length===1?'':'s')+'</span><span style="font-size:11px;color:var(--muted);transition:transform .3s" class="bc">&#9660;</span></div></div>';
+    h+='<div class="bb">';
+    h+='<div style="padding:0 22px 20px;border-top:1px solid var(--border)">';
+    h+='<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin:14px 0 16px;padding:12px 14px;background:'+(isT?'var(--teal-pale)':'var(--cream)')+';border-radius:12px;border:1px solid '+(isT?'var(--teal)':'var(--border)')+'"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:18px">📅</span><div><div style="font-size:13px;font-weight:600;color:'+(isT?'var(--teal)':'var(--charcoal)')+'">Next class: '+nxt+'</div><div style="font-size:12px;color:var(--muted)">'+b.class_day+' · '+b.class_time+'</div></div></div>'+(b.meet_link?'<a href="'+b.meet_link+'" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:#fff;font-size:12px;font-weight:600;padding:8px 16px;border-radius:100px;text-decoration:none;flex-shrink:0">🎥 Join Google Meet</a>':'<span style="font-size:12px;color:var(--muted)">No Meet link added</span>')+'</div>';
+    if(bs.length){
+      h+='<div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin:14px 0 8px;padding-bottom:5px;border-bottom:1px solid var(--border)">Students — tap for profile</div>';
+      bs.forEach(function(s){
+        var sA=allAtt.filter(function(a){return a.student_id===s.id;});
+        var sp=sA.length?Math.round(sA.filter(function(a){return a.status==='present';}).length/sA.length*100):null;
+        var sN=allNotes.filter(function(n){return n.student_id===s.id;}).length;
+        h+='<div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--cream);border-radius:12px;border:1px solid var(--border);cursor:pointer;margin-bottom:8px;transition:all .2s" onmouseover="this.style.background=\'var(--teal-light)\';this.style.borderColor=\'var(--teal)\'" onmouseout="this.style.background=\'var(--cream)\';this.style.borderColor=\'var(--border)\'" onclick="openStudentProfile(\''+s.id+'\')">';
+        h+='<div class="user-avatar" style="width:30px;height:30px;font-size:11px;flex-shrink:0">'+ini(s.name)+'</div>';
+        h+='<div style="flex:1"><div style="font-size:13px;font-weight:600">'+s.name+'</div><div style="font-size:11px;color:var(--muted)">'+(s.level||'')+(s.current_surah?' · 📖 '+s.current_surah:'')+'</div></div>';
+        if(sp!==null) h+='<span class="badge '+(sp>=75?'bg':sp>=50?'bgold':'bred')+'" style="font-size:10px">'+sp+'%</span>';
+        if(sN) h+='<span class="badge bteal" style="font-size:10px;margin-left:3px">'+sN+'</span>';
+        h+='</div>';
+      });
+      h+='<div style="margin-top:10px;padding-top:8px;border-top:1px solid var(--border);font-size:12px;color:var(--muted);display:flex;gap:12px"><span style="color:#1B7A4A;font-weight:600">'+bP+' present</span><span style="color:#C0392B;font-weight:600">'+bA+' absent</span></div>';
+    }else h+='<div style="font-size:13px;color:var(--muted);padding:12px 0">No students in this batch.</div>';
+    h+='</div></div></div>';
+  });
+  var el=document.getElementById('t-batches-list');
+  if(el) el.innerHTML=h||'<div class="empty-state"><div class="empty-state-icon">&#128218;</div><div class="empty-state-title">No batches yet</div></div>';
+}
+
+function tBEH(hdr){
+  var body=hdr.nextElementSibling;var chev=hdr.querySelector('.bc');var open=body.classList.contains('open');
+  body.classList.toggle('open',!open);hdr.style.background=!open?'var(--teal-pale)':'';
+  if(chev) chev.style.transform=!open?'rotate(180deg)':'';
+}
+
+function renderAttByBatch(batches,students,allAtt){
+  var el=document.getElementById('t-att-summary');if(!el) return;
+  if(!allAtt.length){el.innerHTML='<div class="empty-state"><div class="empty-state-icon">&#128202;</div><div class="empty-state-title">No attendance records yet</div></div>';return;}
+  var h='';
+  batches.forEach(function(b){
+    var bs=students.filter(function(s){return s.batch_id===b.id;});
+    if(!bs.some(function(s){return allAtt.some(function(a){return a.student_id===s.id;});})) return;
+    h+='<div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin:14px 0 8px;padding-bottom:5px;border-bottom:1px solid var(--border)">'+b.name+'</div>';
+    bs.forEach(function(s){
+      var sa=allAtt.filter(function(a){return a.student_id===s.id;});if(!sa.length) return;
+      var p=sa.filter(function(a){return a.status==='present';}).length,t=sa.length,pc=Math.round(p/t*100);
+      h+='<div style="display:flex;align-items:center;padding:10px 14px;border-radius:10px;background:var(--cream);border:1px solid var(--border);margin-bottom:6px;cursor:pointer;gap:10px" onclick="openStudentProfile(\''+s.id+'\')">';
+      h+='<div style="font-size:13px;font-weight:500;min-width:100px">'+s.name+'</div>';
+      h+='<div style="flex:1"><div style="display:flex;gap:2px;margin-bottom:3px"><div style="height:8px;background:#1B7A4A;border-radius:4px;width:'+pc+'%;min-width:'+(p?4:0)+'px"></div><div style="height:8px;background:#C0392B;border-radius:4px;width:'+(100-pc)+'%;min-width:'+(t-p?4:0)+'px"></div></div>';
+      h+='<div style="font-size:11px;color:var(--muted)">'+p+' present · '+(t-p)+' absent</div></div>';
+      h+='<span class="badge '+(pc>=75?'bg':pc>=50?'bgold':'bred')+'">'+pc+'%</span></div>';
+    });
+  });
+  el.innerHTML=h||'<div class="empty-state"><div class="empty-state-icon">&#128202;</div><div class="empty-state-title">No records yet</div></div>';
+}
+
+function renderNotesByBatch(batches,students,allNotes){
+  var el=document.getElementById('t-notes-list');if(!el) return;
+  if(!allNotes.length){el.innerHTML='<div class="empty-state"><div class="empty-state-icon">&#128221;</div><div class="empty-state-title">No notes yet</div></div>';return;}
+  var h='';
+  batches.forEach(function(b){
+    var bs=students.filter(function(s){return s.batch_id===b.id;});
+    var bn=allNotes.filter(function(n){return bs.some(function(s){return s.id===n.student_id;});});
+    if(!bn.length) return;
+    h+='<div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin:14px 0 8px;padding-bottom:5px;border-bottom:1px solid var(--border)">'+b.name+'</div>';
+    h+='<div class="timeline">';
+    bn.slice(0,5).forEach(function(n){
+      var st=students.find(function(s){return s.id===n.student_id;});
+      h+='<div class="tl-item" style="cursor:pointer" onclick="openStudentProfile(\''+n.student_id+'\')"><div class="tl-dot">&#128221;</div><div><div class="tl-title">'+(st?st.name:'?')+' · '+new Date(n.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'short'})+'</div><div class="tl-sub">'+n.note+'</div></div></div>';
+    });
+    h+='</div>';
+  });
+  el.innerHTML=h||'<div class="empty-state"><div class="empty-state-icon">&#128221;</div><div class="empty-state-title">No notes yet</div></div>';
+}
+
+function renderSurahTracker(students){
+  var h='';
+  students.forEach(function(s){
+    h+='<div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--cream);border-radius:12px;border:1px solid var(--border);margin-bottom:8px">';
+    h+='<div style="display:flex;align-items:center;gap:10px;flex:1;cursor:pointer" onclick="openStudentProfile(\''+s.id+'\')"><div class="user-avatar" style="width:30px;height:30px;font-size:11px;flex-shrink:0">'+ini(s.name)+'</div>';
+    h+='<div><div style="font-size:13px;font-weight:600">'+s.name+'</div><div style="font-size:11px;color:var(--muted)">'+(s.current_surah?'📖 '+s.current_surah:'No surah assigned yet')+'</div></div></div>';
+    h+='<button class="btn btn-primary btn-sm" onclick="openSurahModal(\''+s.id+'\',\''+s.name.replace(/'/g,'\u2019')+'\',\''+(s.current_surah||'')+'\',\''+(s.surah_notes||'')+'\')">'+( s.current_surah?'Update':'Assign')+'</button></div>';
+  });
+  var el=document.getElementById('t-surah-list');
+  if(el) el.innerHTML=h||'<div class="empty-state"><div class="empty-state-icon">&#128214;</div><div class="empty-state-title">No students yet</div></div>';
+}
+
+/* FIX 3: openStudentProfile — General tab now shows WhatsApp with clickable link */
+function openStudentProfile(sid){
+  var all=teacherStudentsCache.concat(adminStudents);
+  var s=all.find(function(x){return x.id===sid;});
+  if(!s){showToast('Student not found.','error');return;}
+  document.getElementById('spm-title').textContent=s.name||'Student';
+  document.getElementById('spm-sub').textContent=(s.level||'')+(s.country?' · '+s.country:'');
+  document.querySelectorAll('#modal-student-profile .profile-tab').forEach(function(t){t.classList.remove('active');});
+  document.querySelectorAll('#modal-student-profile .profile-tab-panel').forEach(function(p){p.classList.remove('active');});
+  document.querySelector('#modal-student-profile .profile-tab').classList.add('active');
+  document.getElementById('ptab-general').classList.add('active');
+  var isTeacher=currentProfile&&currentProfile.role==='teacher';
+
+  /* WhatsApp field — clickable link if number exists */
+  var waDisplay=s.whatsapp
+    ?'<a href="https://wa.me/'+s.whatsapp.replace(/[^0-9]/g,'')+'" target="_blank" style="color:var(--teal);font-weight:600;text-decoration:none">'+s.whatsapp+' ↗</a>'
+    :'—';
+
+  var gRows=[
+    ['Name',s.name||'—'],
+    ['Age',s.age||'—'],
+    ['WhatsApp',waDisplay],
+    ['Country',s.country||'—'],
+    ['Language',s.language||'—']
+  ];
+  if(!isTeacher) gRows.push(['Payment',s.payment_status==='paid'?'<span class="badge bg">'+(s.payment_amount||'Paid')+'</span>':'<span class="badge bgold">Pending</span>']);
+  var gh='<div style="display:flex;flex-direction:column;gap:8px">';
+  gRows.forEach(function(r){gh+='<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--cream);border-radius:10px"><span style="font-size:12px;color:var(--muted);font-weight:500">'+r[0]+'</span><span style="font-size:13px;font-weight:600">'+r[1]+'</span></div>';});
+  gh+='</div>';
+  document.getElementById('ptab-general').innerHTML=gh;
+
+  var allB=teacherBatchesCache.concat(adminBatches),allT=adminTeachers;
+  var bname='—',bday='—',btime='—',tname='—';
+  if(s.batch_id){
+    var b=allB.find(function(x){return x.id===s.batch_id;});
+    if(b){bname=b.name||'—';bday=b.class_day||'—';btime=b.class_time||'—';
+      if(b.teacher_id){var t=allT.find(function(x){return x.id===b.teacher_id;});if(t) tname=t.name;else if(currentProfile&&currentProfile.role==='teacher') tname=document.getElementById('t-name').textContent||'—';}
+    }
+  }
+  var levels=["Haroof - Level 1","Qira'a - Level 2","Tajweed - Level 3","Hifz - Level 4"];
+  var cL=levels.indexOf(s.level);
+  var aRows=[['Level',s.level||'—'],['Batch',bname],['Day',bday],['Time',btime],['Teacher','<span style="color:var(--teal);font-weight:600">'+tname+'</span>']];
+  var ah='<div style="display:flex;flex-direction:column;gap:8px">';
+  aRows.forEach(function(r){ah+='<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--cream);border-radius:10px"><span style="font-size:12px;color:var(--muted);font-weight:500">'+r[0]+'</span><span style="font-size:13px;font-weight:600">'+r[1]+'</span></div>';});
+  if(s.current_surah) ah+='<div style="padding:12px 14px;background:var(--teal-pale);border-radius:10px;border-left:3px solid var(--teal)"><div style="font-size:11px;color:var(--teal);font-weight:600;text-transform:uppercase;margin-bottom:3px">Current Surah</div><div style="font-size:14px;font-weight:600;color:var(--teal)">'+s.current_surah+'</div>'+(s.surah_notes?'<div style="font-size:12px;color:var(--muted);margin-top:3px">'+s.surah_notes+'</div>':'')+'</div>';
+  ah+='</div><div style="margin-top:14px"><div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:8px">Level Progress</div>';
+  levels.forEach(function(l,i){var done=i<cL,active=i===cL;ah+='<div style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;margin-bottom:3px"><span style="font-size:12px;color:'+(done||active?'var(--charcoal)':'var(--muted)')+'">'+l+'</span>';if(done) ah+='<span class="badge bg" style="font-size:10px">Done</span>';else if(active) ah+='<span class="badge bteal" style="font-size:10px">Current</span>';else ah+='<span class="badge bgrey" style="font-size:10px">Next</span>';ah+='</div><div class="prog-bar"><div class="prog-fill" style="width:'+(done?100:active?50:0)+'%"></div></div></div>';});
+  ah+='</div>';
+  document.getElementById('ptab-academic').innerHTML=ah;
+
+  var sAtt=(teacherAttCache.concat(adminAttendance)).filter(function(a){return a.student_id===sid;});
+  if(sAtt.length){
+    var p=sAtt.filter(function(a){return a.status==='present';}).length,tot=sAtt.length,pc=Math.round(p/tot*100);
+    var ath='<div style="background:var(--cream);border-radius:12px;padding:18px;margin-bottom:14px"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:13px;color:var(--muted)">Attendance rate</span><span style="font-size:22px;font-weight:700;color:'+(pc>=75?'#1B7A4A':pc>=50?'#8B6914':'#C0392B')+'">'+pc+'%</span></div>';
+    ath+='<div style="display:flex;gap:3px;margin-bottom:8px"><div style="height:10px;background:#1B7A4A;border-radius:4px;width:'+pc+'%;min-width:'+(p?4:0)+'px"></div><div style="height:10px;background:#C0392B;border-radius:4px;width:'+(100-pc)+'%;min-width:'+(tot-p?4:0)+'px"></div></div>';
+    ath+='<div style="display:flex;gap:14px;font-size:12px"><span style="color:#1B7A4A;font-weight:600">✓ '+p+' present</span><span style="color:#C0392B;font-weight:600">✕ '+(tot-p)+' absent</span><span style="color:var(--muted)">'+tot+' total</span></div></div>';
+    var sorted=sAtt.slice().sort(function(a,b){return new Date(b.date)-new Date(a.date);}).slice(0,8);
+    ath+='<div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:8px">Recent Records</div>';
+    sorted.forEach(function(a){ath+='<div style="display:flex;justify-content:space-between;padding:7px 12px;background:var(--cream);border-radius:8px;margin-bottom:5px"><span style="font-size:12px;color:var(--muted)">'+new Date(a.date).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})+'</span><span class="badge '+(a.status==='present'?'bg':'bred')+'" style="font-size:10px">'+a.status+'</span></div>';});
+    document.getElementById('ptab-attendance').innerHTML=ath;
+  }else document.getElementById('ptab-attendance').innerHTML='<div class="empty-state"><div class="empty-state-icon">&#128202;</div><div class="empty-state-title">No attendance records yet</div></div>';
+
+  var sNotes=teacherNotesCache.filter(function(n){return n.student_id===sid;});
+  function setNotesTab(notes){
+    if(notes.length){var nh='<div class="timeline">';notes.forEach(function(n){nh+='<div class="tl-item"><div class="tl-dot">&#128221;</div><div><div class="tl-title">'+new Date(n.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})+'</div><div class="tl-sub">'+n.note+'</div></div></div>';});nh+='</div>';document.getElementById('ptab-notes').innerHTML=nh;}
+    else document.getElementById('ptab-notes').innerHTML='<div class="empty-state"><div class="empty-state-icon">&#128221;</div><div class="empty-state-title">No notes yet</div></div>';
+  }
+  if(sNotes.length) setNotesTab(sNotes);
+  else supa('GET','/rest/v1/progress_notes?student_id=eq.'+sid+'&order=created_at.desc&limit=10&select=*').then(function(n){setNotesTab(n||[]);});
+  openModal('modal-student-profile');
+}
+
+function switchPTab(name,btn){
+  document.querySelectorAll('#modal-student-profile .profile-tab').forEach(function(t){t.classList.remove('active');});
+  document.querySelectorAll('#modal-student-profile .profile-tab-panel').forEach(function(p){p.classList.remove('active');});
+  btn.classList.add('active');document.getElementById('ptab-'+name).classList.add('active');
+}
+
+function openEditTeacher(id,name,email,phone){
+  document.getElementById('et-id').value=id;document.getElementById('et-name').value=name||'';
+  document.getElementById('et-email').value=email||'';document.getElementById('et-phone').value=phone||'';
+  openModal('modal-edit-teacher');
+}
+function updateTeacher(){
+  var id=document.getElementById('et-id').value;var name=document.getElementById('et-name').value.trim();
+  if(!name){showToast('Please enter a name.','error');return;}
+  supa('PATCH','/rest/v1/teachers?id=eq.'+id,{name:name,email:document.getElementById('et-email').value.trim(),phone:document.getElementById('et-phone').value.trim()}).then(function(){
+    closeModal('modal-edit-teacher');showToast('Teacher updated! 🌙','success');loadAdminData();
+  }).catch(function(){showToast('Could not update.','error');});
+}
+
+function openTeacherProfile(tid){
+  var t=adminTeachers.find(function(x){return x.id===tid;});
+  if(!t){showToast('Teacher not found.','error');return;}
+  document.getElementById('tpm-title').textContent=t.name||'Teacher';
+  document.getElementById('tpm-sub').textContent=(t.email||'')+(t.phone?' · '+t.phone:'');
+  document.querySelectorAll('#modal-teacher-profile .profile-tab').forEach(function(b){b.classList.remove('active');});
+  document.querySelectorAll('#modal-teacher-profile .profile-tab-panel').forEach(function(p){p.classList.remove('active');});
+  document.querySelector('#modal-teacher-profile .profile-tab').classList.add('active');
+  document.getElementById('ptab-tgeneral').classList.add('active');
+  var gRows=[['Name',t.name||'—'],['Email',t.email||'—'],['Phone',t.phone||'—'],['Status',t.status||'active']];
+  var gh='<div style="display:flex;flex-direction:column;gap:8px">';
+  gRows.forEach(function(r){gh+='<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--cream);border-radius:10px"><span style="font-size:12px;color:var(--muted);font-weight:500">'+r[0]+'</span><span style="font-size:13px;font-weight:600">'+r[1]+'</span></div>';});
+  gh+='</div>';document.getElementById('ptab-tgeneral').innerHTML=gh;
+  var batches=adminBatches.filter(function(b){return b.teacher_id===tid;});
+  var batchStudents=adminStudents.filter(function(s){return batches.some(function(b){return b.id===s.batch_id;});});
+  var ah='<div style="font-size:13px;color:var(--muted);margin-bottom:14px">'+batches.length+' batch'+(batches.length!==1?'es':'')+' · '+batchStudents.length+' student'+(batchStudents.length!==1?'s':'')+'</div>';
+  if(batches.length){
+    batches.forEach(function(b){
+      var bs=adminStudents.filter(function(s){return s.batch_id===b.id;});
+      ah+='<div style="background:var(--cream);border-radius:14px;padding:14px 16px;margin-bottom:10px;border:1px solid var(--border)">';
+      ah+='<div style="font-weight:600;font-size:14px;color:var(--teal);margin-bottom:3px">'+b.name+'</div>';
+      ah+='<div style="font-size:12px;color:var(--muted);margin-bottom:8px">'+(b.class_day||'')+' · '+(b.class_time||'')+' · '+(b.level||'')+'</div>';
+      if(bs.length){ah+='<div style="display:flex;flex-wrap:wrap;gap:5px">';bs.forEach(function(s){ah+='<span class="badge bteal" style="cursor:pointer" onclick="closeModal(\'modal-teacher-profile\');setTimeout(function(){openStudentProfile(\''+s.id+'\')},200)">'+s.name+'</span>';});ah+='</div>';}
+      else{ah+='<span style="font-size:12px;color:var(--muted)">No students yet</span>';}
+      ah+='</div>';
+    });
+  }else{ah+='<div class="empty-state"><div class="empty-state-icon">📖</div><div class="empty-state-title">No batches assigned yet</div></div>';}
+  document.getElementById('ptab-tacademic').innerHTML=ah;
+  openModal('modal-teacher-profile');
+}
+function switchTTab(name,btn){
+  document.querySelectorAll('#modal-teacher-profile .profile-tab').forEach(function(t){t.classList.remove('active');});
+  document.querySelectorAll('#modal-teacher-profile .profile-tab-panel').forEach(function(p){p.classList.remove('active');});
+  btn.classList.add('active');document.getElementById('ptab-'+name).classList.add('active');
+}
+
+function openBatchDetail(bid){
+  var b=adminBatches.find(function(x){return x.id===bid;});
+  if(!b){showToast('Batch not found.','error');return;}
+  var t=adminTeachers.find(function(x){return x.id===b.teacher_id;});
+  var students=adminStudents.filter(function(s){return s.batch_id===bid;});
+  var paidCount=students.filter(function(s){return s.payment_status==='paid';}).length;
+  document.getElementById('bdm-title').textContent=b.name||'Batch';
+  document.getElementById('bdm-sub').textContent=(b.class_day||'')+(b.class_time?' · '+b.class_time:'')+' · '+(b.level||'');
+  var html='';
+  var info=[['Teacher',t?'<span style="color:var(--teal);font-weight:700">'+t.name+'</span>':'<span style="color:var(--muted)">Not assigned</span>'],['Level',b.level||'—'],['Language',b.language||'—'],['Schedule',b.class_day+' · '+b.class_time]];
+  html+='<div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px">';
+  info.forEach(function(r){html+='<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--cream);border-radius:10px"><span style="font-size:12px;color:var(--muted);font-weight:500">'+r[0]+'</span><span style="font-size:13px;font-weight:600">'+r[1]+'</span></div>';});
+  html+='</div>';
+  html+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px"><div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal)">Students ('+students.length+')</div>';
+  if(currentProfile&&currentProfile.role==='admin') html+='<span style="font-size:12px;color:#1B7A4A;font-weight:600">'+paidCount+' paid</span>';
+  html+='</div>';
+  if(students.length){
+    students.forEach(function(s){
+      html+='<div class="entity-row" onclick="closeModal(\'modal-batch-detail\');setTimeout(function(){openStudentProfile(\''+s.id+'\')},200)">';
+      html+='<div class="user-avatar" style="width:32px;height:32px;font-size:11px;flex-shrink:0">'+ini(s.name)+'</div>';
+      html+='<div style="flex:1"><div style="font-size:13px;font-weight:600">'+s.name+'</div><div style="font-size:11px;color:var(--muted)">'+(s.level||'')+(s.country?' · '+s.country:'')+'</div></div>';
+      if(currentProfile&&currentProfile.role==='admin') html+='<span class="badge '+(s.payment_status==='paid'?'bg':'bgold')+'">'+(s.payment_status||'pending')+'</span>';
+      html+='</div>';
+    });
+  }else{html+='<div class="empty-state"><div class="empty-state-icon">👤</div><div class="empty-state-title">No students in this batch</div></div>';}
+  document.getElementById('bdm-content').innerHTML=html;
+  openModal('modal-batch-detail');
+}
+
+/* ── STUDENT TICKETS ── */
+function submitTicket(){
+  var subject=document.getElementById('tk-subject').value.trim();var message=document.getElementById('tk-message').value.trim();
+  if(!subject||!message){showToast('Please fill in subject and message.','error');return;}
+  var btn=document.querySelector('#modal-raise-ticket .btn-primary');
+  if(btn){btn.disabled=true;btn.innerHTML='<span class="spinner"></span>';}
+  supa('POST','/rest/v1/tickets',{student_id:currentProfile&&currentProfile.linked_id?currentProfile.linked_id:null,subject:subject,message:message,status:'open'}).then(function(){
+    closeModal('modal-raise-ticket');document.getElementById('tk-subject').value='';document.getElementById('tk-message').value='';
+    showToast('Ticket submitted! We will get back to you soon. 🌙','success');loadStudentTickets();
+  }).catch(function(){showToast('Could not submit. Please try again.','error');}).finally(function(){if(btn){btn.disabled=false;btn.textContent='Submit Ticket';}});
+}
+function loadStudentTickets(){
+  if(!currentProfile||!currentProfile.linked_id) return;
+  supa('GET','/rest/v1/tickets?student_id=eq.'+currentProfile.linked_id+'&order=created_at.desc&select=*').then(function(tickets){
+    var el=document.getElementById('s-tickets-list');if(!el) return;
+    if(!tickets||!tickets.length){el.innerHTML='<div class="empty-state"><div class="empty-state-icon">🎫</div><div class="empty-state-title">No tickets yet</div><p>Tap the button above to raise a support ticket.</p></div>';return;}
+    var h='';
+    tickets.forEach(function(tk){
+      var statusClass=tk.status==='open'?'bgold':tk.status==='resolved'?'bg':'bgrey';
+      h+='<div class="ticket-row">';
+      h+='<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px"><div style="font-size:13px;font-weight:600">'+tk.subject+'</div><span class="badge '+statusClass+'">'+tk.status+'</span></div>';
+      h+='<div style="font-size:12px;color:var(--muted);line-height:1.55">'+tk.message+'</div>';
+      h+='<div style="font-size:11px;color:var(--muted);margin-top:6px">'+new Date(tk.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})+'</div>';
+      h+='</div>';
+    });
+    el.innerHTML=h;
+  }).catch(function(){});
+}
 </script>
+
 </body>
 </html>

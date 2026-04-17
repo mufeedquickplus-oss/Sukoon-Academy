@@ -900,7 +900,12 @@ function doLogin(){
 }
 function doLogout(){
   currentUser=null;currentProfile=null;currentSession=null;clearSession();
-  document.getElementById('l-email').value='';document.getElementById('l-password').value='';
+  document.getElementById('l-email').value='';
+  document.getElementById('l-password').value='';
+  var btn=document.getElementById('login-btn');
+  if(btn){btn.disabled=false;btn.textContent='Sign in';}
+  var errEl=document.getElementById('login-error');
+  if(errEl){errEl.classList.remove('show');}
   showPage('page-login');
 }
 function routeToDashboard(){
@@ -984,10 +989,9 @@ function submitRegistration(){
     notes:document.getElementById('f-notes').value.trim(),
     currency:detectedCurrency,status:'new'
   }).then(function(){
-    var r=rates[detectedCurrency]||rates.AED;
     var isKid=parseInt(age)<=16;
-    var grp=isKid?'Child - '+r.sym+r.kids+'/month':'Adult - '+r.sym+r.adults+'/month';
-    var msg='*New Registration - Sukoon Academy*\n\n*Name:* '+name+'\n*Age:* '+age+'\n*WhatsApp:* '+whatsapp+'\n*Level:* '+document.getElementById('f-level').value+'\n*Group:* '+grp+'\n*Time:* '+document.getElementById('f-time').value+'\n*Language:* '+document.getElementById('f-lang').value+(document.getElementById('f-notes').value.trim()?'\n*Notes:* '+document.getElementById('f-notes').value.trim():'');
+    var grp=isKid?'Child (Age 5-16)':'Adult (Age 17+)';
+    var msg='*New Registration - Sukoon Academy*\n\n*Name:* '+name+'\n*Age:* '+age+'\n*Group:* '+grp+'\n*Current level:* '+document.getElementById('f-level').value+'\n*Preferred time:* '+document.getElementById('f-time').value+'\n*Language:* '+document.getElementById('f-lang').value+(document.getElementById('f-notes').value.trim()?'\n*Notes:* '+document.getElementById('f-notes').value.trim():'');
     btn.innerHTML='JazakAllah khair! Opening WhatsApp 🌙';btn.style.background='#1D9E75';
     setTimeout(function(){
       window.open('https://wa.me/971523627011?text='+encodeURIComponent(msg),'_blank');
@@ -1493,14 +1497,16 @@ function renderLoginsPanel(){
   }
 
   // Fetch all profiles to know who already has a login
-  supa('GET','/rest/v1/profiles?select=id,linked_id,role').then(function(profiles){
+  supa('GET','/rest/v1/profiles?select=id,linked_id,role,email').then(function(profiles){
     profiles=profiles||[];
     var hasLogin={};
     var authIdMap={};
+    var emailMap={};
     profiles.forEach(function(p){
       if(p.linked_id){
         hasLogin[p.linked_id]=true;
         authIdMap[p.linked_id]=p.id;
+        emailMap[p.linked_id]=p.email||'';
       }
     });
 
@@ -1531,8 +1537,8 @@ function renderLoginsPanel(){
         if(hasAcc){
           sh+='<button class="btn btn-ghost btn-sm" style="font-size:11px;opacity:.4;cursor:not-allowed" disabled>&#128272; Create</button>';
           sh+='<button class="btn btn-primary btn-sm" style="font-size:11px" ';
-          sh+='data-authid="'+authId+'" data-sname="'+sname+'" ';
-          sh+='onclick="openResetPassword(this.dataset.authid,this.dataset.sname)">&#128273; Reset</button>';
+          sh+='data-authid="'+authId+'" data-sname="'+sname+'" data-email="'+(emailMap[sid]||'')+'" ';
+          sh+='onclick="openResetPasswordById(this.dataset.authid,this.dataset.sname,this.dataset.email)">&#128273; Reset</button>';
         } else {
           sh+='<button class="btn btn-primary btn-sm" style="font-size:11px" ';
           sh+='data-sid="'+sid+'" data-sname="'+sname+'" ';
@@ -1569,8 +1575,8 @@ function renderLoginsPanel(){
         if(hasAcc){
           th+='<button class="btn btn-ghost btn-sm" style="font-size:11px;opacity:.4;cursor:not-allowed" disabled>&#128272; Create</button>';
           th+='<button class="btn btn-primary btn-sm" style="font-size:11px" ';
-          th+='data-authid="'+authId+'" data-tname="'+tname+'" ';
-          th+='onclick="openResetPasswordTeacher(this.dataset.authid,this.dataset.tname)">&#128273; Reset</button>';
+          th+='data-authid="'+authId+'" data-tname="'+tname+'" data-email="'+(t.email||'')+'" ';
+          th+='onclick="openResetPasswordById(this.dataset.authid,this.dataset.tname,this.dataset.email)">&#128273; Reset</button>';
         } else {
           th+='<button class="btn btn-primary btn-sm" style="font-size:11px" ';
           th+='data-tid="'+tid+'" data-tname="'+tname+'" ';
@@ -1587,22 +1593,42 @@ function renderLoginsPanel(){
   });
 }
 function toggleClPwd(){var i=document.getElementById('cl-password');i.type=i.type==='password'?'text':'password';}
-function openResetPassword(authUserId,name){
-  // authUserId is profiles.id - passed directly from renderLoginsPanel
+function openResetPassword(authUserId,name,email){
   document.getElementById('cl-linked-id').value=authUserId;
   document.getElementById('cl-name').value=name;
   document.getElementById('cl-mode').value='reset';
-  document.getElementById('cl-email').value='';
   document.getElementById('cl-password').value='';
   document.getElementById('cl-error').style.display='none';
   document.getElementById('cl-info-title').textContent='&#128273; Reset login password';
-  document.getElementById('cl-info-text').textContent='Enter a new password for '+name+'. Their email login stays the same.';
-  document.getElementById('cl-email-wrap').style.display='none';
+  document.getElementById('cl-info-text').textContent='Updating password for '+name+'. Email stays the same.';
+  // Show email field but frozen/readonly
+  document.getElementById('cl-email-wrap').style.display='block';
+  var emailEl=document.getElementById('cl-email');
+  if(email){
+    emailEl.value=email;
+  } else {
+    // Fetch email from Supabase auth via profiles
+    emailEl.value='Fetching...';
+    emailEl.disabled=true;
+    supa('GET','/rest/v1/profiles?id=eq.'+authUserId+'&select=id').then(function(){
+      // We can't get email from profiles directly
+      // Show a placeholder
+      emailEl.value='(email on file)';
+    });
+  }
+  emailEl.readOnly=true;
+  emailEl.style.opacity='0.6';
+  emailEl.style.cursor='not-allowed';
   document.getElementById('cl-submit-btn').textContent='Update Password';
+  // Focus password field
+  setTimeout(function(){document.getElementById('cl-password').focus();},300);
   openModal('modal-create-login');
 }
+function openResetPasswordById(authUserId,name,email){
+  openResetPassword(authUserId,name,email||'');
+}
 function openResetPasswordTeacher(authUserId,name){
-  openResetPassword(authUserId,name);
+  openResetPassword(authUserId,name,'');
 }
 function openCreateLoginForStudent(studentId,name){
   document.getElementById('cl-linked-id').value=studentId;
@@ -1617,6 +1643,10 @@ function openCreateLoginForStudent(studentId,name){
   document.getElementById('cl-email-wrap').style.display='block';
   document.getElementById('cl-submit-btn').textContent='Create Login';
   document.getElementById('cl-info-text').textContent='Creating login for '+name+'. Share the password via WhatsApp.';
+  // Reset email field to editable
+  var emailEl=document.getElementById('cl-email');
+  emailEl.readOnly=false;emailEl.disabled=false;
+  emailEl.style.opacity='1';emailEl.style.cursor='';
   openModal('modal-create-login');
 }
 function openCreateLoginForTeacher(teacherId,name){
@@ -1632,6 +1662,9 @@ function openCreateLoginForTeacher(teacherId,name){
   document.getElementById('cl-email-wrap').style.display='block';
   document.getElementById('cl-submit-btn').textContent='Create Login';
   document.getElementById('cl-info-text').textContent='Creating login for teacher '+name+'.';
+  var emailEl=document.getElementById('cl-email');
+  emailEl.readOnly=false;emailEl.disabled=false;
+  emailEl.style.opacity='1';emailEl.style.cursor='';
   openModal('modal-create-login');
 }
 function submitCreateLogin(){
@@ -1660,9 +1693,16 @@ function submitCreateLogin(){
     body:JSON.stringify(payload)
   }).then(function(r){return r.json();}).then(function(data){
     if(data.error){errEl.textContent=data.error;errEl.style.display='block';btn.disabled=false;btn.textContent=mode==='reset'?'Update Password':'Create Login';return;}
+    if(mode==='create'&&data.user_id){
+      // Save email to profiles so we can show it later
+      supa('PATCH','/rest/v1/profiles?id=eq.'+data.user_id,{email:email}).catch(function(){});
+    }
     closeModal('modal-create-login');
-    showToast(mode==='reset'?'Password updated for '+name+'!':'Login created for '+name+'!','success');
+    showToast(mode==='reset'?'Password updated for '+name+'! &#127769;':'Login created for '+name+'! &#127769;','success');
     loadAdminData();
+    // Refresh logins panel if open
+    var loginsPanel=document.getElementById('ap-logins');
+    if(loginsPanel&&loginsPanel.classList.contains('active')){setTimeout(renderLoginsPanel,800);}
   }).catch(function(){
     errEl.textContent='Could not connect. Please try again.';errEl.style.display='block';
     btn.disabled=false;btn.textContent=mode==='reset'?'Update Password':'Create Login';

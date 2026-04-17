@@ -1491,63 +1491,118 @@ function renderLoginsPanel(){
     sl.innerHTML='<div class="empty-state"><div class="empty-state-icon">&#9203;</div><div class="empty-state-title">Loading...</div></div>';
     tl.innerHTML='';loadAdminData();return;
   }
-  if(!adminStudents.length){
-    sl.innerHTML='<div class="empty-state"><div class="empty-state-icon">&#127891;</div><div class="empty-state-title">No students yet</div></div>';
-  } else {
-    var sh='';
-    adminStudents.forEach(function(s){
-      var sid=s.id;
-      var sname=(s.name||'').replace(/"/g,' ');
-      sh+='<div class="user-row" style="flex-wrap:wrap;gap:8px">';
-      sh+='<div class="user-avatar">'+ini(s.name)+'</div>';
-      sh+='<div style="flex:1;min-width:100px"><div class="user-name">'+s.name+'</div>';
-      sh+='<div class="user-detail">'+(s.level||'')+(s.language?' - '+s.language:'')+'</div></div>';
-      sh+='<div style="display:flex;gap:5px;flex-shrink:0">';
-      sh+='<button class="btn btn-primary btn-sm" style="font-size:11px" data-sid="'+sid+'" data-sname="'+sname+'" onclick="openCreateLoginForStudent(this.dataset.sid,this.dataset.sname)">&#128272; Create</button>';
-      sh+='<button class="btn btn-ghost btn-sm" style="font-size:11px" data-sid="'+sid+'" data-sname="'+sname+'" onclick="openResetPassword(this.dataset.sid,this.dataset.sname,\'\')">&#128273; Reset</button>';
-      sh+='</div></div>';
+
+  // Fetch all profiles to know who already has a login
+  supa('GET','/rest/v1/profiles?select=id,linked_id,role').then(function(profiles){
+    profiles=profiles||[];
+    var hasLogin={};
+    var authIdMap={};
+    profiles.forEach(function(p){
+      if(p.linked_id){
+        hasLogin[p.linked_id]=true;
+        authIdMap[p.linked_id]=p.id;
+      }
     });
-    sl.innerHTML=sh;
-  }
-  if(!adminTeachers.length){
-    tl.innerHTML='<div class="empty-state"><div class="empty-state-icon">&#128218;</div><div class="empty-state-title">No teachers yet</div></div>';
-  } else {
-    var th='';
-    adminTeachers.forEach(function(t){
-      var tid=t.id;
-      var tname=(t.name||'').replace(/"/g,' ');
-      var temail=(t.email||'').replace(/"/g,' ');
-      th+='<div class="user-row" style="flex-wrap:wrap;gap:8px">';
-      th+='<div class="user-avatar" style="background:var(--gold-light);color:#8B6914">'+ini(t.name)+'</div>';
-      th+='<div style="flex:1;min-width:100px"><div class="user-name">'+t.name+'</div>';
-      th+='<div class="user-detail">'+(t.email||'')+'</div></div>';
-      th+='<div style="display:flex;gap:5px;flex-shrink:0">';
-      th+='<button class="btn btn-primary btn-sm" style="font-size:11px" data-tid="'+tid+'" data-tname="'+tname+'" onclick="openCreateLoginForTeacher(this.dataset.tid,this.dataset.tname)">&#128272; Create</button>';
-      th+='<button class="btn btn-ghost btn-sm" style="font-size:11px" data-tid="'+tid+'" data-tname="'+tname+'" data-email="'+temail+'" onclick="openResetPassword(this.dataset.tid,this.dataset.tname,this.dataset.email)">&#128273; Reset</button>';
-      th+='</div></div>';
-    });
-    tl.innerHTML=th;
-  }
+
+    // Render Students
+    if(!adminStudents.length){
+      sl.innerHTML='<div class="empty-state"><div class="empty-state-icon">&#127891;</div><div class="empty-state-title">No students yet</div></div>';
+    } else {
+      var sh='';
+      adminStudents.forEach(function(s){
+        var sid=s.id;
+        var sname=(s.name||'').replace(/"/g,' ');
+        var hasAcc=!!hasLogin[sid];
+        var authId=authIdMap[sid]||'';
+        // Find email from profiles
+        var prof=profiles.find(function(p){return p.linked_id===sid;});
+        sh+='<div style="display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--border);flex-wrap:wrap">';
+        sh+='<div class="user-avatar">'+ini(s.name)+'</div>';
+        sh+='<div style="flex:1;min-width:120px">';
+        sh+='<div class="user-name">'+s.name+'</div>';
+        sh+='<div class="user-detail">'+(s.level||'')+(s.language?' - '+s.language:'')+'</div>';
+        if(hasAcc){
+          sh+='<div style="font-size:11px;color:#1B7A4A;margin-top:3px;font-weight:500">&#10003; Login created</div>';
+        } else {
+          sh+='<div style="font-size:11px;color:var(--muted);margin-top:3px">No login yet</div>';
+        }
+        sh+='</div>';
+        sh+='<div style="display:flex;gap:6px;flex-shrink:0">';
+        if(hasAcc){
+          sh+='<button class="btn btn-ghost btn-sm" style="font-size:11px;opacity:.4;cursor:not-allowed" disabled>&#128272; Create</button>';
+          sh+='<button class="btn btn-primary btn-sm" style="font-size:11px" ';
+          sh+='data-authid="'+authId+'" data-sname="'+sname+'" ';
+          sh+='onclick="openResetPassword(this.dataset.authid,this.dataset.sname)">&#128273; Reset</button>';
+        } else {
+          sh+='<button class="btn btn-primary btn-sm" style="font-size:11px" ';
+          sh+='data-sid="'+sid+'" data-sname="'+sname+'" ';
+          sh+='onclick="openCreateLoginForStudent(this.dataset.sid,this.dataset.sname)">&#128272; Create</button>';
+          sh+='<button class="btn btn-ghost btn-sm" style="font-size:11px;opacity:.4;cursor:not-allowed" disabled>&#128273; Reset</button>';
+        }
+        sh+='</div></div>';
+      });
+      sl.innerHTML=sh||'<div class="empty-state"><div class="empty-state-icon">&#127891;</div><div class="empty-state-title">No students yet</div></div>';
+    }
+
+    // Render Teachers
+    if(!adminTeachers.length){
+      tl.innerHTML='<div class="empty-state"><div class="empty-state-icon">&#128218;</div><div class="empty-state-title">No teachers yet</div></div>';
+    } else {
+      var th='';
+      adminTeachers.forEach(function(t){
+        var tid=t.id;
+        var tname=(t.name||'').replace(/"/g,' ');
+        var hasAcc=!!hasLogin[tid];
+        var authId=authIdMap[tid]||'';
+        th+='<div style="display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--border);flex-wrap:wrap">';
+        th+='<div class="user-avatar" style="background:var(--gold-light);color:#8B6914">'+ini(t.name)+'</div>';
+        th+='<div style="flex:1;min-width:120px">';
+        th+='<div class="user-name">'+t.name+'</div>';
+        th+='<div class="user-detail">'+(t.email||'No email')+'</div>';
+        if(hasAcc){
+          th+='<div style="font-size:11px;color:#1B7A4A;margin-top:3px;font-weight:500">&#10003; Login created</div>';
+        } else {
+          th+='<div style="font-size:11px;color:var(--muted);margin-top:3px">No login yet</div>';
+        }
+        th+='</div>';
+        th+='<div style="display:flex;gap:6px;flex-shrink:0">';
+        if(hasAcc){
+          th+='<button class="btn btn-ghost btn-sm" style="font-size:11px;opacity:.4;cursor:not-allowed" disabled>&#128272; Create</button>';
+          th+='<button class="btn btn-primary btn-sm" style="font-size:11px" ';
+          th+='data-authid="'+authId+'" data-tname="'+tname+'" ';
+          th+='onclick="openResetPasswordTeacher(this.dataset.authid,this.dataset.tname)">&#128273; Reset</button>';
+        } else {
+          th+='<button class="btn btn-primary btn-sm" style="font-size:11px" ';
+          th+='data-tid="'+tid+'" data-tname="'+tname+'" ';
+          th+='onclick="openCreateLoginForTeacher(this.dataset.tid,this.dataset.tname)">&#128272; Create</button>';
+          th+='<button class="btn btn-ghost btn-sm" style="font-size:11px;opacity:.4;cursor:not-allowed" disabled>&#128273; Reset</button>';
+        }
+        th+='</div></div>';
+      });
+      tl.innerHTML=th||'<div class="empty-state"><div class="empty-state-icon">&#128218;</div><div class="empty-state-title">No teachers yet</div></div>';
+    }
+
+  }).catch(function(){
+    sl.innerHTML='<div class="empty-state"><div class="empty-state-icon">&#9888;</div><div class="empty-state-title">Could not load</div></div>';
+  });
 }
 function toggleClPwd(){var i=document.getElementById('cl-password');i.type=i.type==='password'?'text':'password';}
-function openResetPassword(linkedId,name,email){
-  // linkedId here is the student/teacher row ID
-  // We need to find their auth user ID from profiles table
-  supa('GET','/rest/v1/profiles?linked_id=eq.'+linkedId+'&select=id').then(function(res){
-    var authUserId=res&&res.length?res[0].id:null;
-    if(!authUserId){showToast('No login account found for '+name+'. Create one first.','error');return;}
-    document.getElementById('cl-linked-id').value=authUserId;
-    document.getElementById('cl-name').value=name;
-    document.getElementById('cl-mode').value='reset';
-    document.getElementById('cl-email').value='';
-    document.getElementById('cl-password').value='';
-    document.getElementById('cl-error').style.display='none';
-    document.getElementById('cl-info-title').textContent='Reset login password';
-    document.getElementById('cl-info-text').textContent='Enter a new password for '+name+'. Share it via WhatsApp. Their email stays the same.';
-    document.getElementById('cl-email-wrap').style.display='none';
-    document.getElementById('cl-submit-btn').textContent='Update Password';
-    openModal('modal-create-login');
-  }).catch(function(){showToast('Could not find account. Please try again.','error');});
+function openResetPassword(authUserId,name){
+  // authUserId is profiles.id - passed directly from renderLoginsPanel
+  document.getElementById('cl-linked-id').value=authUserId;
+  document.getElementById('cl-name').value=name;
+  document.getElementById('cl-mode').value='reset';
+  document.getElementById('cl-email').value='';
+  document.getElementById('cl-password').value='';
+  document.getElementById('cl-error').style.display='none';
+  document.getElementById('cl-info-title').textContent='&#128273; Reset login password';
+  document.getElementById('cl-info-text').textContent='Enter a new password for '+name+'. Their email login stays the same.';
+  document.getElementById('cl-email-wrap').style.display='none';
+  document.getElementById('cl-submit-btn').textContent='Update Password';
+  openModal('modal-create-login');
+}
+function openResetPasswordTeacher(authUserId,name){
+  openResetPassword(authUserId,name);
 }
 function openCreateLoginForStudent(studentId,name){
   document.getElementById('cl-linked-id').value=studentId;

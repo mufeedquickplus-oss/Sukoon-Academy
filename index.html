@@ -328,21 +328,6 @@ body.dash-active .sidebar-backdrop.open{left:260px}
 </div></div>
 
 <!-- CREATE LOGIN MODAL -->
-<div class="modal-overlay" id="modal-create-login"><div class="modal">
-<div class="modal-header"><div class="modal-title" style="font-family:'Lora',serif">Create <em style="color:var(--teal);font-style:italic">Login Account</em></div><button class="modal-close" onclick="closeModal('modal-create-login')">✕</button></div>
-<div class="info-box" style="margin-bottom:20px">
-  <div class="info-box-title">🔐 Setting up dashboard access</div>
-  <p id="cl-info-text">This will create a login for the student so they can access their dashboard.</p>
-</div>
-<input type="hidden" id="cl-linked-id"/>
-<input type="hidden" id="cl-role"/>
-<input type="hidden" id="cl-name"/>
-<input type="hidden" id="cl-reg-id"/>
-<div class="fg"><label>Email address</label><input id="cl-email" type="email" placeholder="student@email.com"/></div>
-<div class="fg"><label>Temporary password <span style="color:var(--muted);font-weight:300">(share this with them)</span></label><div class="pwd-wrap"><input id="cl-password" type="password" placeholder="Min. 8 characters"/><button class="pwd-toggle" onclick="toggleClPwd()">👁</button></div></div>
-<div id="cl-error" style="background:#FEE8E8;color:#C0392B;font-size:13px;padding:12px 16px;border-radius:var(--rs);margin-bottom:16px;display:none;border:1px solid rgba(192,57,43,.15)"></div>
-<div class="modal-actions"><button class="btn btn-ghost btn-sm" onclick="closeModal('modal-create-login')">Cancel</button><button class="btn btn-primary btn-sm" id="cl-submit-btn" onclick="submitCreateLogin()">Create Login 🔐</button></div>
-</div></div>
 
 <div class="modal-overlay" id="modal-create-login"><div class="modal">
 <div class="modal-header"><div class="modal-title" style="font-family:'Lora',serif">Create <em style="color:var(--teal);font-style:italic">Login</em></div><button class="modal-close" onclick="closeModal('modal-create-login')">&#x2715;</button></div>
@@ -840,7 +825,17 @@ function showPanel(pageId,panelId,el,evt){
 }
 
 function openModal(id){document.getElementById(id).classList.add('open');}
-function closeModal(id){document.getElementById(id).classList.remove('open');}
+function closeModal(id){
+  document.getElementById(id).classList.remove('open');
+  if(id==='modal-create-login'){
+    var btn=document.getElementById('cl-submit-btn');
+    if(btn){btn.disabled=false;var m=document.getElementById('cl-mode');btn.textContent=m&&m.value==='reset'?'Update Password':'Create Login';}
+    var emailEl=document.getElementById('cl-email');
+    if(emailEl){emailEl.readOnly=false;emailEl.disabled=false;emailEl.style.opacity='1';emailEl.style.cursor='';}
+    var errEl=document.getElementById('cl-error');
+    if(errEl) errEl.style.display='none';
+  }
+}
 
 /* ── ACCORDION ── */
 function toggleAcc(trigger){
@@ -1010,10 +1005,11 @@ function loadStudentData(){
     if(!st||!st.length) return;
     var s=st[0];
     var lmap={'Haroof - Level 1':'حروف',"Qira'a - Level 2":'قراءة','Tajweed - Level 3':'تجويد','Hifz - Level 4':'حفظ'};
-    document.getElementById('s-stat-level').textContent=(s.level||'').split(' - ')[0]||'-';
+    var levelShort=(s.level||'').split(' - ')[0]||'-';
+    document.getElementById('s-stat-level').textContent=levelShort;
     document.getElementById('s-stat-level-ar').textContent=lmap[s.level]||'-';
-    document.getElementById('s-level-pill').textContent=s.level||'Student';
-    document.getElementById('s-role').textContent=s.level||'Student';
+    document.getElementById('s-level-pill').textContent=levelShort;
+    document.getElementById('s-role').textContent=levelShort;
     document.getElementById('s-stat-lang').textContent=s.language||'-';
     var levels=["Haroof - Level 1","Qira'a - Level 2","Tajweed - Level 3","Hifz - Level 4"];
     var cur=levels.indexOf(s.level);var html='';
@@ -1026,24 +1022,83 @@ function loadStudentData(){
       html+='</div><div class="prog-bar"><div class="prog-fill" style="width:'+(done?100:active?50:0)+'%"></div></div></div>';
     });
     document.getElementById('s-progress-levels').innerHTML=html;
-    if(s.batch_id){
-      supa('GET','/rest/v1/batches?id=eq.'+s.batch_id+'&select=*').then(function(ba){
-        if(ba&&ba.length){
-          var b=ba[0];
-          document.getElementById('s-stat-batch').textContent=b.name||'-';
-          document.getElementById('s-batch-info').innerHTML='<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px"><div style="background:var(--teal-pale);border-radius:12px;padding:16px"><div style="font-size:11px;color:var(--muted);text-transform:uppercase;margin-bottom:5px">Class day</div><div style="font-size:15px;font-weight:600;color:var(--teal)">'+(b.class_day||'-')+'</div></div><div style="background:var(--gold-light);border-radius:12px;padding:16px"><div style="font-size:11px;color:#8B6914;text-transform:uppercase;margin-bottom:5px">Time</div><div style="font-size:15px;font-weight:600;color:#8B6914">'+(b.class_time||'-')+'</div></div></div>';
-        }
-      });
-    }
     supa('GET','/rest/v1/progress_notes?student_id=eq.'+s.id+'&order=created_at.desc&limit=5&select=*').then(function(notes){
       if(notes&&notes.length){
         var nh='<div class="timeline">';
-        notes.forEach(function(n){nh+='<div class="tl-item"><div class="tl-dot">📝</div><div><div class="tl-title">'+new Date(n.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'short'})+'</div><div class="tl-sub">'+n.note+'</div></div></div>';});
+        notes.forEach(function(n){nh+='<div class="tl-item"><div class="tl-dot">&#128221;</div><div><div class="tl-title">'+new Date(n.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'short'})+'</div><div class="tl-sub">'+n.note+'</div></div></div>';});
         nh+='</div>';document.getElementById('s-notes-list').innerHTML=nh;
       }
     });
+    if(s.batch_id){
+      supa('GET','/rest/v1/batches?id=eq.'+s.batch_id+'&select=*').then(function(ba){
+        if(!ba||!ba.length) return;
+        var b=ba[0];
+        document.getElementById('s-stat-batch').textContent=b.name||'-';
+        var days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+        var targetDay=days.indexOf(b.class_day);
+        var today=new Date();today.setHours(0,0,0,0);
+        var diff=(targetDay-today.getDay()+7)%7;
+        if(diff===0) diff=7;
+        var nextDate=new Date(today);nextDate.setDate(today.getDate()+diff);
+        var isToday=diff===7&&targetDay===today.getDay();
+        var nextLabel=isToday?'Today':diff===1?'Tomorrow':nextDate.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'});
+        var ncHtml='<div style="padding:14px;background:'+(isToday?'var(--teal-pale)':'var(--cream)')+';border-radius:12px;border:1px solid '+(isToday?'var(--teal)':'var(--border)')+';">';
+        ncHtml+='<div style="font-size:13px;font-weight:600;color:'+(isToday?'var(--teal)':'var(--charcoal)')+'">'+nextLabel+' · '+b.class_time+'</div>';
+        ncHtml+='<div style="font-size:12px;color:var(--muted);margin-top:3px">'+b.name+'</div>';
+        if(b.meet_link) ncHtml+='<a href="'+b.meet_link+'" target="_blank" style="display:inline-flex;align-items:center;gap:6px;margin-top:10px;background:var(--teal);color:#fff;font-size:12px;font-weight:600;padding:8px 16px;border-radius:100px;text-decoration:none">📹 Join Google Meet</a>';
+        ncHtml+='</div>';
+        document.getElementById('s-next-class').innerHTML=ncHtml;
+        var bHtml='<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">';
+        bHtml+='<div style="background:var(--teal-pale);border-radius:12px;padding:16px"><div style="font-size:11px;color:var(--muted);text-transform:uppercase;margin-bottom:5px">Class day</div><div style="font-size:16px;font-weight:600;color:var(--teal)">'+b.class_day+'</div></div>';
+        bHtml+='<div style="background:var(--gold-light);border-radius:12px;padding:16px"><div style="font-size:11px;color:#8B6914;text-transform:uppercase;margin-bottom:5px">Time</div><div style="font-size:16px;font-weight:600;color:#8B6914">'+b.class_time+'</div></div></div>';
+        if(b.meet_link) bHtml+='<a href="'+b.meet_link+'" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:#fff;font-size:14px;font-weight:600;padding:12px 24px;border-radius:100px;text-decoration:none;margin-bottom:20px">📹 Join Google Meet</a><br>';
+        else bHtml+='<p style="font-size:13px;color:var(--muted);margin-bottom:16px">Meet link will appear here once your teacher adds it.</p>';
+        bHtml+='<div style="font-size:13px;font-weight:600;color:var(--charcoal);margin-bottom:12px">Upcoming Classes</div>';
+        var base=new Date(today);base.setDate(today.getDate()+diff);
+        for(var ci=0;ci<8;ci++){
+          var cd=new Date(base);cd.setDate(base.getDate()+ci*7);
+          var isFuture=cd>=today;var isNext=ci===0;
+          var cdLabel=cd.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
+          bHtml+='<div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)">';
+          bHtml+='<div style="width:8px;height:8px;border-radius:50%;flex-shrink:0;background:'+(isNext?'var(--teal)':isFuture?'var(--border)':'var(--muted)')+'"></div>';
+          bHtml+='<div style="flex:1"><div style="font-size:13px;font-weight:'+(isNext?600:400)+';color:'+(isNext?'var(--teal)':isFuture?'var(--charcoal)':'var(--muted)')+'">Class '+(ci+1)+' · '+cdLabel+'</div>';
+          bHtml+='<div style="font-size:11px;color:var(--muted)">'+b.class_time+(isNext?' · Next up':'')+'</div></div>';
+          if(isNext&&b.meet_link) bHtml+='<a href="'+b.meet_link+'" target="_blank" style="font-size:11px;background:var(--teal);color:#fff;padding:5px 12px;border-radius:100px;text-decoration:none;flex-shrink:0">📹 Join</a>';
+          bHtml+='</div>';
+        }
+        document.getElementById('s-batch-info').innerHTML=bHtml;
+        if(b.teacher_id){
+          supa('GET','/rest/v1/teachers?id=eq.'+b.teacher_id+'&select=*').then(function(tr){
+            if(tr&&tr.length){
+              var t=tr[0];
+              var tHtml='<div style="display:flex;align-items:center;gap:12px">';
+              tHtml+='<div class="user-avatar" style="background:var(--gold-light);color:#8B6914;width:44px;height:44px;font-size:16px">'+ini(t.name)+'</div>';
+              tHtml+='<div><div style="font-size:14px;font-weight:600">'+t.name+'</div>';
+              if(t.phone) tHtml+='<a href="https://wa.me/'+t.phone.replace(/[^0-9]/g,'')+'" target="_blank" style="font-size:12px;color:var(--teal);text-decoration:none">💬 WhatsApp</a>';
+              tHtml+='</div></div>';
+              document.getElementById('s-teacher-info').innerHTML=tHtml;
+            }
+          });
+        }
+        supa('GET','/rest/v1/homework?batch_id=eq.'+s.batch_id+'&order=created_at.desc&limit=3&select=*').then(function(hws){
+          var hwEl=document.getElementById('s-homework-info');if(!hwEl) return;
+          if(!hws||!hws.length){hwEl.innerHTML='<div class="empty-state"><div class="empty-state-icon">&#128203;</div><div class="empty-state-title">No homework yet</div><p>Your teacher will assign homework after your first class.</p></div>';return;}
+          var hwHtml='';
+          hws.forEach(function(hw){
+            hwHtml+='<div style="background:var(--cream);border-radius:12px;padding:16px;margin-bottom:12px;border:1px solid var(--border)">';
+            hwHtml+='<div style="font-size:14px;font-weight:600;color:var(--teal);margin-bottom:4px">'+hw.surah+'</div>';
+            hwHtml+='<div style="font-size:13px;color:var(--muted);margin-bottom:10px">Ayahs '+hw.from_ayah+' to '+hw.to_ayah+(hw.notes?' · '+hw.notes:'')+'</div>';
+            var waMsg='*Homework Submission*\nStudent: '+(currentProfile.name||'')+'\nSurah: '+hw.surah+'\nAyahs: '+hw.from_ayah+' to '+hw.to_ayah;
+            hwHtml+='<a href="https://wa.me/?text='+encodeURIComponent(waMsg)+'" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:#fff;font-size:12px;font-weight:600;padding:8px 16px;border-radius:100px;text-decoration:none">📤 Submit via WhatsApp</a>';
+            hwHtml+='</div>';
+          });
+          hwEl.innerHTML=hwHtml;
+        });
+      });
+    }
   }).catch(function(e){console.error('Student data:',e);});
 }
+
 
 /* ── TEACHER DASHBOARD ── */
 function loadTeacherData(){
